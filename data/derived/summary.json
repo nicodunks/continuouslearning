@@ -1,0 +1,33 @@
+{
+  "dataset": "male-cns:v1.0",
+  "annotation_rows": 211577,
+  "cx_annotation_rows": 2950,
+  "seed_neurons": 1486,
+  "seed_types": 76,
+  "selection": {
+    "exact": [
+      "Delta7",
+      "EL",
+      "EPG",
+      "EPGt",
+      "PEG",
+      "PEN_a(PEN1)",
+      "PEN_b(PEN2)",
+      "PFGs",
+      "PFL1",
+      "PFL2",
+      "PFL3"
+    ],
+    "prefixes": [
+      "ER",
+      "PFN",
+      "PFR",
+      "FC",
+      "hDelta"
+    ]
+  },
+  "graph_rows": 151856684,
+  "graph_weight_sum": 311833243,
+  "seed_edge_rows": 131701,
+  "seed_weight_sum": 1057187
+}

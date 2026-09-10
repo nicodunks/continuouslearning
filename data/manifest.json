@@ -1,0 +1,28 @@
+{
+  "dataset": "male-cns:v1.0",
+  "accessed": "2026-09-10",
+  "source": "https://male-cns.janelia.org/download/",
+  "files": [
+    {
+      "name": "body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "size": 14483314,
+      "md5_base64": "UKdxh3DFciDxYLpPQxq4ng==",
+      "generation": "1780494878811468"
+    },
+    {
+      "name": "body-neurotransmitters-male-cns-v1.0.feather",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+      "size": 43282834,
+      "md5_base64": "PYQrEv5cSe763lKNfdJKHw==",
+      "generation": "1780894899156750"
+    },
+    {
+      "name": "connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "size": 1051241946,
+      "md5_base64": "8w6dzKJc/QIb8eez2XVZng==",
+      "generation": "1780494887545976"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "A neural heading estimate is compared with an internal goal to guide oriented navigation",
+  "doi": "10.1038/s41593-019-0444-x",
+  "folder": "2019-a-neural-heading-estimate-is-compared-with-an-internal-goal-to-guide-oriented-navigat",
+  "discovery_note": "Links the compass to correction toward an internal goal bearing.",
+  "assets": [
+    {
+      "filename": "41593_2019_444_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM1_ESM.pdf",
+      "bytes": 1608522,
+      "sha256": "65ad032c2144775f4095fdc7ec4041282be51bd1b180631d79906fe8f5730303"
+    },
+    {
+      "filename": "41593_2019_444_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM2_ESM.pdf",
+      "bytes": 73215,
+      "sha256": "4d430b6b7622e679ea6c075fef7140852d15f061ec13dd08bca7e8cd115dd7ff"
+    },
+    {
+      "filename": "41593_2019_444_MOESM3_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM3_ESM.mov",
+      "bytes": 26600017,
+      "sha256": "6ea90db049b8bd4504e1140dae15beaafdfe4e422ebbdc0caec81fb4700cd9b2"
+    },
+    {
+      "filename": "41593_2019_444_MOESM4_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM4_ESM.mov",
+      "bytes": 11647975,
+      "sha256": "3a08a2cc0c69079b277bddcbdf7522dc52a7ab3d48e857726bf384357d8fc4d7"
+    },
+    {
+      "filename": "41593_2019_444_MOESM5_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM5_ESM.mov",
+      "bytes": 9863194,
+      "sha256": "c022efeb037c628629c6266df4f6a8911a6af2b55a55fadca6c1ede2930fddc3"
+    },
+    {
+      "filename": "41593_2019_444_MOESM6_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM6_ESM.mov",
+      "bytes": 4506459,
+      "sha256": "9d2d72e711c6ffc850111938b6732a291ccd788a9d567f3f2e0d27893427ecbe"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/s41593-019-0444-x.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

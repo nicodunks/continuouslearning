@@ -1,0 +1,68 @@
+{
+  "title": "Neural dynamics for landmark orientation and angular path integration",
+  "doi": "10.1038/nature14446",
+  "folder": "2015-neural-dynamics-for-landmark-orientation-and-angular-path-integration",
+  "discovery_note": "A persistent heading-related activity bump follows landmarks and self-motion in darkness.",
+  "assets": [
+    {
+      "filename": "41586_2015_BFnature14446_MOESM80_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM80_ESM.mp4",
+      "bytes": 12687552,
+      "sha256": "75100583da9939aa6b523713a3c6a9fe6384abac38d97ce9ab7d90012af2b481"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM81_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM81_ESM.mp4",
+      "bytes": 11622703,
+      "sha256": "c5a7d2084906a491cc29661653844766b48137e548b0e76c6b8ac53e1bd3f6a3"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM82_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM82_ESM.mp4",
+      "bytes": 11483479,
+      "sha256": "b6f87d1966b62755d4b71f7d74417c81e366e34820e4bc2987404e882f6ae862"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM83_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM83_ESM.mp4",
+      "bytes": 11947812,
+      "sha256": "8a3bcdce86ac7a3004ceb8fe64a6c93da3d4556fe5447ffb36f55275d80ba2de"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM84_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM84_ESM.mp4",
+      "bytes": 11558290,
+      "sha256": "485e560a2c65c165707e97b7c709766e9283a57feffa01fe82e39051ee036532"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM85_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM85_ESM.mp4",
+      "bytes": 11215826,
+      "sha256": "3b20a3a647aece257aecc0cf8f409d74aa1d901cc3cc185a45424de91419b2e6"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM86_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM86_ESM.mp4",
+      "bytes": 15430690,
+      "sha256": "19639cd9c718da32543279a6eb932878c3d1c0aa825a477514e13f9c8886b87c"
+    },
+    {
+      "filename": "41586_2015_BFnature14446_MOESM87_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature14446/MediaObjects/41586_2015_BFnature14446_MOESM87_ESM.mp4",
+      "bytes": 15631911,
+      "sha256": "a932238671925c9bc2bffee5113e1aa8ed3fb6ff546d7c70acca5f426edb4683"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://neurophysics.ucsd.edu/courses/physics_171/Seelig_Jayaraman_reprint.pdf",
+      "bytes": 5720320,
+      "sha256": "b08974a28a7bd02316c7c0ac7a4f2a742c978f59c4e8f76de11732717ced3d52"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/nature14446.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

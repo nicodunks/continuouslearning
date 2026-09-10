@@ -1,0 +1,50 @@
+{
+  "title": "Generation of stable heading representations in diverse visual scenes",
+  "doi": "10.1038/s41586-019-1767-1",
+  "folder": "2019-generation-of-stable-heading-representations-in-diverse-visual-scenes",
+  "discovery_note": "Experiments and modeling connect visual plasticity to a stable heading map.",
+  "assets": [
+    {
+      "filename": "41586_2019_1767_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM1_ESM.pdf",
+      "bytes": 634851,
+      "sha256": "7e75423c6bae29c1963f4e3373fe0fd07fbdc9e2acada24bd0cabb078b677e56"
+    },
+    {
+      "filename": "41586_2019_1767_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM2_ESM.pdf",
+      "bytes": 69324,
+      "sha256": "b2071af5a9c0b1b53adae13dd8853152ea4cb4d95530d1124e7edf6bed8f115c"
+    },
+    {
+      "filename": "41586_2019_1767_MOESM3_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM3_ESM.mp4",
+      "bytes": 25276329,
+      "sha256": "93a6a1256ff03f81c3fbb2350de8bebf8f5712104d560f7e9e25e156c809ad33"
+    },
+    {
+      "filename": "41586_2019_1767_MOESM4_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM4_ESM.mp4",
+      "bytes": 14239084,
+      "sha256": "fec95e1c7e018d91eadbf6a888f1fd0c511db9e0334b58164a5eab317a7e9b84"
+    },
+    {
+      "filename": "41586_2019_1767_MOESM5_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM5_ESM.mp4",
+      "bytes": 17993614,
+      "sha256": "9ad73b34d7ff3a0374250e2abbc6f1b049fc806aaa70dde12ed8443bb73fcf9a"
+    },
+    {
+      "filename": "41586_2019_1767_MOESM6_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM6_ESM.mp4",
+      "bytes": 17132429,
+      "sha256": "25f1121d94c3d3e5c9ef1e4f0bc7b360bb76d6d405e35599197663dad5e73211"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/s41586-019-1767-1.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

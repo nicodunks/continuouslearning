@@ -1,0 +1,39 @@
+{
+  "title": "Angular velocity integration in a fly heading circuit",
+  "doi": "10.7554/eLife.23496",
+  "folder": "2017-angular-velocity-integration-in-a-fly-heading-circuit",
+  "discovery_note": "Conjunctive heading/angular-velocity coding and anatomically shifted recurrence.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/23496.pdf",
+      "bytes": 8960656,
+      "sha256": "d8531dbc018a68db48723e16a4e91cde89f89c1288fcdb400a677086483c1e4e"
+    },
+    {
+      "filename": "elife-23496-media1.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvNDU1LzE5M2M1ODljYzg0NjMxYzUxZmQ1OTE3MTU5NGNjMWYwMDQwMTY5OGQvZWxpZmUtMjM0OTYtbWVkaWExLm1wNA--/elife-23496-media1.mp4?_hash=ziTm%2BoQb39d3A8ecV%2BIkki1YeIqmpmbLNSGFm4CkiGw%3D",
+      "bytes": 945188,
+      "sha256": "e9f140d2e573ca2d22d930bb2378130d345234611e9d4132fb20baf67cd9eac2"
+    },
+    {
+      "filename": "elife-23496-media2.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvNDU1LzE5M2M1ODljYzg0NjMxYzUxZmQ1OTE3MTU5NGNjMWYwMDQwMTY5OGQvZWxpZmUtMjM0OTYtbWVkaWEyLm1wNA--/elife-23496-media2.mp4?_hash=KrU2bFlIpblzajDHJocEHX7kVgU%2BAqHl%2FTAGteZo2TY%3D",
+      "bytes": 4243626,
+      "sha256": "61d32b1a6c81e229a52f1160feb7592e3dcaecd0853750efc7e0c5f8ed42c0e4"
+    },
+    {
+      "filename": "elife-23496-v2.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMjM0OTYvZWxpZmUtMjM0OTYtdjIucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzIzNDk2/elife-23496-v2.pdf?_hash=lthigJML2WebqP1bPbpEq%2B%2B3WQ7Ml9FC%2F9OR8eA8B4c%3D",
+      "bytes": 8960656,
+      "sha256": "d8531dbc018a68db48723e16a4e91cde89f89c1288fcdb400a677086483c1e4e"
+    },
+    {
+      "filename": "elife-23496-figures-v2.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMjM0OTYvZWxpZmUtMjM0OTYtZmlndXJlcy12Mi5wZGY-/elife-23496-figures-v2.pdf?_hash=w5zPWMOyghVLw3yoMVoizsL4JBtSFI%2FMvGqeKsGh8Mc%3D",
+      "bytes": 10307465,
+      "sha256": "eca76b5764b9f1adb2d49fe341f2767164c8cc0c89e88c633a67aaf0f6d3acc4"
+    }
+  ],
+  "download_errors": []
+}

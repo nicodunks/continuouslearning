@@ -1,0 +1,62 @@
+{
+  "title": "A neural circuit architecture for angular integration in Drosophila",
+  "doi": "10.1038/nature22343",
+  "folder": "2017-a-neural-circuit-architecture-for-angular-integration-in-drosophila",
+  "discovery_note": "P-EN pathways shift the heading estimate; perturbations test the updating mechanism.",
+  "assets": [
+    {
+      "filename": "41586_2017_BFnature22343_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM1_ESM.pdf",
+      "bytes": 378097,
+      "sha256": "144f447b5cea214f8f9e15af4d9db7f7d76c7af81c0e21e7d46eea98b84336f5"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM2_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM2_ESM.mp4",
+      "bytes": 1127554,
+      "sha256": "d7b59d227c8384e9d4c9c1f7ecc4808e23600201f1d5ad0b561e2a00e0e719ba"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM3_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM3_ESM.mp4",
+      "bytes": 1613557,
+      "sha256": "46cfff4335e59e149ac92f0cc7d46156b6d78e44f2ccb5c130edf640e3ee5c23"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM4_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM4_ESM.mp4",
+      "bytes": 2017619,
+      "sha256": "096222f79f4896f9a17c5473721984fbf8c75698f19232d95a507a9a732a15ed"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM5_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM5_ESM.mp4",
+      "bytes": 2059774,
+      "sha256": "b04e931db3ed29c4d39669fe70636d7b46306b4c133e90499fd7e3475ba3ac35"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM6_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM6_ESM.mp4",
+      "bytes": 2466224,
+      "sha256": "77fd2c4ee3d690adb91c9f7d3e34322b3e6296a8c1467544657d8dcdddc3db0b"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM7_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM7_ESM.mp4",
+      "bytes": 1964674,
+      "sha256": "6021f8a6cc2d4f6bde0e6905ac95b9f6bd49ff4bde2a61fcc06d4b5f1e30a41d"
+    },
+    {
+      "filename": "41586_2017_BFnature22343_MOESM8_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM8_ESM.mp4",
+      "bytes": 2441398,
+      "sha256": "559aee49c4159c181114d09730abfefd9c53132208b1042f1105b020cc28526c"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/nature22343.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

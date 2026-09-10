@@ -1,0 +1,21 @@
+{
+  "title": "Multimodal cue integration and learning in a neural representation of head direction",
+  "doi": "10.1038/s41593-024-01823-z",
+  "folder": "2025-multimodal-cue-integration-and-learning-in-a-neural-representation-of-head-direction",
+  "discovery_note": "Examines integration and learning of multiple heading cues.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41593-024-01823-z.pdf",
+      "bytes": 13356091,
+      "sha256": "78900a893ba33f85b07df49abd2176b61013d1473052c086614e5087a080f0e2"
+    },
+    {
+      "filename": "41593_2024_1823_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-024-01823-z/MediaObjects/41593_2024_1823_MOESM1_ESM.pdf",
+      "bytes": 61392,
+      "sha256": "4e2c4f6c27b68b97392ccc17d2809521bad61a3e67b315791f5ec70d78443b3c"
+    }
+  ],
+  "download_errors": []
+}

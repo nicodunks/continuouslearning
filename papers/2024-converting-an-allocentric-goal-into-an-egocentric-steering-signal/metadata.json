@@ -1,0 +1,27 @@
+{
+  "title": "Converting an allocentric goal into an egocentric steering signal",
+  "doi": "10.1038/s41586-023-07006-3",
+  "folder": "2024-converting-an-allocentric-goal-into-an-egocentric-steering-signal",
+  "discovery_note": "FC2 goal representation and PFL3 transformation into steering.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41586-023-07006-3.pdf",
+      "bytes": 14268439,
+      "sha256": "1e0dfa7487c5beda00d943dacc246563a0f36c7f424bc8707f398d1a09f8b310"
+    },
+    {
+      "filename": "41586_2023_7006_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-023-07006-3/MediaObjects/41586_2023_7006_MOESM1_ESM.pdf",
+      "bytes": 460501,
+      "sha256": "832998f0c6d74fe609edf85d5eae454a97f9615c3db2d23d306d99102baa6227"
+    },
+    {
+      "filename": "41586_2023_7006_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-023-07006-3/MediaObjects/41586_2023_7006_MOESM2_ESM.pdf",
+      "bytes": 73628,
+      "sha256": "7381d16df6dd0aaf9b2c32bba4486acc0a78904f1468e8441a7dccf5357c78be"
+    }
+  ],
+  "download_errors": []
+}

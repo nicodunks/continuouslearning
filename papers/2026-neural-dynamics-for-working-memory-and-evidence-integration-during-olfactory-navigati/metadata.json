@@ -1,0 +1,39 @@
+{
+  "title": "Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila",
+  "doi": "10.1038/s41467-026-75945-2",
+  "folder": "2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati",
+  "discovery_note": "FB local-neuron activity accumulates odor evidence and persists after odor loss; silencing impairs persistent directional behavior.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41467-026-75945-2.pdf",
+      "bytes": 5500984,
+      "sha256": "d657799cf2d56846685ff119b67790e9c9b05368e8007f12b35764f10f4970cd"
+    },
+    {
+      "filename": "41467_2026_75945_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-026-75945-2/MediaObjects/41467_2026_75945_MOESM1_ESM.pdf",
+      "bytes": 2415114,
+      "sha256": "5ff8281d2abb12f45095dbc40d8df48eacd812f5d5998bc6eb117d20c5687e79"
+    },
+    {
+      "filename": "41467_2026_75945_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-026-75945-2/MediaObjects/41467_2026_75945_MOESM2_ESM.pdf",
+      "bytes": 94089,
+      "sha256": "b9734fc1fc400c035a094cf1dca94a588c575a5d32837bb7f54decf73f69a5bd"
+    },
+    {
+      "filename": "41467_2026_75945_MOESM3_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-026-75945-2/MediaObjects/41467_2026_75945_MOESM3_ESM.pdf",
+      "bytes": 118893,
+      "sha256": "0dc7e0254c34fabd37429a8ae004e2f6f3e1bbbf6be6c4e97c1e3ea29181c2c7"
+    },
+    {
+      "filename": "41467_2026_75945_MOESM4_ESM.zip",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-026-75945-2/MediaObjects/41467_2026_75945_MOESM4_ESM.zip",
+      "bytes": 13370957,
+      "sha256": "340da3724f1f535a88b30db068314b995b1ab157a44ed01620702d25952711bd"
+    }
+  ],
+  "download_errors": []
+}

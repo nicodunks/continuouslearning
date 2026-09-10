@@ -1,0 +1,21 @@
+{
+  "title": "Transforming a head direction signal into a goal-oriented steering command",
+  "doi": "10.1038/s41586-024-07039-2",
+  "folder": "2024-transforming-a-head-direction-signal-into-a-goal-oriented-steering-command",
+  "discovery_note": "PFL3 populations support turn direction; PFL2 increases steering strength for large errors.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41586-024-07039-2.pdf",
+      "bytes": 14702108,
+      "sha256": "89a17cfdf9b57a68faf6c1614a8f0394302836181edb0bfd5240230d184991bb"
+    },
+    {
+      "filename": "41586_2024_7039_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07039-2/MediaObjects/41586_2024_7039_MOESM1_ESM.pdf",
+      "bytes": 59341,
+      "sha256": "68753606498e7baacd0cc12cdfe299d8e93657be03bde90a20746d58de04555c"
+    }
+  ],
+  "download_errors": []
+}

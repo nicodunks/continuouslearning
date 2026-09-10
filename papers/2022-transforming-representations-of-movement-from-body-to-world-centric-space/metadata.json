@@ -1,0 +1,20 @@
+{
+  "title": "Transforming representations of movement from body- to world-centric space",
+  "doi": "10.1038/s41586-021-04191-x",
+  "folder": "2022-transforming-representations-of-movement-from-body-to-world-centric-space",
+  "discovery_note": "PFN populations combine heading and translation; h\u0394B represents world-relative velocity.",
+  "assets": [
+    {
+      "filename": "41586_2021_4191_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04191-x/MediaObjects/41586_2021_4191_MOESM1_ESM.pdf",
+      "bytes": 84150,
+      "sha256": "55aa6b3910c3505b29eef5660dc718e7f259639336346d6fad9601df4ef2c85c"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/s41586-021-04191-x.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

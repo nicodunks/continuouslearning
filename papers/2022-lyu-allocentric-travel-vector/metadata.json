@@ -1,0 +1,52 @@
+{
+  "title": "Building an allocentric travelling direction signal via vector computation",
+  "doi": "10.1038/s41586-021-04067-0",
+  "folder": "2022-lyu-allocentric-travel-vector",
+  "discovery_note": "A vector computation transforms body-relative movement into world-relative travel direction.",
+  "assets": [
+    {
+      "filename": "41586_2021_4067_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04067-0/MediaObjects/41586_2021_4067_MOESM1_ESM.pdf",
+      "bytes": 534270,
+      "sha256": "8d6bc9d30aa67999328a4fa2d1aadc96852ac98736f25fb7b0c3842235049384"
+    },
+    {
+      "filename": "41586_2021_4067_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04067-0/MediaObjects/41586_2021_4067_MOESM2_ESM.pdf",
+      "bytes": 70592,
+      "sha256": "3b5045f3cbf7afaf2275800e94401d81eba62a5a7260ad60fd4f31e21c396f2e"
+    },
+    {
+      "filename": "41586_2021_4067_MOESM3_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04067-0/MediaObjects/41586_2021_4067_MOESM3_ESM.mov",
+      "bytes": 6871599,
+      "sha256": "5d7aa5fb909de3b3f602371b6259d1796a27c7278bb73ad2e8dabba68633b9e5"
+    },
+    {
+      "filename": "41586_2021_4067_MOESM4_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04067-0/MediaObjects/41586_2021_4067_MOESM4_ESM.mov",
+      "bytes": 2317597,
+      "sha256": "0ba3197557e53e0e19ab07fbbee1481a8e6b54b300154ec848d545aae2c9f906"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://pnicompneurojc.github.io/papers/lyu2021building.pdf",
+      "bytes": 10984072,
+      "sha256": "81f13272e5780a6e3a2f83ae43fe75b955a20687dd4981faa796d971af49ed0a"
+    },
+    {
+      "filename": "supplementary-information.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04067-0/MediaObjects/41586_2021_4067_MOESM1_ESM.pdf",
+      "bytes": 534270,
+      "sha256": "8d6bc9d30aa67999328a4fa2d1aadc96852ac98736f25fb7b0c3842235049384"
+    },
+    {
+      "filename": "reporting-summary.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-021-04067-0/MediaObjects/41586_2021_4067_MOESM2_ESM.pdf",
+      "bytes": 70592,
+      "sha256": "3b5045f3cbf7afaf2275800e94401d81eba62a5a7260ad60fd4f31e21c396f2e"
+    }
+  ],
+  "download_errors": [],
+  "reading_status": "complete_pdf_reading_movies_sampled"
+}

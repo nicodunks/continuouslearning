@@ -1,0 +1,57 @@
+{
+  "title": "A vector-based strategy for olfactory navigation in Drosophila",
+  "doi": "10.1038/s41586-026-10827-7",
+  "folder": "2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila",
+  "discovery_note": "Odor-boundary tracking uses directional memories; FC2 signals the return direction outside the plume.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41586-026-10827-7.pdf",
+      "bytes": 29178968,
+      "sha256": "bc4cd16a77681a7e90d96464c456f04999c84aa69009b725ab345a8369f3558b"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM1_ESM.pdf",
+      "bytes": 707337,
+      "sha256": "492d9dc72f8585c40ee56cbb4a8a7a3060b09c3c4af2b34231bb4d78ed1b6c3f"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM2_ESM.pdf",
+      "bytes": 1726557,
+      "sha256": "1e26c808c053be77fb7fa59b097e61f06647942a73190ae239d1c083f3f67df6"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM3_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM3_ESM.pdf",
+      "bytes": 1424675,
+      "sha256": "7331e7a2ebe4b21cb106f8b358b29ad5dee60dfce4c35be1fcf3505ef206e62d"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM4_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM4_ESM.mov",
+      "bytes": 7810093,
+      "sha256": "ab36c07ce9bb8b4bb2c10c1d89ee6b81367f1b954020dee5d906695160b74779"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM5_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM5_ESM.mov",
+      "bytes": 26772228,
+      "sha256": "a5e8e8c9b276fd0e68a4879f62d6a515f1cbab24e9e9966abbc6fc912bc8279c"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM6_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM6_ESM.mov",
+      "bytes": 155848,
+      "sha256": "a71ffee66131041f9a4e771207f31992374fea4f2dddb5c4264fa335dc9e9f8a"
+    },
+    {
+      "filename": "41586_2026_10827_MOESM7_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10827-7/MediaObjects/41586_2026_10827_MOESM7_ESM.mov",
+      "bytes": 24867052,
+      "sha256": "5cc716975f67d0f6edfe4d2bb7c48aa15272802e65ec6a89ea51bddf5aa2d250"
+    }
+  ],
+  "download_errors": []
+}

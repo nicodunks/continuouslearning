@@ -1,0 +1,15 @@
+{
+  "title": "Ring attractor dynamics in the Drosophila central brain",
+  "doi": "10.1126/science.aal4835",
+  "folder": "2017-ring-attractor-dynamics-in-the-drosophila-central-brain",
+  "discovery_note": "Optogenetically imposed activity states persist with attractor-like dynamics.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://neurophysics.ucsd.edu/courses/physics_171/kim_jayaraman_science_2017.pdf",
+      "bytes": 5267411,
+      "sha256": "fe22411d0466a79cfd014ca134316f9a25348594d0cdc93a938a7cfe8e370941"
+    }
+  ],
+  "download_errors": []
+}

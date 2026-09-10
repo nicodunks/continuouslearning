@@ -1,0 +1,63 @@
+{
+  "title": "Connectomic reconstruction predicts visual features used for navigation",
+  "doi": "10.1038/s41586-024-07967-z",
+  "folder": "2024-connectomic-reconstruction-predicts-visual-features-used-for-navigation",
+  "discovery_note": "Uses visual-pathway anatomy to predict features supplied to the navigation system.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41586-024-07967-z.pdf",
+      "bytes": 45831381,
+      "sha256": "f36ef2a39ba97ab04cf52bdf637b8f517a9cd241eef7abf161b9b77347be0090"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM1_ESM.pdf",
+      "bytes": 1709650,
+      "sha256": "21e618d1d2ea687a26422f9fd4060813c7c522c26d4d1b3f0a2d90e8b065efd4"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM2_ESM.pdf",
+      "bytes": 72710,
+      "sha256": "ebb8dbb12089f620d33016576fcd5c420f067f63e707e984c75aa78f28cec4e5"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM3_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM3_ESM.pdf",
+      "bytes": 109289004,
+      "sha256": "0b0ab7f3b024d0e15ae7a31f6be340e7f684f1e5c18a767f4c183058fa0ad0e3"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM4_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM4_ESM.pdf",
+      "bytes": 18741602,
+      "sha256": "ea26438a9b40d5c72432bc5f33e31e72d79b162f53de419a7ef09c0a0aa83f35"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM7_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM7_ESM.pdf",
+      "bytes": 51590,
+      "sha256": "fbd81c3a38d6b00b10767eb59f6c6382414e407537088425ce110bb20af04fce"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM8_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM8_ESM.mp4",
+      "bytes": 19434199,
+      "sha256": "936cea1cee86dfd0e29721ca0dd08149224b02a36faf6a190fd77bb5a568cacb"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM9_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM9_ESM.mp4",
+      "bytes": 13972935,
+      "sha256": "140599bea15ae9a1cc8c17845e08b27823dc8cff5394863dd9b1488d1c5ed893"
+    },
+    {
+      "filename": "41586_2024_7967_MOESM10_ESM.mp4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07967-z/MediaObjects/41586_2024_7967_MOESM10_ESM.mp4",
+      "bytes": 12773728,
+      "sha256": "6b7fc44fb7c52b1e060d1117e1f48853f9fe90d83997a6e00614ecfe9d7e59df"
+    }
+  ],
+  "download_errors": []
+}

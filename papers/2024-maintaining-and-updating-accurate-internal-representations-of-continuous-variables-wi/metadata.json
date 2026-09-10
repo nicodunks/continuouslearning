@@ -1,0 +1,27 @@
+{
+  "title": "Maintaining and updating accurate internal representations of continuous variables with a handful of neurons",
+  "doi": "10.1038/s41593-024-01766-5",
+  "folder": "2024-maintaining-and-updating-accurate-internal-representations-of-continuous-variables-wi",
+  "discovery_note": "Small networks can support continuous representations with tuning/robustness tradeoffs.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41593-024-01766-5.pdf",
+      "bytes": 11171899,
+      "sha256": "960d9a52b340014a20cac4696137970780870a2c7287e94ec5500c1a3fa5e396"
+    },
+    {
+      "filename": "41593_2024_1766_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-024-01766-5/MediaObjects/41593_2024_1766_MOESM1_ESM.pdf",
+      "bytes": 499942,
+      "sha256": "4b73166df95c9a3090b867ce59127bb6dae05bdaef1c90bafd13a945dc182fc2"
+    },
+    {
+      "filename": "41593_2024_1766_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-024-01766-5/MediaObjects/41593_2024_1766_MOESM2_ESM.pdf",
+      "bytes": 60281,
+      "sha256": "776c5c881508fb702a268fc994c1ffd5d4d576db4737fb77b3460d55d617e19d"
+    }
+  ],
+  "download_errors": []
+}

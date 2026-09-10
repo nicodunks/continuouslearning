@@ -1,0 +1,159 @@
+{
+  "title": "A connectome of the Drosophila central complex reveals network motifs suitable for flexible navigation and context-dependent action selection",
+  "doi": "10.7554/eLife.66039",
+  "folder": "2021-a-connectome-of-the-drosophila-central-complex-reveals-network-motifs-suitable-for-fl",
+  "discovery_note": "Broad hemibrain CX architecture and candidate computational motifs.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/66039.pdf",
+      "bytes": 46360125,
+      "sha256": "f59db164fe12b6756926429127bfacec69170686cd2ac7e6ebc92dd6e257781b"
+    },
+    {
+      "filename": "elife-66039-video1.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xLm1wNA--/elife-66039-video1.mp4?_hash=%2FFE1aP%2Fhu%2Fs1iwG7xQp69ynFEMH%2FmyT4OwrqzS7X6D8%3D",
+      "bytes": 9847724,
+      "sha256": "269ff2d7a00c51766e448543a2580b13cf6b89d5b09adb121ef335dba0bd6ad1"
+    },
+    {
+      "filename": "elife-66039-video2.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8yLm1wNA--/elife-66039-video2.mp4?_hash=MsSgRkmsFx8losHW%2Bcw8OuTVMz37HlCmF9MWxe16g6Y%3D",
+      "bytes": 27002883,
+      "sha256": "f52c9cd7b4905331513ffcf345e5496f20a8f3fb9d653f5729d4d9211e59ccdd"
+    },
+    {
+      "filename": "elife-66039-video3.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8zLm1wNA--/elife-66039-video3.mp4?_hash=wJANW57t7Wg%2B7ynwtj4Ki66SDq89FPpVQ8AYuZY2oE4%3D",
+      "bytes": 10392210,
+      "sha256": "67bc82a89212330a1bebf6f63f0c5d7c448eb733d9be4f3d5c27efd17342e619"
+    },
+    {
+      "filename": "elife-66039-video4.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW80Lm1wNA--/elife-66039-video4.mp4?_hash=xm7C60e0%2Bl0qk6%2BQTSIB6jU4R0PuQC7OVgFiQhXWNlQ%3D",
+      "bytes": 16937237,
+      "sha256": "26b2d415f16b9ca2291c5c1b32bbc7c2f392ede402027f974f8c073500691571"
+    },
+    {
+      "filename": "elife-66039-video5.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW81Lm1wNA--/elife-66039-video5.mp4?_hash=7EKOnDMbXAD1r2VRkqtiopHZYuX3r5COdc%2Fqbt3WBHA%3D",
+      "bytes": 37979561,
+      "sha256": "9552362e60f8c52be5d7a2f4e2f967238a35c341eb1e995e52190c2ab34da85c"
+    },
+    {
+      "filename": "elife-66039-video6.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW82Lm1wNA--/elife-66039-video6.mp4?_hash=M5hhUcP3tdT5hmXbTA6e0CEJLi6rxm49p7ISZtMu6pM%3D",
+      "bytes": 13066082,
+      "sha256": "5a0a71b432d7faaf54c44065c442021ad1517dd94c2c717faadf588935b6ad8f"
+    },
+    {
+      "filename": "elife-66039-video7.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW83Lm1wNA--/elife-66039-video7.mp4?_hash=1G0KcEhC02BJuSxwgpCjIlCQmoyFh4eRHmBBX63BVBI%3D",
+      "bytes": 12295619,
+      "sha256": "22ea9e8f09c086c4ede4607bc14be2238938c9be2e474a713b62a365439cf0c9"
+    },
+    {
+      "filename": "elife-66039-video8.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW84Lm1wNA--/elife-66039-video8.mp4?_hash=CxNDpgRDOfW6gymZ6CZvzP1IGmo1xkzrVgc0N1XWIEM%3D",
+      "bytes": 43341519,
+      "sha256": "9bbe5de3418d3d6570dace828eb45f6fdb0f9085a83e8568efc337e633bfc4f0"
+    },
+    {
+      "filename": "elife-66039-video9.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW85Lm1wNA--/elife-66039-video9.mp4?_hash=Do%2FLDhclxAO%2FI3KKFB9U2Ca5YkkKH%2F5GZmHJIgV5Pw8%3D",
+      "bytes": 35576205,
+      "sha256": "d66821529fe4606a8ca29521420633bf05b55ed3a455bbbdde2b5551d94bcbf7"
+    },
+    {
+      "filename": "elife-66039-video10.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xMC5tcDQ-/elife-66039-video10.mp4?_hash=jiMWCWecRQiu9KClZLMSVj%2Bw9353tjD82%2FlCMas7G3k%3D",
+      "bytes": 86614316,
+      "sha256": "a030121d46c534b1a5c0b7b466edcd91968fbbfcba3b02c9a0005dec51952f20"
+    },
+    {
+      "filename": "elife-66039-video11.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xMS5tcDQ-/elife-66039-video11.mp4?_hash=uvHepD1d7T80X%2BFSdnKot0ziataEEKtBOnCfSjbgWOA%3D",
+      "bytes": 20649352,
+      "sha256": "9ccc4357dd36b74175e6d095bf9f0e671651566d6b98b4fc1b7d27f62c085361"
+    },
+    {
+      "filename": "elife-66039-video12.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xMi5tcDQ-/elife-66039-video12.mp4?_hash=bkgE4C503cy0agYSXEjPhvgeDO%2BMsNoeYIK6fxNnPiA%3D",
+      "bytes": 18846506,
+      "sha256": "317d83d76c697ec70eede437cf0e234c7662fef96a8bb978293db3cc9db16a94"
+    },
+    {
+      "filename": "elife-66039-video13.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xMy5tcDQ-/elife-66039-video13.mp4?_hash=0h4vugs%2F4ddP6z1Ehpusuyp%2B4Vj%2Fiw1dijzp6xdwXEE%3D",
+      "bytes": 50606898,
+      "sha256": "afb90995349d86a85a18be3533fb311d198e1176199407689a540450cc897597"
+    },
+    {
+      "filename": "elife-66039-video14.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xNC5tcDQ-/elife-66039-video14.mp4?_hash=rK0csMC2aciiiviCR0OGp7nXqXdC%2FAGDWEH46ddS19Q%3D",
+      "bytes": 18008065,
+      "sha256": "6b872c7abb6ac8a635605efd04ef9fdcf0065c08983362e202ffbfa21007c430"
+    },
+    {
+      "filename": "elife-66039-video15.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xNS5tcDQ-/elife-66039-video15.mp4?_hash=xqdZgG3ZrDZFw0%2BnIbF8x7oQ4VEMjZ8PikOK%2F5znVS8%3D",
+      "bytes": 4616528,
+      "sha256": "e3fe6078f1beddfc9f9c4a376e201cdb8ba6356779636442858864dc977aa47e"
+    },
+    {
+      "filename": "elife-66039-video16.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xNi5tcDQ-/elife-66039-video16.mp4?_hash=jUEUnStKju7IA%2Fl3BiBRgABC78jlybqOOK6gbkO4jIQ%3D",
+      "bytes": 9576324,
+      "sha256": "f8ed6478902b43325771a9da540c39d3ea990e5e16c04bcbc6899d90446455b6"
+    },
+    {
+      "filename": "elife-66039-video17.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xNy5tcDQ-/elife-66039-video17.mp4?_hash=ZW4lkJcz%2BBioWAVCQd1gm99hoefuCgHUJw7EQWZQCDI%3D",
+      "bytes": 28182079,
+      "sha256": "3e3f9fd787c3d7bf183bbda227d9efd6f2c1a11045c440eb7c41f4904c31129c"
+    },
+    {
+      "filename": "elife-66039-video18.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xOC5tcDQ-/elife-66039-video18.mp4?_hash=OMwSlbEeR%2FTvl70rI3WUWBvyJTKIMk9n4FFankKZ48o%3D",
+      "bytes": 53616780,
+      "sha256": "7b3f7ae09434721bee51e3e0a1a71bb23057b95bd6f9197c2fe9c1e71761596b"
+    },
+    {
+      "filename": "elife-66039-video19.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8xOS5tcDQ-/elife-66039-video19.mp4?_hash=EonxWsNNXDAektkVpjNTv2FiECvidIDiZT9AoL9JZ7Y%3D",
+      "bytes": 37615691,
+      "sha256": "e1f2e6af8ed424c388eb3352dfd7944bfe50c72531691fe2ed97b1ce5d628745"
+    },
+    {
+      "filename": "elife-66039-video20.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8yMC5tcDQ-/elife-66039-video20.mp4?_hash=M6MafZWMR4%2FUh6DUJX7Q4g3pGVQfuzVCoGTnDSGPUCQ%3D",
+      "bytes": 68425309,
+      "sha256": "8696700a739f258d00ad3bb16c603ab9dfd879b062cb069ed29b1e7a2b15a5ea"
+    },
+    {
+      "filename": "elife-66039-video21.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8yMS5tcDQ-/elife-66039-video21.mp4?_hash=RKYLKLw40Y4QzJubDDvEk49dG%2FHXUuF45F9Lyks1q8Q%3D",
+      "bytes": 25139539,
+      "sha256": "ce0de627cfb7af65f629bb8ba87f4dc39f1d22123673f6c6fdbbad3d2e3eb4c1"
+    },
+    {
+      "filename": "elife-66039-video22.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzUxL2U2MGI3ZmE0YmQ0NDQ1ZmM3ZjVlODRhZjdkMjg0MTdiM2EzNmFmNzYvZWxpZmUtNjYwMzktdmlkZW8yMi5tcDQ-/elife-66039-video22.mp4?_hash=F1CmUmFpRQx8mHBYulrZ7onnlK6UtteNhmHxLyFFb4w%3D",
+      "bytes": 19818985,
+      "sha256": "202235ea502ec463ea5812c18c5e66443285a0bfc50f24c14c85dfff606b25fb"
+    },
+    {
+      "filename": "elife-66039-v4.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNjYwMzkvZWxpZmUtNjYwMzktdjQucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzY2MDM5/elife-66039-v4.pdf?_hash=AqBoszBfpcTRz3ZUC4mfz%2B0nXZ%2BxrONqUE2wD6dZ%2BEg%3D",
+      "bytes": 46360125,
+      "sha256": "f59db164fe12b6756926429127bfacec69170686cd2ac7e6ebc92dd6e257781b"
+    },
+    {
+      "filename": "elife-66039-figures-v4.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNjYwMzkvZWxpZmUtNjYwMzktZmlndXJlcy12NC5wZGY-/elife-66039-figures-v4.pdf?_hash=izBSwRuoqWyy981Lc9%2F0TpUFxKU2u4Ua7xBOyW7zrqY%3D",
+      "bytes": 104353899,
+      "sha256": "2806a786a6cdfdc172ca8611ddb27249110e8d2a4aa15f2edb23a536f331c1db"
+    }
+  ],
+  "download_errors": []
+}

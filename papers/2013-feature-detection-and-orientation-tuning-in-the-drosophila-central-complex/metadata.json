@@ -1,0 +1,56 @@
+{
+  "title": "Feature detection and orientation tuning in the Drosophila central complex",
+  "doi": "10.1038/nature12601",
+  "folder": "2013-feature-detection-and-orientation-tuning-in-the-drosophila-central-complex",
+  "discovery_note": "Visual feature tuning in ring neurons.",
+  "assets": [
+    {
+      "filename": "41586_2013_BFnature12601_MOESM17_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM17_ESM.mov",
+      "bytes": 1349136,
+      "sha256": "6b892f9c78d5e3197492a9d4c0c54caa4cae0b1791c194a53f7f96eb1dee7ad3"
+    },
+    {
+      "filename": "41586_2013_BFnature12601_MOESM18_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM18_ESM.mov",
+      "bytes": 582483,
+      "sha256": "307df6dc0683061c99e07ae21c063eff588b47c7a65c9c44cd291cfd324a4a04"
+    },
+    {
+      "filename": "41586_2013_BFnature12601_MOESM19_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM19_ESM.mov",
+      "bytes": 2441424,
+      "sha256": "af3d01ed34b611c352ba095357a16ab3425a12fcc452af04c1d97ff11d68ab2b"
+    },
+    {
+      "filename": "41586_2013_BFnature12601_MOESM20_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM20_ESM.mov",
+      "bytes": 1225096,
+      "sha256": "91fd6ba239cf7c8adbb894018cc985bcf7f79482851cb4c1749ac9115ede3792"
+    },
+    {
+      "filename": "41586_2013_BFnature12601_MOESM21_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM21_ESM.mov",
+      "bytes": 4312131,
+      "sha256": "22d128ead2a7a470d37057414e9a330a335407974f4d249fb0c5c9d2087ed63f"
+    },
+    {
+      "filename": "41586_2013_BFnature12601_MOESM22_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM22_ESM.mov",
+      "bytes": 5586367,
+      "sha256": "f1b9e5f8fbbaa29639204827b479d5056bf1585dfecf6788fc16c373434568c5"
+    },
+    {
+      "filename": "41586_2013_BFnature12601_MOESM23_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM23_ESM.mov",
+      "bytes": 2798388,
+      "sha256": "ec904c72aa6569e6b406e3f0a3519668818335de9e6dfe92d8fce36b23c76a88"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/nature12601.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

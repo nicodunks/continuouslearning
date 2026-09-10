@@ -1,0 +1,20 @@
+{
+  "title": "Sensorimotor experience remaps visual input to a heading-direction network",
+  "doi": "10.1038/s41586-019-1772-4",
+  "folder": "2019-sensorimotor-experience-remaps-visual-input-to-a-heading-direction-network",
+  "discovery_note": "Inhibitory visual inputs and experience-dependent remapping.",
+  "assets": [
+    {
+      "filename": "41586_2019_1772_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1772-4/MediaObjects/41586_2019_1772_MOESM1_ESM.pdf",
+      "bytes": 119088,
+      "sha256": "0168ea9aca03d4e994bada13de5ad5f5a0cbf044247b53cce9826d19839a81c9"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/s41586-019-1772-4.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

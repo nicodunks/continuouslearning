@@ -3,3 +3,11 @@ data/raw/
 __pycache__/
 .DS_Store
 .env
+tmp/
+# Large supplementary movies remain local; source URLs and checksums are tracked.
+papers/**/*.mov
+papers/**/*.mp4
+papers/**/*.zip
+# Oversize supplementary PDFs are local; download from metadata URLs.
+papers/2021-a-connectome-of-the-drosophila-central-complex-reveals-network-motifs-suitable-for-fl/elife-66039-figures-v4.pdf
+papers/2024-connectomic-reconstruction-predicts-visual-features-used-for-navigation/41586_2024_7967_MOESM3_ESM.pdf

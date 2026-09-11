@@ -2,6 +2,7 @@
 
 A research workspace for understanding navigation in the Drosophila central complex, using the **MaleCNS v1.0** connectome and primary literature. Started 2026-09-10.
 
+- [Research objective and sequence](RESEARCH_APPROACH.md): complete behavioral accounts first, then targeted structure/function analysis.
 - [Paper library](papers/README.md): one folder per paper, PDFs/supplements, reading status, and detailed notes.
 - [Reading map](docs/literature.md): canonical results and 2024–2026 developments.
 - [Circuit map and open questions](docs/circuit-and-open-questions.md).

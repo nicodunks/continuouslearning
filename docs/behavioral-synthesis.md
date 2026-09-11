@@ -143,3 +143,11 @@ These studies constrain the current-heading estimator. They do not establish a r
 The same world bearing can survive darkness if the compass mapping remains stable, if the goal changes internal coordinates along with compass remapping, or if another controller retrieves the preference. The paper records behavior and does not resolve those circuit alternatives. It also does not establish whether the preference is learned versus an enduring individual bias. Static connectivity can constrain candidate interactions but cannot alone identify that distinction.
 
 Survival selection (26 of 81 in the principal cohort), locomotion-dependent feeding, and substantial within-fly variability qualify generality. The timed-feeding supplement extends behavior to roughly two weeks and argues that the walking contingency is not required. These details belong in the behavioral account because state, retention and expression are separate mechanisms.
+
+## Visual calibration is learned, so memory needs a compatible frame
+
+[Kim et al. (2019)](../papers/2019-generation-of-stable-heading-representations-in-diverse-visual-scenes/notes.md) shows that scene-to-compass mapping can be experimentally rewritten, even reversed in some flies. Visual feature patterns need not be pure sinusoids: learning can align a complex visual input with a phase maintained by recurrent dynamics. Elevation-sensitive features disambiguate yaw without representing two-dimensional position.
+
+The supplement makes memory interference explicit. Presynaptically gated inhibitory plasticity can protect inactive visual channels, whereas postsynaptically gated plasticity can modify them whenever the compass cell is active. Scene retrieval does not uniquely establish either rule; deterministic scene similarity or residual weights can also restore an offset. Connectivity alone does not reveal these learning rules or an individual's learned calibration.
+
+This sharpens the interface with the long-term bearing results. A shared offset cancels from a goal–heading comparison, but changing the compass without transforming the goal rotates the intended world bearing. A complete food-return account must explain how calibration, goal retrieval and displacement memory stay compatible across scene changes and translation.

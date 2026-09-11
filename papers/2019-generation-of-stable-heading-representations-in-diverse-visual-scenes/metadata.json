@@ -39,6 +39,18 @@
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-019-1767-1/MediaObjects/41586_2019_1767_MOESM6_ESM.mp4",
       "bytes": 17132429,
       "sha256": "25f1121d94c3d3e5c9ef1e4f0bc7b360bb76d6d405e35599197663dad5e73211"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://www.columbia.edu/cu/neurotheory/Larry/KimNature19.pdf",
+      "bytes": 19596792,
+      "sha256": "c3e79c38587599b24a15f0b79e559a6014bcad8122cb3a6e51ebfe3e50d367b3"
+    },
+    {
+      "filename": "simulation-code.zip",
+      "url": "https://research.janelia.org/jayaraman/Kim_etal_Nature2019_Downloads/Kim_etal_Nature2019_simulation_codes.zip",
+      "bytes": 473535,
+      "sha256": "2ec3146fbf397436be9b82ee4d4bf6379e80809b7a583577811bf5cf4ad48bbb"
     }
   ],
   "download_errors": [
@@ -46,5 +58,6 @@
       "url": "https://www.nature.com/articles/s41586-019-1767-1.pdf",
       "error": "Unavailable or unexpected format"
     }
-  ]
+  ],
+  "reading_status": "Complete main/Methods/Extended Data/scientific-supplement text and visual reading; four movies sampled; targeted model-source reading."
 }

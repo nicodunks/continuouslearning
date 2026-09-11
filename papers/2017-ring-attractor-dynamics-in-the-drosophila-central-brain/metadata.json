@@ -11,5 +11,14 @@
       "sha256": "fe22411d0466a79cfd014ca134316f9a25348594d0cdc93a938a7cfe8e370941"
     }
   ],
-  "download_errors": []
+  "download_errors": [],
+  "reading_status": "complete combined article/scientific supplement PDF; movies unavailable",
+  "access_gaps": [
+    "Movies S1\u2013S11 not downloaded: attempted publisher endpoint 403, legacy Janelia site timeout. Captions read."
+  ],
+  "source_code": {
+    "url": "https://github.com/hrouault/RingAttractor",
+    "commit": "2b7b3dc08e0ca191d05796424087497264ceec26",
+    "coverage": "targeted dynamics, parameter and inference implementation sections; not executed"
+  }
 }

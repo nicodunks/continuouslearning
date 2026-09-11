@@ -103,3 +103,19 @@ The published review history corrected a proposed output route after checking sy
 The geometry is explicit: if a fly at x retains return vector f−x after transport by d, it arrives at f+d. This is a predictable error of an internal estimate, not successful relocalization to the original physical site after arbitrary displacement. The experiment does not establish a long-term catalog of food locations.
 
 The same paper demonstrates that naïve flies prefer a location previously occupied by rewarded flies, and shows that a chemical-mark model can mimic some earlier annular-search statistics. A complete account must therefore consider chemical cues, internal vectors, remembered bearings, and visual place recognition together. These can cooperate in natural behavior; similar trajectories do not identify the underlying representation. The earlier local-search studies are being read alongside this challenge, rather than accepted or dismissed solely through a later paper's characterization.
+
+## The compass is an angular reference, with a learned-frame problem
+
+[Seelig & Jayaraman (2015)](../papers/2015-neural-dynamics-for-landmark-orientation-and-angular-path-integration/notes.md) establishes localized, landmark-anchored activity that can update in darkness and retain orientation across pauses. It supplies an angular state, not a location or return vector. The original data include drift, variable self-motion gain, weak-activity epochs and delayed visual relocking.
+
+Its population-vector analysis extracts the first angular harmonic of a localized bump. Exact sinusoids are unnecessary for that phase extraction; downstream vector arithmetic imposes additional constraints that must be checked in its own experiments. A decoded phase and a biologically implemented computation are separate claims.
+
+The fly-specific phase offset cancels from heading–goal comparison if both variables share it. Cue ambiguity and relocking create a harder question: when the compass changes its reference, how is an existing goal or displacement memory kept consistent? The later sensory-remapping and goal-learning literature must close that interface. An intact heading representation by itself does not show that a remembered destination remains correctly registered to the world.
+
+## A maintained compass state has an experimentally constrained mechanism
+
+[Kim et al. (2017)](../papers/2017-ring-attractor-dynamics-in-the-drosophila-central-brain/notes.md) shows that directly overwriting EPG activity replaces the old bump and leaves a persistent state with organized drift. Two-site stimulation supports functional competition. The experiments favor local effective excitation and broad inhibition within the tested model space; they do not identify a unique set of direct synapses.
+
+This provides a generative explanation for localized activity, extending the earlier phase-decoding description. The model produces a bounded smooth bump rather than requiring a pure sinusoid as its full-ring activity profile. Retention, accurate self-motion updating, goal storage and steering remain distinct functions.
+
+The tethered-flight preparation preserves persistence while largely uncoupling the bump from motor-derived heading in darkness. Its targeted supplemental stripe assay nevertheless finds increased turning after compass manipulation. These results cannot be summarized as either a complete flight navigation mechanism or a compass with no behavioral effect. The model's input assumptions, fluorescence normalization and inference priors also constrain how strongly its effective connectivity can be inferred.

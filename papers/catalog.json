@@ -268,5 +268,17 @@
     "title": "An anatomically constrained model for path integration in the bee brain",
     "doi": "10.1016/j.cub.2017.08.052",
     "discovery_note": "Canonical comparative model; bee evidence must not be treated as fly demonstration."
+  },
+  {
+    "title": "Drosophila maintain a consistent navigational goal angle for days to weeks",
+    "doi": "10.64898/2025.12.09.693277",
+    "folder": "2025-weisman-long-term-goal-angle",
+    "discovery_note": "Preprint: long-term menotaxis and retention after overnight cue removal. Full reading underway; destination memory must be distinguished from bearing."
+  },
+  {
+    "title": "Functional Logic of a Cognitive Brain System for Navigation",
+    "doi": "10.1146/annurev-neuro-112723-062711",
+    "folder": "2026-maimon-abbott-navigation-review",
+    "discovery_note": "Integrative review, July 2026: follow primary references to test coverage of the whole behavioral computation."
   }
 ]

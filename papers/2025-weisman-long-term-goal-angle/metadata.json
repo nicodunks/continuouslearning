@@ -1,0 +1,58 @@
+{
+  "title": "Drosophila maintain a consistent navigational goal angle for days to weeks",
+  "doi": "10.64898/2025.12.09.693277",
+  "folder": "2025-weisman-long-term-goal-angle",
+  "discovery_note": "Preprint: long-term menotaxis and retention after overnight cue removal. Full reading underway; destination memory must be distinguished from bearing.",
+  "assets": [
+    {
+      "filename": "main-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12714015/",
+      "bytes": 255628,
+      "sha256": "b3739714fc652bb5214872a882f46399be4a870997235463e6f7135827c9880c"
+    },
+    {
+      "filename": "nihpp-2025.12.09.693277v1-f0001.jpg",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 137855,
+      "sha256": "8f06f895d6976d7f0430c98fb941c03d39e2edb93191f9927764f399aac91bb1"
+    },
+    {
+      "filename": "nihpp-2025.12.09.693277v1-f0002.jpg",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 221918,
+      "sha256": "419754a1092d030f46007e8c23c03725b64cfaa19835e0693e655ecf473b53a0"
+    },
+    {
+      "filename": "nihpp-2025.12.09.693277v1-f0003.jpg",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 120424,
+      "sha256": "dd76dd68e17730bef1e7fbcea2a4552e4712bb6c62849f4b195c9bf4658c5b65"
+    },
+    {
+      "filename": "nihpp-2025.12.09.693277v1-f0006.jpg",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 124079,
+      "sha256": "edb09fc05e5c2619d287a8347b166cae7b5d66965590f12f57d9652e44ada529"
+    },
+    {
+      "filename": "nihpp-2025.12.09.693277v1-f0004.jpg",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 56185,
+      "sha256": "6a918865b6eccac084bdc0027394e1b82d783755d112dc15bcd4662120e2204b"
+    },
+    {
+      "filename": "nihpp-2025.12.09.693277v1-f0005.jpg",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 96644,
+      "sha256": "91cfaee0f8b16b26da571e11efba6f2f6cf1790a5735134bf38037c20d288643"
+    },
+    {
+      "filename": "NIHPP2025.12.09.693277v1-supplement-1.pdf",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12714015/supplementaryFiles",
+      "bytes": 2022628,
+      "sha256": "b2d7633184e0e4079b733282463da63abd09f873347f0f4933319dd6541cee26"
+    }
+  ],
+  "reading_status": "complete scientific HTML and supplement; main PDF missing",
+  "version": "bioRxiv December 11 2025 preprint v1"
+}

@@ -135,3 +135,11 @@ P-EN blockade weakens and destabilizes E-PG activity, sometimes allowing large e
 Projecting measured bridge profiles through the anatomy fails to reproduce sharp EB profiles, especially for P-EN2. This is a concrete unresolved transformation for later physiology and connectomics to explain. A synapse table without compartment dynamics cannot settle it. The paper also exposes missing closure at the outer bridge glomeruli and suggests neighboring cells rather than assuming a perfect ring.
 
 These studies constrain the current-heading estimator. They do not establish a remembered destination, and their temporal ordering relative to neural phase must not be mistaken for command timing relative to behavioral turns.
+
+## Long-term bearing retrieval constrains the reference-frame interface
+
+[Weisman et al. (2025 preprint)](../papers/2025-weisman-long-term-goal-angle/notes.md) shows days-to-weeks preferred bearings, repeated correction of virtual rotations and retrieval after twelve hours without the cue. Long intervals of deviation or incoherent dark walking need not erase the preference. This is virtual bearing maintenance, not demonstrated return to a remembered food location.
+
+The same world bearing can survive darkness if the compass mapping remains stable, if the goal changes internal coordinates along with compass remapping, or if another controller retrieves the preference. The paper records behavior and does not resolve those circuit alternatives. It also does not establish whether the preference is learned versus an enduring individual bias. Static connectivity can constrain candidate interactions but cannot alone identify that distinction.
+
+Survival selection (26 of 81 in the principal cohort), locomotion-dependent feeding, and substantial within-fly variability qualify generality. The timed-feeding supplement extends behavior to roughly two weeks and argues that the walking contingency is not required. These details belong in the behavioral account because state, retention and expression are separate mechanisms.

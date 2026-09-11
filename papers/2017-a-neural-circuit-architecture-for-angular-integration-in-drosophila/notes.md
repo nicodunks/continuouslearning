@@ -54,7 +54,7 @@ ATP was titrated differently for P-EN1 and P-EN2 (0.5 versus 0.1 mM). Five flies
 
 1. Periodic bridge profiles, angular offsets and phase/behavior comparisons establish the basic heading measurement. Empirical spatial profiles need not be exact sinusoids just because a Fourier component decodes them.
 2. Additional examples support heading tracking in the different cell populations and conditions; they are not separate goal-memory tests.
-3. Driver expression and anatomical context constrain which labeled cells can contribute to the measured signal; driver names cannot replace tracing.
+3. Example glomerulus-by-glomerulus visual tuning curves show the relation to bar angle in all three populations. Means and standard deviations use 22.5-degree position bins; positions in the unseen 90-degree gap are omitted. These curves describe tuning, not driver specificity.
 4. Original versus revised numbering clarifies the +1/−1 projection rule. Synaptotagmin supports presynaptic specializations in EB and noduli. Multicolor flip-outs provide single-cell tracing, with unresolved or color-assigned branches marked rather than silently treated as definitive.
 5. Turn-related bridge asymmetry persists in darkness. This establishes a nonvisual contribution but does not identify proprioception versus efference copy.
 6. Open-loop short-lived random-dot optic flow evokes asymmetry even during epochs with little turning. Turning along with the dots reduces the response, consistent with visual and nonvisual contributions opposing one another under this manipulation. Seven flies per subtype are shown. The dots are designed to separate visual motion from a stable positional landmark.

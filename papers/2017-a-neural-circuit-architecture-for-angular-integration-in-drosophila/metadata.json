@@ -51,6 +51,102 @@
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature22343/MediaObjects/41586_2017_BFnature22343_MOESM8_ESM.mp4",
       "bytes": 2441398,
       "sha256": "559aee49c4159c181114d09730abfefd9c53132208b1042f1105b020cc28526c"
+    },
+    {
+      "filename": "main-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 246937,
+      "sha256": "a71a88078f7b3da2afe2daa76ec18d4de39b644499ceb5c6344bb0a6c84ce6e2"
+    },
+    {
+      "filename": "F1.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 307690,
+      "sha256": "41a245a0a743c24ed058a7a342204a76cd685c1dbb146457085c77a894c87ca6"
+    },
+    {
+      "filename": "F10.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 383228,
+      "sha256": "30598e96809ee86b87a1c92f5f9253e496f6e4ff97acf41b9fe4b0e0343774bc"
+    },
+    {
+      "filename": "F11.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 344253,
+      "sha256": "50b3baae2165e74883eb0e3576a17401d6f1aa1f85edf3f397a5e4e78d4c3b38"
+    },
+    {
+      "filename": "F12.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 517201,
+      "sha256": "9fdeb575b88f940da30683c58bff2281a6de2a8f59a29ee9908f771e98afca74"
+    },
+    {
+      "filename": "F13.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 179363,
+      "sha256": "91fa0e1985aad60986e687e1efe8807cb30bb2f008c8093379931d68115ab8a8"
+    },
+    {
+      "filename": "F14.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 352045,
+      "sha256": "41ae8355ef27bc38985367bc05a37304f40ccf50335463e4734695f6f7fbe3f1"
+    },
+    {
+      "filename": "F15.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 267223,
+      "sha256": "21c2e88fab65a9a180e1013281ca6ef9dd300b93a202d8b4b9fbe953c6edb7f3"
+    },
+    {
+      "filename": "F2.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 381796,
+      "sha256": "1846b15a1686d866efa656481d5d7d4ac95e9c9b3d6393a78b8eb1d0ab6d508b"
+    },
+    {
+      "filename": "F3.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 322089,
+      "sha256": "73df99cd120f426a2b289488c10d2bcd2584e9ca45f47962bacf18bae72deec4"
+    },
+    {
+      "filename": "F4.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 289048,
+      "sha256": "f821d40921f2bc48ad51a6dc62b2991be20560b140a20c3a8ea2c91efc586e99"
+    },
+    {
+      "filename": "F5.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 343981,
+      "sha256": "2c86f47309572a992e525249c9a8e2620d0d1f867b6daf5bf62c6063d939b25a"
+    },
+    {
+      "filename": "F6.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 511462,
+      "sha256": "d97e62db584c289b61a8c2b00614067206f8fbf818c975bc5ca85d6c1e973f4b"
+    },
+    {
+      "filename": "F7.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 433464,
+      "sha256": "0360ddb811aa900d8993dffc44dd61181c07a2ee9693d8f3ebf9ffb85402ddb7"
+    },
+    {
+      "filename": "F8.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 175774,
+      "sha256": "375c1b6cc57f776c7d54c1531b83458af21d8930dc7a7cc5995f5f7413417cf0"
+    },
+    {
+      "filename": "F9.jpg",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320684/",
+      "bytes": 644785,
+      "sha256": "5524e72f98359fe1c4b554249df0009ae21f3b17600a26e6e0e083fdc621b1d2"
     }
   ],
   "download_errors": [
@@ -58,5 +154,6 @@
       "url": "https://www.nature.com/articles/nature22343.pdf",
       "error": "Unavailable or unexpected format"
     }
-  ]
+  ],
+  "reading_status": "complete scientific HTML/figures/supplement PDF; movies sampled; main PDF missing"
 }

@@ -127,3 +127,11 @@ The tethered-flight preparation preserves persistence while largely uncoupling t
 The paper constrains a heading updater, not translation integration or destination storage. Neural and synaptic time scales, input gain, real subtype topology and smooth movement through a discrete ring remain material assumptions. The rate model's low-speed sticking was not observed biologically. Its approximately calibrated integration and error diffusion are sufficiency results, not measurements of the whole fly's navigational accuracy.
 
 P-EN blockade weakens and destabilizes E-PG activity, sometimes allowing large erroneous phase movements. It does not simply stop updating. Calcium phase offsets also depend on indicator assignment and compartment. A complete circuit account must preserve these differences rather than identify anatomical overlap, measured calcium phase and causal computation as the same evidence. Later connectomic and subtype-specific papers are needed to resolve which recurrent loops maintain state and which move it.
+
+## Similar wiring can conceal different dynamics
+
+[Green et al. (2017)](../papers/2017-a-neural-circuit-architecture-for-angular-integration-in-drosophila/notes.md) separates P-EN subtypes with similar shifted projections but different bridge phases and leading/trailing activity relative to EPG movement. Local activation gives the same anatomical displacement; natural participation can differ because the active locations differ. The proposed P-EN2 braking role remains a hypothesis in that paper.
+
+Projecting measured bridge profiles through the anatomy fails to reproduce sharp EB profiles, especially for P-EN2. This is a concrete unresolved transformation for later physiology and connectomics to explain. A synapse table without compartment dynamics cannot settle it. The paper also exposes missing closure at the outer bridge glomeruli and suggests neighboring cells rather than assuming a perfect ring.
+
+These studies constrain the current-heading estimator. They do not establish a remembered destination, and their temporal ordering relative to neural phase must not be mistaken for command timing relative to behavioral turns.

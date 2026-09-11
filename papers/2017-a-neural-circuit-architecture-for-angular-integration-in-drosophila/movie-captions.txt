@@ -1,0 +1,13 @@
+Sample raw GCaMP6f signals from E-PG neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (E-PG>GCaMP6f raw 1.00x fixation Sample) (download MP4 )
+
+Sample raw GCaMP6m signals from E-PG neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (E-PG>GCaMP6m_raw_1.00x Sample) (download MP4 )
+
+Sample raw GCaMP6m signals from E-PG neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (E-PG>GCaMP6m_raw_0.50x Sample) (download MP4 )
+
+Sample raw GCaMP6m signals from P-EN1 neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (P-EN1>GCaMP6m_raw_1.00x Sample) (download MP4 )
+
+Sample raw GCaMP6m signals from P-EN1 neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (P-EN1>GCaMP6m_raw_0.50x Sample) (download MP4 )
+
+Sample raw GCaMP6m signals from P-EN2 neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (P-EN2>GCaMP6m_raw_1.00x Sample) (download MP4 )
+
+Sample raw GCaMP6m signals from P-EN2 neurons in the protocerebral bridge shown as the fly performs tethered walking behaviour (P-EN2>GCaMP6m_raw_0.50x Sample) (download MP4 )

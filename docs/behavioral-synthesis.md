@@ -1,6 +1,6 @@
 # Fly navigation: building complete behavioral explanations
 
-This is a growing synthesis, not a completed model of fly navigation. It currently incorporates full readings of Lyu et al. (2022) and Mussells Pires et al. (2024). Other papers in the library remain reading targets unless their logs say otherwise. The [research approach](../RESEARCH_APPROACH.md) defines the sequence: literature and synthesis first, then targeted connectome analysis and simulations.
+This is a growing synthesis, not a completed model of fly navigation. It currently incorporates full readings of Lyu et al. (2022), Mussells Pires et al. (2024) Westeinde et al. (2024), and Siliciano et al. (2026). Other papers in the library remain reading targets unless their logs say otherwise. The [research approach](../RESEARCH_APPROACH.md) defines the sequence: literature and synthesis first, then targeted connectome analysis and simulations.
 
 ## The motivating behavior
 
@@ -8,7 +8,7 @@ A fly encounters something useful, leaves, and later navigates toward it from it
 
 Several representations could support superficially similar behavior. An odor-value association, a remembered compass bearing, a home vector, recognition of a familiar view and a remembered location are different computational objects. Evidence for one does not establish all the others. The reading program must follow actual behavioral demonstrations rather than assume a metric map in advance.
 
-## What the first two papers establish
+## Coordinate operations established so far
 
 | Link | Evidence read so far | Boundary |
 |---|---|---|
@@ -52,6 +52,22 @@ A home vector updated by self-motion, familiar-view matching, an odor/wind polic
 
 ## Reading frontier
 
-The existing library covers compass dynamics, movement transformations, steering, learning and recent olfactory work. Read the companion Westeinde study next to compare PFL3 computation and neighboring PFL pathways. Then connect goal learning and odor/wind persistence to the upstream side, while returning to canonical compass papers to audit reference frames and memory claims. Follow necessary references beyond the initial 21 entries, especially papers experimentally connecting sensory history, persistent objectives and behavior.
+The existing library covers compass dynamics, movement transformations, steering, learning and recent olfactory work. With Westeinde and Siliciano now read, connect goal learning and odor/wind persistence to the upstream side, while returning to canonical compass papers to audit reference frames and memory claims. Follow necessary references beyond the initial 21 entries, especially papers experimentally connecting sensory history, persistent objectives and behavior.
 
 Only after that synthesis should novel-cell hypotheses be prioritized. Their eventual records should state the candidate signal and behavioral role, anatomical and physiological support, alternatives, and what a simulation can discriminate. Successful simulation establishes a possible mechanism under stated assumptions; it does not alone discover the neuron's biological function.
+
+## Steering also needs control of response strength
+
+[Westeinde](../papers/2024-transforming-a-head-direction-signal-into-a-goal-oriented-steering-command/notes.md) adds PFL2 and a proposed DNa03 gain pathway. PFL2 activation increases rotational speed and reduces forward velocity; its natural activity is strongest near the anti-goal. In the model, bilateral excitation changes the slope of a downstream nonlinearity, amplifying the directional bias supplied by PFL3. That downstream gain mechanism is anatomy/model-supported, while PFL2 activation and activity tuning are experimental findings. Simulated PFL2 removal is not an animal necessity experiment.
+
+The combined account now includes selected bearing, heading comparison and error-dependent response strength. It still lacks identified memory writing/retrieval, translation-dependent target updating, arrival detection and a full mapping to locomotion. S (total input gain) and A (goal amplitude) are separate proposed controls; neither should be relabeled “memory strength” without evidence.
+
+## A fuller episode: remember a direction that leads back into odor
+
+[Siliciano et al.](../papers/2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila/notes.md) connects sensory history to repeated plume returns. The fly encounters odor, exits with an upwind-biased policy, explores outside, then steers in a direction associated with earlier entries. Successful encounters update that bearing. FC2 begins pointing toward the plume before the return turn, and FC2/EPG silencing impairs returns. Repetition advances the animal along the boundary, including a dynamic virtual plume.
+
+This is a complete repeated behavioral motif, with important internal links still unresolved. Its model remembers goal velocity/direction rather than a fixed place: M is updated by a weighted sum of entry-direction phasors. Memory is held between encounters; the model does not derive a biological decay constant. It assumes an initial upwind exit bias, and evidence for a separate biological exit memory is weaker than evidence for the return goal.
+
+The connection from expressed FC2 goal to heading comparison is supported by Pires/Westeinde. The connection from odor encounter to a stored synaptic pattern is still a proposal. In particular, FC2 follows heading again inside odor; another state must retain the return memory if it is temporarily absent from FC2's expressed phase. Odor-gated hDelta/tangential/PFN inputs are therefore a concrete reading and later anatomical frontier.
+
+Arrival at a virtual source threshold does not explain recognition of food, feeding, satiety or a later revisit. A remembered return bearing is also insufficient for arbitrary navigation back to a fixed location after translation. Those are distinct branches of the literature, not details to fill by relabeling this memory.

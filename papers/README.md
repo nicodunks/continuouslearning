@@ -2,7 +2,7 @@
 
 One folder per paper: PDFs and supplementary files alongside `notes.md`, `metadata.json`, and `reading-log.md`. Source URLs and SHA-256 checksums are recorded in metadata. Large supplementary movies, ZIP archives and two oversized supplementary PDFs remain downloaded locally and are excluded from Git; the metadata preserves their download locations. Original publications retain their original copyrights.
 
-**Status:** Lyu et al. has a full PDF/figure/supplement reading and explicitly sampled movie inspection. Mussells Pires et al. (2024) also has a full main/Extended Data/supplement PDF reading. The remaining entries are a discovery and acquisition queue, not completed reviews. A downloaded main PDF does not imply that every supplementary asset has been acquired.
+**Status:** Lyu et al. has a full PDF/figure/supplement reading and explicitly sampled movie inspection. Mussells Pires et al. (2024) also has a full main/Extended Data/supplement PDF reading. Westeinde et al. (2024) has also been fully read, including its 2025 correction. Siliciano et al. (2026) has a full article/scientific-supplement reading plus peer-review reading and sampled movies. The remaining entries are a discovery and acquisition queue, not completed reviews. A downloaded main PDF does not imply that every supplementary asset has been acquired.
 
 | Paper | Main PDF | PDF files | Reading |
 |---|---|---:|---|
@@ -19,13 +19,13 @@ One folder per paper: PDFs and supplementary files alongside `notes.md`, `metada
 | [Building an allocentric travelling direction signal via vector computation](2022-lyu-allocentric-travel-vector/notes.md) | downloaded | 5 | complete pdf reading movies sampled |
 | [Transforming representations of movement from body- to world-centric space](2022-transforming-representations-of-movement-from-body-to-world-centric-space/notes.md) | missing; access search pending | 1 | pending full reading |
 | [Converting an allocentric goal into an egocentric steering signal](2024-converting-an-allocentric-goal-into-an-egocentric-steering-signal/notes.md) | downloaded | 3 | complete PDF/figure/supplement reading |
-| [Transforming a head direction signal into a goal-oriented steering command](2024-transforming-a-head-direction-signal-into-a-goal-oriented-steering-command/notes.md) | downloaded | 2 | pending full reading |
+| [Transforming a head direction signal into a goal-oriented steering command](2024-transforming-a-head-direction-signal-into-a-goal-oriented-steering-command/notes.md) | downloaded | 3 | complete PDF/figure/reporting/correction reading |
 | [A neural circuit architecture for rapid learning in goal-directed navigation](2024-a-neural-circuit-architecture-for-rapid-learning-in-goal-directed-navigation/notes.md) | missing; access search pending | 0 | pending full reading |
 | [Maintaining and updating accurate internal representations of continuous variables with a handful of neurons](2024-maintaining-and-updating-accurate-internal-representations-of-continuous-variables-wi/notes.md) | downloaded | 3 | pending full reading |
 | [Connectomic reconstruction predicts visual features used for navigation](2024-connectomic-reconstruction-predicts-visual-features-used-for-navigation/notes.md) | downloaded | 6 | pending full reading |
 | [Multimodal cue integration and learning in a neural representation of head direction](2025-multimodal-cue-integration-and-learning-in-a-neural-representation-of-head-direction/notes.md) | downloaded | 2 | pending full reading |
 | [Neuronal calcium spikes enable vector inversion in the Drosophila brain](2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain/notes.md) | missing; access search pending | 0 | pending full reading |
-| [A vector-based strategy for olfactory navigation in Drosophila](2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila/notes.md) | downloaded | 4 | pending full reading |
+| [A vector-based strategy for olfactory navigation in Drosophila](2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila/notes.md) | downloaded | 4 | complete article/scientific supplements; movies sampled |
 | [Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila](2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati/notes.md) | downloaded | 4 | pending full reading |
 
 Start with [Lyu’s detailed notes](2022-lyu-allocentric-travel-vector/notes.md). The [literature map](../docs/literature.md) connects these papers to the broader circuit.

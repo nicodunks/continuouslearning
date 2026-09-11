@@ -15,7 +15,15 @@
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-024-07039-2/MediaObjects/41586_2024_7039_MOESM1_ESM.pdf",
       "bytes": 59341,
       "sha256": "68753606498e7baacd0cc12cdfe299d8e93657be03bde90a20746d58de04555c"
+    },
+    {
+      "filename": "author-correction-2025.pdf",
+      "url": "https://www.nature.com/articles/s41586-024-08245-8.pdf",
+      "bytes": 616428,
+      "sha256": "0f860a0d6e79542df35f8c013e2bf6514a95098ee81253af88ba969cd3f6b047"
     }
   ],
-  "download_errors": []
+  "download_errors": [],
+  "reading_status": "complete_pdf_figures_reporting_and_correction_reading",
+  "reading_completed": "2026-09-10"
 }

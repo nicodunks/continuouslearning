@@ -39,6 +39,60 @@
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41593-019-0444-x/MediaObjects/41593_2019_444_MOESM6_ESM.mov",
       "bytes": 4506459,
       "sha256": "9d2d72e711c6ffc850111938b6732a291ccd788a9d567f3f2e0d27893427ecbe"
+    },
+    {
+      "filename": "nihms-1531025-f0001.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/5f3e4fae5c88/nihms-1531025-f0001.jpg",
+      "bytes": 211201,
+      "sha256": "79ba6bfc51ba234b2f4b83982c55bccaf3ed88867878b2e04070a48eebed1722"
+    },
+    {
+      "filename": "nihms-1531025-f0002.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/ef25ed371f3b/nihms-1531025-f0002.jpg",
+      "bytes": 228096,
+      "sha256": "de19efd909e101f49c95a492ce49e1251d8841892c6ec2409d331015e9b80485"
+    },
+    {
+      "filename": "nihms-1531025-f0003.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/a9564763dcbb/nihms-1531025-f0003.jpg",
+      "bytes": 184480,
+      "sha256": "603270b0a4e5558214ca9a6127cb042d1494d67a8c1592ecf04c685d5c013c5c"
+    },
+    {
+      "filename": "nihms-1531025-f0004.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/6a395a6b3f9b/nihms-1531025-f0004.jpg",
+      "bytes": 201346,
+      "sha256": "d327c63d69f666f74964a4693e528a259c0e47c94a10f555aa7ea4b555da9be2"
+    },
+    {
+      "filename": "nihms-1531025-f0005.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/0475b68730ad/nihms-1531025-f0005.jpg",
+      "bytes": 323901,
+      "sha256": "9ba9eeb89b01aa7b95c80111527f11d1e9b8564d1d471d9846c452e47e1e88f1"
+    },
+    {
+      "filename": "nihms-1531025-f0006.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/a720c7fa0ed7/nihms-1531025-f0006.jpg",
+      "bytes": 171134,
+      "sha256": "efa6079625336a334b84f3bb3249693cfeb253548a0102a38abd8ff631761e8e"
+    },
+    {
+      "filename": "nihms-1531025-f0007.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/26b6440cc06b/nihms-1531025-f0007.jpg",
+      "bytes": 182434,
+      "sha256": "f293dc4f0e177f0202743e9acf00a16adefe1343f89f09acb6fb8263ec11e269"
+    },
+    {
+      "filename": "nihms-1531025-f0008.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b433/7688015/bed404a5bfcb/nihms-1531025-f0008.jpg",
+      "bytes": 149106,
+      "sha256": "01cf35d12fd4c51b57003bb9d9f4408ea228557118024c9d5fa0b7e0fa22a029"
+    },
+    {
+      "filename": "main-fulltext.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7688015/",
+      "bytes": 226488,
+      "sha256": "2811f4154d8cb43b4c58f3f5345618bdf66016b8ff622532e0e0984bb059ef68"
     }
   ],
   "download_errors": [
@@ -46,5 +100,6 @@
       "url": "https://www.nature.com/articles/s41593-019-0444-x.pdf",
       "error": "Unavailable or unexpected format"
     }
-  ]
+  ],
+  "reading_status": "Complete main author-manuscript/eight figures, 20-page scientific supplement and three-page report; four movies sampled; main PDF missing."
 }

@@ -1,8 +1,9 @@
-# Reading status
+# Reading status — 2026-09-10
 
-- Main PDF: not downloaded; access search pending.
-- Main text, figures and Methods: pending full reading and visual inspection.
-- Downloaded PDF files: 2. Their presence does not establish complete supplement coverage.
-- Supplementary inventory and full inspection: pending.
-
-Do not treat the discovery note as a completed review.
+- Complete author-manuscript HTML read, including all Methods, eight main figure captions, references and supplementary movie captions.
+- All eight main figures visually inspected.
+- Publisher MOESM1: all twenty pages read and visually inspected, including twelve supplementary figures and all three tables.
+- Publisher MOESM2: all three reporting-summary pages read and visually inspected.
+- Four movies: 24 evenly spaced frames per movie inspected with captions; sampled, not frame-complete. Movie 4 repeats Movie 3 at double speed.
+- Main PDF missing; full HTML and scientific figure images saved. Alternative PMC DOC supplement inaccessible; publisher scientific PDF supplies the figures and tables.
+- Raw data and analysis code available on request; neither acquired nor reproduced. No author contact sent.

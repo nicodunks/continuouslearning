@@ -2,5 +2,150 @@
   "folder": "2025-lanz-recurrent-goal-memory",
   "title": "Disinhibition of a recurrent attractor gates a persistent goal signal for navigation",
   "doi": "10.1101/2025.10.07.681003",
-  "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+  "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked.",
+  "assets": [
+    {
+      "filename": "F1.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/4652ef9008da/nihpp-2025.10.07.681003v1-f0001.jpg",
+      "bytes": 222578,
+      "sha256": "6dee7b79b4a1abc183d75c91e2c3154ac575724b5e2b6ea7d3d263e34652e8f4"
+    },
+    {
+      "filename": "F2.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/6972b4cf371e/nihpp-2025.10.07.681003v1-f0002.jpg",
+      "bytes": 195889,
+      "sha256": "e9ac1b9450ecc14b35f3e8bd4b81aa8b588da8db91d339d02a8eaab3b09bc99d"
+    },
+    {
+      "filename": "F3.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/5b4647484f26/nihpp-2025.10.07.681003v1-f0003.jpg",
+      "bytes": 182653,
+      "sha256": "42bd995c164b93b3f1a8e6f63302746d0d3735279303e24824dce624b59ddd19"
+    },
+    {
+      "filename": "F4.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/aadb98eee2e6/nihpp-2025.10.07.681003v1-f0004.jpg",
+      "bytes": 178415,
+      "sha256": "3d6faa0422482928a7a1509b2a3b7a860e0c672bb415316e0299a25b494e1667"
+    },
+    {
+      "filename": "F5.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/c51a7c559fad/nihpp-2025.10.07.681003v1-f0005.jpg",
+      "bytes": 183741,
+      "sha256": "0a0018258f311006cfb03eaaf4ce027744ff5d987c1ebdea71a6baeb9418b3ad"
+    },
+    {
+      "filename": "F6.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/f7f82fe88301/nihpp-2025.10.07.681003v1-f0006.jpg",
+      "bytes": 195174,
+      "sha256": "c8da3ad92b0f4c7c9bf38141f1436b27f69f5cf8a6189e707f04000843a5d9de"
+    },
+    {
+      "filename": "F7.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/1ac2e2304089/nihpp-2025.10.07.681003v1-f0007.jpg",
+      "bytes": 194170,
+      "sha256": "974886c47f72d7f5975e5b258bb47ce515e19ed261a150aafc05556323680ab4"
+    },
+    {
+      "filename": "F8.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/00155f4299be/nihpp-2025.10.07.681003v1-f0008.jpg",
+      "bytes": 173643,
+      "sha256": "d82d4da853584c82665e5ecdef3c1f98532b03ceb4a95275e25576b779a0ec33"
+    },
+    {
+      "filename": "F9.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/e7d6e36ab7bd/nihpp-2025.10.07.681003v1-f0009.jpg",
+      "bytes": 87191,
+      "sha256": "b5848575ab0e3ffaeca14455451ee02dcac32ef54d2cd37b2920411555c29a66"
+    },
+    {
+      "filename": "F10.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/ab0aed6b94d6/nihpp-2025.10.07.681003v1-f0010.jpg",
+      "bytes": 78484,
+      "sha256": "f62472e72598e8516342539154a5de72999498e39557298e515943f8d2653115"
+    },
+    {
+      "filename": "F11.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/dbd282870cc5/nihpp-2025.10.07.681003v1-f0011.jpg",
+      "bytes": 125382,
+      "sha256": "f65371e0bebd9aeecbb7c1d025a7a8efd7a133e48b1995f7474fd23f0b0c3f88"
+    },
+    {
+      "filename": "F12.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/4ba4aa70d7ed/nihpp-2025.10.07.681003v1-f0012.jpg",
+      "bytes": 135901,
+      "sha256": "7eb71bb6ba95532ede9fa990aa490474c3eabd22b35a556cc02e4a0723d8203e"
+    },
+    {
+      "filename": "F13.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/e456c3a1941c/nihpp-2025.10.07.681003v1-f0013.jpg",
+      "bytes": 91916,
+      "sha256": "f03b436d76f690f9bdbdb34c5f60b4f02912dd2ac289bfa53aac15383a2aeabc"
+    },
+    {
+      "filename": "F14.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/fc9f27e10f6d/nihpp-2025.10.07.681003v1-f0014.jpg",
+      "bytes": 139250,
+      "sha256": "e02de5bc06badd93274bf1a070f59cc714fff759180aaf7623a3a13f03cb28d6"
+    },
+    {
+      "filename": "F15.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/db92894b9c64/nihpp-2025.10.07.681003v1-f0015.jpg",
+      "bytes": 101586,
+      "sha256": "bfba76fce1620a9fb2b8f4b1c71790e2c7d89feb64c1d20aba14513780bb8fc1"
+    },
+    {
+      "filename": "F16.jpg",
+      "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb71/12632281/e3564737f391/nihpp-2025.10.07.681003v1-f0016.jpg",
+      "bytes": 152012,
+      "sha256": "53bb514aeb3c6be8260aeffadc779c846e89ad54da9387462a050acf29688cb2"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC12632281?pdf=render",
+      "bytes": 15679990,
+      "sha256": "c0ea6ca6b66ba6a8c3f99bb7a21f95f6ac95d120b48f3409479a0cb09f36d051"
+    },
+    {
+      "filename": "main.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12632281/",
+      "bytes": 351962,
+      "sha256": "8f7119f7abc41df55501623de8fd336cc9b0b106ee1c3b6415213716777a8383"
+    },
+    {
+      "filename": "code.zip",
+      "url": "https://codeload.github.com/nagellab/Lanzetal2025/zip/refs/heads/main",
+      "bytes": 772003,
+      "sha256": "8ffbfb1cc50977439c91b38cd1ae74deaeebd99c5833322b31a8080f8c0e116a"
+    },
+    {
+      "filename": "model-data.zip",
+      "url": "https://zenodo.org/api/records/19687299/files/model_data.zip/content",
+      "bytes": 289124,
+      "sha256": "84cffb8839ebc138a1e8f613121bfab5484e2b42b0a4f8773f3603939f39ebc1"
+    },
+    {
+      "filename": "data-README.rtf",
+      "url": "https://zenodo.org/api/records/19687299/files/README.rtf/content",
+      "bytes": 12186,
+      "sha256": "29b966086672c664bfee5e26a3388ca22a5bc6a4a27d530739bf348502caa512"
+    }
+  ],
+  "source_html": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12632281/",
+  "reading_status": "complete v1 scientific manuscript and figures; later code read selectively",
+  "version_read": "bioRxiv v1, 2025-10-07",
+  "code_commit": "b52ee5742e96a579356bc475d01a08d640759789",
+  "version_caveat": "2026 repository and data differ from v1; later manuscript not acquired",
+  "unacquired_data": [
+    {
+      "filename": "2p_data_structs.zip",
+      "bytes": 5328392156,
+      "url": "https://zenodo.org/api/records/19687299/files/2p_data_structs.zip/content"
+    },
+    {
+      "filename": "ephys_data_structs.zip",
+      "bytes": 28652159203,
+      "url": "https://zenodo.org/api/records/19687299/files/ephys_data_structs.zip/content"
+    }
+  ]
 }

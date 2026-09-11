@@ -1,0 +1,16 @@
+{
+  "folder": "2021-hardcastle-polarization-pathway",
+  "doi": "10.7554/eLife.63225",
+  "title": "A visual pathway for skylight polarization processing in Drosophila",
+  "discovery_note": "Upstream celestial-cue transformation into compass input.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.63225",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/63225.pdf",
+      "bytes": 9710345,
+      "sha256": "ef2daeca2969cae7c7ded781c343e3a9fda9a67518520ed2a403ebe811f98de6"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

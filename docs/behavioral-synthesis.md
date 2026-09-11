@@ -161,3 +161,17 @@ This sharpens the interface with the long-term bearing results. A shared offset 
 The supplementary controls qualify the motor interpretation. E-PG impairment leaves some front fixation, and its reduction of turning largely disappears after matching baseline walking speed. Impaired slowing remains clearer for half-turn perturbations. A behavioral synthesis must distinguish arbitrary-bearing control, direct visual fixation and general locomotor state rather than attributing all three to a single compass pathway.
 
 This task involves spontaneous bearing maintenance under conditions favoring dispersal. It supplies neither a remembered food coordinate nor a position-dependent goal vector. Later goal and steering studies need to be linked to the additional computations that produce and update a destination-bearing signal.
+
+
+## A candidate gate between sensing a direction and retaining it
+
+[Lanz et al., October 2025 preprint](../papers/2025-lanz-recurrent-goal-memory/notes.md) develops the recurrent-memory hypothesis adjacent to Kathman's hΔK results. PFG receives compass input; selective inhibition of hΔK can, in their model, leave PFG following heading, while disinhibition recruits recurrence and retains the direction present at gate opening. Slow excitation makes useful persistence less dependent on fine tuning. Physiology supports feedback-dependent persistence and identifies inhibitory tangential inputs; imaging finds appropriate odor/turn signals in FB5V. The causal demonstration of a selective gate writing and releasing an imposed memory remains incomplete in this version.
+
+This adds a candidate mechanism for a postodor run, not a stored food coordinate. Persistence may partly originate upstream because FB5V suppression itself persists. hΔK largely disappears during turns, so a return after a detour still requires identifying another retained state or a retrieval mechanism. Later code/data are public but differ from v1; their revision must be matched before using them as an exact reproduction.
+
+
+## Learned refuge locations provide a stronger behavioral target
+
+[Ofstad et al. (2011)](../papers/2011-visual-place-learning/notes.md) shows learned search for an absent cool refuge whose location is specified by a surrounding panorama. Coupled rotation of panorama and refuge preserves the learned relationship; uncoupled and dark controls do not show comparable learning. Retention exceeds the uncoupled control through two hours. This is a useful demonstration of destination-like memory beyond maintained heading, but it does not distinguish coordinates from view matching or a conditional route policy. Training largely begins from the preceding refuge, and no neural activity is recorded.
+
+Driver-defined ellipsoid-body ring populations are necessary across training/testing, while several mushroom-body manipulations spare this particular task and impair odor learning. Therefore the whole-food-navigation account must distinguish visual refuge memory from learned odor value rather than treating one memory center as universally responsible. Acquiring, storing, retrieving and converting the visual memory into a changing goal direction remain separate unknowns.

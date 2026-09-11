@@ -101,5 +101,11 @@
       "error": "Unavailable or unexpected format"
     }
   ],
-  "reading_status": "Complete main author-manuscript/eight figures, 20-page scientific supplement and three-page report; four movies sampled; main PDF missing."
+  "reading_status": "Complete main author-manuscript/eight figures, 20-page scientific supplement and three-page report; four movies sampled; main PDF missing.",
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC7688015?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

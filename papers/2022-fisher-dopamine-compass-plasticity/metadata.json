@@ -1,0 +1,14 @@
+{
+  "folder": "2022-fisher-dopamine-compass-plasticity",
+  "doi": "10.1038/s41586-022-05485-4",
+  "title": "Dopamine promotes head direction plasticity during orienting movements",
+  "discovery_note": "State-dependent compass learning and orienting movements.",
+  "metadata_source": "https://api.crossref.org/works/10.1038/s41586-022-05485-4",
+  "assets": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC9729112?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
+}

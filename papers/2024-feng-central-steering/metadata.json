@@ -1,0 +1,14 @@
+{
+  "folder": "2024-feng-central-steering",
+  "doi": "10.1101/2024.06.27.601106",
+  "title": "Hierarchical Transformation of Navigational Variables into Coordinated Turning",
+  "discovery_note": "Descending and premotor steering circuit; verify later publication.",
+  "metadata_source": "https://api.crossref.org/works/10.1101/2024.06.27.601106",
+  "assets": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://www.biorxiv.org/content/10.1101/2024.06.27.601106.full.pdf",
+      "error": "No valid PDF received"
+    }
+  ]
+}

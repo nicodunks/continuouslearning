@@ -16,5 +16,11 @@
       "url": "https://www.nature.com/articles/s41586-021-04191-x.pdf",
       "error": "Unavailable or unexpected format"
     }
+  ],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC10759448?pdf=render",
+      "error": "No valid PDF received"
+    }
   ]
 }

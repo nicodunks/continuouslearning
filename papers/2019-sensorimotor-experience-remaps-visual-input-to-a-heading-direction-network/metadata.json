@@ -113,5 +113,11 @@
       "error": "Unavailable or unexpected format"
     }
   ],
-  "reading_status": "Complete main author-manuscript and all 14 scientific figures, Methods, references and 3-page reporting summary; main PDF missing."
+  "reading_status": "Complete main author-manuscript and all 14 scientific figures, Methods, references and 3-page reporting summary; main PDF missing.",
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC7753972?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

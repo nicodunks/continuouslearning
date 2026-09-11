@@ -1,3 +1,5 @@
 # Reading log
 
-Acquisition in progress; not yet read.
+2026-09-10: Read all October 7, 2025 v1 scientific text, Methods, tables 1–4, captions and references through the saved PMC manuscript. Visually inspected all six main and ten Extended Data figure images (F1–F16.jpg). Subsequently acquired the complete 61-page PDF from bioRxiv and Europe PMC; the latter is saved as main.pdf. Additionally rendered and read PDF pages 25–28 to check mathematical notation. All scientific figures and extended materials in this version are covered; no separate movie attachment was listed in the PMC manuscript.
+
+Read the code/data READMEs completely and selected source sections for connectivity, integration, gating and parameter selection. Code archive commit b52ee5742e96a579356bc475d01a08d640759789 differs from v1 and includes later analyses; notes distinguish these versions. Downloaded the small model-data archive and inventoried its contents. Did not run simulations or download/reanalyze the 5.33-GB imaging and 28.65-GB electrophysiology archives. No claim that later revised manuscript content has been read.

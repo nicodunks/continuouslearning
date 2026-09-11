@@ -1,0 +1,14 @@
+{
+  "folder": "2025-may-multisensory-wind",
+  "doi": "10.1101/2025.05.09.653128",
+  "title": "Central Complex representations of self-movement are sufficient to compute wind direction in flight",
+  "discovery_note": "Disentangle ambient wind from self-motion and apparent airflow.",
+  "metadata_source": "https://api.crossref.org/works/10.1101/2025.05.09.653128",
+  "assets": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://www.biorxiv.org/content/10.1101/2025.05.09.653128.full.pdf",
+      "error": "No valid PDF received"
+    }
+  ]
+}

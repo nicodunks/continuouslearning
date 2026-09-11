@@ -1,0 +1,17 @@
+{
+  "folder": "2025-wolff-cx-neuropeptides-drivers",
+  "doi": "10.7554/eLife.104764",
+  "title": "Cell type-specific driver lines targeting the Drosophila central complex and their use to investigate neuropeptide expression and sleep regulation",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/104764.pdf",
+      "bytes": 34049729,
+      "sha256": "31ba693d59a38cf3e14a2ea2fad7594920d7b5614a01e3d7d9af38f69d91ad98"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

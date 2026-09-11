@@ -1,0 +1,15 @@
+{
+  "folder": "2023-hulse-visuomotor-angular-velocity",
+  "doi": "10.1101/2023.09.25.559373",
+  "title": "A rotational velocity estimate constructed through visuomotor competition updates the fly\u2019s neural compass",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://www.biorxiv.org/content/10.1101/2023.09.25.559373.full.pdf",
+      "error": "No valid PDF received"
+    }
+  ]
+}

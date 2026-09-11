@@ -1,0 +1,310 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww16600\viewh17820\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 This README describes the formatting of the data in the manuscript: \'93Disinhibition of a recurrent attractor gates a persistent goal signal for navigation\'94 by Lanz et al.. The README is split into two sections: 1) two photon calcium imaging data and 2) electrophysiology data\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b \cf0 1) Two-photon calcium imaging data
+\f0\b0 \
+\
+In the folder \'93genotypes\'94, the imaging data is organized into several Matlab cell arrays, each corresponding to a different genotype or experiment type used in the paper. Each index of a cell array contains the data of a single fly, organized into a data structure (see below). The genotype cell arrays include:\
+	-
+\f1\b struct_5V
+\f0\b0 : FB5V imaging data (VT013602AD; 78H12DBD)\
+	-
+\f1\b struct_6M
+\f0\b0 : FB6M imaging data (49B08AD; VT063626DBD)\
+	-
+\f1\b struct_PFG
+\f0\b0 : PFGs imaging data, all flies (VT017491AD; VT000355DBD)\
+	-
+\f1\b struct_PFG_shift
+\f0\b0 : PFGs imaging data, only flies used for the wind/odor shift experiments (VT017491AD; VT000355DBD)\
+	-
+\f1\b struct_VT062617
+\f0\b0 : h\uc0\u8710 K broad line imaging data (VT062617-Gal4)\
+	-
+\f1\b struct_hdk
+\f0\b0 : h\uc0\u8710 K split imaging data (VT062617AD; VT037223DBD)\
+\
+In the folder \'93flies\'94, the imaging data is organized into pairs of Matlab data structures (\'91fly_struct_date\'92 and \'91struct_date\'92), each corresponding to the data of a single fly. The fly_struct_date structures are slightly processed versions of the struct_date structures (see below). The cell arrays mentioned above (in \'91genotypes\'92) are cells arrays of the fly_struct_date structures. \
+\
+
+\f1\b struct_date structures
+\f0\b0 :\
+The struct_date structures are the main output of the Nagel lab 2p imaging importing pipeline, developed in Kathman et al. (Neural dynamics for working memory and evidence integration during olfactory navigation in 
+\f2\i Drosophila
+\f0\i0 ). These structures have a single row for each trial, and contain the following fields:\
+	-
+\f1\b filename
+\f0\b0 : fictrac filename containing raw behaviour data\
+	-
+\f1\b fps
+\f0\b0 : frame rate\
+	-
+\f1\b wind_speed
+\f0\b0 : wind speed in cm/s\
+	-
+\f1\b winddir
+\f0\b0 : initial egocentric wind direction (0 degrees is directly in front of the fly)\
+	-
+\f1\b wind_on
+\f0\b0 : binary variable indicating if wind is ever turned on in this trial\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 	-
+\f1\b odor_on
+\f0\b0 : binary variable indicating if odor is ever turned on in this trial\
+	-
+\f1\b closed_loop
+\f0\b0 : binary variable indicating if wind is controlled in closed loop in this trial - all trials in this manuscript are closed loop\
+	-
+\f1\b wind
+\f0\b0 : binarized wind signal during trial - same signal used to control wind valve\
+	-
+\f1\b odor
+\f0\b0 : binarized odor signal during trial - same signal used to control odor and compensate valves\
+	-
+\f1\b frame
+\f0\b0 : frame numbers during trial\
+	-
+\f1\b calc_ts
+\f0\b0 : relative time of each fictrac frame\
+	-
+\f1\b calc_heading
+\f0\b0 : heading calculated by fictrac, zeroed such that the initial heading (not necessarily upwind) is zero\
+	-
+\f1\b raw_windpos
+\f0\b0 : raw motor position (wind position) around the fly. The raw format contains a few artifacts.\
+	-
+\f1\b calc_windpos
+\f0\b0 : cleaned up motor position. Used to calculate heading in most analyses\
+	-
+\f1\b calc_speed
+\f0\b0 : fictrac\'92s estimate of the speed of the fly\
+	-
+\f1\b calc_deltaz
+\f0\b0 : delta z position (delta yaw of ball - turning)\
+	-
+\f1\b calc_deltapitch
+\f0\b0 : delta pitch position (delta pitch of ball - forward/backwards translation)\
+	-
+\f1\b calc_deltaroll
+\f0\b0 : delta roll position (delta roll of ball - left/right translation\
+	-
+\f1\b pybmt_heading
+\f0\b0 : old version of heading - not used in this manuscript\
+	-
+\f1\b plume_y
+\f0\b0 : used during plume experiments - not in this manuscript \
+	-
+\f1\b plume_speed
+\f0\b0 : used during plume experiments - not in this manuscript \
+	-
+\f1\b plume_valve
+\f0\b0 : used during plume experiments - not in this manuscript \
+	-
+\f1\b plume_spatgain
+\f0\b0 : used during plume experiments - not in this manuscript \
+	-
+\f1\b dff_green
+\f0\b0 : raw imaging data green channel (GCaMP7f) across all ROIs. Data is roi x time, where time is at the imaging sampling rate\
+	-
+\f1\b dff_red
+\f0\b0 : raw imaging data red channel (tdTomato) across all ROIs. Data is roi x time, where time is at the imaging sampling rate\
+	-
+\f1\b dff_diff
+\f0\b0 : change in green channel raw data across all ROIs. Data is roi x time, where time is at the imaging sampling rate\
+	-
+\f1\b dff_ts
+\f0\b0 : timing of each frame of imaging data\
+	-
+\f1\b thorname
+\f0\b0 : folder name of imaging trial\
+	-
+\f1\b thortime
+\f0\b0 : time stamp of imaging trial - used to find the correct fictrac file\
+	-
+\f1\b bump_col
+\f0\b0 : old bump position measure - not used in this manuscript\
+	-
+\f1\b bump_amp
+\f0\b0 : bump amplitude calculated over all ROIs at each time point. Data is interpolated to match fictrac timing.\
+	-
+\f1\b bump_com
+\f0\b0 : old bump position measure - not used in this manuscript\
+	-
+\f1\b straight
+\f0\b0 : straightness measure - not used in this manuscript\
+\
+
+\f1\b fly_struct_date structures
+\f0\b0 :\
+The fly_struct_date structures are processed versions of the struct_date structures. These structures have a single row for each trial, and contain the following fields:\
+	-
+\f1\b odor
+\f0\b0 : binarized odor signal during trial - same signal used to control odor and compensate valves\
+	-
+\f1\b wind
+\f0\b0 : binarized wind signal during trial - same signal used to control wind valve\
+	-
+\f1\b dff
+\f0\b0 : bump amplitude calculated over all ROIs at each time point. Data is interpolated to match fictrac timing.\
+	-
+\f1\b tt
+\f0\b0 : relative time of each fictrac frame\
+	-
+\f1\b tt_dff
+\f0\b0 : relative time of each raw imaging frame\
+	-
+\f1\b speed
+\f0\b0 : fictrac\'92s estimate of the speed of the fly\
+	-
+\f1\b fps
+\f0\b0 : frame rate\
+	-
+\f1\b heading: 
+\f0\b0 heading of the fly (wrapped from -180 to 180 degrees). Calculated from filtered motor position (calc_windpos in struct_date)\
+	-
+\f1\b x
+\f0\b0 : x position of fly - calculated from speed and heading\
+	-
+\f1\b y
+\f0\b0 : y position of fly - calculated from speed and heading\
+	-
+\f1\b col
+\f0\b0 : old bump position measure - not used in this manuscript\
+	-
+\f1\b com
+\f0\b0 : old bump position measure - not used in this manuscript\
+	-
+\f1\b pos
+\f0\b0 : old bump position measure - not used in this manuscript\
+	-
+\f1\b avel
+\f0\b0 : angular velocity - calculated from heading\
+	-
+\f1\b abs_avel
+\f0\b0 : angular speed - absolute value of avel\
+	-
+\f1\b uwv
+\f0\b0 : upwind velocity - velocity component projected onto upwind direction (0 degrees)\
+	-
+\f1\b fvel
+\f0\b0 : forward velocity  - calculated from calc_deltapitch in struct_date\
+	-
+\f1\b dff_col
+\f0\b0 : raw imaging data green channel (GCaMP7f) across all ROIs. Data is roi x time, where time is at the imaging sampling rate\
+	-dff_col_norm: values for normalizing raw dff signals for visualization - range from 0 to max dff signal\
+	-deltay: delta y position\
+	-deltax: delta x position\
+	-heading_fictrac: fictrac estimation of fly heading\
+	-dff_col_interp: raw imaging data green channel (GCaMP7f) across all ROIs, interpolated to match fictrac timing\
+	-pos_w: bump position wrapped from -180 to 180 degrees. Bump position calculated from a von mises fit (only for PFGs, h\uc0\u8710 K, and VT062617 data)\
+	-pos_uw: bump position unwrapped (only for PFGs, h\uc0\u8710 K, and VT062617 data)\
+\
+All data analyses in the manuscript are performed on the fly_struct_date data structures. To see the code for creating struct_date and then processing this into fly_struct_date, please see the code repository on GitHub (https://github.com/nagellab/Lanzetal2025)\
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\f1\b 2) Electrophysiology data\
+\
+
+\f0\b0 -The electrophysiology data is organized into several Matlab structures, each corresponding to a different genotype used in the paper, and include: \
+	-
+\f1\b VT062617gfp_24C07chrim
+\f0\b0 : VT062617 > GFP, 24C07 > Chrimson\
+	-
+\f1\b VT062617gfp_36B06chrim
+\f0\b0 : VT062617 > GFP, 36B06 > Chrimson\
+	-
+\f1\b VT062617gfp_65C03chrim
+\f0\b0 : VT062617 > GFP, 65C03 > crimson\
+	-
+\f1\b VT062617gfp_65C03chrim_VT062617tnte
+\f0\b0 : VT062617 > GFP, VT062617 > TNTe, 65C03 > Chrimson\
+	-
+\f1\b VT062617gfp_FB5Vsplitchrim
+\f0\b0 : VT062617 > GFP, VT013602AD; 78H12DBD > Chrimson\
+	-
+\f1\b VT062617gfp_FB6Msplitchrim
+\f0\b0 : VT062617 > GFP, 49B08AD; VT063626DBD > Chrimson\
+	-
+\f1\b VT062617gfp_PFGsplitchrim
+\f0\b0 : VT062617 > GFP, VT017491AD; VT000355DBD > Chrimson\
+	-
+\f1\b VT062617gfp_current
+\f0\b0 : VT062617 > GFP (Chrimson expressed in various presynaptic cells)\
+\
+ Each of these structures have a single row for each cell, and contain the following fields:\
+	-
+\f1\b name
+\f0\b0 : date and experiment number\
+	-
+\f1\b folder
+\f0\b0 : pathname to folder containing raw data on local computer\
+	-
+\f1\b data
+\f0\b0 : name of matlab structure containing metadata (found in raw data folder)\
+	-
+\f1\b N_ctrl
+\f0\b0 : trial numbers for pre-drug data\
+	-
+\f1\b N_IMI
+\f0\b0 : trial numbers for trials in the presence of imidacloprid (100 nM)\
+	-
+\f1\b N_curare
+\f0\b0 : trial numbers for trials in the presence of curare (10 \'b5M)\
+	-
+\f1\b N_IMI_curare
+\f0\b0 : trial numbers for trials in the presence of imidacloprid (100 nM) and curare (10 \'b5M)\
+	-
+\f1\b N_picro
+\f0\b0 : trial numbers for trials in the presence of picrotoxin (5 \'b5M)\
+	-
+\f1\b N_picro_IMI_curare
+\f0\b0 : trial numbers for trials in the presence of picrotoxin (5 \'b5M), imidacloprid (100 nM), and curare (10 \'b5M)\
+	-
+\f1\b N_methysergide
+\f0\b0 : trial numbers for trials in the presence of methysergide (50 \'b5M)\
+	-
+\f1\b N_methysergide_IMI_curare
+\f0\b0 : trial numbers for trials in the presence of methysergide (50 \'b5M), imidacloprid (100 nM), and curare (10 \'b5M)\
+	-
+\f1\b N_yohimbine
+\f0\b0 : trial numbers for trials in the presence of yohimbine (10 \'b5M)\
+	-
+\f1\b voltage
+\f0\b0 : matrix containing raw voltage values for each trial (samples X trial)\
+	-
+\f1\b current
+\f0\b0 : matrix containing raw current values for each trial (samples X trial)\
+	-
+\f1\b stim_struct
+\f0\b0 : data structure containing the trial numbers for each stimulus type (field #1 = stimulus type, field #2 = trial numbers)\
+	-
+\f1\b opto
+\f0\b0 :  matrix containing optogenetic signal for each trial (samples X trial)\
+	-
+\f1\b wind
+\f0\b0 : matrix containing binarized wind signal for each trial (samples X trial)\
+	-
+\f1\b odor
+\f0\b0 : matrix containing binarized odor signal for each trial (samples X trial)\
+	-
+\f1\b sampratein
+\f0\b0 : digitizer sample rate (10 kHz)\
+	-
+\f1\b samprateout
+\f0\b0 : sample rate of stimulus (opto, wind, or odor signal) \
+\
+All data analyses in the manuscript are performed on these data structures. To see the code for creating the data structures, please see the code repository on GitHub (https://github.com/nagellab/Lanzetal2025)\
+\
+}

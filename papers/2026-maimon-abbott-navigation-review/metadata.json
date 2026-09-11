@@ -3,5 +3,6 @@
   "doi": "10.1146/annurev-neuro-112723-062711",
   "folder": "2026-maimon-abbott-navigation-review",
   "discovery_note": "Integrative review, July 2026: follow primary references to test coverage of the whole behavioral computation.",
-  "assets": []
+  "assets": [],
+  "main_pdf_fallback_attempts": []
 }

@@ -155,5 +155,11 @@
       "error": "Unavailable or unexpected format"
     }
   ],
-  "reading_status": "complete scientific HTML/figures/supplement PDF; movies sampled; main PDF missing"
+  "reading_status": "complete scientific HTML/figures/supplement PDF; movies sampled; main PDF missing",
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC6320684?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

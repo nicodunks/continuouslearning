@@ -4,5 +4,11 @@
   "doi": "10.1016/j.neuron.2019.03.012",
   "discovery_note": "Upstream mechanosensory computation supplying wind navigation.",
   "assets": [],
-  "download_errors": []
+  "download_errors": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC6533146?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

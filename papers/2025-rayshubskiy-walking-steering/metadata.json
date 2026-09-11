@@ -1,0 +1,16 @@
+{
+  "folder": "2025-rayshubskiy-walking-steering",
+  "doi": "10.7554/eLife.102230",
+  "title": "Neural circuit mechanisms for steering control in walking Drosophila",
+  "discovery_note": "Downstream conversion of navigation signals into walking steering.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.102230",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/102230.pdf",
+      "bytes": 5220695,
+      "sha256": "c0592587aaa56ba89b7cec63bfaffdf3ae544cf7a8672d4057632ab994bf7ac3"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

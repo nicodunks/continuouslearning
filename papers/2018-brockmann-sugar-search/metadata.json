@@ -3,6 +3,14 @@
   "title": "Sugar intake elicits intelligent searching behavior in flies and honey bees",
   "doi": "10.3389/fnbeh.2018.00280",
   "discovery_note": "Comparative local search and chemical-trail controls; retain species differences.",
-  "assets": [],
-  "download_errors": []
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC6279864?pdf=render",
+      "bytes": 5551695,
+      "sha256": "cc6e0b69322b2416d0f491ae2c88f86100721400494e8872b791fdbff16c874f"
+    }
+  ],
+  "download_errors": [],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
 }

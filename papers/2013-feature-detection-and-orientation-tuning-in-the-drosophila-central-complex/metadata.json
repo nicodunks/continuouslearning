@@ -45,6 +45,12 @@
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature12601/MediaObjects/41586_2013_BFnature12601_MOESM23_ESM.mov",
       "bytes": 2798388,
       "sha256": "ec904c72aa6569e6b406e3f0a3519668818335de9e6dfe92d8fce36b23c76a88"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC3830704?pdf=render",
+      "bytes": 2015893,
+      "sha256": "e0fef27dacab11558bdf05af1bea9768fbe0e58b18ddbadaa52e3310216ba85e"
     }
   ],
   "download_errors": [
@@ -52,5 +58,6 @@
       "url": "https://www.nature.com/articles/nature12601.pdf",
       "error": "Unavailable or unexpected format"
     }
-  ]
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
 }

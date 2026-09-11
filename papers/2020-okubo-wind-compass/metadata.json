@@ -4,5 +4,11 @@
   "doi": "10.1016/j.neuron.2020.06.022",
   "discovery_note": "Airflow anchoring of the heading compass; distinguish from PFN basis input.",
   "assets": [],
-  "download_errors": []
+  "download_errors": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC7507644?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

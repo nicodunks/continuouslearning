@@ -3,6 +3,14 @@
   "title": "Use of spatial information and search strategies in a water maze analog in Drosophila melanogaster",
   "doi": "10.1371/journal.pone.0015231",
   "discovery_note": "Visual place learning behavior preceding Ofstad.",
-  "assets": [],
-  "download_errors": []
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC2997081?pdf=render",
+      "bytes": 677346,
+      "sha256": "f1e114889fbbb1001de9f1a567a827ba6fa3c358bce71c1fd2d4b50a67c15295"
+    }
+  ],
+  "download_errors": [],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
 }

@@ -1,0 +1,15 @@
+{
+  "folder": "2015-hige-heterosynaptic-memory-plasticity",
+  "doi": "10.1016/j.neuron.2015.11.003",
+  "title": "Heterosynaptic Plasticity Underlies Aversive Olfactory Learning in Drosophila",
+  "metadata_source": "https://doi.org/10.1016/j.neuron.2015.11.003",
+  "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC4674068?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
+}

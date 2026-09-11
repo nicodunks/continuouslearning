@@ -1,0 +1,17 @@
+{
+  "folder": "2014-aso-mushroom-body-output-valence",
+  "doi": "10.7554/eLife.04580",
+  "title": "Mushroom body output neurons encode valence and guide memory-based action selection in Drosophila",
+  "metadata_source": "https://doi.org/10.7554/eLife.04580",
+  "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/04580.pdf",
+      "bytes": 6839007,
+      "sha256": "330dfd87211f4340bbf0886744b53e9419105b729b3bb6795bb52917559790c1"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

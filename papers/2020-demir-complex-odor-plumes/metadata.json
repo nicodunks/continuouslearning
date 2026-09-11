@@ -1,0 +1,16 @@
+{
+  "folder": "2020-demir-complex-odor-plumes",
+  "doi": "10.7554/eLife.57524",
+  "title": "Walking Drosophila navigate complex plumes using stochastic decisions biased by the timing of odor encounters",
+  "discovery_note": "Behavioral policies in intermittent plumes beyond a fixed angular goal.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.57524",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/57524.pdf",
+      "bytes": 4452254,
+      "sha256": "c4f5f9df20e665c50f01263f052c929a4ffae36beb9132f6cfccb1657e501e82"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

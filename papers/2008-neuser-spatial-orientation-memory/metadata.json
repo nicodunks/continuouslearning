@@ -22,5 +22,6 @@
       "url": "https://www.nature.com/articles/nature07003.pdf",
       "error": "Unavailable or unexpected format"
     }
-  ]
+  ],
+  "main_pdf_fallback_attempts": []
 }

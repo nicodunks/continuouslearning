@@ -280,5 +280,148 @@
     "doi": "10.1146/annurev-neuro-112723-062711",
     "folder": "2026-maimon-abbott-navigation-review",
     "discovery_note": "Integrative review, July 2026: follow primary references to test coverage of the whole behavioral computation."
+  },
+  {
+    "folder": "2022-fisher-dopamine-compass-plasticity",
+    "doi": "10.1038/s41586-022-05485-4",
+    "title": "Dopamine promotes head direction plasticity during orienting movements",
+    "discovery_note": "State-dependent compass learning and orienting movements.",
+    "metadata_source": "https://api.crossref.org/works/10.1038/s41586-022-05485-4"
+  },
+  {
+    "folder": "2025-plitt-octopamine-compass-plasticity",
+    "doi": "10.64898/2025.12.11.693783",
+    "title": "Octopamine instructs head direction plasticity",
+    "discovery_note": "Complementary neuromodulatory mechanism; check version and compare with dopamine.",
+    "metadata_source": "https://api.crossref.org/works/10.64898/2025.12.11.693783"
+  },
+  {
+    "folder": "2025-datri-odometry",
+    "doi": "10.1101/2025.03.23.644782",
+    "title": "Neural basis of odometry in Drosophila",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2025-flores-valle-goal-learning-memory-drift",
+    "doi": "10.1101/2025.03.20.644317",
+    "title": "Goal learning, memory, and drift in the Drosophila head direction system",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2023-goulard-emergent-spatial-goals",
+    "doi": "10.1371/journal.pcbi.1011480",
+    "title": "Emergent spatial goals in an integrative model of the insect central complex",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2019-lemoel-vector-navigation",
+    "doi": "10.3389/fpsyg.2019.00690",
+    "title": "The Central Complex as a Potential Substrate for Vector Based Navigation",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2021-hardcastle-polarization-pathway",
+    "doi": "10.7554/eLife.63225",
+    "title": "A visual pathway for skylight polarization processing in Drosophila",
+    "discovery_note": "Upstream celestial-cue transformation into compass input.",
+    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.63225"
+  },
+  {
+    "folder": "2023-mitchell-cue-integration",
+    "doi": "10.1098/rspb.2023.0767",
+    "title": "A model of cue integration as vector summation in the insect brain",
+    "discovery_note": "Cue reliability and vector combination; comparative model.",
+    "metadata_source": "https://api.crossref.org/works/10.1098/rspb.2023.0767"
+  },
+  {
+    "folder": "2023-hulse-visuomotor-angular-velocity",
+    "doi": "10.1101/2023.09.25.559373",
+    "title": "A rotational velocity estimate constructed through visuomotor competition updates the fly\u2019s neural compass",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2025-may-multisensory-wind",
+    "doi": "10.1101/2025.05.09.653128",
+    "title": "Central Complex representations of self-movement are sufficient to compute wind direction in flight",
+    "discovery_note": "Disentangle ambient wind from self-motion and apparent airflow.",
+    "metadata_source": "https://api.crossref.org/works/10.1101/2025.05.09.653128"
+  },
+  {
+    "folder": "2025-rayshubskiy-walking-steering",
+    "doi": "10.7554/eLife.102230",
+    "title": "Neural circuit mechanisms for steering control in walking Drosophila",
+    "discovery_note": "Downstream conversion of navigation signals into walking steering.",
+    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.102230"
+  },
+  {
+    "folder": "2024-feng-central-steering",
+    "doi": "10.1101/2024.06.27.601106",
+    "title": "Hierarchical Transformation of Navigational Variables into Coordinated Turning",
+    "discovery_note": "Descending and premotor steering circuit; verify later publication.",
+    "metadata_source": "https://api.crossref.org/works/10.1101/2024.06.27.601106"
+  },
+  {
+    "folder": "2021-scaplen-mushroom-body-output-pathways",
+    "doi": "10.7554/eLife.63379",
+    "title": "Transsynaptic mapping of Drosophila mushroom body output neurons",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2020-demir-complex-odor-plumes",
+    "doi": "10.7554/eLife.57524",
+    "title": "Walking Drosophila navigate complex plumes using stochastic decisions biased by the timing of odor encounters",
+    "discovery_note": "Behavioral policies in intermittent plumes beyond a fixed angular goal.",
+    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.57524"
+  },
+  {
+    "folder": "2023-kutschireiter-bayesian-ring-attractor",
+    "doi": "10.1073/pnas.2210622120",
+    "title": "Bayesian inference in ring attractor networks",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2025-wolff-cx-neuropeptides-drivers",
+    "doi": "10.7554/eLife.104764",
+    "title": "Cell type-specific driver lines targeting the Drosophila central complex and their use to investigate neuropeptide expression and sleep regulation",
+    "metadata_source": "Reference lists of the manuscripts already read",
+    "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2014-aso-mushroom-body-output-valence",
+    "doi": "10.7554/eLife.04580",
+    "title": "Mushroom body output neurons encode valence and guide memory-based action selection in Drosophila",
+    "metadata_source": "https://doi.org/10.7554/eLife.04580",
+    "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2015-hige-heterosynaptic-memory-plasticity",
+    "doi": "10.1016/j.neuron.2015.11.003",
+    "title": "Heterosynaptic Plasticity Underlies Aversive Olfactory Learning in Drosophila",
+    "metadata_source": "https://doi.org/10.1016/j.neuron.2015.11.003",
+    "discovery_note": "Canonical associative-memory mechanism; connect to learned-valence navigation. Full reading pending.",
+    "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference"
+  },
+  {
+    "folder": "2020-li-mushroom-body-connectome",
+    "doi": "10.7554/eLife.62576",
+    "title": "The connectome of the adult Drosophila mushroom body provides insights into function",
+    "discovery_note": "Memory circuitry and pathways to neighboring navigation networks.",
+    "metadata_source": "https://api.crossref.org/works/10.7554/eLife.62576"
   }
 ]

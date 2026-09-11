@@ -3,6 +3,14 @@
   "title": "An anatomically constrained model for path integration in the bee brain",
   "doi": "10.1016/j.cub.2017.08.052",
   "discovery_note": "Canonical comparative model; bee evidence must not be treated as fly demonstration.",
-  "assets": [],
-  "download_errors": []
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC6196076?pdf=render",
+      "bytes": 3835637,
+      "sha256": "b0233005ae0e02d74c3a8d6ad28bee34cc6053a7e49ba4ac1e8c321765198205"
+    }
+  ],
+  "download_errors": [],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
 }

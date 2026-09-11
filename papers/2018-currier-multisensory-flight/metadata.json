@@ -4,5 +4,11 @@
   "doi": "10.1016/j.cub.2018.09.020",
   "discovery_note": "Behavioral basis for wind/visual context and flight versus walking.",
   "assets": [],
-  "download_errors": []
+  "download_errors": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC6503675?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

@@ -3,5 +3,6 @@
   "title": "Idiothetic Path Integration in the Fruit Fly Drosophila melanogaster",
   "doi": "10.1016/j.cub.2017.06.026",
   "discovery_note": "Added by following the behavioral synthesis; full reading pending.",
-  "assets": []
+  "assets": [],
+  "main_pdf_fallback_attempts": []
 }

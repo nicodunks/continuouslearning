@@ -27,6 +27,18 @@
       "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature10131/MediaObjects/41586_2011_BFnature10131_MOESM289_ESM.mov",
       "bytes": 3496087,
       "sha256": "fca115947fdbe9148ad567397652fe5645d488392cacb5f2500d7ea3c218c040"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC3169673?pdf=render",
+      "bytes": 1746363,
+      "sha256": "5d89121b82a4385d2f159fcd64627f4078a1b9917463df2d176ad351829307bc"
+    },
+    {
+      "filename": "publisher-with-methods.pdf",
+      "url": "https://www.columbia.edu/cu/zukerlab/Publications_files/2011%20Nature%20Ofstad.pdf",
+      "bytes": 811642,
+      "sha256": "24453acff8e1c289459bfd7047f9141b7bfe60eaed56eb31ff0c3dcf8bb91ae3"
     }
   ],
   "download_errors": [
@@ -34,5 +46,7 @@
       "url": "https://www.nature.com/articles/nature10131.pdf",
       "error": "Unavailable or unexpected format"
     }
-  ]
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading.",
+  "reading_status": "complete main/full Methods/scientific supplement; movies sampled"
 }

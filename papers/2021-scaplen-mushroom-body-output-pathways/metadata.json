@@ -1,0 +1,17 @@
+{
+  "folder": "2021-scaplen-mushroom-body-output-pathways",
+  "doi": "10.7554/eLife.63379",
+  "title": "Transsynaptic mapping of Drosophila mushroom body output neurons",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/63379.pdf",
+      "bytes": 7767487,
+      "sha256": "7cadfae78f645686b50c68cd97331818eb9b5f21235291b2b97787b2ee0e4f36"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

@@ -54,5 +54,11 @@
     }
   ],
   "reading_status": "complete scientific HTML and supplement; main PDF missing",
-  "version": "bioRxiv December 11 2025 preprint v1"
+  "version": "bioRxiv December 11 2025 preprint v1",
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://www.biorxiv.org/content/10.64898/2025.12.09.693277.full.pdf",
+      "error": "No valid PDF received"
+    }
+  ]
 }

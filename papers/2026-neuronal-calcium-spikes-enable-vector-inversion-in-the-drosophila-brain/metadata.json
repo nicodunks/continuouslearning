@@ -4,5 +4,11 @@
   "folder": "2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain",
   "discovery_note": "Hyperpolarization-elicited T-type calcium spikes enable PFNa population-vector inversion.",
   "assets": [],
-  "download_errors": []
+  "download_errors": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC12758628?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

@@ -1,0 +1,17 @@
+{
+  "folder": "2023-goulard-emergent-spatial-goals",
+  "doi": "10.1371/journal.pcbi.1011480",
+  "title": "Emergent spatial goals in an integrative model of the insect central complex",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1011480&type=printable",
+      "bytes": 5263486,
+      "sha256": "521ef5790288b07c4cfbd4e2e1457fcca7c0a1baa57ca672b38d7a45a7a731d5"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

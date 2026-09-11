@@ -1,0 +1,17 @@
+{
+  "folder": "2019-lemoel-vector-navigation",
+  "doi": "10.3389/fpsyg.2019.00690",
+  "title": "The Central Complex as a Potential Substrate for Vector Based Navigation",
+  "metadata_source": "Reference lists of the manuscripts already read",
+  "discovery_note": "Reference trail from Maimon & Abbott 2026 and Lanz et al. 2025 v1; primary reading pending.",
+  "metadata_lookup_note": "HTTP Error 429: Too Many Requests; title retained from cited primary reference",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://europepmc.org/articles/PMC6460943?pdf=render",
+      "bytes": 4412147,
+      "sha256": "33c751733a38e67573d6b8d472f47ef3861c18f463f5777dbc6e297343464318"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

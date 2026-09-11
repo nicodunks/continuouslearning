@@ -4,5 +4,11 @@
   "doi": "10.1016/j.cub.2021.08.006",
   "discovery_note": "Reference-point updating and multiple rewards; reconcile pheromone alternative.",
   "assets": [],
-  "download_errors": []
+  "download_errors": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://europepmc.org/articles/PMC8551043?pdf=render",
+      "error": "No valid PDF received"
+    }
+  ]
 }

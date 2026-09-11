@@ -1,0 +1,16 @@
+{
+  "folder": "2020-li-mushroom-body-connectome",
+  "doi": "10.7554/eLife.62576",
+  "title": "The connectome of the adult Drosophila mushroom body provides insights into function",
+  "discovery_note": "Memory circuitry and pathways to neighboring navigation networks.",
+  "metadata_source": "https://api.crossref.org/works/10.7554/eLife.62576",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/62576.pdf",
+      "bytes": 20869991,
+      "sha256": "a4de101b17533f7015c7e3c1a2b697407809c8b641e5fe55bbfa95f30635aa44"
+    }
+  ],
+  "main_pdf_acquisition": "Downloaded; verify version during full reading."
+}

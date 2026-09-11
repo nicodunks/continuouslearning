@@ -1,0 +1,14 @@
+{
+  "folder": "2025-plitt-octopamine-compass-plasticity",
+  "doi": "10.64898/2025.12.11.693783",
+  "title": "Octopamine instructs head direction plasticity",
+  "discovery_note": "Complementary neuromodulatory mechanism; check version and compare with dopamine.",
+  "metadata_source": "https://api.crossref.org/works/10.64898/2025.12.11.693783",
+  "assets": [],
+  "main_pdf_fallback_attempts": [
+    {
+      "url": "https://www.biorxiv.org/content/10.64898/2025.12.11.693783.full.pdf",
+      "error": "No valid PDF received"
+    }
+  ]
+}

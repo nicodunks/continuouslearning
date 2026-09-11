@@ -1,3 +1,3 @@
 # Reading log
 
-Acquisition/discovery only; full reading pending.
+2026-09-10: Read the complete 11-page author manuscript and its references. Acquired the six-page publisher PDF from Zuker's Columbia lab and read the full Methods and additional references missing from the author manuscript. Inspected all four main figures visually from rendered pages 7–10; read the continued caption on page 11. Read the entire ten-page scientific supplement, visually inspecting figures S1–S8 and reading all movie captions. Downloaded movies 1–3 and inspected 24 evenly sampled frames per movie (durations 120, 60, 60 seconds); no claim of continuous viewing. Notes distinguish location-like behavior from a proven coordinate representation and the specific mushroom-body negative result from a general claim about food navigation.

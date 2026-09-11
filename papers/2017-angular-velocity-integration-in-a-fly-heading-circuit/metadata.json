@@ -33,6 +33,36 @@
       "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMjM0OTYvZWxpZmUtMjM0OTYtZmlndXJlcy12Mi5wZGY-/elife-23496-figures-v2.pdf?_hash=w5zPWMOyghVLw3yoMVoizsL4JBtSFI%2FMvGqeKsGh8Mc%3D",
       "bytes": 10307465,
       "sha256": "eca76b5764b9f1adb2d49fe341f2767164c8cc0c89e88c633a67aaf0f6d3acc4"
+    },
+    {
+      "filename": "elife-23496-supp1-v2.docx",
+      "url": "https://cdn.elifesciences.org/articles/23496/elife-23496-supp1-v2.docx",
+      "bytes": 18437,
+      "sha256": "e58aa425c9f46b5eff34717cd527080f1c3a7cc536f2ff8be9a0c1d8a0406401"
+    },
+    {
+      "filename": "elife-23496-supp2-v2.docx",
+      "url": "https://cdn.elifesciences.org/articles/23496/elife-23496-supp2-v2.docx",
+      "bytes": 22335,
+      "sha256": "49385002baf973d0f9cc8393a4ed2b51eb29fb120361bd111417c9b3c5a2d476"
+    },
+    {
+      "filename": "elife-23496-resp-fig2-v2.jpg",
+      "url": "https://cdn.elifesciences.org/articles/23496/elife-23496-resp-fig2-v2.jpg",
+      "bytes": 438840,
+      "sha256": "16d10c45ef77ed02ee5cce3ff44314683799c229bfe09f5dce6fa1631d5fa2e6"
+    },
+    {
+      "filename": "elife-23496-resp-fig1-v2.jpg",
+      "url": "https://cdn.elifesciences.org/articles/23496/elife-23496-resp-fig1-v2.jpg",
+      "bytes": 304596,
+      "sha256": "75ab9ed8f9306ac6329fdf76f5e6efc3b31aa85acab1469f3652f15a0dd784ef"
+    },
+    {
+      "filename": "published-review.xml",
+      "url": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/master/articles/elife-23496-v2.xml",
+      "bytes": 304631,
+      "sha256": "89fa8ff3b63543404a7d12bffd01a040ec56d81145cbb9b71ac7e83e2eb7c231"
     }
   ],
   "download_errors": []

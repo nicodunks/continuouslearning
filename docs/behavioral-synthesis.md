@@ -119,3 +119,11 @@ The fly-specific phase offset cancels from heading–goal comparison if both var
 This provides a generative explanation for localized activity, extending the earlier phase-decoding description. The model produces a bounded smooth bump rather than requiring a pure sinusoid as its full-ring activity profile. Retention, accurate self-motion updating, goal storage and steering remain distinct functions.
 
 The tethered-flight preparation preserves persistence while largely uncoupling the bump from motor-derived heading in darkness. Its targeted supplemental stripe assay nevertheless finds increased turning after compass manipulation. These results cannot be summarized as either a complete flight navigation mechanism or a compass with no behavioral effect. The model's input assumptions, fluorescence normalization and inference priors also constrain how strongly its effective connectivity can be inferred.
+
+## Updating the compass requires dynamics as well as shifted wiring
+
+[Turner-Evans et al. (2017)](../papers/2017-angular-velocity-integration-in-a-fly-heading-circuit/notes.md) links heading×angular-velocity tuning in P-ENs to spatially shifted recurrent interactions with E-PGs. Opposite shifted projections provide a mechanism for moving phase; inhibition and operating point support a localized state. Neither perfect sinusoids nor literal cellular multiplication are demonstrated requirements.
+
+The paper constrains a heading updater, not translation integration or destination storage. Neural and synaptic time scales, input gain, real subtype topology and smooth movement through a discrete ring remain material assumptions. The rate model's low-speed sticking was not observed biologically. Its approximately calibrated integration and error diffusion are sufficiency results, not measurements of the whole fly's navigational accuracy.
+
+P-EN blockade weakens and destabilizes E-PG activity, sometimes allowing large erroneous phase movements. It does not simply stop updating. Calcium phase offsets also depend on indicator assignment and compartment. A complete circuit account must preserve these differences rather than identify anatomical overlap, measured calcium phase and causal computation as the same evidence. Later connectomic and subtype-specific papers are needed to resolve which recurrent loops maintain state and which move it.

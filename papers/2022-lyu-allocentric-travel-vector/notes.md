@@ -78,8 +78,66 @@ The original anatomical analysis uses **female hemibrain v1.1**. Our dataset is 
 
 Priority analyses: validate cross-dataset type correspondences; obtain spatial synapses for selected PFN/hDeltaB cells; estimate projection-phase kernels by compartment; compare equal-axis and measured-axis predictions; test sensitivity to missing cells, thresholding, gains, and dendritic attenuation. An apparent failure of the ideal orthogonal model could arise from angular indexing or sampling rather than a different computation.
 
-## Remaining uncertainty
+## Remaining questions
 
 This paper strongly constrains a coordinate transformation. It does not alone establish a full naturalistic velocity metric, location memory, goal selection, or steering policy. Its causal perturbations constrain vector balance but are not a direct selective perturbation of every proposed link. These boundaries are precisely why this circuit is unusually tractable without being completely solved.
 
 Author analysis code: https://github.com/Cheng-Lyu/TravelingDirectionPaper_code (linked by the paper; not executed in this reading).
+
+### Where do the sinusoids come from, and how perfect must they be?
+
+This is a central mechanistic question, not merely a fitting detail. Two different approximately sinusoidal relationships enter the ideal model:
+
+1. **Spatial tuning:** activity across PB glomeruli at a given moment has a dominant first spatial harmonic, with phase tied to heading.
+2. **Movement tuning:** each PFN population's amplitude varies approximately as the projection of body-relative velocity onto its preferred axis.
+
+The first makes spatial summation equivalent to phasor addition. The second, together with the anatomical offsets and gains, makes the resulting phasor point along allocentric travel. Either can fail independently.
+
+**What Lyu actually establishes.** Fig. 3 and Extended Data Fig. 3 show profiles compatible with sinusoidal fits. Methods describe phase alignment, averaging, fitting and goodness-of-fit tests. Failing to reject a sinusoidal model is not proof of exact sinusoidal activity. Finite spatial sampling, calcium measurements and averaging limit sensitivity to deviations. Phase alignment itself does not force a sinusoid, but averaging can obscure trial-specific departures. Useful follow-up: quantify harmonics within individual flies and trials, alongside uncertainty, rather than inspecting only the mean fitted bump.
+
+**The proposed generator.** Supplementary Information p2 explicitly proposes Delta7-mediated reshaping. Broad, spatially structured inhibitory input could transform a more localized EPG bump into a more sinusoidal PFN profile. Delta7 also feeds back to EPG. This is supported by anatomical and physiological observations, but selective causal proof that Delta7 generates the required PFN waveform is not supplied by this paper. Nor does saying “Delta7” finish the explanation: we still need to explain its projection kernel, effective synaptic signs and strengths, interaction with direct EPG input, and robustness across state and animals. Delta7-mediated spatial shaping also does not by itself explain the separate movement-direction tuning of PFN amplitudes.
+
+**Why perfect sinusoids are not strictly necessary.** The following is our mathematical analysis, not an additional experimental result from Lyu. Use an angular convention in which an output centered on alpha has first-harmonic phasor proportional to exp(i alpha). Any real activity profile can be expanded as
+
+    f(theta) = c0 + sum_{n>=1} [c_n exp(-i n theta) + conjugate(c_n) exp(i n theta)].
+
+A spatial shift f(theta-alpha) multiplies c_n by exp(i n alpha). Under linear summation, the first harmonic therefore obeys
+
+    C1 = sum_k g_k c_{k,1} exp(i alpha_k),
+
+regardless of what other harmonics are present. First-harmonic phasor addition is still exact. To obtain the intended travel vector, these first-harmonic coefficients must also have the appropriate movement dependence and relative gains.
+
+What fails for an arbitrary waveform is the stronger assertion that **the maximum of the entire output profile equals the phase of its first harmonic**. Higher harmonics can shift the maximum, produce multiple peaks, or distort a downstream nonlinear readout. A circuit that selectively reads the first harmonic could tolerate substantial waveform distortion; a peak-following circuit may tolerate less. An experimenter's population-vector decoder is not evidence that the biological downstream circuit implements that decoder. With finite columns, discrete sampling can also alias higher harmonics into the estimated first harmonic.
+
+**A possible filtering mechanism.** In an ideal translation-invariant ring, synaptic convolution becomes multiplication in Fourier space:
+
+    Y_n = K_n X_n.
+
+A kernel with strong first-harmonic transmission and weak higher-harmonic transmission can extract a sinusoidal component from a sharper input. This provides a useful mathematical interpretation of the Delta7 proposal. Generic broad inhibition is not sufficient: its spatial structure and combination with excitation matter. Actual PB circuitry is finite, anatomically heterogeneous, and not automatically a translation-invariant convolution.
+
+Four evenly spaced PFN axes do not cancel every possible waveform distortion. In the equal-axis construction with the ideal amplitude rule, some higher harmonics survive, including a third spatial harmonic. Thus fourfold symmetry alone does not establish robustness. Conversely, a pointwise strictly increasing output nonlinearity preserves the location of an input maximum even if it distorts the waveform; the paper does not require hDeltaB firing rate to remain sinusoidal or linear.
+
+**Experiments and analyses to distinguish these possibilities:** measure trial-level PFN and hDeltaB spatial harmonics; perturb Delta7 while monitoring changes in waveform and heading phase separately; estimate compartment-resolved anatomical kernels and test whether plausible effective weights suppress higher modes; introduce controlled harmonic and gain errors into the model; compare predictions from a first-harmonic decoder, a peak decoder, and a biologically specified downstream readout. Evaluate error especially when the desired resultant is weak, where small distortions can dominate phase.
+
+### Open questions within and beyond the coordinate transform
+
+| Question | Why the existing result does not close it | Discriminating direction |
+|---|---|---|
+| How is body-relative velocity calibrated? | Optic flow depends on scene depth as well as speed; leg movement and actual displacement can differ. | Independently vary visual depth, visual motion and leg motion; quantify direction and speed errors separately. |
+| How are gains, axes and compartments calibrated? | Synapse counts are not physiological weights; the model assumes how opposing compartmental contributions combine. | Test sensitivity to side-specific gains, angular mapping and dendritic attenuation; seek developmental or plastic calibration mechanisms. |
+| Does magnitude represent speed, confidence or state? | Weak first-harmonic output can arise from weak input, cancellation or gain suppression. | Dissociate speed, cue conflict and behavioral state. A single complex first moment cannot preserve a general multimodal directional distribution. |
+| How do compass and goal remain aligned after remapping? | A changed landmark-to-compass offset could invalidate a memory expressed in the old coordinates. | Track heading and goal representations together through cue conflict and relearning. Basnak et al. demonstrate cue integration/remapping, not a complete solution to cross-memory consistency. |
+| Where is displacement integrated and corrected? | Instantaneous travel direction is distinct from the time integral of metric velocity. | Identify integration, leak, resets and landmark correction; distinguish persistent direction from accumulated position. |
+| What is learned about a food source? | A goal bearing, place vector, visual scene and action sequence can produce similar trajectories in restricted assays. | Displacement and cue-rearrangement tests that distinguish these strategies; do not assume nest-like round trips are the relevant natural behavior. |
+| How is a goal selected and retrieved? | A heading–goal comparator does not explain which goal should be active under hunger, competing rewards or uncertainty. | Connect learning and internal state to changes in the represented goal, not only steering output. |
+| How does steering become successful closed-loop behavior? | Turning toward a bearing does not alone compensate for drift, obstacles or changes between walking and flight. | Predict trajectories, speed and behavioral switching under independently manipulated sensory and motor conditions. |
+| Do the components work together in one animal? | The anatomical and functional evidence combines different preparations, individuals, datasets and conditions. | Build a quantitatively specified model that predicts joint representations and perturbation-induced behavioral errors, with parameters constrained across tasks. |
+
+The newer work gives concrete partial mechanisms: FC2/PFL3 goal-to-steering comparisons, PFL2/PFL3 steering control, multisensory compass learning, and odor-dependent evidence integration/persistence. It would be inaccurate to label those entire topics unknown. Equally, those findings do not by themselves establish a unified system for finding, remembering and revisiting a food location.
+
+Context sources (targeted checks, **not completed full-paper readings**):
+
+- [Mussells Pires et al., 2024 — goal-to-steering transformation](https://www.nature.com/articles/s41586-023-07006-3).
+- [Westeinde et al., 2024 — heading-to-steering transformation](https://www.nature.com/articles/s41586-024-07039-2).
+- [Basnak et al., 2025 — multimodal cue integration and learning](https://www.nature.com/articles/s41593-024-01823-z).
+- [Kathman et al., 2026 — working memory and odor evidence integration](https://www.nature.com/articles/s41467-026-75945-2).

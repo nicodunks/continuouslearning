@@ -21,7 +21,20 @@
       "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNjE1MTAvZWxpZmUtNjE1MTAtZmlndXJlcy12Mi5wZGY-/elife-61510-figures-v2.pdf?_hash=BwHJ%2BwDUADX3R%2BNsVTNvjQUPMi4MitdXZbi8fE5uDC4%3D",
       "bytes": 13630253,
       "sha256": "e54d9aa2f775ca62471a7aca0728b6f1b5c1e49a13a6a81b10f8f71a52d20181"
+    },
+    {
+      "filename": "elife-61510-transrepform-v2.docx",
+      "url": "https://cdn.elifesciences.org/articles/61510/elife-61510-transrepform-v2.docx",
+      "bytes": 252029,
+      "sha256": "5ddd8ff5e4eca7f9904a61fe12deafb8b7181c87843291f18c9cbdb1530a5fa0"
+    },
+    {
+      "filename": "article-with-peer-review.xml",
+      "url": "https://raw.githubusercontent.com/elifesciences/elife-article-xml/master/articles/elife-61510-v2.xml",
+      "bytes": 269284,
+      "sha256": "ef7cee77539ce63602e4b20709b5534f5491f72e50c4eaef7a7710e4b9dae4c1"
     }
   ],
-  "download_errors": []
+  "download_errors": [],
+  "reading_status": "Main text and all scientific figures/supplements read; reporting form text and complete XML peer review read."
 }

@@ -166,5 +166,107 @@
     "title": "Spatial learning in feature-impoverished environments in Drosophila",
     "doi": "10.1101/2024.09.28.615625",
     "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+  },
+  {
+    "title": "Displacement experiments provide evidence for path integration in Drosophila",
+    "doi": "10.1242/jeb.245289",
+    "folder": "2023-titova-displacement-path-integration",
+    "discovery_note": "Separates internal navigation from reward-associated chemical cues using passive displacement."
+  },
+  {
+    "folder": "2020-okubo-wind-compass",
+    "title": "A neural network for wind-guided compass navigation",
+    "doi": "10.1016/j.neuron.2020.06.022",
+    "discovery_note": "Airflow anchoring of the heading compass; distinguish from PFN basis input."
+  },
+  {
+    "folder": "2019-suver-wind-direction",
+    "title": "Encoding of wind direction by central neurons in Drosophila",
+    "doi": "10.1016/j.neuron.2019.03.012",
+    "discovery_note": "Upstream mechanosensory computation supplying wind navigation."
+  },
+  {
+    "folder": "2018-currier-multisensory-flight",
+    "title": "Multisensory control of orientation in tethered flying Drosophila",
+    "doi": "10.1016/j.cub.2018.09.020",
+    "discovery_note": "Behavioral basis for wind/visual context and flight versus walking."
+  },
+  {
+    "folder": "2018-alvarez-salvado-olfactory-navigation",
+    "title": "Elementary sensory-motor transformations underlying olfactory navigation in walking fruit-flies",
+    "doi": "10.7554/eLife.37815",
+    "discovery_note": "Odor history, upwind action and search after loss."
+  },
+  {
+    "folder": "2014-van-breugel-plume-tracking",
+    "title": "Plume-tracking behavior of flying Drosophila emerges from a set of distinct sensory-motor reflexes",
+    "doi": "10.1016/j.cub.2013.12.023",
+    "discovery_note": "Natural flight odor/wind/vision policy."
+  },
+  {
+    "folder": "2018-franconville-functional-connectome",
+    "title": "Building a functional connectome of the Drosophila central complex",
+    "doi": "10.7554/eLife.37017",
+    "discovery_note": "Functional connectivity and sign constraints."
+  },
+  {
+    "folder": "2018-namiki-descending-pathways",
+    "title": "The functional organization of descending sensory-motor pathways in Drosophila",
+    "doi": "10.7554/eLife.34272",
+    "discovery_note": "Bridge from central-complex outputs to locomotion."
+  },
+  {
+    "folder": "2018-giraldo-sun-navigation",
+    "title": "Sun navigation requires compass neurons in Drosophila",
+    "doi": "10.1016/j.cub.2018.07.002",
+    "discovery_note": "Menotaxis and necessity of compass for a specific behavioral task."
+  },
+  {
+    "folder": "2019-corfas-food-local-search",
+    "title": "Diverse food-sensing neurons trigger idiothetic local search in Drosophila",
+    "doi": "10.1016/j.cub.2019.03.004",
+    "discovery_note": "Food-reward initiation of local search; read against displacement controls."
+  },
+  {
+    "folder": "2021-behbahani-rezero-path-integrator",
+    "title": "Drosophila re-zero their path integrator at the center of a fictive food patch",
+    "doi": "10.1016/j.cub.2021.08.006",
+    "discovery_note": "Reference-point updating and multiple rewards; reconcile pheromone alternative."
+  },
+  {
+    "folder": "2019-stern-spatial-trial-error",
+    "title": "Learning a spatial task by trial and error in Drosophila",
+    "doi": "10.1016/j.cub.2019.06.045",
+    "discovery_note": "Reward-dependent spatial learning and PAM reinforcement."
+  },
+  {
+    "folder": "2008-neuser-spatial-orientation-memory",
+    "title": "Analysis of a spatial orientation memory in Drosophila",
+    "doi": "10.1038/nature07003",
+    "discovery_note": "Canonical visual working-memory behavior."
+  },
+  {
+    "folder": "2010-foucaud-spatial-search",
+    "title": "Use of spatial information and search strategies in a water maze analog in Drosophila melanogaster",
+    "doi": "10.1371/journal.pone.0015231",
+    "discovery_note": "Visual place learning behavior preceding Ofstad."
+  },
+  {
+    "folder": "2018-brockmann-sugar-search",
+    "title": "Sugar intake elicits intelligent searching behavior in flies and honey bees",
+    "doi": "10.3389/fnbeh.2018.00280",
+    "discovery_note": "Comparative local search and chemical-trail controls; retain species differences."
+  },
+  {
+    "folder": "2019-haberkern-virtual-landscape",
+    "title": "Visually guided behavior and optogenetically induced learning in head-fixed flies exploring a virtual landscape",
+    "doi": "10.1016/j.cub.2019.04.033",
+    "discovery_note": "Bridge between spatial behavior and imaging-compatible preparations."
+  },
+  {
+    "folder": "2017-stone-bee-path-integration",
+    "title": "An anatomically constrained model for path integration in the bee brain",
+    "doi": "10.1016/j.cub.2017.08.052",
+    "discovery_note": "Canonical comparative model; bee evidence must not be treated as fly demonstration."
   }
 ]

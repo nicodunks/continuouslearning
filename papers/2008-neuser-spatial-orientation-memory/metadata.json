@@ -1,0 +1,26 @@
+{
+  "folder": "2008-neuser-spatial-orientation-memory",
+  "title": "Analysis of a spatial orientation memory in Drosophila",
+  "doi": "10.1038/nature07003",
+  "discovery_note": "Canonical visual working-memory behavior.",
+  "assets": [
+    {
+      "filename": "41586_2008_BFnature07003_MOESM269_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature07003/MediaObjects/41586_2008_BFnature07003_MOESM269_ESM.pdf",
+      "bytes": 237006,
+      "sha256": "f6edfa94b60a8bcef737e68f31689bb9b34f92bb57dea2fb795de862743472b8"
+    },
+    {
+      "filename": "41586_2008_BFnature07003_MOESM270_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature07003/MediaObjects/41586_2008_BFnature07003_MOESM270_ESM.mov",
+      "bytes": 15677536,
+      "sha256": "e0dc8907a91376ca104fbc4d95cb89bc820df95133d2b17ff016f60af2bbd895"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/nature07003.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

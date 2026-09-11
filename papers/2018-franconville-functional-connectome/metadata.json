@@ -1,0 +1,27 @@
+{
+  "folder": "2018-franconville-functional-connectome",
+  "title": "Building a functional connectome of the Drosophila central complex",
+  "doi": "10.7554/eLife.37017",
+  "discovery_note": "Functional connectivity and sign constraints.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/37017.pdf",
+      "bytes": 4039988,
+      "sha256": "4520d9068e396105b11cdfeb6706577fb46fcecd842c6b90096b239ecc5ad795"
+    },
+    {
+      "filename": "elife-37017-v2.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMzcwMTcvZWxpZmUtMzcwMTctdjIucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzM3MDE3/elife-37017-v2.pdf?_hash=JN2gNh59KcmY2HfgIKGVOBqoNS6bBmZRhlxC53NaSMw%3D",
+      "bytes": 4039988,
+      "sha256": "4520d9068e396105b11cdfeb6706577fb46fcecd842c6b90096b239ecc5ad795"
+    },
+    {
+      "filename": "elife-37017-figures-v2.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMzcwMTcvZWxpZmUtMzcwMTctZmlndXJlcy12Mi5wZGY-/elife-37017-figures-v2.pdf?_hash=VKPL7Vm5FAmPy6Wnp9%2FV50Jlc0PZttKTeljMiTmi7nc%3D",
+      "bytes": 8403567,
+      "sha256": "53036c8bb9d55efb4bec2f34e634368b0dfd8d088e09ad12e2e2d279a6c9ee88"
+    }
+  ],
+  "download_errors": []
+}

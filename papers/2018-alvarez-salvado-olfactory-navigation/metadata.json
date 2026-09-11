@@ -1,0 +1,39 @@
+{
+  "folder": "2018-alvarez-salvado-olfactory-navigation",
+  "title": "Elementary sensory-motor transformations underlying olfactory navigation in walking fruit-flies",
+  "doi": "10.7554/eLife.37815",
+  "discovery_note": "Odor history, upwind action and search after loss.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/37815.pdf",
+      "bytes": 5043736,
+      "sha256": "023e9fc23abd1a7a7c959658284705e9476a3b1d0b545d1eb354a22545022c6f"
+    },
+    {
+      "filename": "elife-37815-video1.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzEvM2JhYzM5NTk5MDUwNzRiOTU1NWVhZDVlYzdiNTA1YWI3MWZkZTBkMy9lbGlmZS0zNzgxNS12aWRlbzEubXA0/elife-37815-video1.mp4?_hash=zvNhaFZ7NfOCj%2B5flf2Wegumqk%2BfOy0lmRvrl25krII%3D",
+      "bytes": 705325,
+      "sha256": "8c58a66f79a66489b94047b415867a62869585c533aa4ebc343c2d525dd89616"
+    },
+    {
+      "filename": "elife-37815-video2.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzEvM2JhYzM5NTk5MDUwNzRiOTU1NWVhZDVlYzdiNTA1YWI3MWZkZTBkMy9lbGlmZS0zNzgxNS12aWRlbzIubXA0/elife-37815-video2.mp4?_hash=1FwtGi3ASLLZANfiGswXA5CnapvgCvs1pJeJ%2BTTHkjY%3D",
+      "bytes": 769237,
+      "sha256": "71cd6ba347976d95d1aa6c0b2a637183b0b5f74039689fcea05cd05a1553aa79"
+    },
+    {
+      "filename": "elife-37815-v1.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMzc4MTUvZWxpZmUtMzc4MTUtdjEucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzM3ODE1/elife-37815-v1.pdf?_hash=UTSmK%2BcJx%2BzohcgKX8bXVPhUlGNLw6NkjpTBJzsvWt0%3D",
+      "bytes": 5043736,
+      "sha256": "023e9fc23abd1a7a7c959658284705e9476a3b1d0b545d1eb354a22545022c6f"
+    },
+    {
+      "filename": "elife-37815-figures-v1.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMzc4MTUvZWxpZmUtMzc4MTUtZmlndXJlcy12MS5wZGY-/elife-37815-figures-v1.pdf?_hash=nSOBwc9bTDXTlIJHXBSp5H95hsRAd7Phkzs4s5sBISA%3D",
+      "bytes": 6843833,
+      "sha256": "7d9d2fcf9f0e4e0b13f1347dc5d17a9623ea8530521c176a1bf6e4ff757a0675"
+    }
+  ],
+  "download_errors": []
+}

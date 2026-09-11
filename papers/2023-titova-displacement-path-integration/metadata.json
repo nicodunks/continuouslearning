@@ -1,0 +1,28 @@
+{
+  "title": "Displacement experiments provide evidence for path integration in Drosophila",
+  "doi": "10.1242/jeb.245289",
+  "folder": "2023-titova-displacement-path-integration",
+  "discovery_note": "Separates internal navigation from reward-associated chemical cues using passive displacement.",
+  "assets": [
+    {
+      "filename": "jexbio-226-245289-s1.pdf",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10281513/supplementaryFiles",
+      "bytes": 1836967,
+      "sha256": "58c68dd4e77e1a1ad50873cd3c880b9dcf21ffb93e8db7ae17c58991959425ff"
+    },
+    {
+      "filename": "main.pdf",
+      "url": "https://refubium.fu-berlin.de/bitstream/fub188/40743/1/jeb245289.pdf",
+      "bytes": 1767931,
+      "sha256": "6d5cde171f328c63d14d3d1050344e82a75406fa2bd1eb5805c19cbf90d91382"
+    },
+    {
+      "filename": "MovieS1.mp4",
+      "url": "https://static-movie-usa.glencoesoftware.com/mp4/10.1242/517/0e5a98f6badc27bdd0d9fcb5c40f2df4005f5a5b/JEB245289.MovieS1.mp4",
+      "bytes": 54677796,
+      "sha256": "e6ce999e869c66f40d6af15b45eb4d351a17c161947dfe9a986da6ffe50ffe68"
+    }
+  ],
+  "reading_status": "Complete main and scientific-supplement PDF reading; movie sampled; targeted model source inspected",
+  "code_commit": "0eb07940a9ffdedd97ada81f75e9d5f7bface579"
+}

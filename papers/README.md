@@ -2,7 +2,7 @@
 
 One folder per paper: PDFs and supplementary files alongside `notes.md`, `metadata.json`, and `reading-log.md`. Source URLs and SHA-256 checksums are recorded in metadata. Large supplementary movies, ZIP archives and two oversized supplementary PDFs remain downloaded locally and are excluded from Git; the metadata preserves their download locations. Original publications retain their original copyrights.
 
-**Status:** Lyu et al. has a full PDF/figure/supplement reading and explicitly sampled movie inspection. Mussells Pires et al. (2024) also has a full main/Extended Data/supplement PDF reading. Westeinde et al. (2024) has also been fully read, including its 2025 correction. Siliciano et al. (2026) has a full article/scientific-supplement reading plus peer-review reading and sampled movies. Kathman et al. (2026) has a full article/supplement/peer-review reading and targeted equation-to-code checks. Matheson et al. (2022) has a full article/supplement/addendum/peer-review reading and targeted archived-model checks. The remaining entries are a discovery and acquisition queue, not completed reviews. A downloaded main PDF does not imply that every supplementary asset has been acquired.
+**Status:** Lyu et al. has a full PDF/figure/supplement reading and explicitly sampled movie inspection. Mussells Pires et al. (2024) also has a full main/Extended Data/supplement PDF reading. Westeinde et al. (2024) has also been fully read, including its 2025 correction. Siliciano et al. (2026) has a full article/scientific-supplement reading plus peer-review reading and sampled movies. Kathman et al. (2026) has a full article/supplement/peer-review reading and targeted equation-to-code checks. Matheson et al. (2022) has a full article/supplement/addendum/peer-review reading and targeted archived-model checks. Currier et al. (2020) has a full main/scientific-supplement reading and complete published peer-review text reading. Titova et al. (2023) has a full main/scientific-supplement PDF reading, sampled movie inspection and targeted model-source reading. The remaining entries are a discovery and acquisition queue, not completed reviews. A downloaded main PDF does not imply that every supplementary asset has been acquired.
 
 | Paper | Main PDF | PDF files | Reading |
 |---|---|---:|---|
@@ -29,11 +29,28 @@ One folder per paper: PDFs and supplementary files alongside `notes.md`, `metada
 | [Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila](2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati/notes.md) | downloaded | 4 | complete article/figures/supplements/peer review |
 | [A neural circuit for wind-guided olfactory navigation](2022-matheson-wind-guided-olfactory-navigation/notes.md) | downloaded | 5 | complete article/figures/supplements/addendum/peer review |
 | [Visual place learning in Drosophila melanogaster](2011-visual-place-learning/notes.md) | missing; access search pending | 1 | pending full reading |
-| [Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons](2020-currier-airflow-orientation/notes.md) | downloaded | 3 | pending full reading |
+| [Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons](2020-currier-airflow-orientation/notes.md) | downloaded | 3 | complete main/scientific supplements/peer-review text |
 | [Idiothetic Path Integration in the Fruit Fly Drosophila melanogaster](2017-kim-dickinson-idiothetic-path-integration/notes.md) | missing; access search pending | 0 | pending full reading |
 | [Neural circuit mechanisms for transforming learned olfactory valences into wind oriented movement](2023-aso-learned-valence-wind/notes.md) | downloaded | 3 | pending full reading |
 | [Spatial learning in feature-impoverished environments in Drosophila](2024-chen-spatial-learning/notes.md) | missing; access search pending | 0 | pending full reading |
 | [Disinhibition of a recurrent attractor gates a persistent goal signal for navigation](2025-lanz-recurrent-goal-memory/notes.md) | missing; access search pending | 0 | pending full reading |
+| [A neural network for wind-guided compass navigation](2020-okubo-wind-compass/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Encoding of wind direction by central neurons in Drosophila](2019-suver-wind-direction/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Multisensory control of orientation in tethered flying Drosophila](2018-currier-multisensory-flight/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Elementary sensory-motor transformations underlying olfactory navigation in walking fruit-flies](2018-alvarez-salvado-olfactory-navigation/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Plume-tracking behavior of flying Drosophila emerges from a set of distinct sensory-motor reflexes](2014-van-breugel-plume-tracking/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Building a functional connectome of the Drosophila central complex](2018-franconville-functional-connectome/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [The functional organization of descending sensory-motor pathways in Drosophila](2018-namiki-descending-pathways/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Sun navigation requires compass neurons in Drosophila](2018-giraldo-sun-navigation/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Diverse food-sensing neurons trigger idiothetic local search in Drosophila](2019-corfas-food-local-search/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Drosophila re-zero their path integrator at the center of a fictive food patch](2021-behbahani-rezero-path-integrator/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Learning a spatial task by trial and error in Drosophila](2019-stern-spatial-trial-error/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Analysis of a spatial orientation memory in Drosophila](2008-neuser-spatial-orientation-memory/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Use of spatial information and search strategies in a water maze analog in Drosophila melanogaster](2010-foucaud-spatial-search/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Sugar intake elicits intelligent searching behavior in flies and honey bees](2018-brockmann-sugar-search/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Visually guided behavior and optogenetically induced learning in head-fixed flies exploring a virtual landscape](2019-haberkern-virtual-landscape/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [An anatomically constrained model for path integration in the bee brain](2017-stone-bee-path-integration/notes.md) | missing; acquisition pending | 0 | pending full reading |
+| [Displacement experiments provide evidence for path integration in Drosophila](2023-titova-displacement-path-integration/notes.md) | downloaded | 2 | complete PDFs; movie sampled |
 
 Start with [Lyu’s detailed notes](2022-lyu-allocentric-travel-vector/notes.md). The [literature map](../docs/literature.md) connects these papers to the broader circuit.
 

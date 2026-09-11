@@ -1,0 +1,27 @@
+{
+  "folder": "2018-namiki-descending-pathways",
+  "title": "The functional organization of descending sensory-motor pathways in Drosophila",
+  "doi": "10.7554/eLife.34272",
+  "discovery_note": "Bridge from central-complex outputs to locomotion.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/34272.pdf",
+      "bytes": 12594669,
+      "sha256": "840ea05685900eba7e6f23d4d70eb43bd28bd6b46e6604b7efc33d19395473ca"
+    },
+    {
+      "filename": "elife-34272-v1.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMzQyNzIvZWxpZmUtMzQyNzItdjEucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzM0Mjcy/elife-34272-v1.pdf?_hash=0baEA9%2FLgXxOGG8DvtKlmz52RFnHUY1IRgcV2UVXUq8%3D",
+      "bytes": 12594669,
+      "sha256": "840ea05685900eba7e6f23d4d70eb43bd28bd6b46e6604b7efc33d19395473ca"
+    },
+    {
+      "filename": "elife-34272-figures-v1.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvMzQyNzIvZWxpZmUtMzQyNzItZmlndXJlcy12MS5wZGY-/elife-34272-figures-v1.pdf?_hash=ffc%2B7yFzRCvekQ5itm3xyeqF59U4S%2FHVYaoOwqbrW%2F4%3D",
+      "bytes": 51229128,
+      "sha256": "c16da3994270e8975accbeec24ca9d6f762fc23473f4850b151a394024bdaa99"
+    }
+  ],
+  "download_errors": []
+}

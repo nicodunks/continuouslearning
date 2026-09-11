@@ -89,3 +89,17 @@ Its model establishes how a supplied directional representation could steer an a
 This paper distinguishes initial upwind turning from sustained orientation during odor; Kathman adds persistence after odor loss. Neither is equivalent to remembering a food location. MB activity can influence wind-relative action, but learned odor value, a selected bearing and a spatial destination remain different variables requiring separate evidence.
 
 The PFL2 component also needs a historical correction: Matheson's model increases forward speed with PFL2 output, whereas Westeinde's later experiments implicate PFL2 in large-error steering and show increased turning with reduced forward speed under activation. A complete controller must follow the newer evidence and reconcile task differences, rather than concatenate those equations.
+
+## Airflow sensing is distinct from the selected policy
+
+[Currier et al. (2020)](../papers/2020-currier-airflow-orientation/notes.md) identifies front-oblique body-relative airflow responses in PFNa and PFNm/PFNp, with LNa as a plausible nodular input. Its behavior is downwind stabilization in tethered flight without food odor. The later upwind-walking papers therefore need context and locomotor-state transformations, not merely an unbroken chain of identically interpreted arrows. Shared tuning across columns in open loop does not exclude heading conjunction in closed loop.
+
+The published review history corrected a proposed output route after checking synaptic direction and compartment: LNa is mainly an input to PFNs. This is an instructive use of connectomics to reject a mistaken route while leaving the actual behavioral readout unresolved. It reinforces the need to match cell identities and distinguish dominant flow from sparse feedback.
+
+## A location memory makes a different prediction from a bearing memory
+
+[Titova et al. (2023)](../papers/2023-titova-displacement-path-integration/notes.md) separates the physical reward site from a fictive site predicted by path integration that misses passive transport. Rewarded flies preferentially search near the fictive site after displacement. This supports a local internal navigation mechanism beyond simply accumulating at reward, while retaining uncertainty about the exact algorithm and circuit.
+
+The geometry is explicit: if a fly at x retains return vector f−x after transport by d, it arrives at f+d. This is a predictable error of an internal estimate, not successful relocalization to the original physical site after arbitrary displacement. The experiment does not establish a long-term catalog of food locations.
+
+The same paper demonstrates that naïve flies prefer a location previously occupied by rewarded flies, and shows that a chemical-mark model can mimic some earlier annular-search statistics. A complete account must therefore consider chemical cues, internal vectors, remembered bearings, and visual place recognition together. These can cooperate in natural behavior; similar trajectories do not identify the underlying representation. The earlier local-search studies are being read alongside this challenge, rather than accepted or dismissed solely through a later paper's characterization.

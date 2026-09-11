@@ -1,0 +1,27 @@
+{
+  "folder": "2020-currier-airflow-orientation",
+  "title": "Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons",
+  "doi": "10.7554/eLife.61510",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/61510.pdf",
+      "bytes": 11931644,
+      "sha256": "11f130c1a44b840ff32acadd335367fb089986e779787c19dd1b55184f51ab72"
+    },
+    {
+      "filename": "elife-61510-v2.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNjE1MTAvZWxpZmUtNjE1MTAtdjIucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzYxNTEw/elife-61510-v2.pdf?_hash=zWWLYr0MkgvCvAHh%2BoK0eH9rTJVrAx8ZZJUa%2FNUY1vc%3D",
+      "bytes": 11931644,
+      "sha256": "11f130c1a44b840ff32acadd335367fb089986e779787c19dd1b55184f51ab72"
+    },
+    {
+      "filename": "elife-61510-figures-v2.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNjE1MTAvZWxpZmUtNjE1MTAtZmlndXJlcy12Mi5wZGY-/elife-61510-figures-v2.pdf?_hash=BwHJ%2BwDUADX3R%2BNsVTNvjQUPMi4MitdXZbi8fE5uDC4%3D",
+      "bytes": 13630253,
+      "sha256": "e54d9aa2f775ca62471a7aca0728b6f1b5c1e49a13a6a81b10f8f71a52d20181"
+    }
+  ],
+  "download_errors": []
+}

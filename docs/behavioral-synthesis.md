@@ -71,3 +71,21 @@ This is a complete repeated behavioral motif, with important internal links stil
 The connection from expressed FC2 goal to heading comparison is supported by Pires/Westeinde. The connection from odor encounter to a stored synaptic pattern is still a proposal. In particular, FC2 follows heading again inside odor; another state must retain the return memory if it is temporarily absent from FC2's expressed phase. Odor-gated hDelta/tangential/PFN inputs are therefore a concrete reading and later anatomical frontier.
 
 Arrival at a virtual source threshold does not explain recognition of food, feeding, satiety or a later revisit. A remembered return bearing is also insufficient for arbitrary navigation back to a fixed location after translation. Those are distinct branches of the literature, not details to fill by relabeling this memory.
+
+## Maintaining an intention during gaps
+
+[Kathman et al.](../papers/2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati/notes.md) links odor history to persistent FB activity and persistent upwind walking. The predominantly hΔK-labeled population shows a relatively stable bump while heading changes; silencing curtails persistence more clearly than initial orientation. This adds a mechanism-level question between choosing a heading and repeatedly correcting toward it: how is an intention kept active when sensory evidence briefly disappears?
+
+Do not identify this short-lived goal state with Siliciano's learned entry-bearing memory. The former supports continued pursuit through odor gaps; the latter can direct a return toward a boundary following exploration. Their relation through hΔK/PFG, FC2 and steering readouts needs explicit evidence. Nor does an exponential distribution of bump lifetimes establish exponential amplitude decay or displacement integration.
+
+The model supplies upwind direction and stochastic state transitions, then finds that an intermediate persistence benefits source occupancy. Its objective penalizes overshooting and lacks food recognition, highlighting why approach, arrival, feeding and revisiting need separate literature. The referenced Lanz follow-up addresses the recurrent persistence/gating mechanism; spatial-learning and idiothetic-search work address different missing behavioral capacities.
+
+## Odor context to a wind-relative bearing: a corrected bridge
+
+[Matheson et al. (2022), read with the 2024 addendum](../papers/2022-matheson-wind-guided-olfactory-navigation/notes.md), places odor-sensitive MB/LH pathways upstream of FB contextual inputs. Direct FB5AB/wind-PFN convergence is an anatomical result about hΔC. The physiology and behavioral perturbations used VT062617, which may predominantly label hΔK; hΔK does not receive those same direct inputs. The two findings require an intermediate-pathway explanation, not a global neuron-name substitution.
+
+Its model establishes how a supplied directional representation could steer an agent. It does not derive the complete wind representation or identify all relays. The alternative model constructed from front-preferring PFNs has a restricted capture range. The main model's exact sinusoidal inputs do not explain the biological generation of tuning curves.
+
+This paper distinguishes initial upwind turning from sustained orientation during odor; Kathman adds persistence after odor loss. Neither is equivalent to remembering a food location. MB activity can influence wind-relative action, but learned odor value, a selected bearing and a spatial destination remain different variables requiring separate evidence.
+
+The PFL2 component also needs a historical correction: Matheson's model increases forward speed with PFL2 output, whereas Westeinde's later experiments implicate PFL2 in large-error steering and show increased turning with reduced forward speed under activation. A complete controller must follow the newer evidence and reconcile task differences, rather than concatenate those equations.

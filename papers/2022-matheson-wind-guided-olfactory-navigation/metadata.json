@@ -1,0 +1,39 @@
+{
+  "folder": "2022-matheson-wind-guided-olfactory-navigation",
+  "title": "A neural circuit for wind-guided olfactory navigation",
+  "doi": "10.1038/s41467-022-32247-7",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://www.nature.com/articles/s41467-022-32247-7.pdf",
+      "bytes": 4287094,
+      "sha256": "9a6c51641b50a51125b23b44d117fe6c82df2a5a5a723217485bf300a6d1bff1"
+    },
+    {
+      "filename": "41467_2022_32247_MOESM1_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-32247-7/MediaObjects/41467_2022_32247_MOESM1_ESM.pdf",
+      "bytes": 6185570,
+      "sha256": "eacf0430bf29aa8187f2db165c4063388c66bc719ee0a9a808305f63df163fc8"
+    },
+    {
+      "filename": "41467_2022_32247_MOESM2_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-32247-7/MediaObjects/41467_2022_32247_MOESM2_ESM.pdf",
+      "bytes": 3548873,
+      "sha256": "479fe824153755934e1e86473d4f959100177bfc85e8ca241d44780c1e30335f"
+    },
+    {
+      "filename": "41467_2022_32247_MOESM3_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-022-32247-7/MediaObjects/41467_2022_32247_MOESM3_ESM.pdf",
+      "bytes": 4229808,
+      "sha256": "fbd04b20eda9d0bb75140bcc994fb7cb00f9b74478f4d77e20575124d84e359c"
+    },
+    {
+      "filename": "addendum-2024.pdf",
+      "url": "https://www.nature.com/articles/s41467-024-46225-8.pdf",
+      "bytes": 259631,
+      "sha256": "06696c0f0986dc774918b3aa4a896bd3c316d275fecb96393b5583153c87005a"
+    }
+  ],
+  "download_errors": []
+}

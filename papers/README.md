@@ -2,7 +2,7 @@
 
 One folder per paper: PDFs and supplementary files alongside `notes.md`, `metadata.json`, and `reading-log.md`. Source URLs and SHA-256 checksums are recorded in metadata. Large supplementary movies, ZIP archives and two oversized supplementary PDFs remain downloaded locally and are excluded from Git; the metadata preserves their download locations. Original publications retain their original copyrights.
 
-**Status:** Lyu et al. has a full PDF/figure/supplement reading and explicitly sampled movie inspection. Mussells Pires et al. (2024) also has a full main/Extended Data/supplement PDF reading. Westeinde et al. (2024) has also been fully read, including its 2025 correction. Siliciano et al. (2026) has a full article/scientific-supplement reading plus peer-review reading and sampled movies. The remaining entries are a discovery and acquisition queue, not completed reviews. A downloaded main PDF does not imply that every supplementary asset has been acquired.
+**Status:** Lyu et al. has a full PDF/figure/supplement reading and explicitly sampled movie inspection. Mussells Pires et al. (2024) also has a full main/Extended Data/supplement PDF reading. Westeinde et al. (2024) has also been fully read, including its 2025 correction. Siliciano et al. (2026) has a full article/scientific-supplement reading plus peer-review reading and sampled movies. Kathman et al. (2026) has a full article/supplement/peer-review reading and targeted equation-to-code checks. Matheson et al. (2022) has a full article/supplement/addendum/peer-review reading and targeted archived-model checks. The remaining entries are a discovery and acquisition queue, not completed reviews. A downloaded main PDF does not imply that every supplementary asset has been acquired.
 
 | Paper | Main PDF | PDF files | Reading |
 |---|---|---:|---|
@@ -26,7 +26,14 @@ One folder per paper: PDFs and supplementary files alongside `notes.md`, `metada
 | [Multimodal cue integration and learning in a neural representation of head direction](2025-multimodal-cue-integration-and-learning-in-a-neural-representation-of-head-direction/notes.md) | downloaded | 2 | pending full reading |
 | [Neuronal calcium spikes enable vector inversion in the Drosophila brain](2026-neuronal-calcium-spikes-enable-vector-inversion-in-the-drosophila-brain/notes.md) | missing; access search pending | 0 | pending full reading |
 | [A vector-based strategy for olfactory navigation in Drosophila](2026-a-vector-based-strategy-for-olfactory-navigation-in-drosophila/notes.md) | downloaded | 4 | complete article/scientific supplements; movies sampled |
-| [Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila](2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati/notes.md) | downloaded | 4 | pending full reading |
+| [Neural dynamics for working memory and evidence integration during olfactory navigation in Drosophila](2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati/notes.md) | downloaded | 4 | complete article/figures/supplements/peer review |
+| [A neural circuit for wind-guided olfactory navigation](2022-matheson-wind-guided-olfactory-navigation/notes.md) | downloaded | 5 | complete article/figures/supplements/addendum/peer review |
+| [Visual place learning in Drosophila melanogaster](2011-visual-place-learning/notes.md) | missing; access search pending | 1 | pending full reading |
+| [Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons](2020-currier-airflow-orientation/notes.md) | downloaded | 3 | pending full reading |
+| [Idiothetic Path Integration in the Fruit Fly Drosophila melanogaster](2017-kim-dickinson-idiothetic-path-integration/notes.md) | missing; access search pending | 0 | pending full reading |
+| [Neural circuit mechanisms for transforming learned olfactory valences into wind oriented movement](2023-aso-learned-valence-wind/notes.md) | downloaded | 3 | pending full reading |
+| [Spatial learning in feature-impoverished environments in Drosophila](2024-chen-spatial-learning/notes.md) | missing; access search pending | 0 | pending full reading |
+| [Disinhibition of a recurrent attractor gates a persistent goal signal for navigation](2025-lanz-recurrent-goal-memory/notes.md) | missing; access search pending | 0 | pending full reading |
 
 Start with [Lyu’s detailed notes](2022-lyu-allocentric-travel-vector/notes.md). The [literature map](../docs/literature.md) connects these papers to the broader circuit.
 

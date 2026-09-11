@@ -1,0 +1,63 @@
+{
+  "folder": "2023-aso-learned-valence-wind",
+  "title": "Neural circuit mechanisms for transforming learned olfactory valences into wind oriented movement",
+  "doi": "10.7554/eLife.85756",
+  "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked.",
+  "assets": [
+    {
+      "filename": "main.pdf",
+      "url": "https://elifesciences.org/articles/85756.pdf",
+      "bytes": 13588316,
+      "sha256": "99c6c3845e2cb698bbfa711b9d321755b700ad225b0a8fc1a399a8d6a70ca2d2"
+    },
+    {
+      "filename": "elife-85756-video1.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzY2L2RiNmQ3MTA0NzdjMGM4ZDJmNDljMmRlODgzY2ZjMzZlMDI4NzM0YjIvZWxpZmUtODU3NTYtdmlkZW8xLm1wNA--/elife-85756-video1.mp4?_hash=lkoyyIQ%2FHhoHziZqdrO8iX5%2BfcOpSMmgpGO17vnB34E%3D",
+      "bytes": 2214733,
+      "sha256": "4951eb622f2a5cef3bc91fb474efc7e3808b75848a8153418673cf5722761c21"
+    },
+    {
+      "filename": "elife-85756-video2.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzY2L2RiNmQ3MTA0NzdjMGM4ZDJmNDljMmRlODgzY2ZjMzZlMDI4NzM0YjIvZWxpZmUtODU3NTYtdmlkZW8yLm1wNA--/elife-85756-video2.mp4?_hash=4X79wp3hwp40WybA7T6Jx%2BFC3%2B7FjdQeDVULzv%2BM3Vg%3D",
+      "bytes": 310496,
+      "sha256": "0095f7968e8f67b1bd2d3d41d40fa106a9b0977333bf7412cac4a576a84ddae1"
+    },
+    {
+      "filename": "elife-85756-video3.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzY2L2RiNmQ3MTA0NzdjMGM4ZDJmNDljMmRlODgzY2ZjMzZlMDI4NzM0YjIvZWxpZmUtODU3NTYtdmlkZW8zLm1wNA--/elife-85756-video3.mp4?_hash=lYzGiA8rRWYLb3%2FyWmjac4FX%2F%2Fs0JR08PWpiNz0ocpw%3D",
+      "bytes": 2522017,
+      "sha256": "799f61bee24692c74e40568fa04b86f80a872e7dadc36424d4921510a30f97be"
+    },
+    {
+      "filename": "elife-85756-video4.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzY2L2RiNmQ3MTA0NzdjMGM4ZDJmNDljMmRlODgzY2ZjMzZlMDI4NzM0YjIvZWxpZmUtODU3NTYtdmlkZW80Lm1wNA--/elife-85756-video4.mp4?_hash=3ThCx8G1ybiz2%2BEIfOn5omDRcydWOVg90YxDTU%2FeWAo%3D",
+      "bytes": 1841230,
+      "sha256": "b00dfdebd42c9e76309d76da796e16acfe60d4a986e2b7b56e8353870dcf2720"
+    },
+    {
+      "filename": "elife-85756-video5.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzY2L2RiNmQ3MTA0NzdjMGM4ZDJmNDljMmRlODgzY2ZjMzZlMDI4NzM0YjIvZWxpZmUtODU3NTYtdmlkZW81Lm1wNA--/elife-85756-video5.mp4?_hash=kYYqZEo3JBlq%2FXZqqaweQVx4ksD8PCq4Uau0QzxEIso%3D",
+      "bytes": 38171,
+      "sha256": "61f0213677500a32c0daf5883caa3cd7a568d131bbd2a6a807329d480f570f44"
+    },
+    {
+      "filename": "elife-85756-video6.mp4",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9zdGF0aWMtbW92aWUtdXNhLmdsZW5jb2Vzb2Z0d2FyZS5jb20vbXA0LzEwLjc1NTQvMzY2L2RiNmQ3MTA0NzdjMGM4ZDJmNDljMmRlODgzY2ZjMzZlMDI4NzM0YjIvZWxpZmUtODU3NTYtdmlkZW82Lm1wNA--/elife-85756-video6.mp4?_hash=I7yjmXlbAnrJ1xpg80rjUl3GYezMmO%2BfpG0zs9JcL8Y%3D",
+      "bytes": 2086944,
+      "sha256": "d9133428f681a21f70b16469fe62d095d5a337da20fb9a058975ace027f86050"
+    },
+    {
+      "filename": "elife-85756-v3.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvODU3NTYvZWxpZmUtODU3NTYtdjMucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzg1NzU2/elife-85756-v3.pdf?_hash=4m%2FSKwDj4Q0sEs62wN4fdNr8UM9u%2BQSFqo%2B%2Bvz69%2FiQ%3D",
+      "bytes": 13588316,
+      "sha256": "99c6c3845e2cb698bbfa711b9d321755b700ad225b0a8fc1a399a8d6a70ca2d2"
+    },
+    {
+      "filename": "elife-85756-figures-v3.pdf",
+      "url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvODU3NTYvZWxpZmUtODU3NTYtZmlndXJlcy12My5wZGY-/elife-85756-figures-v3.pdf?_hash=AhFMmXW%2BazZ95%2FsARlx%2BhszgnprQpLYA6PLMxNd5DTk%3D",
+      "bytes": 29189168,
+      "sha256": "770e762b067777008f29f479e9586cd070de028ea9e4c9de9049865b43b82bf4"
+    }
+  ],
+  "download_errors": []
+}

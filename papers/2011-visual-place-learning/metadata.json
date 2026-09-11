@@ -1,0 +1,38 @@
+{
+  "folder": "2011-visual-place-learning",
+  "title": "Visual place learning in Drosophila melanogaster",
+  "doi": "10.1038/nature10131",
+  "discovery_note": "Added by following the behavioral synthesis; full reading pending.",
+  "assets": [
+    {
+      "filename": "41586_2011_BFnature10131_MOESM286_ESM.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature10131/MediaObjects/41586_2011_BFnature10131_MOESM286_ESM.pdf",
+      "bytes": 5865430,
+      "sha256": "1bb0ce376fd5d25551fb560d5548b672e7e960e8a12e085096bf6f6b97881bcb"
+    },
+    {
+      "filename": "41586_2011_BFnature10131_MOESM287_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature10131/MediaObjects/41586_2011_BFnature10131_MOESM287_ESM.mov",
+      "bytes": 10883013,
+      "sha256": "ba50430f390ddc6883e9e9e3bcbfca064441501591bb1d396c89fa24723a53e8"
+    },
+    {
+      "filename": "41586_2011_BFnature10131_MOESM288_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature10131/MediaObjects/41586_2011_BFnature10131_MOESM288_ESM.mov",
+      "bytes": 3796192,
+      "sha256": "ad9778d99a4dd6e7dac8d31f882672bd8c5ed1440ea4b4fd5de840ab1862b45d"
+    },
+    {
+      "filename": "41586_2011_BFnature10131_MOESM289_ESM.mov",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fnature10131/MediaObjects/41586_2011_BFnature10131_MOESM289_ESM.mov",
+      "bytes": 3496087,
+      "sha256": "fca115947fdbe9148ad567397652fe5645d488392cacb5f2500d7ea3c218c040"
+    }
+  ],
+  "download_errors": [
+    {
+      "url": "https://www.nature.com/articles/nature10131.pdf",
+      "error": "Unavailable or unexpected format"
+    }
+  ]
+}

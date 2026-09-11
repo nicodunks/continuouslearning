@@ -124,5 +124,47 @@
     "doi": "10.1038/s41467-026-75945-2",
     "folder": "2026-neural-dynamics-for-working-memory-and-evidence-integration-during-olfactory-navigati",
     "discovery_note": "FB local-neuron activity accumulates odor evidence and persists after odor loss; silencing impairs persistent directional behavior."
+  },
+  {
+    "folder": "2022-matheson-wind-guided-olfactory-navigation",
+    "title": "A neural circuit for wind-guided olfactory navigation",
+    "doi": "10.1038/s41467-022-32247-7",
+    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+  },
+  {
+    "folder": "2011-visual-place-learning",
+    "title": "Visual place learning in Drosophila melanogaster",
+    "doi": "10.1038/nature10131",
+    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+  },
+  {
+    "folder": "2020-currier-airflow-orientation",
+    "title": "Encoding and control of orientation to airflow by a set of Drosophila fan-shaped body neurons",
+    "doi": "10.7554/eLife.61510",
+    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+  },
+  {
+    "folder": "2017-kim-dickinson-idiothetic-path-integration",
+    "title": "Idiothetic Path Integration in the Fruit Fly Drosophila melanogaster",
+    "doi": "10.1016/j.cub.2017.06.026",
+    "discovery_note": "Added by following the behavioral synthesis; full reading pending."
+  },
+  {
+    "folder": "2025-lanz-recurrent-goal-memory",
+    "title": "Disinhibition of a recurrent attractor gates a persistent goal signal for navigation",
+    "doi": "10.1101/2025.10.07.681003",
+    "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+  },
+  {
+    "folder": "2023-aso-learned-valence-wind",
+    "title": "Neural circuit mechanisms for transforming learned olfactory valences into wind oriented movement",
+    "doi": "10.7554/eLife.85756",
+    "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
+  },
+  {
+    "folder": "2024-chen-spatial-learning",
+    "title": "Spatial learning in feature-impoverished environments in Drosophila",
+    "doi": "10.1101/2024.09.28.615625",
+    "discovery_note": "Added from the behavioral synthesis; full reading pending. Version/publication status must be checked."
   }
 ]

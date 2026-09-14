@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Homing Exam</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#EEF1F4; --panel:#F8F9FA; --ink:#1B2330; --ink-2:#4A5563; --ink-3:#8A94A2; --line:#D3D9E0;
+  --arena:#12181F; --arena-grid:#1E2732; --arena-ink:#DCE3EA;
+  --amber:#E08A2E; --amber-soft:#F6E3C8; --teal:#1F8A8A; --teal-soft:#CDE8E6; --red:#C24A3A;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141A21; --panel:#1B222B; --ink:#E6EAEE; --ink-2:#AEB7C2; --ink-3:#77818E; --line:#2C3541;
+    --arena:#0C1015; --arena-grid:#161D26; --arena-ink:#DCE3EA;
+    --amber:#EFA24A; --amber-soft:#3A2A16; --teal:#3FB3B0; --teal-soft:#14302F; --red:#E0655A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141A21; --panel:#1B222B; --ink:#E6EAEE; --ink-2:#AEB7C2; --ink-3:#77818E; --line:#2C3541;
+  --arena:#0C1015; --arena-grid:#161D26; --arena-ink:#DCE3EA;
+  --amber:#EFA24A; --amber-soft:#3A2A16; --teal:#3FB3B0; --teal-soft:#14302F; --red:#E0655A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.55;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--disp);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:26px;font-weight:700;margin-bottom:6px}
+h3{font-size:16px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em}
+p{max-width:64ch;margin:0 0 12px}
+.lede{font-size:19px;color:var(--ink-2);max-width:60ch}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+header{padding-block:56px 28px;border-bottom:1px solid var(--line)}
+section{padding-block:40px;border-bottom:1px solid var(--line)}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;margin-top:18px}
+@media (max-width:820px){.stage{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+canvas{max-width:100%;display:block}
+#arena{background:var(--arena);border-radius:6px;width:100%;aspect-ratio:1/1}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+button{font-family:var(--disp);font-weight:700;font-size:14px;padding:8px 14px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+button.quiet{background:transparent;color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+button:disabled{opacity:.45;cursor:default}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2)}
+.chip.out{background:var(--panel)}
+.chip.ret{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+.chip.arr{background:var(--teal-soft);color:var(--teal);border-color:transparent}
+.inputs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.gauge{display:flex;flex-direction:column;gap:6px}
+.gauge .lab{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;justify-content:space-between}
+.bar{height:12px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--ink-2);width:0%}
+.lamp{width:14px;height:14px;border-radius:50%;background:var(--line);display:inline-block;vertical-align:middle;margin-right:8px}
+.lamp.on{background:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.lamp.amber.on{background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft)}
+.note{font-size:14px;color:var(--ink-2);margin-top:8px}
+.brain{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:18px}
+.cols{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;align-items:end;height:90px}
+.cols > div{background:var(--ink-3);border-radius:2px 2px 0 0;min-height:2px}
+.cols.tally > div{background:var(--amber)}
+.collab{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:center;margin-top:4px}
+.arrowbox{display:flex;gap:10px;align-items:center;justify-content:space-around}
+.arrowbox canvas{width:96px;height:96px}
+.step{font-family:var(--disp);font-weight:700;color:var(--ink-3);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.dials{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px 28px;margin-top:18px}
+.dial label{display:flex;justify-content:space-between;font-family:var(--disp);font-weight:700;font-size:15px}
+.dial input[type=range]{width:100%;accent-color:var(--amber)}
+.dial .why{font-size:14px;color:var(--ink-2);margin:0}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.presets button{font-size:13px}
+.kpi{display:flex;gap:28px;flex-wrap:wrap;margin:12px 0}
+.kpi div{font-family:var(--mono)}
+.kpi b{display:block;font-size:28px;font-weight:500;color:var(--ink)}
+.kpi span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+table{border-collapse:collapse;font-size:14px;width:100%}
+td,th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+td.n{font-family:var(--mono);text-align:right}
+th.n{text-align:right}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+.radio{display:flex;gap:14px;font-family:var(--disp);font-weight:700;font-size:14px}
+.gateweights{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.gw .lab{font-family:var(--mono);font-size:12px;color:var(--ink-2);display:flex;justify-content:space-between}
+.gw .wbar{height:10px;background:var(--line);border-radius:2px;position:relative;margin:3px 0 8px}
+.gw .wbar i{position:absolute;top:0;height:100%;background:var(--amber)}
+.gw .wbar i.neg{background:var(--red)}
+.callout{border-left:3px solid var(--amber);padding-left:14px;margin:18px 0;color:var(--ink-2)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Step one of the tiny-model plan</div>
+  <h1>The Homing Exam</h1>
+  <p class="lede">A fly leaves food, wanders in the dark, and walks back. This page is the whole experiment in one place: the world it walks in, what its brain is given, how the tally-mark memory fills and empties, the six dials we leave blank, and the search that fills them in. Everything below is one live simulation. Press play and read down.</p>
+</header>
+
+<section>
+  <h2>1 · The world</h2>
+  <p>A flat, dark table. Food sits at the center. Each trip has two halves: 30 seconds of random wandering, then the switch flips and the memory is allowed to drive the legs for up to 60 seconds. The agent never sees the food. If it gets within half a unit, it has arrived.</p>
+  <div class="stage">
+    <div>
+      <canvas id="arena" width="560" height="560"></canvas>
+      <div class="ctl">
+        <button id="play">Play</button>
+        <button id="stepBtn" class="quiet">Step 1 s</button>
+        <button id="newTrip" class="quiet">New trip</button>
+        <span id="phase" class="chip out">Outbound</span>
+        <span class="mono" id="clock" style="font-size:13px;color:var(--ink-2)">t = 0.0 s</span>
+      </div>
+      <p class="note">Grey line: the outbound wander. Amber line: the return. The amber arrow on the agent is what the memory says after rotation. Teal ring: food, half a unit across.</p>
+    </div>
+    <div class="panel">
+      <h3>What the agent is given</h3>
+      <p class="note" style="margin-top:6px">These four signals are the only things the brain receives. Nothing here says where home is.</p>
+      <div class="inputs" style="margin-top:14px">
+        <div class="gauge">
+          <div class="lab"><span>Compass · heading</span><span id="hVal" class="mono">0°</span></div>
+          <canvas id="compass" width="120" height="120" style="width:96px;height:96px"></canvas>
+          <p class="note">Which way it faces. Given free, like the fly's ring of EPG neurons. It walks forward, so this is also its travel direction.</p>
+        </div>
+        <div class="gauge">
+          <div class="lab"><span>Speed</span><span id="sVal" class="mono">0.00</span></div>
+          <div class="bar"><i id="sBar"></i></div>
+          <p class="note">How fast it moves right now. It pauses sometimes. Speed drives the write signal in the fly (FB4M dopamine).</p>
+        </div>
+        <div class="gauge">
+          <div class="lab"><span>Food present</span><span id="fVal" class="mono">no</span></div>
+          <div><span id="fLamp" class="lamp"></span><span class="note">on only while standing at food</span></div>
+          <p class="note">The reward. In the fly this is OA-VPM3 octopamine, the candidate erase signal.</p>
+        </div>
+        <div class="gauge">
+          <div class="lab"><span>Distractor</span><span id="dVal" class="mono">0.00</span></div>
+          <div class="bar"><i id="dBar"></i></div>
+          <p class="note">A random number that means nothing. Only used at level 2, to check the brain learns to ignore it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2 · The brain, live</h2>
+  <p>Four fixed parts copied from the fly, left to right. Watch the tallies grow while it wanders, then watch the opposite columns fill in on the way back until the arrow shrinks to nothing. That shrinking is arrival.</p>
+  <div class="brain">
+    <div class="panel">
+      <div class="step">Step reporters · hΔB</div>
+      <div class="cols" id="repCols"></div>
+      <div class="collab"><span>N</span><span>NE</span><span>E</span><span>SE</span><span>S</span><span>SW</span><span>W</span><span>NW</span></div>
+      <p class="note">Eight cells, one per direction. The one facing the travel direction fires hardest, its neighbours a little, the opposite one not at all.</p>
+    </div>
+    <div class="panel">
+      <div class="step">Write signal · dopamine</div>
+      <div style="margin:12px 0"><span id="wLamp" class="lamp amber"></span><span class="mono" id="wVal">0.00</span></div>
+      <div class="step" style="margin-top:14px">Erase signal · octopamine</div>
+      <div style="margin:12px 0"><span id="eLamp" class="lamp"></span><span class="mono" id="eVal">0.00</span></div>
+      <p class="note">Both touch all eight tallies at once. Write says "you may strengthen now." Erase says "shrink now."</p>
+    </div>
+    <div class="panel">
+      <div class="step">Tally board · the synapses</div>
+      <div class="cols tally" id="tallyCols"></div>
+      <div class="collab"><span>N</span><span>NE</span><span>E</span><span>SE</span><span>S</span><span>SW</span><span>W</span><span>NW</span></div>
+      <p class="note">Eight connection strengths. Each step adds to its own column. This is the memory. It is the only thing that changes while the agent runs.</p>
+    </div>
+    <div class="panel">
+      <div class="step">Reader → rotation → steerer</div>
+      <div class="arrowbox">
+        <div><canvas id="arrowRaw" width="120" height="120"></canvas><div class="collab" style="grid-template-columns:1fr">raw</div></div>
+        <div><canvas id="arrowRot" width="120" height="120"></canvas><div class="collab" style="grid-template-columns:1fr">rotated</div></div>
+      </div>
+      <div class="gauge" style="margin-top:8px">
+        <div class="lab"><span>Turn command</span><span id="tVal" class="mono">0.00</span></div>
+        <div class="bar" style="position:relative"><i id="tBar" style="position:absolute;left:50%;width:0"></i></div>
+      </div>
+      <p class="note">Tallies times current firing, summed as arrows. The raw arrow points from food to fly. Rotating it gives the way back. The steerer turns toward it, harder when the arrow is clean.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3 · The six dials we leave blank</h2>
+  <p>Everything above is fixed. These six numbers are not. Any setting is a candidate brain. Drag them and watch the world above: set rotation to 0 and it walks away from home, set erase to 0 and it gets confused after a few trips.</p>
+  <div class="dials" id="dials"></div>
+  <div class="presets">
+    <span class="note" style="margin:0 8px 0 0">Presets:</span>
+    <button class="quiet" data-p="fly">The fly's answer</button>
+    <button class="quiet" data-p="norot">No rotation</button>
+    <button class="quiet" data-p="noerase">Never erase</button>
+    <button class="quiet" data-p="fade">Heavy fade</button>
+    <button class="quiet" data-p="random">Random</button>
+  </div>
+</section>
+
+<section>
+  <h2>4 · The exam</h2>
+  <p>One candidate, one hundred random trips. For each trip we note the closest it got to the food during the return. The average is the candidate's score, and lower is better. Random trips are a fair exam: you cannot get lucky on all of them, so the only way to score well is to actually keep the running sum.</p>
+  <div class="ctl"><button id="examBtn">Run 100 trips with these dials</button><span class="note" id="examNote"></span></div>
+  <div class="stage" style="margin-top:12px">
+    <div class="panel">
+      <div class="kpi">
+        <div><b id="kScore">–</b><span>score · mean closest approach</span></div>
+        <div><b id="kArr">–</b><span>trips that arrived</span></div>
+        <div><b id="kOut">–</b><span>mean outbound distance</span></div>
+      </div>
+      <canvas id="hist" width="520" height="200"></canvas>
+      <p class="note">Closest approach on each of the 100 trips, binned. A good brain piles up at the left edge.</p>
+    </div>
+    <div>
+      <p><b>Reading it.</b> A brain with the fly's settings piles up near zero. Rotation at 0 gives a pile far to the right on every trip. Erase at 0 looks fine on the first trips and drifts as old tallies pile up. Heavy fade lands too close, because the early steps leaked away.</p>
+      <p>We never tell the candidate where home was. It only learns "you ended 7 units away, that is bad." That coarse feedback is all the search below gets to work with.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>5 · The search</h2>
+  <p>This is the training, and it is almost embarrassingly simple. Make 24 candidates with random dials. Score each on 12 trips. Keep the best 6. Make 18 new ones by copying the survivors and nudging each number a little. Repeat. No gradients, no GPU. It works because six numbers is a tiny space.</p>
+  <div class="callout">The result is not "did it get home." It will. The result is where the dials land, and whether that matches the fly: rotation near 180, erase near 1, fade near 0, and writing that scales with speed.</div>
+  <div class="ctl">
+    <div class="radio">
+      <label><input type="radio" name="lvl" id="lvl1" value="1" checked> Level 1 · six dials</label>
+      <label><input type="radio" name="lvl" id="lvl2" value="2"> Level 2 · it also learns when to write and erase</label>
+    </div>
+  </div>
+  <div class="ctl">
+    <button id="evoStart">Start evolution</button>
+    <button id="evoStop" class="quiet" disabled>Pause</button>
+    <button id="evoReset" class="quiet">Reset</button>
+    <button id="evoLoad" class="quiet" disabled>Load best into the dials above</button>
+    <span class="mono" id="gen" style="font-size:13px;color:var(--ink-2)">generation 0</span>
+  </div>
+  <div class="stage" style="margin-top:12px">
+    <div class="panel">
+      <canvas id="evoChart" width="520" height="280"></canvas>
+      <div class="legend" id="evoLegend"></div>
+      <p class="note">Each line is one dial of the best candidate so far, scaled to its range. Thick dark line: the best score, lower is better.</p>
+    </div>
+    <div class="panel">
+      <h3>Best candidate so far</h3>
+      <table id="bestTable"><thead><tr><th>dial</th><th class="n">value</th><th class="n">fly's answer</th></tr></thead><tbody></tbody></table>
+      <div id="gatePanel" hidden>
+        <h3 style="margin-top:16px">What the decision units learned</h3>
+        <p class="note">At level 2 the write and erase signals are no longer wired to speed and food. Each is a tiny unit that weighs three inputs. If it learned the fly's roles, write leans on speed and erase leans on food, and both ignore the distractor.</p>
+        <div class="gateweights">
+          <div class="gw" id="gwWrite"><div class="step">Write unit</div></div>
+          <div class="gw" id="gwErase"><div class="step">Erase unit</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:18px"><b>What makes it a paper.</b> Run this search twenty times from different random starts. If all twenty land in the same place, that is a real answer. Then freeze the winner and stress it: trips ten times longer than it trained on, a drifting compass, two food sites. A tally board should survive all three. A network that holds the sum in activity should not.</p>
+</section>
+</div>
+
+<script>
+(function(){
+'use strict';
+// ---------- RNG ----------
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){let u=0,v=0;while(u===0)u=r();while(v===0)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+const N=8, COLS=[], DT=0.1, T_OUT=30, T_RET=60, TONIC=0.3;
+for(let i=0;i<N;i++)COLS.push(i*2*Math.PI/N);
+const COLNAMES=['N','NE','E','SE','S','SW','W','NW'];
+const sig=x=>1/(1+Math.exp(-x));
+
+// ---------- dials ----------
+const DIALS=[
+ {k:'write',name:'Write strength',min:0,max:2,step:0.01,fly:1.0,why:'How much one step adds to its column. Zero means nothing is ever stored.'},
+ {k:'speedDep',name:'Speed dependence',min:0,max:1,step:0.01,fly:1.0,why:'0: write is simply on while moving. 1: write scales with speed, so a fast step counts more. The fly needs distance, so 1 should win.'},
+ {k:'erase',name:'Erase at food',min:0,max:1,step:0.01,fly:1.0,why:'Fraction of every tally wiped when standing at food. 1 is a clean slate; 0.5 gives a running average of past food sites.'},
+ {k:'fade',name:'Fade per second',min:0,max:0.2,step:0.001,fly:0.0,why:'How fast tallies shrink on their own. A lossless memory has 0.'},
+ {k:'rot',name:'Readout rotation',min:0,max:360,step:1,fly:180,unit:'°',why:'How far to spin the arrow before steering. The raw arrow points from food to fly; the fly’s inverter neurons turn it around.'},
+ {k:'gain',name:'Turn gain',min:0,max:6,step:0.05,fly:3.0,why:'How sharply to turn for a given disagreement between the arrow and heading.'},
+];
+const P={}; DIALS.forEach(d=>P[d.k]=d.fly);
+// level 2 gate weights [bias, speed, food, distractor]
+const FLY_GATES={w:[-4,8,0,0],e:[-8,0,16,0]};
+let level=1, gates=null; // gates used by the live sim only if level-2 best is loaded
+
+// ---------- simulation core ----------
+function makeState(seed){const r=mulberry32(seed);return{r,x:0,y:0,H:r()*2*Math.PI,W:new Float64Array(N),t:0,phase:'out',speed:1,pause:0,dist:0,minD:Infinity,arrived:false,outD:0,food:true,pathOut:[],pathRet:[],writeSig:0,eraseSig:0,turn:0,arrowRaw:[0,0],arrowRot:[0,0],bump:new Float64Array(N)}}
+function beginTrip(s){ // agent is placed at food; tallies carry over from last trip
+  s.x=0;s.y=0;s.H=s.r()*2*Math.PI;s.t=0;s.phase='out';s.minD=Infinity;s.arrived=false;s.pathOut=[[0,0]];s.pathRet=[];s.food=true;s.foodTicks=5;s.speed=1;s.pause=0;
+}
+function tick(s,p,g){
+  // food presence: first 0.5 s of a trip standing at food, and after arrival
+  const atFood=s.foodTicks>0||s.arrived;
+  if(s.foodTicks>0){s.foodTicks--;}
+  const food=atFood?1:0;
+  // speed: slow drift with pauses
+  if(s.pause>0){s.pause--;s.speed=0;}
+  else{ if(s.r()<0.01*DT*10){s.pause=Math.round((1+2*s.r())/DT);} s.speed=Math.min(1.7,Math.max(0.3,s.speed+0.3*gauss(s.r)*Math.sqrt(DT)+0.2*(1-s.speed)*DT)); }
+  if(atFood)s.speed=0;
+  s.dist=0.5+0.5*Math.sin(s.t*0.7+1.3)+0.1*gauss(s.r); s.dist=Math.min(1,Math.max(0,s.dist));
+  // step reporters: direction only
+  const b=s.bump; for(let i=0;i<N;i++)b[i]=Math.max(0,Math.cos(COLS[i]-s.H));
+  // write and erase signals
+  let wsig,esig;
+  if(g){ wsig=sig(g.w[0]+g.w[1]*s.speed+g.w[2]*food+g.w[3]*s.dist); esig=sig(g.e[0]+g.e[1]*s.speed+g.e[2]*food+g.e[3]*s.dist); }
+  else{ const moving=s.speed>0?1:0; wsig=p.speedDep*s.speed+(1-p.speedDep)*moving; esig=food?p.erase:0; }
+  s.writeSig=wsig;s.eraseSig=esig;
+  const W=s.W;
+  for(let i=0;i<N;i++){ W[i]+=DT*(p.write*wsig*b[i]-p.fade*W[i]); W[i]*=(1-Math.min(1,esig)); if(W[i]<0)W[i]=0; }
+  // reader
+  let ax=0,ay=0,tot=0;
+  for(let i=0;i<N;i++){const a=W[i]*(b[i]+TONIC);ax+=a*Math.cos(COLS[i]);ay+=a*Math.sin(COLS[i]);tot+=a;}
+  s.arrowRaw=[ax,ay];
+  const rr=p.rot*Math.PI/180, rx=ax*Math.cos(rr)-ay*Math.sin(rr), ry=ax*Math.sin(rr)+ay*Math.cos(rr);
+  s.arrowRot=[rx,ry];
+  const coh=tot>1e-9?Math.min(1,Math.hypot(rx,ry)/tot*2):0;
+  // steering
+  let turn=0;
+  if(s.phase==='ret'&&!s.arrived){ turn=p.gain*Math.sin(Math.atan2(ry,rx)-s.H)*coh; }
+  s.turn=turn;
+  if(!s.arrived){
+    s.H+=turn*DT+0.8*gauss(s.r)*Math.sqrt(DT);
+    s.x+=s.speed*Math.cos(s.H)*DT; s.y+=s.speed*Math.sin(s.H)*DT;
+  }
+  s.t+=DT;
+  const d=Math.hypot(s.x,s.y);
+  if(s.phase==='out'){ s.pathOut.push([s.x,s.y]); if(s.t>=T_OUT){s.phase='ret';s.outD=d;s.pathRet=[[s.x,s.y]];} }
+  else if(!s.arrived){ s.pathRet.push([s.x,s.y]); if(d<s.minD)s.minD=d; if(d<0.5){s.arrived=true;} if(s.t>=T_OUT+T_RET){s.phase='done';} }
+  return s;
+}
+function runTrip(s,p,g){ beginTrip(s); while(s.phase!=='done'&&!s.arrived){tick(s,p,g);} if(s.arrived){for(let k=0;k<6;k++)tick(s,p,g);} return {min:Math.min(s.minD,Math.hypot(s.x,s.y)),arrived:s.arrived,out:s.outD}; }
+function score(p,g,trips,seed){ const s=makeState(seed); let sum=0,arr=0,out=0; for(let k=0;k<trips;k++){const r=runTrip(s,p,g);sum+=r.min;arr+=r.arrived?1:0;out+=r.out;} return {score:sum/trips,arr:arr/trips,out:out/trips}; }
+
+// ---------- live world ----------
+const live=makeState(7); beginTrip(live);
+const arena=document.getElementById('arena'), actx=arena.getContext('2d');
+const SC=16; // px per unit at 560
+function drawArena(){
+  const css=getComputedStyle(document.documentElement);
+  const w=arena.width,h=arena.height,cx=w/2,cy=h/2;
+  actx.fillStyle=css.getPropertyValue('--arena');actx.fillRect(0,0,w,h);
+  actx.strokeStyle=css.getPropertyValue('--arena-grid');actx.lineWidth=1;
+  for(let u=-16;u<=16;u+=4){actx.beginPath();actx.moveTo(cx+u*SC,0);actx.lineTo(cx+u*SC,h);actx.stroke();actx.beginPath();actx.moveTo(0,cy-u*SC);actx.lineTo(w,cy-u*SC);actx.stroke();}
+  // scale bar
+  actx.strokeStyle=css.getPropertyValue('--arena-ink');actx.globalAlpha=.5;actx.beginPath();actx.moveTo(20,h-20);actx.lineTo(20+4*SC,h-20);actx.stroke();actx.globalAlpha=1;
+  actx.fillStyle=css.getPropertyValue('--arena-ink');actx.font='11px IBM Plex Mono, monospace';actx.fillText('4 units',22,h-26);
+  const tx=x=>cx+x*SC, ty=y=>cy-y*SC;
+  // food
+  actx.strokeStyle=css.getPropertyValue('--teal');actx.lineWidth=2;actx.beginPath();actx.arc(cx,cy,0.5*SC,0,7);actx.stroke();
+  actx.fillStyle=css.getPropertyValue('--teal');actx.beginPath();actx.arc(cx,cy,3,0,7);actx.fill();
+  // paths
+  function path(pts,col,wd){if(pts.length<2)return;actx.strokeStyle=col;actx.lineWidth=wd;actx.beginPath();actx.moveTo(tx(pts[0][0]),ty(pts[0][1]));for(let i=1;i<pts.length;i++)actx.lineTo(tx(pts[i][0]),ty(pts[i][1]));actx.stroke();}
+  path(live.pathOut,'rgba(220,227,234,0.45)',1.5); path(live.pathRet,css.getPropertyValue('--amber'),2);
+  // home arrow (rotated readout)
+  const [rx,ry]=live.arrowRot, L=Math.hypot(rx,ry);
+  if(L>0.05){const len=Math.min(4,L*0.6)*SC,ang=Math.atan2(ry,rx);actx.strokeStyle=css.getPropertyValue('--amber');actx.lineWidth=2;actx.beginPath();actx.moveTo(tx(live.x),ty(live.y));actx.lineTo(tx(live.x)+len*Math.cos(ang),ty(live.y)-len*Math.sin(ang));actx.stroke();
+    actx.beginPath();const ex=tx(live.x)+len*Math.cos(ang),ey=ty(live.y)-len*Math.sin(ang);actx.moveTo(ex,ey);actx.lineTo(ex-8*Math.cos(ang-0.4),ey+8*Math.sin(ang-0.4));actx.lineTo(ex-8*Math.cos(ang+0.4),ey+8*Math.sin(ang+0.4));actx.closePath();actx.fillStyle=css.getPropertyValue('--amber');actx.fill();}
+  // agent
+  actx.save();actx.translate(tx(live.x),ty(live.y));actx.rotate(-live.H);actx.fillStyle=css.getPropertyValue('--arena-ink');actx.beginPath();actx.moveTo(9,0);actx.lineTo(-6,5);actx.lineTo(-6,-5);actx.closePath();actx.fill();actx.restore();
+}
+// gauges
+const repCols=document.getElementById('repCols'), tallyCols=document.getElementById('tallyCols');
+for(let i=0;i<N;i++){repCols.appendChild(document.createElement('div'));tallyCols.appendChild(document.createElement('div'));}
+function drawArrow(id,vec,col){const c=document.getElementById(id),x=c.getContext('2d'),css=getComputedStyle(document.documentElement);x.clearRect(0,0,120,120);x.strokeStyle=css.getPropertyValue('--line');x.lineWidth=1;x.beginPath();x.arc(60,60,50,0,7);x.stroke();x.fillStyle=css.getPropertyValue('--ink-3');x.font='10px IBM Plex Mono';x.fillText('N',56,14);x.fillText('S',56,114);x.fillText('E',108,64);x.fillText('W',6,64);
+  const L=Math.hypot(vec[0],vec[1]);if(L<0.02)return;const len=Math.min(48,L*8),a=Math.atan2(vec[1],vec[0]);x.strokeStyle=css.getPropertyValue(col);x.lineWidth=3;x.beginPath();x.moveTo(60,60);x.lineTo(60+len*Math.cos(a),60-len*Math.sin(a));x.stroke();x.fillStyle=css.getPropertyValue(col);x.beginPath();x.arc(60+len*Math.cos(a),60-len*Math.sin(a),4,0,7);x.fill();}
+function drawCompass(){const c=document.getElementById('compass'),x=c.getContext('2d'),css=getComputedStyle(document.documentElement);x.clearRect(0,0,120,120);x.strokeStyle=css.getPropertyValue('--line');x.lineWidth=2;x.beginPath();x.arc(60,60,52,0,7);x.stroke();x.fillStyle=css.getPropertyValue('--ink-3');x.font='10px IBM Plex Mono';x.fillText('N',56,14);x.fillText('S',56,114);x.fillText('E',108,64);x.fillText('W',6,64);const a=live.H;x.strokeStyle=css.getPropertyValue('--ink');x.lineWidth=3;x.beginPath();x.moveTo(60-14*Math.cos(a),60+14*Math.sin(a));x.lineTo(60+44*Math.cos(a),60-44*Math.sin(a));x.stroke();}
+function updateGauges(){
+  const deg=((live.H*180/Math.PI)%360+360)%360;
+  document.getElementById('hVal').textContent=deg.toFixed(0)+'°';
+  document.getElementById('sVal').textContent=live.speed.toFixed(2);document.getElementById('sBar').style.width=(live.speed/1.7*100)+'%';
+  const atFood=live.foodTicks>0||live.arrived;document.getElementById('fVal').textContent=atFood?'yes':'no';document.getElementById('fLamp').classList.toggle('on',atFood);
+  document.getElementById('dVal').textContent=live.dist.toFixed(2);document.getElementById('dBar').style.width=(live.dist*100)+'%';
+  const wl=document.getElementById('wLamp');wl.classList.toggle('on',live.writeSig>0.05);document.getElementById('wVal').textContent=live.writeSig.toFixed(2);
+  const el=document.getElementById('eLamp');el.classList.toggle('on',live.eraseSig>0.05);document.getElementById('eVal').textContent=live.eraseSig.toFixed(2);
+  const rc=repCols.children,tc=tallyCols.children;let mx=0;for(let i=0;i<N;i++)mx=Math.max(mx,live.W[i]);
+  for(let i=0;i<N;i++){rc[i].style.height=(live.bump[i]*100)+'%';tc[i].style.height=(mx>0?live.W[i]/mx*100:0)+'%';}
+  drawArrow('arrowRaw',live.arrowRaw,'--ink-2');drawArrow('arrowRot',live.arrowRot,'--amber');drawCompass();
+  const tb=document.getElementById('tBar'),tv=Math.max(-1,Math.min(1,live.turn/3));document.getElementById('tVal').textContent=live.turn.toFixed(2)+(live.turn>0.02?' left':live.turn<-0.02?' right':'');
+  tb.style.background=getComputedStyle(document.documentElement).getPropertyValue('--amber');
+  if(tv>=0){tb.style.left='50%';tb.style.width=(tv*50)+'%';}else{tb.style.left=(50+tv*50)+'%';tb.style.width=(-tv*50)+'%';}
+  const ph=document.getElementById('phase');ph.className='chip '+(live.arrived?'arr':live.phase==='ret'?'ret':live.phase==='done'?'out':'out');ph.textContent=live.arrived?'Arrived':live.phase==='ret'?'Return · memory drives legs':live.phase==='done'?'Time up':'Outbound · wandering';
+  document.getElementById('clock').textContent='t = '+live.t.toFixed(1)+' s';
+}
+function frame(){drawArena();updateGauges();}
+let playing=false,acc=0,last=0;
+function loop(ts){if(!playing)return;const dtms=Math.min(100,ts-last);last=ts;acc+=dtms/1000*4; // 4x real time
+  while(acc>=DT){acc-=DT;if(live.phase==='done'||live.arrived){ if(live.arrived&&live.holdTicks===undefined)live.holdTicks=15; if(live.holdTicks!==undefined&&live.holdTicks-->0){tick(live,P,gates);}else{live.holdTicks=undefined;beginTrip(live);} }else tick(live,P,gates);}
+  frame();requestAnimationFrame(loop);}
+document.getElementById('play').addEventListener('click',e=>{playing=!playing;e.target.textContent=playing?'Pause':'Play';if(playing){last=performance.now();requestAnimationFrame(loop);}});
+document.getElementById('stepBtn').addEventListener('click',()=>{for(let k=0;k<10;k++){if(live.phase!=='done'&&!live.arrived)tick(live,P,gates);}frame();});
+document.getElementById('newTrip').addEventListener('click',()=>{beginTrip(live);frame();});
+
+// ---------- dial UI ----------
+const dialsEl=document.getElementById('dials');
+DIALS.forEach(d=>{const w=document.createElement('div');w.className='dial';w.innerHTML=`<label for="d_${d.k}"><span>${d.name}</span><span class="mono" id="v_${d.k}"></span></label><input type="range" id="d_${d.k}" min="${d.min}" max="${d.max}" step="${d.step}" value="${d.fly}"><p class="why">${d.why}</p>`;dialsEl.appendChild(w);
+  const inp=w.querySelector('input');inp.addEventListener('input',()=>{P[d.k]=parseFloat(inp.value);gates=null;refreshDialVals();});});
+function refreshDialVals(){DIALS.forEach(d=>{document.getElementById('v_'+d.k).textContent=fmt(d,P[d.k]);document.getElementById('d_'+d.k).value=P[d.k];});}
+function fmt(d,v){return d.unit?v.toFixed(0)+d.unit:(d.step<0.01?v.toFixed(3):v.toFixed(2));}
+refreshDialVals();
+const PRESETS={fly:{write:1,speedDep:1,erase:1,fade:0,rot:180,gain:3},norot:{rot:0},noerase:{erase:0},fade:{fade:0.15},random:null};
+document.querySelectorAll('.presets button').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.p;DIALS.forEach(d=>P[d.k]=d.fly);if(k==='random'){const r=Math.random;DIALS.forEach(d=>P[d.k]=d.min+r()*(d.max-d.min));}else Object.assign(P,PRESETS[k]);gates=null;refreshDialVals();frame();}));
+
+// ---------- exam ----------
+document.getElementById('examBtn').addEventListener('click',()=>{
+  const note=document.getElementById('examNote');note.textContent='running…';
+  setTimeout(()=>{const s=makeState(123);const mins=[];let arr=0,out=0;for(let k=0;k<100;k++){const r=runTrip(s,P,gates);mins.push(r.min);arr+=r.arrived?1:0;out+=r.out;}
+    const mean=mins.reduce((a,b)=>a+b,0)/100;document.getElementById('kScore').textContent=mean.toFixed(2);document.getElementById('kArr').textContent=arr+'%';document.getElementById('kOut').textContent=(out/100).toFixed(1);
+    drawHist(mins);note.textContent='done · same 100 trips every time, so dials are compared fairly';},20);
+});
+function drawHist(v){const c=document.getElementById('hist'),x=c.getContext('2d'),css=getComputedStyle(document.documentElement);const w=c.width,h=c.height;x.clearRect(0,0,w,h);const bins=20,mx=16,cnt=new Array(bins).fill(0);v.forEach(d=>{cnt[Math.min(bins-1,Math.floor(d/mx*bins))]++;});const top=Math.max(...cnt,1);const L=28,B=28,W=w-L-10,H=h-B-10;
+  x.strokeStyle=css.getPropertyValue('--line');x.beginPath();x.moveTo(L,10);x.lineTo(L,h-B);x.lineTo(w-10,h-B);x.stroke();
+  x.fillStyle=css.getPropertyValue('--ink-3');x.font='11px IBM Plex Mono';for(let u=0;u<=mx;u+=4){const px=L+u/mx*W;x.fillText(u,px-3,h-B+14);}x.fillText('closest approach, units',w/2-60,h-4);x.fillText(top,4,16);
+  for(let i=0;i<bins;i++){const bh=cnt[i]/top*H;x.fillStyle=i===0?css.getPropertyValue('--teal'):css.getPropertyValue('--amber');x.fillRect(L+i*W/bins+1,h-B-bh,W/bins-2,bh);}}
+
+// ---------- evolution ----------
+const POP=24,KEEP=6,TRIPS=12;
+let evo=null,evoRunning=false;
+function randGenome(r,lvl){const g={p:{}};DIALS.forEach(d=>g.p[d.k]=d.min+r()*(d.max-d.min));if(lvl===2){g.g={w:[0,1,2,3].map(()=>gauss(r)*3),e:[0,1,2,3].map(()=>gauss(r)*3)};}return g;}
+function mutate(g,r,lvl){const c={p:{}};DIALS.forEach(d=>{let v=g.p[d.k]+gauss(r)*(d.max-d.min)*0.08;c.p[d.k]=Math.min(d.max,Math.max(d.min,v));});if(lvl===2){c.g={w:g.g.w.map(v=>v+gauss(r)*0.8),e:g.g.e.map(v=>v+gauss(r)*0.8)};}return c;}
+function evalG(g,seed){const p=Object.assign({},g.p);if(g.g){p.speedDep=0;p.erase=0;}return score(p,g.g||null,TRIPS,seed).score;}
+function resetEvo(){level=document.getElementById('lvl2').checked?2:1;const r=mulberry32(Math.floor(Math.random()*1e9));evo={r,gen:0,pop:[],hist:[],best:null};for(let i=0;i<POP;i++)evo.pop.push(randGenome(r,level));document.getElementById('gen').textContent='generation 0';document.getElementById('evoLoad').disabled=true;document.getElementById('gatePanel').hidden=level!==2;drawEvo();fillBest();}
+function generation(){const seed=1000+evo.gen;evo.pop.forEach(g=>{g.s=evalG(g,seed);});evo.pop.sort((a,b)=>a.s-b.s);const best=evo.pop[0];if(!evo.best||best.s<=evo.best.s+0.0)evo.best=best;evo.hist.push({s:best.s,p:Object.assign({},best.p),g:best.g?{w:best.g.w.slice(),e:best.g.e.slice()}:null});
+  const next=evo.pop.slice(0,KEEP).map(g=>({p:Object.assign({},g.p),g:g.g?{w:g.g.w.slice(),e:g.g.e.slice()}:null,s:g.s}));while(next.length<POP){const par=evo.pop[Math.floor(evo.r()*KEEP)];next.push(mutate(par,evo.r,level));}evo.pop=next;evo.gen++;
+  document.getElementById('gen').textContent='generation '+evo.gen+' · best score '+best.s.toFixed(2);document.getElementById('evoLoad').disabled=false;drawEvo();fillBest();}
+function evoLoop(){if(!evoRunning)return;generation();if(evo.gen>=150){stopEvo();return;}requestAnimationFrame(evoLoop);}
+function stopEvo(){evoRunning=false;document.getElementById('evoStart').disabled=false;document.getElementById('evoStop').disabled=true;}
+document.getElementById('evoStart').addEventListener('click',()=>{if(!evo)resetEvo();if(evo.gen>=150)resetEvo();evoRunning=true;document.getElementById('evoStart').disabled=true;document.getElementById('evoStop').disabled=false;requestAnimationFrame(evoLoop);});
+document.getElementById('evoStop').addEventListener('click',stopEvo);
+document.getElementById('evoReset').addEventListener('click',()=>{stopEvo();resetEvo();});
+document.querySelectorAll('input[name=lvl]').forEach(i=>i.addEventListener('change',()=>{stopEvo();resetEvo();}));
+document.getElementById('evoLoad').addEventListener('click',()=>{const b=evo.hist[evo.hist.length-1];Object.assign(P,b.p);if(b.g){gates=b.g;P.speedDep=0;P.erase=0;}else gates=null;refreshDialVals();frame();window.scrollTo({top:document.getElementById('dials').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});});
+const LINECOL=['#E08A2E','#1F8A8A','#C24A3A','#6C5CE7','#2E86C1','#8A94A2'];
+(function legend(){const L=document.getElementById('evoLegend');DIALS.forEach((d,i)=>{const s=document.createElement('span');s.innerHTML=`<i style="background:${LINECOL[i]}"></i>${d.name}`;L.appendChild(s);});const s=document.createElement('span');s.innerHTML='<i style="background:var(--ink);height:4px"></i>best score';L.appendChild(s);})();
+function drawEvo(){const c=document.getElementById('evoChart'),x=c.getContext('2d'),css=getComputedStyle(document.documentElement);const w=c.width,h=c.height;x.clearRect(0,0,w,h);const L=34,B=26,W=w-L-12,H=h-B-12;x.strokeStyle=css.getPropertyValue('--line');x.beginPath();x.moveTo(L,12);x.lineTo(L,h-B);x.lineTo(w-12,h-B);x.stroke();x.fillStyle=css.getPropertyValue('--ink-3');x.font='11px IBM Plex Mono';x.fillText('generation →',w/2-30,h-6);x.fillText('1',L-14,18);x.fillText('0',L-14,h-B+3);x.fillText('dial, scaled',L+4,h-B-4);
+  if(!evo||evo.hist.length<2)return;const n=evo.hist.length,G=Math.max(n,20);const px=i=>L+i/(G-1)*W;
+  DIALS.forEach((d,k)=>{x.strokeStyle=LINECOL[k];x.lineWidth=1.5;x.beginPath();evo.hist.forEach((hh,i)=>{const v=(hh.p[d.k]-d.min)/(d.max-d.min);const py=h-B-v*H;if(i===0)x.moveTo(px(i),py);else x.lineTo(px(i),py);});x.stroke();});
+  const smax=Math.max(...evo.hist.map(hh=>hh.s),1);x.strokeStyle=css.getPropertyValue('--ink');x.lineWidth=3;x.beginPath();evo.hist.forEach((hh,i)=>{const py=h-B-(hh.s/smax)*H;if(i===0)x.moveTo(px(i),py);else x.lineTo(px(i),py);});x.stroke();
+  x.fillStyle=css.getPropertyValue('--ink');x.fillText('score '+evo.hist[n-1].s.toFixed(2),px(n-1)-70,h-B-(evo.hist[n-1].s/smax)*H-6);}
+function fillBest(){const tb=document.querySelector('#bestTable tbody');tb.innerHTML='';const b=evo&&evo.hist.length?evo.hist[evo.hist.length-1]:null;
+  DIALS.forEach(d=>{if(level===2&&(d.k==='speedDep'||d.k==='erase'))return;const tr=document.createElement('tr');tr.innerHTML=`<td>${d.name}</td><td class="n">${b?fmt(d,b.p[d.k]):'–'}</td><td class="n">${fmt(d,d.fly)}</td>`;tb.appendChild(tr);});
+  if(level===2){['gwWrite','gwErase'].forEach((id,j)=>{const el=document.getElementById(id);el.querySelectorAll('.row').forEach(r=>r.remove());const wts=b?(j===0?b.g.w:b.g.e):[0,0,0,0];const names=['bias','speed','food','distractor'];const mx=Math.max(4,...wts.map(Math.abs));names.forEach((nm,i)=>{const v=wts[i];const row=document.createElement('div');row.className='row';const pct=Math.abs(v)/mx*50;row.innerHTML=`<div class="lab"><span>${nm}</span><span>${v.toFixed(1)}</span></div><div class="wbar"><i class="${v<0?'neg':''}" style="left:${v<0?50-pct:50}%;width:${pct}%"></i></div>`;el.appendChild(row);});});}}
+resetEvo();
+// initial state: run a few seconds so the first frame shows something
+for(let k=0;k<80;k++)tick(live,P,null);
+frame();
+})();
+</script>
+</body>
+</html>

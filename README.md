@@ -1,3 +1,14 @@
+# continuouslearning
+
+Nico's learning fork of [pwang724/fly-circuit-exploration](https://github.com/pwang724/fly-circuit-exploration): a plan to train a tiny model that keeps learning by rewriting its own weights, the way the fly's home-vector circuit is proposed to.
+
+- [Tiny Fly Model Roadmap](docs/roadmap/index.html): five levels from the hand-built simulation to our own trained model, with exact numbers, code, success criteria and failure fixes.
+- [The Homing Exam](docs/roadmap/homing-exam.html): the level 1 experiment as a live, playable simulation.
+
+Original project README follows.
+
+---
+
 # Fly circuit exploration
 
 A research workspace for understanding navigation in the Drosophila central complex, using the **MaleCNS v1.0** connectome and primary literature. Started 2026-09-10.

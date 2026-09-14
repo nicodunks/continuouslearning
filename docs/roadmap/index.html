@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiny Fly Model Roadmap</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#EEF1F4; --panel:#F8F9FA; --ink:#1B2330; --ink-2:#4A5563; --ink-3:#8A94A2; --line:#D3D9E0; --code:#E6EAEF;
+  --amber:#E08A2E; --amber-soft:#F6E3C8; --teal:#1F8A8A; --teal-soft:#CDE8E6; --red:#C24A3A; --red-soft:#F5DAD5;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --serif:'Source Serif 4',Georgia,serif; --disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3B1E1B}}
+:root[data-theme="dark"]{--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3B1E1B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.6;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:900px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--disp);text-wrap:balance;line-height:1.12;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:28px;margin-bottom:8px}
+h3{font-size:20px;margin:26px 0 8px}
+h4{font-size:16px;margin:16px 0 4px;color:var(--ink-2)}
+p{max-width:64ch;margin:0 0 12px}
+ul,ol{max-width:64ch;padding-left:22px;margin:0 0 12px}
+li{margin-bottom:5px}
+.lede{font-size:20px;color:var(--ink-2)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+header{padding-block:56px 28px;border-bottom:1px solid var(--line)}
+section{padding-block:44px;border-bottom:1px solid var(--line)}
+.note{font-size:14.5px;color:var(--ink-2)}
+.goal{background:var(--ink);color:var(--bg);border-radius:8px;padding:22px 24px;margin-top:20px}
+.goal .eyebrow{color:var(--amber)}
+.goal p{color:var(--bg);font-size:21px;font-family:var(--disp);font-weight:500;margin:0;max-width:none;line-height:1.3}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.toc a{font-family:var(--disp);font-weight:700;font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--panel)}
+nav.toc a.g{border-color:var(--amber);color:var(--amber)}
+.tally{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px;align-items:start}
+@media (max-width:700px){.tally{grid-template-columns:1fr}}
+.tbox{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.tbox h3{font-size:16px;margin:0 0 6px}
+.tbox p{font-size:15px;margin-bottom:6px}
+.tbox.bad{border-top:4px solid var(--ink-3)} .tbox.good{border-top:4px solid var(--amber)}
+.ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}
+@media (max-width:900px){.ladder{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.ladder{grid-template-columns:1fr}}
+.rung{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.rung .lv{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.rung h3{font-size:16px;margin:0}
+.rung p{font-size:14px;color:var(--ink-2);margin:0}
+.rung .st{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-top:auto;padding-top:6px}
+.rung.done{border-color:var(--teal)} .rung.done .lv{color:var(--teal)}
+.rung.goal{border:2px solid var(--amber)} .rung.goal .lv{color:var(--amber)}
+.head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.lbl{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.time{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.steps{display:flex;flex-direction:column;border-left:2px solid var(--line);margin:16px 0 0 20px}
+.stp{position:relative;padding:8px 0 22px 28px}
+.stp::before{content:attr(data-n);position:absolute;left:-17px;top:8px;width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--bg);font-family:var(--disp);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.stp.hot::before{background:var(--amber)}
+.stp h3{font-size:19px;margin:0 0 6px}
+.stp p,.stp li{font-size:16px}
+.learn{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:15px;max-width:64ch;margin:8px 0}
+.learn b{font-family:var(--disp);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);display:block}
+.why{border-left:3px solid var(--amber);padding-left:14px;color:var(--ink-2);margin:12px 0;font-size:15.5px;max-width:64ch}
+.why b{color:var(--ink);font-family:var(--disp)}
+.warn{border-left:3px solid var(--red);padding-left:14px;color:var(--ink-2);margin:12px 0;font-size:15.5px;max-width:64ch}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:12px 14px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.5;margin:8px 0 14px;max-width:100%}
+code{font-family:var(--mono);font-size:.92em}
+p code,li code{background:var(--code);padding:1px 5px;border-radius:3px}
+.numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}
+.num{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.num b{font-family:var(--mono);font-size:18px;font-weight:500;display:block}
+.num span{font-size:13px;color:var(--ink-2)}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0 14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+td:first-child{font-family:var(--disp);font-weight:700;font-size:15px}
+.matrix{overflow-x:auto}
+.matrix table{min-width:640px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.fixed{background:var(--line);color:var(--ink-2)} .blank{background:var(--amber-soft);color:var(--amber)} .gone{background:var(--red-soft);color:var(--red)}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:14px 0 0;font-size:15px;max-width:70ch}
+dt{font-family:var(--disp);font-weight:700}
+dd{margin:0;color:var(--ink-2)}
+.check{list-style:none;padding-left:0}
+.check li{padding-left:26px;position:relative}
+.check li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border:2px solid var(--amber);border-radius:3px}
+</style>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Plan and build guide · September 2026</div>
+  <h1>Tiny Fly Model Roadmap</h1>
+  <p class="lede">Five levels, from the hand-built simulation we already have to a model of our own that does the fly's job the fly's way. Every level below is a full build guide: what to make, the exact numbers, why each choice, what success looks like, and what to do when it fails.</p>
+  <div class="goal">
+    <div class="eyebrow">The goal</div>
+    <p>Train our own small model, from scratch, that finds its way home in the dark the way the fly does: by rewriting its own connection strengths as it walks, not by holding a number in its head.</p>
+  </div>
+  <nav class="toc">
+    <a href="#trick">The trick</a><a href="#setup">Before you start</a><a href="#l1">Level 1</a><a href="#l2">Level 2</a><a class="g" href="#l3">Level 3 · the goal</a><a href="#l4">Level 4</a><a href="#table">What is hand-built where</a><a href="#words">Words</a>
+  </nav>
+</header>
+
+<section id="trick">
+  <h2>The trick we are copying</h2>
+  <div class="tally">
+    <div class="tbox bad">
+      <h3>How today's models remember</h3>
+      <p>Like holding a number in your head. You keep repeating it. A little too loud and it grows wrong. A little too quiet and it fades. Everything must be tuned perfectly, and the model's connections never change while it is being used.</p>
+    </div>
+    <div class="tbox good">
+      <h3>How the fly remembers the way home</h3>
+      <p>Like tally marks on a table. Each step north adds a mark to the north column, each step south to the south column. Home is north minus south. The marks are connection strengths between neurons. A "write" chemical (dopamine) says when to add marks. An "erase" chemical (octopamine) wipes them at food.</p>
+    </div>
+  </div>
+  <p style="margin-top:16px">The tally board is the continual learning. At the end of this roadmap, our own trained model has one inside it, and we did not draw it by hand.</p>
+  <div class="ladder">
+    <div class="rung done"><div class="lv">Level 0 · done</div><h3>Hand-built</h3><p>Wiring and numbers copied from the fly. Proves the mechanism works.</p><div class="st">exists in the repo</div></div>
+    <div class="rung"><div class="lv">Level 1</div><h3>Numbers found</h3><p>Fly wiring kept. Six blank numbers found by a search.</p><div class="st">an afternoon</div></div>
+    <div class="rung"><div class="lv">Level 2</div><h3>Signals found</h3><p>The write and erase triggers are learned, not wired.</p><div class="st">a day</div></div>
+    <div class="rung goal"><div class="lv">Level 3 · the goal</div><h3>Our own model</h3><p>No fly wiring at all. A plain network with changeable connections, trained from scratch, that homes.</p><div class="st">two to three weeks</div></div>
+    <div class="rung"><div class="lv">Level 4</div><h3>Proof it is better</h3><p>Race it against a model that holds the sum in its head. Make the trips long and noisy.</p><div class="st">one week</div></div>
+  </div>
+  <div class="why"><b>Why climb instead of jumping to level 3?</b> Level 3 can fail for two reasons: the fly's rule is wrong for the job, or our training is broken. Levels 1 and 2 settle the first in two days, so if level 3 fails we know it is the second.</div>
+</section>
+
+<section id="setup">
+  <h2>Before you start</h2>
+  <p>You need Python 3, and three libraries. Levels 1 and 2 use <code>numpy</code> for math and <code>matplotlib</code> for plots. Levels 3 and 4 add <code>torch</code> (PyTorch), which is the standard toolkit for training models. Install them once:</p>
+  <pre>pip install numpy matplotlib torch</pre>
+  <p>Make one folder for the project. Each level is one script in that folder. Save every result as a file, because you will want to plot the same result many ways.</p>
+  <div class="why"><b>One rule about randomness.</b> Everything here uses random numbers: the wandering, the search, the starting network. Always set the random seed at the top of a script (<code>np.random.seed(0)</code> or <code>torch.manual_seed(0)</code>). Then a run gives the same answer twice, and when something breaks you can reproduce it. When you want a fresh run, change the seed on purpose.</div>
+
+  <h3>The world, used by every level</h3>
+  <p>A flat, dark table. Food is at the point (0, 0). The agent has a position, a heading (the direction it faces), and a speed. It always walks forward, so heading is also its travel direction. Time moves in ticks of a tenth of a second.</p>
+  <div class="numbers">
+    <div class="num"><b>0.1 s</b><span>one tick</span></div>
+    <div class="num"><b>30 s</b><span>outbound wander (300 ticks)</span></div>
+    <div class="num"><b>60 s</b><span>return, at most (600 ticks)</span></div>
+    <div class="num"><b>0.5</b><span>units from food counts as arrived</span></div>
+    <div class="num"><b>0.3 to 1.7</b><span>speed range, units per second</span></div>
+  </div>
+  <p>One trip has two halves. During the outbound half, the agent's turning is random: each tick its heading changes by a random amount drawn from a bell curve with spread 0.8 times the square root of the tick length. This makes a wandering path like a real fly's. During the return half, a switch flips and whatever the brain says is added to the turning. The random wobble stays on, because real walking wobbles.</p>
+  <p>Speed drifts slowly and sometimes drops to zero for a second or three, a pause. Pauses matter because they let us test whether the brain writes only while moving.</p>
+  <pre># world.py  – shared by every level
+import numpy as np
+DT, T_OUT, T_RET = 0.1, 30.0, 60.0
+
+def new_trip(rng):
+    """Agent starts at food, facing a random way."""
+    return dict(x=0.0, y=0.0, hd=rng.uniform(0, 2*np.pi), speed=1.0, pause=0, t=0.0,
+                phase='out', min_d=np.inf, arrived=False)
+
+def update_speed(s, rng):
+    if s['pause'] > 0:
+        s['pause'] -= 1; s['speed'] = 0.0; return
+    if rng.random() < 0.01:                       # start a pause now and then
+        s['pause'] = int(rng.uniform(1, 3) / DT)
+    s['speed'] = np.clip(s['speed'] + 0.3*rng.normal()*np.sqrt(DT) + 0.2*(1-s['speed'])*DT, 0.3, 1.7)
+
+def move(s, turn, rng):
+    """turn is what the brain asks for (radians per second); ignored during outbound."""
+    if s['phase'] == 'out': turn = 0.0
+    s['hd'] += turn*DT + 0.8*rng.normal()*np.sqrt(DT)
+    s['x'] += s['speed']*np.cos(s['hd'])*DT
+    s['y'] += s['speed']*np.sin(s['hd'])*DT
+    s['t'] += DT
+    d = np.hypot(s['x'], s['y'])
+    if s['phase'] == 'out' and s['t'] >= T_OUT: s['phase'] = 'ret'
+    if s['phase'] == 'ret':
+        s['min_d'] = min(s['min_d'], d)
+        if d < 0.5: s['arrived'] = True
+        if s['t'] >= T_OUT + T_RET: s['phase'] = 'done'</pre>
+  <div class="why"><b>Why the agent gets a perfect compass.</b> The fly has one (the ring of EPG neurons) and how it works is already understood. We are not studying the compass. Giving it free keeps the question sharp: can the brain add up steps?</div>
+</section>
+
+<!-- ===================== LEVEL 1 ===================== -->
+<section id="l1">
+  <div class="head"><h2>Level 1</h2><span class="lbl">numbers found</span><span class="time">an afternoon · laptop</span></div>
+  <p>Keep every part of the fly's circuit. Leave six numbers blank. Let a search fill them in. The question: are the fly's own settings the ones the task demands?</p>
+
+  <div class="steps">
+    <div class="stp" data-n="1">
+      <h3>Build the fly's brain by hand</h3>
+      <p>Four fixed parts. Each is a few lines.</p>
+      <h4>Direction cells (the fly's hΔB)</h4>
+      <p>Eight cells, one per compass point, 45 degrees apart: N, NE, E, SE, S, SW, W, NW. Each cell's activity is the cosine of the angle between its direction and the heading, cut off at zero. So the cell facing the way the agent walks is at 1, its two neighbours at 0.7, the sideways ones at 0, and the ones behind at 0. A heading between two cells lights both partway. That is how eight cells can represent any direction.</p>
+      <h4>Tally board (the synapses)</h4>
+      <p>Eight numbers, one per direction cell, all starting at zero. Each tick, while the write signal is on, each tally grows by <em>write strength × write signal × that cell's activity × tick length</em>. Each tally also shrinks a little by <em>fade × its own value × tick length</em>. At food, every tally is multiplied by <em>(1 − erase)</em>.</p>
+      <h4>Reader and turn-around</h4>
+      <p>Each tally is multiplied by its cell's activity right now plus a small constant (0.3), which we call the tonic. Think of each result as an arrow pointing in that cell's direction with that length. Add the eight arrows tip to tail. The sum is one arrow. Rotate it by the rotation number. That is the brain's answer.</p>
+      <h4>Steerer (the fly's PFL3)</h4>
+      <p>Compare the answer's direction with the heading. Turn rate = turn gain × sin(answer direction − heading) × how clean the arrow is. "How clean" is the arrow's length divided by the total of all eight arrow lengths: near 1 when the tallies agree on one direction, near 0 when they cancel. That last factor is what makes the agent stop when it arrives, because the tallies cancel there.</p>
+      <pre># brain1.py
+import numpy as np
+COLS = np.arange(8) * 2*np.pi/8          # the eight directions
+TONIC = 0.3
+
+def direction_cells(hd):
+    return np.maximum(0.0, np.cos(COLS - hd))
+
+def brain_tick(W, s, p, at_food):
+    """W: the eight tallies (changed in place). s: world state. p: the six numbers."""
+    cells = direction_cells(s['hd'])
+    moving = 1.0 if s['speed'] > 0 else 0.0
+    write_signal = p['speed_dep']*s['speed'] + (1-p['speed_dep'])*moving
+    W += DT * (p['write']*write_signal*cells - p['fade']*W)
+    if at_food: W *= (1 - p['erase'])
+    act = W * (cells + TONIC)
+    ax, ay = np.sum(act*np.cos(COLS)), np.sum(act*np.sin(COLS))
+    r = np.radians(p['rot'])
+    rx, ry = ax*np.cos(r) - ay*np.sin(r), ax*np.sin(r) + ay*np.cos(r)
+    clean = np.hypot(rx, ry) / (np.sum(act) + 1e-9)
+    turn = p['gain'] * np.sin(np.arctan2(ry, rx) - s['hd']) * min(1.0, 2*clean)
+    return turn</pre>
+      <div class="why"><b>Why the tonic.</b> Without it, a tally can only be read by a cell that is active right now, so the brain would be blind to the direction opposite its travel. A small constant lets every column speak a little all the time. The fly's store cells probably have some background drive too, but this is an assumption, and it is worth trying 0 and 0.6 to see if anything changes.</div>
+    </div>
+
+    <div class="stp" data-n="2">
+      <h3>Name the six blanks and their ranges</h3>
+      <table>
+        <thead><tr><th>number</th><th>range to search</th><th>the fly's answer</th><th>what it means</th></tr></thead>
+        <tbody>
+          <tr><td>write</td><td>0 to 2</td><td>1</td><td>how much a step adds to its column</td></tr>
+          <tr><td>speed_dep</td><td>0 to 1</td><td>1</td><td>0: writing is simply on while moving. 1: it scales with speed, so fast steps count more. Distance needs 1.</td></tr>
+          <tr><td>erase</td><td>0 to 1</td><td>1</td><td>fraction of every tally wiped at food</td></tr>
+          <tr><td>fade</td><td>0 to 0.2</td><td>0</td><td>how fast tallies leak away per second</td></tr>
+          <tr><td>rot</td><td>0 to 360</td><td>180</td><td>degrees to spin the answer before steering</td></tr>
+          <tr><td>gain</td><td>0 to 6</td><td>3</td><td>how hard to turn for a given error</td></tr>
+        </tbody>
+      </table>
+      <p>The fly's answer column is what we believe from the connectome and the papers. The search is not told these. It only sees scores.</p>
+    </div>
+
+    <div class="stp" data-n="3">
+      <h3>Write the exam: one candidate, many trips, one score</h3>
+      <p>A candidate is one filled-in set of six numbers. To score it, run it on many trips in a row. The tallies carry over from trip to trip, exactly as they would in a fly that keeps living. Each trip starts with the agent standing at food for half a second, so the erase signal fires then. On each trip, record the closest the agent got to food during the return. The score is the average of those. Lower is better.</p>
+      <pre># exam1.py
+from world import *; from brain1 import *
+
+def run_trip(W, p, rng):
+    s = new_trip(rng); food_ticks = 5
+    while s['phase'] != 'done' and not s['arrived']:
+        at_food = food_ticks > 0
+        if at_food: food_ticks -= 1; s['speed'] = 0.0
+        else: update_speed(s, rng)
+        turn = brain_tick(W, s, p, at_food)
+        move(s, turn, rng)
+    if s['arrived']:                       # stand at food: erase fires
+        for _ in range(5): brain_tick(W, s, p, True)
+    return min(s['min_d'], np.hypot(s['x'], s['y'])), s['arrived']
+
+def score(p, n_trips=50, seed=0):
+    rng = np.random.default_rng(seed); W = np.zeros(8)
+    results = [run_trip(W, p, rng) for _ in range(n_trips)]
+    dists = [r[0] for r in results]; arrived = [r[1] for r in results]
+    return np.mean(dists), np.mean(arrived)</pre>
+      <div class="why"><b>Why trips carry over.</b> If every trip started with a clean board, the erase number would never matter and the search could not find it. A fly does not get a clean board either. Carrying tallies over is what makes "erase at food" a real requirement.</div>
+      <p><b>Check it before searching.</b> Run <code>score</code> with the fly's answer. You should get a score under about 1.5 and more than 70 percent of trips arriving. Now set rot to 0: score should jump to around 8 to 10 and almost nothing arrives. Set erase to 0: the first trips look fine, then it drifts. If the fly's settings do not score well, fix the brain before searching. A search on a broken exam finds nonsense.</p>
+    </div>
+
+    <div class="stp" data-n="4">
+      <h3>Write the search</h3>
+      <p>Guess, score, keep, nudge, repeat. In words:</p>
+      <ol>
+        <li>Make 24 candidates by picking each of the six numbers at random inside its range.</li>
+        <li>Score all 24 on the same 50 trips (same seed for everyone, so it is a fair exam).</li>
+        <li>Sort by score. Keep the best 6.</li>
+        <li>Fill the 18 empty slots: pick a survivor at random, copy it, and add to each number a small random amount, a bell curve with spread equal to 8 percent of that number's range. Clip to the range.</li>
+        <li>Change the seed so the next round uses fresh trips. Go to 2.</li>
+      </ol>
+      <p>Run 150 rounds. Each round is a generation. Save the best candidate from every generation.</p>
+      <pre># search1.py
+RANGES = dict(write=(0,2), speed_dep=(0,1), erase=(0,1), fade=(0,0.2), rot=(0,360), gain=(0,6))
+
+def random_candidate(rng):
+    return {k: rng.uniform(lo, hi) for k, (lo, hi) in RANGES.items()}
+
+def nudge(p, rng):
+    c = {}
+    for k, (lo, hi) in RANGES.items():
+        c[k] = np.clip(p[k] + rng.normal()*0.08*(hi-lo), lo, hi)
+    return c
+
+def evolve(seed, generations=150, pop=24, keep=6):
+    rng = np.random.default_rng(seed)
+    cands = [random_candidate(rng) for _ in range(pop)]
+    history = []
+    for g in range(generations):
+        scored = sorted(cands, key=lambda p: score(p, 50, seed=1000+g)[0])
+        best = scored[0]; history.append(dict(best))
+        survivors = scored[:keep]
+        cands = survivors + [nudge(survivors[rng.integers(keep)], rng) for _ in range(pop-keep)]
+        print(g, {k: round(v, 2) for k, v in best.items()})
+    return history</pre>
+      <div class="why"><b>Why not gradient descent here.</b> Gradient descent needs to compute, for each number, exactly which direction improves the score. Our score comes from a random simulation with pauses, wobbles and a hard "within half a unit" test, so there is no formula to differentiate. Random nudge plus keep-the-best does not care. It only needs to be able to run the exam. It is wasteful, but with six numbers waste is cheap.</div>
+      <div class="why"><b>Why fresh trips every generation.</b> If the trips never changed, a candidate could get good at those particular trips instead of at homing. Changing the seed each generation makes the exam different every time, so the only way to keep surviving is to actually integrate steps. Same-seed within a generation keeps the comparison between candidates fair.</div>
+    </div>
+
+    <div class="stp" data-n="5">
+      <h3>Run it twenty times and plot</h3>
+      <p>One search can get lucky or stuck. Run <code>evolve</code> with seeds 0 through 19. For each, take the best candidate at the final generation. Now make one figure with six small panels, one per number. In each panel, draw the fly's answer as a line and the twenty final values as dots.</p>
+      <pre>import matplotlib.pyplot as plt
+finals = [evolve(seed)[-1] for seed in range(20)]
+FLY = dict(write=1, speed_dep=1, erase=1, fade=0, rot=180, gain=3)
+fig, axes = plt.subplots(1, 6, figsize=(14, 3))
+for ax, k in zip(axes, RANGES):
+    ax.scatter([k]*20, [f[k] for f in finals], alpha=.6)
+    ax.axhline(FLY[k], color='orange'); ax.set_ylim(RANGES[k]); ax.set_title(k)
+plt.savefig('level1_dials.png')</pre>
+      <p>Also plot the best score per generation for all twenty runs on one axis. It should drop fast and flatten by generation 50 or so.</p>
+    </div>
+
+    <div class="stp hot" data-n="6">
+      <h3>Read the result</h3>
+      <div class="learn"><b>Success looks like</b> rot clustered near 180, erase near 1, fade near 0, speed_dep near 1. Write and gain may spread out over a range, which means those two do not matter much as long as they are not zero. Final scores under 1.5.</div>
+      <ul>
+        <li><b>rot lands near 180 in all twenty runs.</b> Evolution rediscovered the inverter, the fly's hΔM neurons, with no hint. This is the strongest single result.</li>
+        <li><b>erase lands near 1.</b> A clean slate at food is the optimal design. Supports the octopamine story.</li>
+        <li><b>fade near 0.</b> The memory should be lossless. That is a prediction about the real synapses.</li>
+        <li><b>speed_dep near 1.</b> Writing must scale with speed, so the write signal in the fly (FB4M) should carry speed, not just "moving."</li>
+        <li><b>A number scattered across its range</b> does not matter for the task. Also worth knowing.</li>
+      </ul>
+      <div class="warn"><b>If the search does not converge:</b> first check the exam again with the fly's settings. If that scores well but the search does not find it, the nudges are probably too big (try 4 percent) or the population too small (try 48). If rot lands at 180 only sometimes, look at the other numbers of the runs where it did not: usually gain or write collapsed to zero, which makes rot irrelevant. That is a local trap, and more runs or a bigger population fixes it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEVEL 2 ===================== -->
+<section id="l2">
+  <div class="head"><h2>Level 2</h2><span class="lbl">signals found</span><span class="time">a day · laptop</span></div>
+  <p>At level 1 we wired "write while moving" and "erase at food" by hand. Now we take those away and ask the search to figure out what should trigger each. The question: does the model invent the dopamine and octopamine jobs by itself?</p>
+
+  <div class="steps">
+    <div class="stp" data-n="1">
+      <h3>Build two tiny decision units</h3>
+      <p>A decision unit is the simplest possible neuron. It gets three inputs, multiplies each by a weight, adds a fourth number called the bias, and squashes the total into the range 0 to 1 using the sigmoid function. Near 0 means off, near 1 means on.</p>
+      <p>The three inputs are:</p>
+      <ul>
+        <li><b>speed</b>, 0 to 1.7</li>
+        <li><b>food</b>, 1 while standing at food, else 0</li>
+        <li><b>distractor</b>, a smooth random number between 0 and 1 that means nothing</li>
+      </ul>
+      <p>The write unit's output replaces the write signal. The erase unit's output is applied every tick: each tally is multiplied by (1 − erase output). If the unit outputs 0.9 when food is present, the board is wiped in a few ticks. If it outputs 0.01 all the time, that acts as a slow fade. So this level also swallows the fade number: fade is whatever the erase unit does when nothing is happening.</p>
+      <pre># brain2.py
+def sigmoid(z): return 1/(1+np.exp(-z))
+
+def unit(w, speed, food, distractor):
+    return sigmoid(w[0] + w[1]*speed + w[2]*food + w[3]*distractor)
+
+def brain_tick2(W, s, p, at_food, distractor):
+    cells = direction_cells(s['hd'])
+    write_signal = unit(p['w_write'], s['speed'], float(at_food), distractor)
+    erase_signal = unit(p['w_erase'], s['speed'], float(at_food), distractor)
+    W += DT * p['write'] * write_signal * cells
+    W *= (1 - erase_signal)
+    # reader, rotation, steerer exactly as level 1
+    ...</pre>
+      <div class="why"><b>Why a distractor.</b> Without it, the units have only two inputs and almost any solution uses them. With a meaningless third input, we can check that the search learned to ignore it. Ignoring noise is half of what a good write gate does.</div>
+    </div>
+
+    <div class="stp" data-n="2">
+      <h3>Add the unit weights to the search</h3>
+      <p>Each unit has four weights (bias plus three inputs), so eight new numbers join the search. Their range is −10 to 10. Remove speed_dep, erase and fade from the search, since the units now do those jobs. The search is now 3 dial numbers (write, rot, gain) plus 8 unit weights, 11 in all. Everything else in <code>evolve</code> stays the same. Nudge the unit weights with spread 0.8.</p>
+      <p>Generate the distractor as a slow sine wave plus a little noise, so it looks like a real signal that varies over time:</p>
+      <pre>distractor = np.clip(0.5 + 0.5*np.sin(0.7*s['t'] + 1.3) + 0.1*rng.normal(), 0, 1)</pre>
+    </div>
+
+    <div class="stp" data-n="3">
+      <h3>Run twenty times and plot the learned weights</h3>
+      <p>Same as level 1. The plot is different: two panels, one per unit. Each panel has four bars, bias, speed, food, distractor, showing the average learned weight across the twenty runs with error bars for the spread.</p>
+    </div>
+
+    <div class="stp hot" data-n="4">
+      <h3>Read the result</h3>
+      <div class="learn"><b>Success looks like</b> the write unit has a large positive weight on speed, a negative bias, and near-zero weights on food and distractor. The erase unit has a large positive weight on food, a strongly negative bias, and near-zero weights on speed and distractor. Rot still near 180.</div>
+      <p>Translate: the model decided on its own that writing should track speed and erasing should track reward, and that the distractor is noise. Those are the dopamine and octopamine roles from the connectome, found by a search that was never told about them.</p>
+      <div class="warn"><b>If the erase unit learns to fire on speed instead of food:</b> it has found a shortcut, wiping the board whenever the agent stops. That can work in this world because the agent only stops at food and during pauses. Make pauses more common so the shortcut costs something, and it should switch to food.</div>
+      <div class="warn"><b>If the write unit uses the distractor:</b> the distractor happens to correlate with something useful in your random trips. Change how it is generated, and make sure its seed is independent of the wandering.</div>
+    </div>
+  </div>
+  <p>After this level, the only fly-shaped things we still built by hand are the eight direction cells, the tally board, the reader and the turn-around. Level 3 removes those.</p>
+</section>
+
+<!-- ===================== LEVEL 3 ===================== -->
+<section id="l3">
+  <div class="head"><h2>Level 3</h2><span class="lbl">our own model · the goal</span><span class="time">two to three weeks · laptop, a small GPU helps</span></div>
+  <p>Now we throw the fly's parts away. No direction cells, no tally board, no reader, no turn-around. What is left is a plain network of 64 neurons, all connected to each other. Its inputs are heading, speed and food as raw numbers. Its output is a turn command. Nothing in it knows what a compass direction is.</p>
+  <p>The one fly-like thing it keeps is this: every connection between two neurons has two strengths. A <b>slow</b> strength, set by training and then frozen forever. And a <b>fast</b> strength, which starts at zero and changes while the model runs, following one simple rule. The rule is the same for every connection. The network itself produces a "write" signal and an "erase" signal that control the rule. So the network decides, moment by moment, when to rewrite its own connections.</p>
+  <p>If this network can get home, and keeps getting home on new trips after training stops, then we have a model of our own that learns continuously by changing its weights, doing the fly's job. That is the goal.</p>
+
+  <div class="steps">
+    <div class="stp" data-n="1">
+      <h3>Understand the network before coding it</h3>
+      <h4>The neurons</h4>
+      <p>64 numbers, one per neuron, each between −1 and 1. Call this list <em>x</em>. Every tick, every neuron computes a new value from three things: the inputs, the other neurons' values through the slow strengths, and the other neurons' values through the fast strengths. The three are added and squashed into −1 to 1 with the tanh function.</p>
+      <h4>The inputs</h4>
+      <p>Four numbers per tick: cos(heading), sin(heading), speed, food. We give heading as a cosine and a sine rather than a raw angle because 359 degrees and 1 degree are neighbours, and cos and sin make that true for the network.</p>
+      <h4>The outputs</h4>
+      <p>Three numbers read off the neurons: turn (any value), write gate (squashed to 0 to 1), erase gate (squashed to 0 to 1).</p>
+      <h4>The two strengths</h4>
+      <p><em>W</em> is the 64 by 64 table of slow strengths. <em>F</em> is the 64 by 64 table of fast strengths. There is also a third table, <em>A</em>, that says for each connection how much its fast strength is allowed to count, so the effective strength of a connection is <em>W + A × F</em>. Training sets W and A. Only F changes during a trip.</p>
+      <h4>The rule</h4>
+      <p>After each tick, for every pair of neurons (from neuron j to neuron i):</p>
+      <pre>F[i][j]  =  (1 − erase gate) × F[i][j]  +  learning rate × write gate × x_new[i] × x_old[j]</pre>
+      <p>In words: when the write gate is on, a connection grows in proportion to how active both its neurons are, which is the classic Hebbian "cells that fire together wire together." When the erase gate is on, it shrinks toward zero. The learning rate is one trained number. Fast strengths are clipped to stay between −1 and 1 so they cannot blow up.</p>
+      <div class="why"><b>Why this rule and not the fly's exact rule.</b> The fly's tally rule at level 1 was "add the presynaptic activity." This rule is more general: it includes that case (when the postsynaptic neuron is always on) but also lets the network use both sides. We give it the general form because we are not supposed to hand it the answer. If, after training, the network ends up using it in the fly's way, that is a finding.</div>
+    </div>
+
+    <div class="stp" data-n="2">
+      <h3>Build it in PyTorch</h3>
+      <p>Everything below runs on a batch of trips at once, which is how PyTorch is fast. A batch is 64 trips running side by side, each with its own agent, its own neurons and its own F table.</p>
+      <pre># flynet.py
+import torch, torch.nn as nn
+N = 64
+
+class FlyNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.W_in  = nn.Linear(4, N)                       # inputs to neurons
+        self.W     = nn.Parameter(0.1*torch.randn(N, N))   # slow strengths
+        self.A     = nn.Parameter(0.01*torch.randn(N, N))  # how much fast strength counts
+        self.W_out = nn.Linear(N, 3)                       # turn, write gate, erase gate
+        self.lr    = nn.Parameter(torch.tensor(0.1))       # the rule's learning rate
+
+    def start(self, batch):
+        x = torch.zeros(batch, N); F = torch.zeros(batch, N, N)
+        return x, F
+
+    def step(self, x, F, inp):
+        eff = self.W + self.A * F                            # batch x N x N
+        recurrent = torch.bmm(eff, x.unsqueeze(2)).squeeze(2)
+        x_new = torch.tanh(self.W_in(inp) + recurrent)
+        out = self.W_out(x_new)
+        turn  = out[:, 0]
+        write = torch.sigmoid(out[:, 1])
+        erase = torch.sigmoid(out[:, 2])
+        hebb = x_new.unsqueeze(2) * x.unsqueeze(1)           # x_new[i] * x_old[j]
+        F = (1 - erase[:, None, None]) * F + self.lr * write[:, None, None] * hebb
+        F = F.clamp(-1, 1)
+        return x_new, F, turn, write, erase</pre>
+      <p>Count the trained numbers: W_in has 320, W has 4096, A has 4096, W_out has 195, plus the learning rate. About 8,700. Tiny, but far too many for the search from levels 1 and 2.</p>
+    </div>
+
+    <div class="stp" data-n="3">
+      <h3>Write the world in PyTorch too</h3>
+      <p>The same world as before, but every quantity is a tensor of length 64, one entry per trip in the batch, and the loop runs tick by tick with all trips moving together. The turn command from the network is ignored during the outbound half (multiply it by a 0/1 switch) and added during the return.</p>
+      <pre># world_torch.py
+def run_episode(net, batch=64, n_trips=2, seed=None):
+    """n_trips trips in a row; F carries over between trips, x is reset."""
+    g = torch.Generator().manual_seed(seed) if seed is not None else None
+    x, F = net.start(batch)
+    losses = []
+    for trip in range(n_trips):
+        pos = torch.zeros(batch, 2); hd = torch.rand(batch, generator=g)*6.2832
+        speed = torch.ones(batch); x = torch.zeros(batch, N)
+        for k in range(int((T_OUT + T_RET)/DT)):
+            t = k*DT; returning = 1.0 if t >= T_OUT else 0.0
+            food = (t < 0.5).float().expand(batch) if trip == 0 else (t < 0.5).float().expand(batch)
+            speed = (speed + 0.3*torch.randn(batch, generator=g)*DT**0.5 + 0.2*(1-speed)*DT).clamp(0.3, 1.7)
+            speed = speed * (1 - food)                      # standing still at food
+            inp = torch.stack([torch.cos(hd), torch.sin(hd), speed, food], 1)
+            x, F, turn, write, erase = net.step(x, F, inp)
+            hd = hd + returning*turn*DT + 0.8*torch.randn(batch, generator=g)*DT**0.5
+            pos = pos + speed[:, None]*torch.stack([torch.cos(hd), torch.sin(hd)], 1)*DT
+            if t >= T_OUT + T_RET - 10:                     # last 10 s of the return
+                losses.append(pos.norm(dim=1))
+        # arrival: stand at food for half a second so erase can fire
+        for _ in range(5):
+            inp = torch.stack([torch.cos(hd), torch.sin(hd), torch.zeros(batch), torch.ones(batch)], 1)
+            x, F, *_ = net.step(x, F, inp)
+    return torch.stack(losses).mean()</pre>
+      <p>The score, which training calls the loss, is the agent's average distance from food over the last ten seconds of each return. Not "did it arrive." An arrival test is a yes/no cliff that gradient descent cannot see over. Distance changes smoothly, so every tiny improvement in the network shows up as a tiny drop in loss, which is what gradients need.</p>
+      <div class="why"><b>Why two trips per episode.</b> Same reason as level 1: if F were reset between trips, the erase gate would never need to exist. Two trips in a row, with F carried over, forces the network to learn to wipe its own memory at food.</div>
+      <div class="warn"><b>Do not reset F at the start of a trip.</b> It is tempting, and it makes training easier, but it hands the network the erase for free and the result no longer tests the fly's design.</div>
+    </div>
+
+    <div class="stp" data-n="4">
+      <h3>Train with gradient descent, backwards through the trips</h3>
+      <p>Here is what gradient descent does, in one paragraph. Run an episode. Get the loss. Then ask, for every one of the 8,700 trained numbers, "if this number were a hair bigger, would the loss go up or down, and by how much?" PyTorch computes all 8,700 answers at once by tracing backwards through every calculation the episode made, including every change to F. That trace is called backpropagation, and running it through the fast-weight rule is what Miconi named differentiable plasticity. Then move every number a small step in its improving direction. Repeat thousands of times.</p>
+      <pre># train3.py
+net = FlyNet(); opt = torch.optim.Adam(net.parameters(), lr=1e-3)
+for it in range(4000):
+    loss = run_episode(net, batch=64, n_trips=2)
+    opt.zero_grad(); loss.backward()
+    torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0)
+    opt.step()
+    if it % 50 == 0: print(it, float(loss))
+torch.save(net.state_dict(), 'flynet.pt')</pre>
+      <p>Each iteration runs 64 trips of 1,800 ticks with a 64 by 64 table per trip, then traces it all backwards. On a laptop that is a few seconds per iteration, so 4,000 iterations is a few hours. A small GPU makes it minutes. Print the loss every 50 iterations. It should start around 7 (a random walk's typical distance) and fall.</p>
+      <div class="why"><b>Why clip the gradients.</b> A trace backwards through 1,800 ticks can produce enormous numbers when the network is near a tipping point. Clipping caps the step size so one bad episode cannot wreck the training. Standard practice for anything that runs through time.</div>
+      <div class="learn"><b>Success looks like</b> loss below 1.5 by the end, and it keeps dropping rather than bouncing. A random-walk agent scores about 7, so anything under 3 means it is homing at all, and under 1.5 means it is homing well.</div>
+    </div>
+
+    <div class="stp hot" data-n="5">
+      <h3>Freeze it and watch it learn anyway</h3>
+      <p>This is the moment. Load the trained network. Turn off training, so W, A and the rest never change again. Run 200 new trips with seeds the network has never seen. Record the closest approach on each.</p>
+      <pre>net.load_state_dict(torch.load('flynet.pt')); net.eval()
+with torch.no_grad():
+    test_loss = run_episode(net, batch=200, n_trips=2, seed=999)
+print('frozen network, new trips:', float(test_loss))</pre>
+      <p>If the frozen network still gets home on trips it never trained on, think about what that means. Its slow strengths are fixed. Its neurons are reset at the start of every trip. The only thing that could have carried "how far and which way have I walked" across the trip is F, the fast strengths, changing tick by tick under the network's own write and erase gates. The model learned, during use, by rewriting its own connections. That is the goal, reached.</p>
+      <div class="learn"><b>Success looks like</b> a test loss within about 20 percent of the training loss, and more than 70 percent of test trips getting within half a unit.</div>
+      <div class="warn"><b>Proving the memory really is in F.</b> Run the frozen network again with F forced to zero every tick. If it still gets home, the memory was not in F after all; it found a way to hold the sum in x, which is the activity kind. That would be a real and interesting failure, and level 4 is built to measure exactly this. If it now wanders randomly, the memory was in F.</div>
+    </div>
+
+    <div class="stp" data-n="6">
+      <h3>Look inside</h3>
+      <p>We never showed this network a direction cell or a tally board. Did it build them anyway? Three checks, each a plot.</p>
+      <ol>
+        <li><b>Direction tuning.</b> Run many trips and, for each neuron, plot its average activity against the heading at that moment, in 16 bins around the circle. Fly-like neurons show one bump. Count how many neurons have a clear bump, and check that the bumps' preferred directions spread around the circle rather than all pointing the same way.</li>
+        <li><b>Tally-like fast strengths.</b> Pick the connections with the largest A (the ones training decided should use fast strength). Plot their F over a trip. Tally-like ones grow steadily during outbound, in proportion to distance walked in some direction, and drop to near zero at food.</li>
+        <li><b>The gates.</b> Plot the write gate and erase gate over a trip alongside speed and food. Fly-like: write follows speed, erase spikes at food and is near zero elsewhere.</li>
+      </ol>
+      <div class="learn"><b>What we learn</b> If all three appear, a model that was never shown the fly's wiring built the fly's wiring, because that is what the problem demands. That is a statement about the four neuron types in the connectome: they are the natural answer. If the network found a different way that also works, the fly's design is one answer among several, and the write-up says so.</div>
+    </div>
+
+    <div class="stp" data-n="7">
+      <h3>When it fails, and what each failure means</h3>
+      <ul>
+        <li><b>Loss never drops below 5.</b> Training is stuck. Try: a smaller learning rate for Adam (3e-4), a bigger network (128 neurons), or start with shorter trips (10 seconds out) and lengthen them once it works, which is called a curriculum. If nothing helps, switch the search method: an evolution strategy on all 8,700 numbers is slow but does not depend on gradients flowing through 1,800 ticks.</li>
+        <li><b>Loss drops in training but the frozen test is bad.</b> It memorized the training trips. Use fresh seeds every iteration (the code above does), make trips more varied, and check that no slow strength is doing the memory's job by running the F-forced-to-zero test.</li>
+        <li><b>It homes but F stays near zero.</b> It found the activity solution. Not wrong, just not the fly. Make it need F: lengthen the outbound to 60 seconds, add compass noise, or shrink the network to 16 neurons so there is not enough activity to hold a sum. If it then switches to using F, that itself is a result about when fast weights become necessary.</li>
+        <li><b>The gates are always on.</b> The network is using fade instead of erase. Add a tiny penalty to the loss for the erase gate being on, so it only fires when it pays.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEVEL 4 ===================== -->
+<section id="l4">
+  <div class="head"><h2>Level 4</h2><span class="lbl">proof it is better</span><span class="time">one week</span></div>
+  <p>A model that works is not yet a result. The claim is that this kind of memory beats the kind today's models use. So we build the rival and race them, and we make the race hard.</p>
+
+  <div class="steps">
+    <div class="stp" data-n="1">
+      <h3>Build the rival</h3>
+      <p>The rival is the exact same 64-neuron network with the fast strengths removed: set A to zero and do not train it. Now the only way it can remember is to keep the running sum alive in the activity of its neurons, holding the number in its head. This is how every published model of path integration works, and it is how today's language models hold context.</p>
+      <pre>class RivalNet(FlyNet):
+    def __init__(self):
+        super().__init__()
+        self.A.requires_grad_(False); self.A.zero_()</pre>
+      <p>Train it exactly the way you trained the fly network: same world, same loss, same iterations, same batch. It must be tuned just as carefully, or the comparison is unfair. It will probably learn to home too. Holding a number in your head works fine for 30-second trips.</p>
+    </div>
+
+    <div class="stp hot" data-n="2">
+      <h3>Make the game harder without retraining</h3>
+      <p>Freeze both winners. Then run each on three harder versions of the world, with no retraining at all. This is the point: a memory design is only as good as what it survives when the world changes.</p>
+      <table>
+        <thead><tr><th>test</th><th>what changes</th><th>why it should hurt the activity model more</th></tr></thead>
+        <tbody>
+          <tr><td>Long trips</td><td>Outbound of 30, 60, 100, 200 and 300 seconds. Return time scaled to match.</td><td>An activity memory needs its loop gain tuned to exactly one. Any error compounds with time. A tally just keeps adding.</td></tr>
+          <tr><td>Drifting compass</td><td>Add a slow random drift to the heading the network is told, spread 0.05 and 0.15 per root-second.</td><td>Both suffer, but the activity model also has to fight its own leak, so it should degrade faster.</td></tr>
+          <tr><td>Two food sites</td><td>Food alternates between (0,0) and (6,0). After each visit the agent should head to the other.</td><td>Tests whether the erase is a clean reset or a partial one. Real flies show a running average of recent sites.</td></tr>
+        </tbody>
+      </table>
+      <p>For each test, score is the mean closest approach over 200 trips. Make one figure with three panels, one per test, each with two lines, fly network and rival, error against difficulty.</p>
+      <div class="learn"><b>Success looks like</b> in the long-trips panel, the fly line stays roughly flat out to 300 seconds while the rival line climbs. That single panel is the claim "current models don't do this" turned into a plot that anyone can check.</div>
+      <div class="warn"><b>If the rival is just as good on long trips:</b> then for this task, activity memory is fine, and the argument for fast weights has to rest on something else, such as robustness to noise or the fact that it needs no fine-tuned gain. Report it. A negative result here is still a result, and pretending otherwise is how a project loses trust.</div>
+    </div>
+
+    <div class="stp" data-n="3">
+      <h3>Write it up</h3>
+      <p>A findings page in the style of the four existing ones. Same four questions per result: what was known, what we found, why it matters, what the evidence is. Three figures: the level 1 dial plot, the level 3 look-inside plots, the level 4 stress plot. State the caveats plainly:</p>
+      <ul>
+        <li>The shape of the fast-weight rule was still chosen by us. It is the standard Hebbian form, but it is an assumption.</li>
+        <li>A model that works this way is not proof the fly works this way. It shows the design is sufficient and, if level 4 comes out as hoped, that it is better than the alternative for this job.</li>
+        <li>The world is a plane with a perfect compass. Real flies have neither guarantee.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="table">
+  <h2>What is built by hand at each level</h2>
+  <div class="matrix">
+    <table>
+      <thead><tr><th>Part</th><th>Level 0</th><th>Level 1</th><th>Level 2</th><th>Level 3</th></tr></thead>
+      <tbody>
+        <tr><td>Direction cells</td><td><span class="pill fixed">by hand</span></td><td><span class="pill fixed">by hand</span></td><td><span class="pill fixed">by hand</span></td><td><span class="pill gone">not given</span></td></tr>
+        <tr><td>Tally board</td><td><span class="pill fixed">by hand</span></td><td><span class="pill fixed">by hand</span></td><td><span class="pill fixed">by hand</span></td><td><span class="pill gone">not given</span></td></tr>
+        <tr><td>Write trigger</td><td><span class="pill fixed">speed</span></td><td><span class="pill fixed">speed</span></td><td><span class="pill blank">learned</span></td><td><span class="pill blank">learned</span></td></tr>
+        <tr><td>Erase trigger</td><td><span class="pill fixed">food</span></td><td><span class="pill fixed">food</span></td><td><span class="pill blank">learned</span></td><td><span class="pill blank">learned</span></td></tr>
+        <tr><td>Reader and turn-around</td><td><span class="pill fixed">by hand</span></td><td><span class="pill blank">angle learned</span></td><td><span class="pill blank">angle learned</span></td><td><span class="pill gone">not given</span></td></tr>
+        <tr><td>Dial numbers</td><td><span class="pill fixed">fly's</span></td><td><span class="pill blank">learned</span></td><td><span class="pill blank">learned</span></td><td><span class="pill blank">learned</span></td></tr>
+        <tr><td>Shape of the changing rule</td><td><span class="pill fixed">add on step</span></td><td><span class="pill fixed">add on step</span></td><td><span class="pill fixed">add on step</span></td><td><span class="pill fixed">Hebbian, numbers learned</span></td></tr>
+        <tr><td>How numbers are found</td><td>–</td><td>search</td><td>search</td><td>gradient descent</td></tr>
+        <tr><td>Numbers found</td><td>0</td><td>6</td><td>11</td><td>about 8,700</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">The last hand-built thing at level 3 is the shape of the changing rule. That is the standard assumption in this field, but it is an assumption, and the write-up should say so.</p>
+</section>
+
+<section id="words">
+  <h2>Words that came up</h2>
+  <dl>
+    <dt>Fast weights</dt><dd>Connection strengths that change while the model runs. The tally marks. The continual learning lives here. In level 3, the table F.</dd>
+    <dt>Slow weights</dt><dd>Connection strengths set during training and then frozen. The wiring and the rulebook. In the fly, the genes. In level 3, W, A and the rest.</dd>
+    <dt>The search</dt><dd>Guess, score, keep the best, nudge, repeat. Also called an evolution strategy. Good for a dozen numbers. Used at levels 1 and 2.</dd>
+    <dt>Gradient descent</dt><dd>The standard way models are trained. Works out which way to nudge every number at once. Needs a smooth score. Used at levels 3 and 4.</dd>
+    <dt>Backpropagation</dt><dd>The bookkeeping that computes those nudge directions by tracing backwards through every calculation. PyTorch does it for you when you call <code>loss.backward()</code>.</dd>
+    <dt>Differentiable plasticity</dt><dd>Backpropagation run through the fast-weight changes too, so training can shape the rule and the gates. Miconi, 2018.</dd>
+    <dt>Hebbian rule</dt><dd>"Cells that fire together wire together." A connection grows in proportion to the activity of both its neurons. The shape of the rule at level 3.</dd>
+    <dt>Loss and score</dt><dd>The same idea. How far from food the model ended up, averaged over many random trips. Lower is better. The only feedback the search or the training ever gets.</dd>
+    <dt>Batch</dt><dd>Many trips run side by side so the computer does them all at once. 64 in level 3.</dd>
+    <dt>Frozen</dt><dd>Training is off. The slow weights cannot change. Anything the model still learns after this is learned by fast weights.</dd>
+  </dl>
+</section>
+</div>
+</body>
+</html>

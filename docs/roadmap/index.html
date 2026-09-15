@@ -486,7 +486,7 @@ distractor = np.clip(0.5 + 0.5*np.sin(0.7*s['t'] + 1.3) + 0.1*rng.normal(), 0, 1
 <!-- ================= LEVEL 3 ================= -->
 <section id="l3">
   <div class="head"><h2>Level 3</h2><span class="lbl">our own model · the goal</span><span class="time">two to three weeks · laptop, a small GPU helps</span></div>
-  <p>Now we throw the fly's parts away. No direction cells, no tally board, no reader, no turn-around. What is left is a plain network of 64 neurons, all connected to each other. Its inputs are heading, speed and food as raw numbers. Its output is a turn command. Nothing in it knows what a compass direction is.</p>
+  <p>Now we throw the fly's parts away. No direction cells, no tally board, no reader, no turn-around. What is left is a plain network of 64 neurons, all connected to each other. Its inputs are heading, speed and food as raw numbers. Its outputs are a turn command for the legs and two gate signals, write and erase, that act only on its own memory. Nothing in it knows what a compass direction is.</p>
   <p>The one fly-like thing it keeps: every connection has two strengths. A <b>slow</b> one, set by training and then frozen. And a <b>fast</b> one, starting at zero, changing while the model runs, by one simple rule. The network itself produces the write and erase signals that control the rule. So it decides, moment by moment, when to rewrite its own connections. This cannot be trained in a web page, so the two demos below teach the two ideas you need, and the code is complete.</p>
 
   <h3>Demo 1 · the rule that changes connections</h3>

@@ -5,7 +5,7 @@ Nico's learning fork of [pwang724/fly-circuit-exploration](https://github.com/pw
 - [Tiny Fly Model Roadmap](docs/roadmap/index.html): five levels from the hand-built simulation to our own trained model, with exact numbers, code, success criteria and failure fixes.
 - [The Homing Exam](docs/roadmap/homing-exam.html): the level 1 experiment as a live, playable simulation.
 - [Level 3 Training Plan](docs/roadmap/level3-plan.html): build order, decisions, compute, curriculum, checks, success and the failure playbook, before any code runs.
-- [Inside Runs 1 and 2](docs/roadmap/inside-runs-1-2.html): what the first two level 3 networks actually learned, drawn from their checkpoints, explained for a beginner.
+- [Inside Runs 1, 2 and 3](docs/roadmap/inside-runs.html): what the level 3 networks actually learned, drawn from their checkpoints, explained for a beginner.
 - `level1/` and `level2/`: local apps that run the level 1 and level 2 searches (`python3 level1/server.py`, `python3 level2/server.py`); `level3/` trains the network and serves a live dashboard (`python3 level3/server.py`).
 
 Original project README follows.

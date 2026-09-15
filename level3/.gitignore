@@ -1,4 +1,3 @@
 runs/*/ckpt*.pt
 runs/*/final.pt
 runs/*.out
-runs/run3/

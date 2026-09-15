@@ -12,9 +12,10 @@ DEFAULT_CONFIG = dict(
     pop=24,             # candidates per generation
     keep=6,             # survivors copied unchanged into the next generation
     lanes=10,           # agents per candidate running side by side
-    trips_per_lane=3,   # trips each agent runs in a row (tallies carried over) -> 30 trips per score
+    trips_per_lane=5,   # trips each agent runs in a row (tallies carried over) -> 50 trips per score
     nudge=0.08,         # child = parent + bell-curve noise of (nudge x range) on every dial
     seed=0,             # for the starting population and the nudges
+    w_max=40.0,         # tally ceiling: synapses saturate, which is why a reset is needed
     ranges=DEFAULT_RANGES,
     start=None,         # None = random start; or a dict of dial values every candidate starts at
 )
@@ -58,7 +59,7 @@ class Evolution:
         # Fresh trips every generation (seed changes) so nobody can memorise the exam;
         # same seed within the generation so every candidate sat the same exam.
         scores, arrived = score_population(self.pop, int(self.cfg['lanes']), int(self.cfg['trips_per_lane']),
-                                           seed=1000 + int(self.cfg['seed']) * 100000 + self.gen)
+                                           seed=1000 + int(self.cfg['seed']) * 100000 + self.gen, w_max=float(self.cfg['w_max']))
         order = np.argsort(scores)                  # best (lowest) first
         best = int(order[0])
         record = dict(

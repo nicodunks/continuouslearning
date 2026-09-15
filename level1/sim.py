@@ -16,13 +16,16 @@ import numpy as np
 DT, T_OUT, T_RET = 0.1, 30.0, 60.0        # tick, outbound seconds, max return seconds
 N = 8                                     # direction columns
 COLS = np.arange(N) * 2 * np.pi / N       # their angles: 0, 45°, 90° ... in radians
-TONIC = 0.3                               # background read-out drive so every column speaks a little
+TONIC = 0.3
+W_MAX = 40.0    # a synapse cannot grow forever.  One trip writes roughly 30 units across the columns, so a board
+                # that is never erased hits this ceiling within a couple of trips and can no longer record new steps.
+                # This is WHY a reset is needed at all; without a ceiling the search finds it can skip erasing.                               # background read-out drive so every column speaks a little
 
 DIALS = ['write', 'speed_dep', 'erase', 'fade', 'rot', 'gain']   # the six blanks, in this order
 FLY = dict(write=1.0, speed_dep=1.0, erase=1.0, fade=0.0, rot=180.0, gain=3.0)   # what we believe the fly does
 
 
-def score_population(params, lanes=10, trips_per_lane=3, seed=0):
+def score_population(params, lanes=10, trips_per_lane=3, seed=0, w_max=W_MAX):
     """Score every candidate in `params` on the same random trips.
 
     params : dict  dial name -> numpy array of shape (pop,)   one value per candidate
@@ -46,16 +49,22 @@ def score_population(params, lanes=10, trips_per_lane=3, seed=0):
         hd = rng.uniform(0, 2 * np.pi, M)
         speed = np.ones(M); pause = np.zeros(M, int)
         min_d = np.full(M, np.inf); arrived = np.zeros(M, bool)
+        since_arrival = np.zeros(M, int)     # ticks since arriving; after 5 the agent is 'done' and frozen
 
         for k in range(n_ticks):
             t = k * DT
             returning = t >= T_OUT                            # the switch: brain may drive the legs
-            at_food = (t < 0.5) | arrived                     # first half second, or after arriving
+            # At food for the first half second, and for half a second after arriving.  After that the
+            # agent is DONE: nothing updates, so 'standing still after arriving' is not a window a brain
+            # could exploit as an erase trigger.  Erase has to happen while food is actually present.
+            done = since_arrival >= 5
+            active = ~done
+            at_food = ((t < 0.5) | arrived) & active
 
             # ---- speed: slow drift, occasional pauses, zero while at food ----
             in_pause = pause > 0
             pause = np.where(in_pause, pause - 1, pause)
-            start_pause = (~in_pause) & (rng.random(M) < 0.01)               # 1 % chance per tick
+            start_pause = (~in_pause) & (rng.random(M) < 0.02)               # 2 % chance per tick
             pause = np.where(start_pause, (rng.uniform(1, 3, M) / DT).astype(int), pause)
             speed = np.clip(speed + 0.3 * rng.normal(size=M) * np.sqrt(DT) + 0.2 * (1 - speed) * DT, 0.3, 1.7)
             speed = np.where(in_pause | at_food, 0.0, speed)
@@ -68,8 +77,10 @@ def score_population(params, lanes=10, trips_per_lane=3, seed=0):
             wsig = P['speed_dep'] * speed + (1 - P['speed_dep']) * moving
 
             # ---- THE TALLY UPDATE.  This line is the continual learning. ----
-            W += DT * (P['write'][:, None] * wsig[:, None] * cells - P['fade'][:, None] * W)
+            dW = DT * (P['write'][:, None] * wsig[:, None] * cells - P['fade'][:, None] * W)
+            W += dW * active[:, None]
             W *= np.where(at_food, 1 - P['erase'], 1.0)[:, None]      # erase at food (erase=1 wipes clean)
+            np.minimum(W, w_max, out=W)                                # saturation: no column above the ceiling
 
             # ---- reader: tallies read through current cell activity, summed as arrows ----
             act = W * (cells + TONIC)
@@ -90,6 +101,7 @@ def score_population(params, lanes=10, trips_per_lane=3, seed=0):
             if returning:
                 min_d = np.minimum(min_d, d)
                 arrived |= d < 0.5
+            since_arrival += arrived
 
         total_min += min_d
         total_arr += arrived

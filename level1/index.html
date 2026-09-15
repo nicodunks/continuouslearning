@@ -65,7 +65,8 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:6px;paddin
     <label class="f"><span>Population<small>candidates per generation</small></span><input type="number" id="c_pop" value="24" min="4"></label>
     <label class="f"><span>Keep<small>survivors, copied unchanged</small></span><input type="number" id="c_keep" value="6" min="1"></label>
     <label class="f"><span>Lanes<small>agents per candidate, side by side</small></span><input type="number" id="c_lanes" value="10" min="1"></label>
-    <label class="f"><span>Trips per lane<small>in a row, tallies carried over</small></span><input type="number" id="c_tpl" value="3" min="1"></label>
+    <label class="f"><span>Trips per lane<small>in a row, tallies carried over</small></span><input type="number" id="c_tpl" value="5" min="1"></label>
+    <label class="f"><span>Tally ceiling<small>synapses saturate; why a reset is needed</small></span><input type="number" id="c_wmax" value="40" step="5" min="1"></label>
     <label class="f"><span>Nudge<small>fraction of each dial's range</small></span><input type="number" id="c_nudge" value="0.08" step="0.01" min="0"></label>
     <label class="f"><span>Seed<small>change for a different random start</small></span><input type="number" id="c_seed" value="0"></label>
     <h2 style="margin-top:14px">Dial ranges and start</h2>
@@ -84,7 +85,7 @@ pre{background:var(--code);border:1px solid var(--line);border-radius:6px;paddin
       </div>
       <div class="kpi"><div><b id="kGen">0</b><span>generation</span></div><div><b id="kBest">–</b><span>best score</span></div><div><b id="kArr">–</b><span>best: trips arrived</span></div><div><b id="kMean">–</b><span>population mean</span></div><div><b id="kTime">–</b><span>s per generation</span></div></div>
       <canvas id="scoreChart" width="860" height="220"></canvas>
-      <div class="legend"><span><i style="background:var(--ink)"></i>best score</span><span><i style="background:var(--ink-3)"></i>population mean</span><span><i style="background:var(--teal)"></i>fly's settings would score about 0.9</span></div>
+      <div class="legend"><span><i style="background:var(--ink)"></i>best score</span><span><i style="background:var(--ink-3)"></i>population mean</span><span><i style="background:var(--teal)"></i>fly's settings score about 0.6</span></div>
     </div>
     <div class="two">
       <div class="panel"><h2>Where the dials are going</h2><canvas id="dialChart" width="420" height="240"></canvas><div class="legend" id="dialLegend"></div><p class="note">Best candidate's dials, scaled to their range, accumulating over generations. Dashed: the fly's answer.</p></div>
@@ -115,7 +116,7 @@ const rangesEl=$('ranges');
 const DEF={write:[0,2],speed_dep:[0,1],erase:[0,1],fade:[0,0.2],rot:[0,360],gain:[0,6]};
 DIALS.forEach(k=>{rangesEl.insertAdjacentHTML('beforeend',`<b>${NAMES[k]}</b><input type="number" id="lo_${k}" value="${DEF[k][0]}" step="any"><input type="number" id="hi_${k}" value="${DEF[k][1]}" step="any"><input type="text" id="st_${k}" placeholder="random">`);});
 function config(){const ranges={},start={};let anyStart=false;DIALS.forEach(k=>{ranges[k]=[+$('lo_'+k).value,+$('hi_'+k).value];const s=$('st_'+k).value.trim();if(s!==''){start[k]=+s;anyStart=true;}});
-  return{pop:+$('c_pop').value,keep:+$('c_keep').value,lanes:+$('c_lanes').value,trips_per_lane:+$('c_tpl').value,nudge:+$('c_nudge').value,seed:+$('c_seed').value,ranges,start:anyStart?start:null};}
+  return{pop:+$('c_pop').value,keep:+$('c_keep').value,lanes:+$('c_lanes').value,trips_per_lane:+$('c_tpl').value,nudge:+$("c_nudge").value,seed:+$("c_seed").value,w_max:+$("c_wmax").value,ranges,start:anyStart?start:null};}
 $('flyStart').addEventListener('click',()=>{if(!state)return;DIALS.forEach(k=>$('st_'+k).value=state.fly[k]);});
 
 // ---- api ----

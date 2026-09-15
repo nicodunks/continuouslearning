@@ -85,7 +85,7 @@ const $=id=>document.getElementById(id);const cv=n=>getComputedStyle(document.do
 let runs=[],cur=null,log=null,test=null;
 async function api(p,b){const r=await fetch(p,b?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}:undefined);return r.json();}
 function axes(c,L,B){const x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle=cv('--line');x.beginPath();x.moveTo(L,10);x.lineTo(L,h-B);x.lineTo(w-10,h-B);x.stroke();x.fillStyle=cv('--ink-3');x.font='11px IBM Plex Mono';return x;}
-async function refreshRuns(){runs=await api('/api/runs');const s=$('run');const prev=s.value;s.innerHTML='';runs.forEach(r=>{const o=document.createElement('option');o.value=r.run;o.textContent=r.run;s.appendChild(o);});if(!runs.length){const o=document.createElement('option');o.value='run1';o.textContent='run1';s.appendChild(o);}s.value=prev||(runs[0]?runs[0].run:'run1');cur=s.value;}
+async function refreshRuns(){runs=await api('/api/runs');const s=$('run');const prev=s.value;s.innerHTML='';runs.forEach(r=>{const o=document.createElement('option');o.value=r.run;o.textContent=r.run;s.appendChild(o);});if(!runs.length){const o=document.createElement('option');o.value='run1';o.textContent='run1';s.appendChild(o);}const want=new URLSearchParams(location.search).get('run');s.value=want||prev||(runs[0]?runs[0].run:'run1');cur=s.value;document.title='Level 3 · '+cur;}
 async function refresh(){log=await api('/api/log?run='+cur);const L=log.lines,last=L[L.length-1];const st=log.status||{};
   $('pill').textContent=log.alive?'running':(st.msg||'idle');$('pill').className='pill '+(log.alive?'run':st.msg==='finished'?'done':'');
   $('kIt').textContent=st.it||0;$('kStage').textContent=last?`${last.stage} · ${last.t_out}`:'–';$('kScore').textContent=last?last.running.toFixed(2):'–';$('kArr').textContent=last?Math.round(last.arrived*100)+'%':'–';$('kSec').textContent=last?last.sec_per_iter.toFixed(2):'–';
@@ -128,7 +128,7 @@ function drawInside(){$('inside').hidden=false;
   {const c=$('aheat'),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);const A=test.A_heat,n=A.length,mx=Math.max(...A.flat().map(Math.abs))+1e-9,cw=(W-20)/n,ch=(H-30)/n;x.fillStyle=cv('--ink-3');x.font='10px IBM Plex Mono';x.fillText('row = receiving neuron, column = sending neuron',10,14);
    for(let i=0;i<n;i++)for(let j=0;j<n;j++){const v=A[i][j];x.fillStyle=v>0?cv('--amber'):cv('--red');x.globalAlpha=Math.abs(v)/mx;x.fillRect(10+j*cw,20+i*ch,cw,ch);}x.globalAlpha=1;
    $('aNote').textContent=`mean |A| ${test.A_abs_mean.toFixed(3)}, write strength ${test.ws.toFixed(3)}. Bright cells are connections whose fast strength counts most.`;}}
-$('run').addEventListener('change',async()=>{cur=$('run').value;await refresh();await loadTest();});
+$('run').addEventListener('change',async()=>{cur=$('run').value;history.replaceState(null,'','?run='+cur);document.title='Level 3 · '+cur;await refresh();await loadTest();});
 $('start').addEventListener('click',async()=>{await api('/api/start',{run:cur});setTimeout(refresh,1500);});
 $('stop').addEventListener('click',async()=>{await api('/api/stop',{run:cur});setTimeout(refresh,1500);});
 $('runTest').addEventListener('click',async()=>{$('testNote').textContent='running… (about a minute)';const r=await api('/api/test',{run:cur,ckpt:$('ckpt').value,t_out:+$('tOut').value});$('testNote').textContent=r.ok?'done':'failed: '+r.log.slice(-300);await loadTest();});

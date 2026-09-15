@@ -74,7 +74,7 @@ with torch.no_grad():
 json.dump(dict(
     ckpt=args.ckpt, t_out=args.t_out, batch=args.batch, bars=bars, n=n,
     tuning=dict(curves=tuning[order[:16]].tolist(), strength=strength[order[:16]].tolist(), neurons=order[:16].tolist(),
-                n_tuned=int((strength > 0.25).sum())),
+                n_tuned=int((strength > 0.25).sum()), all_curves=tuning.tolist(), all_strength=strength.tolist()),
     traces=dict(t=[k * DT for k in range(len(hds))], speed=speeds, food=foods, write=[g[0] for g in gates], erase=[g[1] for g in gates],
                 dist=rec['traces']['dist'][:len(hds)], F=Fm.t().tolist(), F_conn=[[i, j, float(A[i, j])] for i, j in zip(ii, jj)]),
     A_heat=A.tolist(), A_abs_mean=float(A.abs().mean()), ws=float(net.ws),

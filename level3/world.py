@@ -17,7 +17,8 @@ W_MAX = 40.0          # tally ceiling (used by the hand brain; FlyNet clamps F t
 ERASE_PENALTY = 0.05  # weight of the "erase open without food" penalty in the loss
 
 
-def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False):
+def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5):
+    # food_stand: seconds spent standing at food at the start of a trip and after arriving (run 3 raises it to 2 s)
     """Run one episode of `trips` trips for `batch` agents.  `brain` must implement:
          brain.reset_fast(batch)   -> start of episode: fast state to zero
          brain.reset_activity()    -> start of each trip: activity to zero (fast state untouched)
@@ -29,6 +30,7 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
 
     t_ret = 2.0 * t_out
     n_ticks = int(round((t_out + t_ret) / DT))
+    food_ticks = int(round(food_stand / DT))
     brain.reset_fast(batch)
     dist_terms, pen_terms, score_terms, arr_terms = [], [], [], []
     traces = {k: [] for k in ('t', 'speed', 'food', 'write', 'erase', 'dist', 'hd')} if record else None
@@ -47,9 +49,9 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
         for k in range(n_ticks):
             t = k * DT
             returning = t >= t_out
-            done = since_arrival >= 5
+            done = since_arrival >= food_ticks
             active = ~done
-            at_food = ((t < 0.5) | arrived) & active
+            at_food = ((t < food_stand) | arrived) & active
             food = at_food.float()
 
             # ---- speed: drift, pauses, zero at food / when done ----
@@ -86,7 +88,7 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
                 traces['erase'].append(float(erase[0])); traces['dist'].append(float(d[0])); traces['hd'].append(float(hd[0]))
         score_terms.append(min_d); arr_terms.append(arrived.float())
 
-    loss = torch.stack(dist_terms).mean() + ERASE_PENALTY * torch.stack(pen_terms).mean()
+    loss = torch.stack(dist_terms).mean() + erase_penalty * torch.stack(pen_terms).mean()
     out = dict(loss=loss, score=float(torch.stack(score_terms).mean()), arrived=float(torch.stack(arr_terms).mean()))
     if record: out['traces'] = traces
     return out

@@ -18,6 +18,8 @@ p.add_argument('--batch', type=int, default=32); p.add_argument('--stages', defa
 p.add_argument('--stage_cap', type=int, default=1500); p.add_argument('--promote', type=float, default=1.5)
 p.add_argument('--lr', type=float, default=1e-3); p.add_argument('--neurons', type=int, default=64)
 p.add_argument('--use_fast', type=int, default=1); p.add_argument('--init', default='')
+p.add_argument('--erase_penalty', type=float, default=0.05)   # the exam's charge for erasing with no food present
+p.add_argument('--food_stand', type=float, default=0.5)       # seconds at food per trip; more ticks of food = more signal for the erase gate
 args = p.parse_args()
 
 RUN = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'runs', args.run); os.makedirs(RUN, exist_ok=True)
@@ -38,11 +40,11 @@ if os.path.exists(CK):                                          # resume
 def drift_check(t_out, seed):
     """Frozen network on fresh trips: F allowed vs F held at zero.  The gap is where the memory lives."""
     with torch.no_grad():
-        a = run_episode(net, batch=64, t_out=t_out, seed=seed)
+        a = run_episode(net, batch=64, t_out=t_out, seed=seed, food_stand=args.food_stand)
         net.zero_F = True
-        b = run_episode(net, batch=64, t_out=t_out, seed=seed)
+        b = run_episode(net, batch=64, t_out=t_out, seed=seed, food_stand=args.food_stand)
         net.zero_F = False
-        rec = run_episode(net, batch=1, t_out=t_out, seed=seed + 1, record=True)
+        rec = run_episode(net, batch=1, t_out=t_out, seed=seed + 1, record=True, food_stand=args.food_stand)
     return dict(score_F=a['score'], arrived_F=a['arrived'], score_noF=b['score'], arrived_noF=b['arrived'], traces=rec['traces'])
 
 
@@ -55,7 +57,7 @@ write_status('running')
 t_last = time.time()
 while state['it'] < args.iters:
     it = state['it']; t_out = stages[min(state['stage'], len(stages) - 1)]
-    r = run_episode(net, batch=args.batch, t_out=t_out, seed=10000 + it)
+    r = run_episode(net, batch=args.batch, t_out=t_out, seed=10000 + it, erase_penalty=args.erase_penalty, food_stand=args.food_stand)
     opt.zero_grad(); r['loss'].backward()
     torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0); opt.step()
     state['recent'] = (state['recent'] + [r['score']])[-50:]

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 3 Training Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#EEF1F4; --panel:#F8F9FA; --ink:#1B2330; --ink-2:#4A5563; --ink-3:#8A94A2; --line:#D3D9E0; --code:#E8ECF0;
+  --amber:#E08A2E; --amber-soft:#F6E3C8; --teal:#1F8A8A; --teal-soft:#CDE8E6; --red:#C24A3A; --red-soft:#F5DAD5; --blue:#2E6FB5; --purple:#6C5CE7;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --serif:'Source Serif 4',Georgia,serif; --disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3B1E1B;--blue:#5B97DB;--purple:#9B8CFF}}
+:root[data-theme="dark"]{--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3B1E1B;--blue:#5B97DB;--purple:#9B8CFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.6;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--disp);text-wrap:balance;line-height:1.12;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:27px;margin-bottom:8px}
+h3{font-size:19px;margin:22px 0 6px}
+p{max-width:64ch;margin:0 0 12px}
+ul,ol{max-width:64ch;padding-left:22px;margin:0 0 12px}
+li{margin-bottom:5px}
+.lede{font-size:20px;color:var(--ink-2)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+header{padding-block:56px 28px;border-bottom:1px solid var(--line)}
+section{padding-block:40px;border-bottom:1px solid var(--line)}
+.note{font-size:14.5px;color:var(--ink-2)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.goal{background:var(--ink);color:var(--bg);border-radius:8px;padding:20px 24px;margin-top:18px}
+.goal .eyebrow{color:var(--amber)}
+.goal p{color:var(--bg);font-size:20px;font-family:var(--disp);font-weight:500;margin:0;max-width:none;line-height:1.3}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.toc a{font-family:var(--disp);font-weight:700;font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--panel)}
+.machine{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:14px}
+.num{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.num b{font-family:var(--mono);font-size:17px;font-weight:500;display:block}
+.num span{font-size:13px;color:var(--ink-2)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-top:14px}
+@media (max-width:820px){.stage{grid-template-columns:1fr}}
+canvas{max-width:100%;display:block}
+button{font-family:var(--disp);font-weight:700;font-size:13px;padding:7px 12px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+button.quiet{background:transparent;color:var(--ink)}
+button.on{background:var(--amber);border-color:var(--amber);color:#1B2330}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.slider{display:flex;flex-direction:column;gap:3px;margin:8px 0}
+.slider label{display:flex;justify-content:space-between;font-family:var(--disp);font-weight:700;font-size:14px}
+.slider input{width:100%;accent-color:var(--amber)}
+.timeline{display:grid;grid-template-columns:110px 1fr;gap:0;margin-top:16px;border-left:2px solid var(--line);margin-left:6px}
+.day{padding:10px 0 18px 18px;position:relative}
+.day::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--ink)}
+.day.hot::before{background:var(--amber)}
+.day .d{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.day h3{margin:2px 0 4px;font-size:18px}
+.day p{font-size:15.5px;margin-bottom:6px}
+.check{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font-size:14.5px;max-width:64ch;margin:6px 0}
+.check b{font-family:var(--disp);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);display:block}
+.callout{border-left:3px solid var(--amber);padding-left:14px;margin:14px 0;color:var(--ink-2);max-width:64ch}
+.callout b{color:var(--ink);font-family:var(--disp)}
+.warn{border-left:3px solid var(--red);padding-left:14px;margin:12px 0;color:var(--ink-2);font-size:15.5px;max-width:64ch}
+table{border-collapse:collapse;font-size:14.5px;width:100%;margin:10px 0 14px}
+td,th{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+td:first-child{font-family:var(--disp);font-weight:700}
+td.n,th.n{text-align:right;font-family:var(--mono)}
+.matrix{overflow-x:auto}.matrix table{min-width:600px}
+.dec{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.d1{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:10px 18px;align-items:start}
+@media (max-width:640px){.d1{grid-template-columns:1fr}}
+.d1 h4{font-size:16px;margin:0 0 3px}
+.d1 p{font-size:14.5px;margin:0;color:var(--ink-2)}
+.d1 .opts{display:flex;gap:6px;flex-wrap:wrap}
+.d1 .opts button{font-size:12px;padding:5px 9px}
+.d1 .why{grid-column:1/-1;font-size:14px;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:8px;margin-top:2px}
+.kpi{display:flex;gap:24px;flex-wrap:wrap;margin:10px 0}
+.kpi div{font-family:var(--mono)}
+.kpi b{display:block;font-size:24px;font-weight:500}
+.kpi span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.tree{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.sym{display:flex;gap:8px;flex-wrap:wrap}
+.sym button{font-size:13px}
+.fix{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-size:15px;max-width:70ch;min-height:60px}
+.fix b{font-family:var(--disp);display:block;margin-bottom:4px}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:12px}
+.file{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.file b{font-family:var(--mono);font-size:13px;display:block;color:var(--amber)}
+.file span{font-size:13.5px;color:var(--ink-2)}
+.todo{list-style:none;padding:0;max-width:70ch}
+.todo li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line);font-size:15px}
+.todo input{margin-top:5px;accent-color:var(--teal)}
+.todo .who{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-left:auto;white-space:nowrap}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:6px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Level 3 · plan before code · September 2026</div>
+  <h1>Level 3 Training Plan</h1>
+  <p class="lede">How we train a 64-neuron network, from random numbers, to find its way home by rewriting its own connections. What gets built, in what order, why each choice, what the machine will do, how long it takes, how we know it worked, and what to do when it does not. Nothing here has run yet.</p>
+  <div class="goal"><div class="eyebrow">What "done" means</div><p>A frozen network that homes on trips it has never seen, and gets lost when its fast strengths are held at zero. Same 8,700 numbers both times. The gap is the memory.</p></div>
+  <nav class="toc"><a href="#machine">The machine</a><a href="#build">Build order</a><a href="#decisions">Decisions</a><a href="#compute">Compute</a><a href="#curriculum">Curriculum</a><a href="#checks">Checks</a><a href="#success">Success</a><a href="#playbook">If it fails</a><a href="#files">Files</a><a href="#go">Go list</a></nav>
+</header>
+
+<section id="machine">
+  <h2>The machine we will run on</h2>
+  <p>Checked today. PyTorch is installed and can use the Apple GPU (MPS). Nothing about this plan needs a cloud machine.</p>
+  <div class="machine">
+    <div class="num"><b>Apple M5 Max</b><span>CPU and GPU</span></div>
+    <div class="num"><b>137 GB</b><span>memory · far more than needed</span></div>
+    <div class="num"><b>torch 2.8.0</b><span>installed · MPS available</span></div>
+    <div class="num"><b>numpy 2.0</b><span>for the world checks</span></div>
+  </div>
+  <div class="callout"><b>Why this matters.</b> One training iteration is 64 agents, 1,800 ticks each, a 64-by-64 multiply per tick, then the same again backwards. That is small. The laptop does it in seconds per iteration. The whole first run is an evening, not a week. The GPU helps but is not required.</div>
+</section>
+
+<section id="build">
+  <h2>Build order, and why that order</h2>
+  <p>Each step is checked before the next starts, so a bug is found where it was made. The rule that shaped this order: never debug the network and the world at the same time.</p>
+  <div class="timeline">
+    <div class="day"><div class="d">Step 1 · half a day</div><h3>The world in PyTorch</h3><p>Port the level 2 world exactly: drifting speed, pauses, half a second at food, the tally ceiling, the freeze after arrival, 64 agents side by side, two trips per episode. Every operation must be one PyTorch can trace backwards.</p><div class="check"><b>Check before moving on</b>Drop the level 1 hand-built brain into it. It must score about 0.6, the same as in numpy. If it does not, the world is wrong and nothing after it means anything.</div></div>
+    <div class="day"><div class="d">Step 2 · half a day</div><h3>The network</h3><p>FlyNet as on the roadmap: input weights, W, A, output weights, write strength, the Hebbian rule with two gates. Plus one switch that disables A, which gives us brain B and the level 4 rival for free.</p><div class="check"><b>Check</b>An untrained network runs an episode without errors and scores about 7, a random walk. Then fifty iterations of training: the score must move. If it sits at 7.0 exactly, gradients are not flowing.</div></div>
+    <div class="day hot"><div class="d">Step 3 · overnight</div><h3>Train, with a curriculum</h3><p>Ten-second wanders first, then twenty, then thirty. Each stage starts from the last stage's numbers. Checkpoints saved every 100 iterations. A training page shows the score, the gates on a sample trip, and the F-zeroed score at every checkpoint, so we watch where the memory is going as it learns.</p><div class="check"><b>Check</b>Ten-second stage under 1.5 within a few hundred iterations. Thirty-second stage under 1.5 by the morning.</div></div>
+    <div class="day hot"><div class="d">Step 4 · half a day</div><h3>Freeze and test</h3><p>Load the best checkpoint. Run brain A (F allowed), brain B (F held at zero), brain C (random walk) on the same 200 trips. The three-bar chart.</p><div class="check"><b>Check</b>A under 1.5, B near 7. That is the goal. Any other pattern goes to the playbook below.</div></div>
+    <div class="day"><div class="d">Step 5 · half a day</div><h3>Look inside</h3><p>Four pictures: each neuron's activity around the compass, F on the highest-A connections over a trip, the two gates against speed and food, and a heatmap of A itself, which is a map of where training put the tally board.</p></div>
+    <div class="day"><div class="d">Step 6 · a day</div><h3>Write it up</h3><p>A fifth findings page: what was known, what we found, why it matters, what the evidence is. With the caveats: the shape of the rule was ours, 64 neurons was ours, the world is a plane with a perfect compass.</p></div>
+  </div>
+</section>
+
+<section id="decisions">
+  <h2>Decisions, with the default and the reason</h2>
+  <p>Click an option to read what it would change. The highlighted one is what we will run first. None of these is sacred; they are the choices that let a first run be interpretable.</p>
+  <div class="dec" id="decs"></div>
+</section>
+
+<section id="compute">
+  <h2>How long it takes</h2>
+  <p>Drag the sliders. The estimate is a rule of thumb calibrated to what small recurrent networks cost on a laptop; step 2 replaces it with a measured number. Treat it as within a factor of two.</p>
+  <div class="stage">
+    <div class="panel">
+      <div class="slider"><label for="cN"><span>Neurons</span><span class="mono" id="cNv">64</span></label><input type="range" id="cN" min="16" max="256" step="16" value="64"></div>
+      <div class="slider"><label for="cB"><span>Agents side by side (batch)</span><span class="mono" id="cBv">64</span></label><input type="range" id="cB" min="16" max="256" step="16" value="64"></div>
+      <div class="slider"><label for="cT"><span>Wander seconds (return is 2×)</span><span class="mono" id="cTv">30</span></label><input type="range" id="cT" min="10" max="60" step="5" value="30"></div>
+      <div class="slider"><label for="cI"><span>Iterations</span><span class="mono" id="cIv">4000</span></label><input type="range" id="cI" min="500" max="10000" step="500" value="4000"></div>
+    </div>
+    <div class="panel">
+      <div class="kpi"><div><b id="kP">–</b><span>trained numbers</span></div><div><b id="kTk">–</b><span>ticks per episode</span></div><div><b id="kS">–</b><span>seconds per iteration</span></div><div><b id="kH">–</b><span>hours for the run</span></div></div>
+      <canvas id="cChart" width="440" height="160"></canvas>
+      <p class="note" id="cNote"></p>
+    </div>
+  </div>
+  <div class="callout"><b>What the number of neurons does to cost.</b> The two tables W and A are 64 × 64 each, and the multiply per tick is 64 × 64 per agent. Double the neurons and both quadruple. That is why 64 is the first run and 128 is a second experiment, not a default.</div>
+</section>
+
+<section id="curriculum">
+  <h2>The curriculum, and why not just train on 30-second trips</h2>
+  <p>Backpropagation through 900 ticks from a random start often finds nothing: the slope of the score with respect to something that happened 80 seconds earlier is tiny and noisy. Through 300 ticks it usually finds something. So we train on short trips first, then lengthen them once the network has a working memory, and let it stretch what it already has.</p>
+  <div class="stage">
+    <div class="panel">
+      <div class="slider"><label for="s1"><span>Stage 1 wander (s)</span><span class="mono" id="s1v">10</span></label><input type="range" id="s1" min="5" max="30" step="5" value="10"></div>
+      <div class="slider"><label for="s2"><span>Stage 2 wander (s)</span><span class="mono" id="s2v">20</span></label><input type="range" id="s2" min="5" max="45" step="5" value="20"></div>
+      <div class="slider"><label for="s3"><span>Stage 3 wander (s)</span><span class="mono" id="s3v">30</span></label><input type="range" id="s3" min="5" max="60" step="5" value="30"></div>
+      <div class="slider"><label for="sP"><span>Promote when score is under</span><span class="mono" id="sPv">1.5</span></label><input type="range" id="sP" min="0.8" max="3" step="0.1" value="1.5"></div>
+    </div>
+    <div class="panel"><canvas id="curChart" width="440" height="200"></canvas><div class="legend"><span><i style="background:var(--amber)"></i>expected score</span><span><i style="background:var(--teal)"></i>promotion line</span><span><i style="background:var(--ink-3)"></i>stage boundaries</span></div><p class="note">Illustrative shape: each stage starts with a bump, because longer trips are harder, and settles. Promotion happens when the score crosses the line.</p></div>
+  </div>
+</section>
+
+<section id="checks">
+  <h2>The checks along the way</h2>
+  <p>Each one is cheap and each one catches a class of bug before it costs a night. They run in this order, and none is skipped.</p>
+  <table>
+    <thead><tr><th>check</th><th>when</th><th>pass</th><th>what a fail means</th></tr></thead>
+    <tbody>
+      <tr><td>World check</td><td>after step 1</td><td>level 1 hand brain scores ≈ 0.6 in torch</td><td>the torch world differs from numpy; fix before anything else</td></tr>
+      <tr><td>Random check</td><td>after step 2</td><td>untrained net scores ≈ 7</td><td>the net is steering by accident, or the world is broken</td></tr>
+      <tr><td>Gradient check</td><td>50 iterations</td><td>score has moved from 7</td><td>gradients not flowing: a detach, a clamp, or a wrong loss</td></tr>
+      <tr><td>Stage check</td><td>each stage</td><td>under 1.5 before promotion</td><td>learning rate, neurons, or stage too long</td></tr>
+      <tr><td>Drift check</td><td>every checkpoint</td><td>F-zeroed score rising over training</td><td>if it stays low, the net is choosing activity; tighten the task early, not at the end</td></tr>
+      <tr><td>Frozen check</td><td>step 4</td><td>new-trip score within 20 % of training</td><td>memorised the training trips</td></tr>
+      <tr><td>F-zeroed check</td><td>step 4</td><td>score near 7</td><td>memory in activity: see playbook</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><b>The drift check is the one people skip.</b> Running the F-zeroed test only at the end tells you where the memory ended up. Running it at every checkpoint tells you where it was heading, so if the network is settling into the activity solution you find out at iteration 500 and can make the task harder then, instead of discovering it after a full night.</div>
+</section>
+
+<section id="success">
+  <h2>What success is</h2>
+  <p>Three brains, the same 200 trips, one number each. Brain A is the trained network. Brain B is the identical network with its fast strengths held at zero every tick. Brain C is a random walk. Click the outcomes.</p>
+  <div class="panel">
+    <div class="sym" style="margin-bottom:10px"><button id="o1" class="on">Success · memory in F</button><button id="o2" class="quiet">Failure · memory in activity</button><button id="o3" class="quiet">Failure · never learned</button></div>
+    <canvas id="bars" width="680" height="210"></canvas>
+    <p class="note" id="vd"></p>
+  </div>
+  <p style="margin-top:14px">The reason this is a clean test: A and B share every one of the 8,700 trained numbers, and the neuron activity is reset at the start of every trip. Between second 0 and second 30 of a trip, the only thing that can change is F. If A homes and B does not, whatever A learned during the trip lived in F.</p>
+</section>
+
+<section id="playbook">
+  <h2>If it fails, what each failure means</h2>
+  <p>Click the symptom you see.</p>
+  <div class="tree">
+    <div class="sym" id="syms"></div>
+    <div class="fix" id="fix"><b>Pick a symptom above.</b></div>
+  </div>
+</section>
+
+<section id="files">
+  <h2>What gets written</h2>
+  <p>All in a new <span class="mono">level3/</span> folder in the fork, next to levels 1 and 2, with the same local-app pattern: a Python server, a page with buttons and accumulating charts, and the source shown in tabs.</p>
+  <div class="files">
+    <div class="file"><b>world.py</b><span>The batched torch world. Speed drift, pauses, food stand, ceiling, arrival freeze. Returns the smooth loss.</span></div>
+    <div class="file"><b>flynet.py</b><span>The network and the rule. One flag disables A for brain B and the rival.</span></div>
+    <div class="file"><b>handbrain.py</b><span>The level 1 brain written in torch, for the world check only.</span></div>
+    <div class="file"><b>train.py</b><span>Curriculum, checkpoints every 100 iterations, the drift check, logs to a JSON the page reads.</span></div>
+    <div class="file"><b>test.py</b><span>Three brains on the same trips, the look-inside plots, saved as PNGs and JSON.</span></div>
+    <div class="file"><b>server.py + index.html</b><span>Start, pause, resume training; the charts; load a checkpoint; run the tests; the code tabs.</span></div>
+  </div>
+</section>
+
+<section id="go">
+  <h2>Go list</h2>
+  <p>Tick these off as we go. They are stored in this browser only.</p>
+  <ul class="todo" id="todo"></ul>
+</section>
+</div>
+
+<script>
+(function(){
+'use strict';
+const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const $=id=>document.getElementById(id);
+
+/* ---------- decisions ---------- */
+const DECS=[
+ {q:'Tally ceiling',opts:['keep the ceiling (default)','no ceiling'],why:['Real synapses cannot grow forever, and level 2 showed that without a ceiling the search learns it never needs to erase. Keeping it makes the erase gate necessary and is closer to biology.','Without it the network can skip erasing and still score well, and the erase gate becomes decoration. We already watched this happen at level 2.']},
+ {q:'Trips per episode',opts:['two (default)','one','five'],why:['Two is the minimum that makes erasing matter: trip 2 starts with trip 1 leftovers. Cheap enough to train through.','With one, F starts clean every time and the erase gate never has to exist. Fine for a first sanity run, wrong for the result.','Five makes erasing matter more and tests the running-average behaviour flies show, but doubles training time. Save for level 4.']},
+ {q:'Loss',opts:['distance, last 10 s (default)','distance at the final tick','arrived yes or no'],why:['Averaging over the last ten seconds is smooth and forgiving of a wobble at the very end. Every tiny improvement in steering shows up as a tiny drop, which is what gradients need.','A single tick is noisier; one unlucky wobble at second 90 can dominate the gradient.','A yes/no is a cliff. Gradient descent cannot see over it. This is the one choice that would break training outright.']},
+ {q:'Erase penalty',opts:['small penalty when no food (default)','none'],why:['A tiny cost for the erase gate being open when food is absent discourages the network from using a constant fade instead of a clean reset. Small enough not to fight the main loss.','Without it the network may learn a slow fade that works on 30-second trips and fails on long ones. Try it as a second run to see whether the penalty was needed.']},
+ {q:'Neurons',opts:['64 (default)','16','128'],why:['Room to build compass cells, a tally, gates and a steerer with slack, small enough to inspect and to train in an evening.','Not enough activity to hold a sum, so the network is pushed toward F. A good second run: if it homes at 16, it is almost certainly using fast weights.','More room, four times the cost. Try if 64 will not train at all.']},
+ {q:'Heading input',opts:['cos and sin (default)','raw angle'],why:['Two smooth numbers with no seam. A neuron can prefer any direction with two weights. Closest to how the compass ring reads out.','359 and 1 look far apart. The network wastes neurons learning that the circle wraps. Avoid.']},
+ {q:'Reset between trips',opts:['reset activity, keep F (default)','reset both','keep both'],why:['Only F can cross the boundary, so trip 2 leftovers are the erase gate\'s problem and nothing else\'s. Clean test.','Hands the network a clean board for free; the erase gate never needs to exist. Do not do this.','Activity could smuggle information across trips and muddy the F-zeroed test. Avoid for the first run.']},
+];
+const decEl=$('decs');
+DECS.forEach((d,i)=>{const el=document.createElement('div');el.className='d1';el.innerHTML=`<div><h4>${d.q}</h4><p>${d.opts[0].replace(' (default)','')} is the first run.</p></div><div class="opts">${d.opts.map((o,j)=>`<button class="${j?'quiet':'on'}" data-i="${i}" data-j="${j}">${o}</button>`).join('')}</div><div class="why">${d.why[0]}</div>`;decEl.appendChild(el);
+  el.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{el.querySelectorAll('button').forEach(o=>o.className='quiet');b.className='on';el.querySelector('.why').textContent=d.why[+b.dataset.j];}));});
+
+/* ---------- compute ---------- */
+function compute(){const N=+$('cN').value,B=+$('cB').value,T=+$('cT').value,I=+$('cI').value;
+  ['cN','cB','cT','cI'].forEach(k=>$(k+'v').textContent=$(k).value);
+  const params=4*N+N+N*N+N*N+3*N+3+1;
+  const ticks=2*Math.round(3*T/0.1)+10;
+  // rule of thumb: per tick per agent ~ 2*N*N flops fwd, x3 for bwd; laptop ~ 2e9 effective flops/s for these tiny ops, plus 40 µs per-tick overhead
+  const flops=ticks*B*2*N*N*3;const sec=flops/2e9+ticks*4e-5*3;
+  const hours=sec*I/3600;
+  $('kP').textContent=params.toLocaleString();$('kTk').textContent=ticks.toLocaleString();$('kS').textContent=sec.toFixed(1);$('kH').textContent=hours<1?(hours*60).toFixed(0)+' min':hours.toFixed(1);
+  $('cNote').textContent=hours<2?'An evening. Start it, read the charts after dinner.':hours<10?'Overnight. Start it before bed.':'Long. Use the curriculum so most iterations are on short trips, or a smaller batch.';
+  const c=$('cChart'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.fillStyle=cv('--ink-3');x.font='11px IBM Plex Mono';x.fillText('hours for the run, by neuron count (this batch, wander, iterations)',10,14);
+  const Ns=[16,32,64,128,256],L=34,Bm=26,W=w-L-12,H=h-Bm-24;x.strokeStyle=cv('--line');x.beginPath();x.moveTo(L,20);x.lineTo(L,h-Bm);x.lineTo(w-12,h-Bm);x.stroke();
+  const hrs=Ns.map(n=>{const f=ticks*B*2*n*n*3;return (f/2e9+ticks*4e-5*3)*I/3600;});const mx=Math.max(...hrs)*1.1;
+  Ns.forEach((n,i)=>{const bw=W/Ns.length*0.6,bx=L+(i+0.2)*W/Ns.length,bh=hrs[i]/mx*H;x.fillStyle=n===N?cv('--amber'):cv('--ink-3');x.fillRect(bx,h-Bm-bh,bw,bh);x.fillStyle=cv('--ink');x.fillText(hrs[i]<1?(hrs[i]*60).toFixed(0)+'m':hrs[i].toFixed(1)+'h',bx,h-Bm-bh-4);x.fillStyle=cv('--ink-3');x.fillText(n,bx+bw/2-8,h-Bm+14);});}
+['cN','cB','cT','cI'].forEach(k=>$(k).addEventListener('input',compute));compute();
+
+/* ---------- curriculum ---------- */
+function curriculum(){const s=[+$('s1').value,+$('s2').value,+$('s3').value],P=+$('sP').value;['s1','s2','s3'].forEach((k,i)=>$(k+'v').textContent=s[i]);$('sPv').textContent=P.toFixed(1);
+  const c=$('curChart'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);const L=30,Bm=24,W=w-L-10,H=h-Bm-14;x.strokeStyle=cv('--line');x.beginPath();x.moveTo(L,10);x.lineTo(L,h-Bm);x.lineTo(w-10,h-Bm);x.stroke();x.fillStyle=cv('--ink-3');x.font='11px IBM Plex Mono';x.fillText('7',L-12,16);x.fillText('0',L-12,h-Bm+3);x.fillText('iterations →',w/2-30,h-6);
+  const py=v=>h-Bm-Math.min(8,v)/8*H;x.strokeStyle=cv('--teal');x.setLineDash([4,3]);x.beginPath();x.moveTo(L,py(P));x.lineTo(w-10,py(P));x.stroke();x.setLineDash([]);
+  // each stage: starts at a bump proportional to length, decays toward floor ~0.7+0.01*len; stage length ∝ len
+  let pts=[],t=0;const bounds=[];s.forEach((len,i)=>{const dur=200+len*12,start=i?pts[pts.length-1][1]+len*0.08:7,floor=0.6+len*0.01;for(let k=0;k<dur;k+=4){pts.push([t+k,floor+(start-floor)*Math.exp(-k/(dur*0.3))]);}t+=dur;bounds.push(t);});
+  const tot=t;bounds.slice(0,-1).forEach(b=>{x.strokeStyle=cv('--ink-3');x.setLineDash([2,3]);x.beginPath();x.moveTo(L+b/tot*W,10);x.lineTo(L+b/tot*W,h-Bm);x.stroke();x.setLineDash([]);});
+  s.forEach((len,i)=>{const a=i?bounds[i-1]:0;x.fillStyle=cv('--ink-3');x.fillText(len+' s',L+(a+(bounds[i]-a)/2)/tot*W-10,22);});
+  x.strokeStyle=cv('--amber');x.lineWidth=2.5;x.beginPath();pts.forEach(([tt,v],i)=>{const px=L+tt/tot*W;i?x.lineTo(px,py(v)):x.moveTo(px,py(v));});x.stroke();}
+['s1','s2','s3','sP'].forEach(k=>$(k).addEventListener('input',curriculum));curriculum();
+
+/* ---------- success bars ---------- */
+let outcome=1;
+function bars(){const c=$('bars'),g=c.getContext('2d'),W=c.width,H=c.height;g.clearRect(0,0,W,H);const vals=outcome===1?[0.9,6.4,6.8]:outcome===2?[0.9,1.1,6.8]:[6.2,6.5,6.8];const names=['A · trained, F allowed','B · same brain, F held at 0','C · random walk'],cols=[cv('--amber'),cv('--blue'),cv('--ink-3')];
+  const L=40,B=40,bw=130,gap=70,x0=110,py=v=>H-B-v/8*(H-B-20);g.strokeStyle=cv('--line');g.beginPath();g.moveTo(L,10);g.lineTo(L,H-B);g.lineTo(W-16,H-B);g.stroke();g.fillStyle=cv('--ink-3');g.font='11px IBM Plex Mono';g.fillText('0',L-10,H-B+3);g.fillText('7 = random',L-10,py(7)+4);
+  g.strokeStyle=cv('--teal');g.setLineDash([4,3]);g.beginPath();g.moveTo(L,py(1.5));g.lineTo(W-16,py(1.5));g.stroke();g.setLineDash([]);g.fillStyle=cv('--teal');g.fillText('1.5 = homing well',W-120,py(1.5)-4);
+  vals.forEach((v,i)=>{const x=x0+i*(bw+gap);g.fillStyle=cols[i];g.fillRect(x,py(v),bw,H-B-py(v));g.fillStyle=cv('--ink');g.font='13px IBM Plex Mono';g.fillText(v.toFixed(1),x+bw/2-12,py(v)-6);g.fillStyle=cv('--ink-3');g.font='11px IBM Plex Mono';g.fillText(names[i],x-8,H-B+16);});
+  if(outcome===1){const x1=x0+bw/2,x2=x0+bw+gap+bw/2;g.strokeStyle=cv('--ink');g.beginPath();g.moveTo(x1,py(vals[0])-22);g.lineTo(x2,py(vals[1])-22);g.stroke();g.fillStyle=cv('--ink');g.font='12px IBM Plex Mono';g.fillText('this gap is the memory',x1+20,py(vals[1])-30);}
+  $('vd').textContent=outcome===1?'A homes. B, with the same 8,700 numbers, is lost. Only F could have made the difference. Goal reached.':outcome===2?'A homes, but so does B with F held at zero. F was doing nothing; the path was held in activity. Not the fly. See the playbook.':'A is no better than a random walk. It never learned to home. Fix training before asking where memory lives.';}
+[['o1',1],['o2',2],['o3',3]].forEach(([id,o])=>$(id).addEventListener('click',()=>{outcome=o;['o1','o2','o3'].forEach(j=>$(j).className='quiet');$(id).className='on';bars();}));bars();
+
+/* ---------- playbook ---------- */
+const SYMS=[
+ ['Score stuck at 7 after 50 iterations','Gradients are not reaching the slow weights. Look for a .detach(), an in-place operation on F, or a clamp that flattens everything. Test: make the loss depend only on the first tick\'s turn output and confirm it moves. Then widen from there.'],
+ ['Stage 1 never gets under 1.5','The short-trip stage is the easiest; if it fails, training is misconfigured rather than the task being hard. Lower Adam to 3e-4. Check the world with the hand brain again. If still stuck, try 128 neurons, then evolution on all parameters as a last resort.'],
+ ['Stage 3 much worse than stage 2','Long trips are where a leaky memory shows. Add an intermediate stage (25 s). Check the write strength: if it has shrunk toward zero, the network abandoned F and is trying to hold the sum in activity, which fails at length.'],
+ ['Frozen test far worse than training','Memorised the training trips. Confirm seeds are fresh each iteration. Widen the wandering (more turning noise) so trips are more varied. Increase batch.'],
+ ['F-zeroed score stays low','The memory is in activity. Not wrong, but not the fly. Options in order: 16 neurons; 60-second wander; compass drift of 0.05; a one-second activity blackout mid-trip. Retrain with one at a time and watch the drift check. When the F-zeroed score starts rising during training, the network has moved to F.'],
+ ['Erase gate always open','The network is using a constant fade instead of a reset. Raise the erase penalty. Confirm the ceiling is on. Try five trips per episode so leftovers hurt more.'],
+ ['Write gate always on','It writes at rest, which adds junk in the heading direction while standing. Usually harmless on 30-second trips; it will matter on long ones. Add a small penalty on write when speed is zero, or simply note it and test at length.'],
+ ['Trains, but A is near zero everywhere','A near zero means fast strengths are switched off and the net is pure activity. Same fix as F-zeroed-stays-low. Also try initialising A larger (0.1 instead of 0.01) so F counts from the start.'],
+];
+const symEl=$('syms');SYMS.forEach(([s,f],i)=>{const b=document.createElement('button');b.className='quiet';b.textContent=s;b.addEventListener('click',()=>{symEl.querySelectorAll('button').forEach(o=>o.className='quiet');b.className='on';$('fix').innerHTML=`<b>${s}</b>${f}`;});symEl.appendChild(b);});
+
+/* ---------- go list ---------- */
+const TODO=[['Confirm PyTorch and MPS on the laptop','done today'],['Write world.py and run the world check (hand brain ≈ 0.6)','step 1'],['Write flynet.py; random check ≈ 7; gradient check moves','step 2'],['Write train.py with curriculum, checkpoints, drift check','step 3'],['Start the overnight run; read charts in the morning','step 3'],['test.py: three brains on 200 trips; the bars','step 4'],['Look-inside plots: tuning, F traces, gates, A heatmap','step 5'],['If B is low: pick one tightening from the playbook, retrain','if needed'],['Write the findings page','step 6']];
+const todoEl=$('todo');let saved={};try{saved=JSON.parse(localStorage.getItem('l3todo')||'{}');}catch(e){}
+TODO.forEach(([t,w],i)=>{const li=document.createElement('li');li.innerHTML=`<input type="checkbox" id="td${i}" ${saved[i]?'checked':''}><label for="td${i}">${t}</label><span class="who">${w}</span>`;todoEl.appendChild(li);li.querySelector('input').addEventListener('change',e=>{saved[i]=e.target.checked;try{localStorage.setItem('l3todo',JSON.stringify(saved));}catch(err){}});});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "level1", "runtimeExecutable": "python3", "runtimeArgs": ["-u", "/Users/nico/Documents/GitHub/fly-circuit-exploration/level1/server.py"], "port": 8765, "autoPort": true }
+  ]
+}

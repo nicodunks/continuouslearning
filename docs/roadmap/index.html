@@ -490,7 +490,7 @@ distractor = np.clip(0.5 + 0.5*np.sin(0.7*s['t'] + 1.3) + 0.1*rng.normal(), 0, 1
   <p>The one fly-like thing it keeps: every connection has two strengths. A <b>slow</b> one, set by training and then frozen. And a <b>fast</b> one, starting at zero, changing while the model runs, by one simple rule. The network itself produces the write and erase signals that control the rule. So it decides, moment by moment, when to rewrite its own connections. This cannot be trained in a web page, so the two demos below teach the two ideas you need, and the code is complete.</p>
 
   <h3>Demo 1 · the rule that changes connections</h3>
-  <p>Six neurons and the table of fast strengths between them. Click neurons to switch them on or off. Set the write and erase gates. Press Tick. The rule: when write is on, the connection from j to i grows by <em>learning rate × write × x<sub>i</sub> × x<sub>j</sub></em>. When erase is on, every connection shrinks toward zero. This is "cells that fire together wire together," gated.</p>
+  <p>Six neurons and the table of fast strengths between them. Click neurons to switch them on or off. Set the write and erase gates. Press Tick. The rule: when write is on, the connection from j to i grows by <em>write strength × write × x<sub>i</sub> × x<sub>j</sub></em>. When erase is on, every connection shrinks toward zero. Write strength is the same idea as level 1's write dial: how much one tick of writing adds. It is one trained number that then stays fixed. It is not the learning rate that training uses, which is a different number and only exists while training runs. This is "cells that fire together wire together," gated.</p>
   <div class="hebb">
     <div class="panel">
       <div class="step">Neurons · click to toggle</div>
@@ -518,7 +518,7 @@ distractor = np.clip(0.5 + 0.5*np.sin(0.7*s['t'] + 1.3) + 0.1*rng.normal(), 0, 1
 
   <h3>The build, step by step</h3>
   <ol>
-    <li><b>Build the network</b> (code below). About 8,700 trained numbers: the input weights, the slow table W, the table A that says how much each connection may use its fast strength, the output weights, and the rule's learning rate.</li>
+    <li><b>Build the network</b> (code below). About 8,700 trained numbers: the input weights, the slow table W, the table A that says how much each connection may use its fast strength, the output weights, and the rule's write strength.</li>
     <li><b>Write the world in PyTorch</b>, running 64 trips side by side. Two trips per episode with F carried over, so the network must learn to erase.</li>
     <li><b>Train</b> for about 4,000 iterations. Loss starts near 7 (a random walk) and should fall below 1.5.</li>
     <li><b>Freeze and test</b> on 200 new trips. If it still homes, the fast strengths carried the memory. Then force F to zero every tick and confirm it now fails: that proves where the memory lived.</li>
@@ -538,7 +538,8 @@ N = 64   <span class="c"># neurons. Enough to hold a vector many ways; small eno
         self.W     = nn.Parameter(0.1*torch.randn(N, N))    <span class="c"># SLOW strengths, neuron j -> neuron i</span>
         self.A     = nn.Parameter(0.01*torch.randn(N, N))   <span class="c"># per-connection: how much FAST strength counts</span>
         self.W_out = nn.Linear(N, 3)      <span class="c"># 64 neurons -> 3 outputs: turn, write gate, erase gate</span>
-        self.lr    = nn.Parameter(torch.tensor(0.1))        <span class="c"># the rule's learning rate, also trained</span>
+        self.ws    = nn.Parameter(torch.tensor(0.1))        <span class="c"># the rule's WRITE STRENGTH (level 1's write dial), also trained.</span>
+                                                             <span class="c"># Not the training learning rate: that one belongs to Adam, below.</span>
 
     <span class="k">def</span> start(self, batch):
         <span class="c"># Fresh neurons (all 0) and a fresh fast table (all 0) for each of `batch` trips.</span>
@@ -562,7 +563,7 @@ N = 64   <span class="c"># neurons. Enough to hold a vector many ways; small eno
         <span class="c"># hebb[i][j] = x_new[i] * x_old[j]: big when both ends are active together.</span>
         hebb = x_new.unsqueeze(2) * x.unsqueeze(1)        <span class="c"># outer product, shape [batch, N, N]</span>
         <span class="c"># [:, None, None] reshapes the per-trip gate so it multiplies a whole table.</span>
-        F = (1 - erase[:, None, None]) * F + self.lr * write[:, None, None] * hebb
+        F = (1 - erase[:, None, None]) * F + self.ws * write[:, None, None] * hebb
         F = F.clamp(-1, 1)                         <span class="c"># fast strengths can never blow up</span>
         <span class="k">return</span> x_new, F, turn, write, erase</pre>
   </div></details>
@@ -606,6 +607,7 @@ DT, T_OUT, T_RET = 0.1, 30.0, 60.0
 torch.manual_seed(0)
 net = FlyNet()
 <span class="c"># Adam: gradient descent with a per-number adaptive step. lr=1e-3 is the usual safe start.</span>
+<span class="c"># THIS is the learning rate: how far each slow parameter moves per training step. Gone after training.</span>
 opt = torch.optim.Adam(net.parameters(), lr=1e-3)
 
 <span class="k">for</span> it <span class="k">in</span> range(4000):
@@ -714,6 +716,8 @@ net.load_state_dict(torch.load('flynet.pt')); net.eval()
 <section id="words">
   <h2>Words that came up</h2>
   <dl>
+    <dt>Write strength</dt><dd>How much one tick of writing adds to a fast weight. Level 1's write dial; in level 3, one trained number inside the rule. Not the same thing as the learning rate.</dd>
+    <dt>Learning rate</dt><dd>The step size gradient descent uses to move the slow weights during training. Only exists while training runs. The confusing part is that the field uses the same words for the write strength inside a plasticity rule; this page does not.</dd>
     <dt>Fast weights</dt><dd>Connection strengths that change while the model runs. The tally marks. In level 3, the table F.</dd>
     <dt>Slow weights</dt><dd>Set by training, then frozen. The wiring and the rulebook. In the fly, the genes. In level 3, W, A and the rest.</dd>
     <dt>Loop gain</dt><dd>How much an activity memory multiplies itself by each moment. Must be exactly 1 to hold a number. The slider at the top.</dd>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 3 Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#EEF1F4;--panel:#F8F9FA;--ink:#1B2330;--ink-2:#4A5563;--ink-3:#8A94A2;--line:#D3D9E0;--code:#E8ECF0;--amber:#E08A2E;--amber-soft:#F6E3C8;--teal:#1F8A8A;--teal-soft:#CDE8E6;--red:#C24A3A;--blue:#2E6FB5;--purple:#6C5CE7;
+ --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--serif:'Source Serif 4',Georgia,serif;--disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme: dark){:root{--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--blue:#5B97DB;--purple:#9B8CFF}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.5;padding-inline:20px;padding-block:0 60px}
+.wrap{max-width:1200px;margin:0 auto}
+h1,h2,h3{font-family:var(--disp);line-height:1.1;margin:0}
+h1{font-size:30px;font-weight:700}
+h2{font-size:14px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+header{padding-block:24px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px}
+.sub{color:var(--ink-2);font-size:14px;max-width:80ch}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;margin-top:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.grid3{grid-template-columns:1fr}}
+button{font-family:var(--disp);font-weight:700;font-size:13px;padding:7px 12px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+button.quiet{background:transparent;color:var(--ink)}
+button:disabled{opacity:.4;cursor:default}
+select,input[type=number]{font-family:var(--mono);font-size:13px;padding:5px 7px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink)}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.kpi{display:flex;gap:22px;flex-wrap:wrap;margin:8px 0 4px}
+.kpi div{font-family:var(--mono)}
+.kpi b{display:block;font-size:24px;font-weight:500}
+.kpi span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+canvas{max-width:100%;display:block}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:6px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
+.note{font-size:13px;color:var(--ink-2)}
+.status{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.pill{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--line)}
+.pill.run{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+.pill.done{background:var(--teal-soft);color:var(--teal);border-color:transparent}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tabs button{font-size:12px;padding:5px 10px}
+.tabs button.on{background:var(--amber);border-color:var(--amber);color:#1B2330}
+pre{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:12px;overflow:auto;font-family:var(--mono);font-size:12px;line-height:1.5;max-height:520px;margin:0}
+.verdict{font-family:var(--disp);font-weight:700;font-size:14px;padding:8px 12px;border-radius:4px;background:var(--amber-soft);color:var(--amber);margin-top:8px}
+.verdict.ok{background:var(--teal-soft);color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>Level 3 Dashboard</h1><div class="sub">Training runs as its own process and writes a log; this page only reads it, every 3 seconds. Close it, reopen it, the run keeps going.</div></div>
+  <div class="ctl"><select id="run"></select><span id="pill" class="pill">–</span><span class="status" id="status"></span></div>
+</header>
+
+<div class="panel">
+  <div class="ctl"><button id="start">Start / resume</button><button id="stop" class="quiet">Stop</button><span class="note">Run 1 = stages 10 s then 20 s, batch 32, 3,000 iterations. Stop resumes from the last checkpoint.</span></div>
+  <div class="kpi"><div><b id="kIt">0</b><span>iteration</span></div><div><b id="kStage">–</b><span>stage · wander s</span></div><div><b id="kScore">–</b><span>score, running 50</span></div><div><b id="kArr">–</b><span>arrived, last batch</span></div><div><b id="kSec">–</b><span>s per iteration</span></div><div><b id="kEta">–</b><span>time left</span></div></div>
+  <canvas id="scoreChart" width="1140" height="230"></canvas>
+  <div class="legend"><span><i style="background:var(--ink)"></i>score, running mean (closest approach)</span><span><i style="background:var(--ink-3)"></i>loss (last-10-s distance + erase penalty)</span><span><i style="background:var(--teal)"></i>1.5 = promotion / homing well</span><span><i style="background:var(--purple)"></i>stage boundary</span></div>
+</div>
+
+<div class="grid2">
+  <div class="panel"><h2>Drift check · where is the memory going</h2><canvas id="driftChart" width="560" height="220"></canvas><div class="legend"><span><i style="background:var(--amber)"></i>frozen, F allowed</span><span><i style="background:var(--blue)"></i>frozen, F held at zero</span></div><p class="note">Every 100 iterations, on fresh trips. The gap opening means the network is putting the memory into F. No gap means it is holding the sum in activity.</p></div>
+  <div class="panel"><h2>Gates on a sample trip · latest checkpoint</h2><canvas id="gateChart" width="560" height="220"></canvas><div class="legend"><span><i style="background:var(--ink-3)"></i>speed</span><span><i style="background:var(--teal)"></i>food</span><span><i style="background:var(--amber)"></i>write gate</span><span><i style="background:var(--red)"></i>erase gate</span><span><i style="background:var(--blue)"></i>distance from food ÷ 8</span></div><p class="note" id="gateNote"></p></div>
+</div>
+<div class="grid2">
+  <div class="panel"><h2>The rule's numbers</h2><canvas id="paramChart" width="560" height="180"></canvas><div class="legend"><span><i style="background:var(--amber)"></i>write strength ws</span><span><i style="background:var(--purple)"></i>mean |A| (how much F counts)</span><span><i style="background:var(--ink-3)"></i>mean |W|</span></div></div>
+  <div class="panel"><h2>Freeze and test</h2><div class="ctl"><select id="ckpt"></select><input type="number" id="tOut" value="20" step="5" min="5" style="width:70px"><span class="note">wander s</span><button id="runTest">Run three brains on 200 trips</button><span class="status" id="testNote"></span></div><canvas id="bars" width="560" height="200"></canvas><div id="verdict" class="verdict" hidden></div></div>
+</div>
+
+<div class="grid3" id="inside" hidden>
+  <div class="panel"><h2>Neuron tuning around the compass</h2><canvas id="tuning" width="360" height="260"></canvas><p class="note" id="tuneNote"></p></div>
+  <div class="panel"><h2>F on the 12 highest-|A| connections, one trip</h2><canvas id="ftrace" width="360" height="260"></canvas><p class="note">Tally-like: grows during the wander, opposite ones catch up on the return, drops at food.</p></div>
+  <div class="panel"><h2>A · where training put the memory</h2><canvas id="aheat" width="360" height="260"></canvas><p class="note" id="aNote"></p></div>
+</div>
+
+<div class="panel"><h2>The code that is running</h2><div class="tabs" id="tabs"></div><pre id="code"></pre></div>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let runs=[],cur=null,log=null,test=null;
+async function api(p,b){const r=await fetch(p,b?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}:undefined);return r.json();}
+function axes(c,L,B){const x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle=cv('--line');x.beginPath();x.moveTo(L,10);x.lineTo(L,h-B);x.lineTo(w-10,h-B);x.stroke();x.fillStyle=cv('--ink-3');x.font='11px IBM Plex Mono';return x;}
+async function refreshRuns(){runs=await api('/api/runs');const s=$('run');const prev=s.value;s.innerHTML='';runs.forEach(r=>{const o=document.createElement('option');o.value=r.run;o.textContent=r.run;s.appendChild(o);});if(!runs.length){const o=document.createElement('option');o.value='run1';o.textContent='run1';s.appendChild(o);}s.value=prev||(runs[0]?runs[0].run:'run1');cur=s.value;}
+async function refresh(){log=await api('/api/log?run='+cur);const L=log.lines,last=L[L.length-1];const st=log.status||{};
+  $('pill').textContent=log.alive?'running':(st.msg||'idle');$('pill').className='pill '+(log.alive?'run':st.msg==='finished'?'done':'');
+  $('kIt').textContent=st.it||0;$('kStage').textContent=last?`${last.stage} · ${last.t_out}`:'–';$('kScore').textContent=last?last.running.toFixed(2):'–';$('kArr').textContent=last?Math.round(last.arrived*100)+'%':'–';$('kSec').textContent=last?last.sec_per_iter.toFixed(2):'–';
+  if(last&&st.iters){const left=(st.iters-st.it)*last.sec_per_iter;$('kEta').textContent=left>3600?(left/3600).toFixed(1)+' h':Math.round(left/60)+' min';}
+  $('status').textContent=last?`updated ${new Date().toLocaleTimeString()}`:'no log yet';
+  drawScore();drawDrift();drawGates();drawParams();fillCkpts();}
+function drawScore(){const c=$('scoreChart'),L=36,B=26,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const Ls=log?log.lines:[];x.fillText('iteration →',c.width/2-30,c.height-6);if(!Ls.length)return;const it=Ls[Ls.length-1].it,G=Math.max(it+1,300),ymax=Math.max(3,...Ls.map(r=>r.loss))*1.05;
+  for(let v=0;v<=ymax;v+=Math.max(1,Math.ceil(ymax/5)))x.fillText(v,L-22,c.height-B-v/ymax*H+4);const px=i=>L+i/G*W,py=v=>c.height-B-Math.min(ymax,v)/ymax*H;
+  x.strokeStyle=cv('--teal');x.setLineDash([4,4]);x.beginPath();x.moveTo(L,py(1.5));x.lineTo(c.width-10,py(1.5));x.stroke();x.setLineDash([]);
+  let ps=null;Ls.forEach(r=>{if(ps!==null&&r.stage!==ps){x.strokeStyle=cv('--purple');x.setLineDash([2,3]);x.beginPath();x.moveTo(px(r.it),10);x.lineTo(px(r.it),c.height-B);x.stroke();x.setLineDash([]);x.fillStyle=cv('--purple');x.fillText(r.t_out+' s',px(r.it)+4,20);}ps=r.stage;});
+  [['loss','--ink-3',1.2],['running','--ink',2.5]].forEach(([k,col,wd])=>{x.strokeStyle=cv(col);x.lineWidth=wd;x.beginPath();Ls.forEach((r,i)=>{i?x.lineTo(px(r.it),py(r[k])):x.moveTo(px(r.it),py(r[k]));});x.stroke();});}
+function drawDrift(){const c=$('driftChart'),L=36,B=26,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const D=(log?log.lines:[]).filter(r=>r.drift);x.fillText('iteration →',c.width/2-30,c.height-6);if(!D.length)return;const G=Math.max(D[D.length-1].it+1,300),ymax=Math.max(3,...D.map(r=>Math.max(r.drift.score_F,r.drift.score_noF)))*1.1;
+  for(let v=0;v<=ymax;v+=Math.max(1,Math.ceil(ymax/5)))x.fillText(v,L-22,c.height-B-v/ymax*H+4);const px=i=>L+i/G*W,py=v=>c.height-B-Math.min(ymax,v)/ymax*H;
+  [['score_noF','--blue'],['score_F','--amber']].forEach(([k,col])=>{x.strokeStyle=cv(col);x.lineWidth=2.5;x.beginPath();D.forEach((r,i)=>{i?x.lineTo(px(r.it),py(r.drift[k])):x.moveTo(px(r.it),py(r.drift[k]));});x.stroke();D.forEach(r=>{x.fillStyle=cv(col);x.beginPath();x.arc(px(r.it),py(r.drift[k]),3.5,0,7);x.fill();});});
+  const l=D[D.length-1];x.fillStyle=cv('--ink');x.fillText(`gap ${(l.drift.score_noF-l.drift.score_F).toFixed(2)}`,px(l.it)-60,py(l.drift.score_F)-8);}
+function drawGates(){const c=$('gateChart'),L=30,B=24,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const D=(log?log.lines:[]).filter(r=>r.drift);x.fillText('1',L-12,16);x.fillText('0',L-12,c.height-B+3);if(!D.length)return;const tr=D[D.length-1].drift.traces,n=tr.t.length,px=i=>L+i/(n-1)*W,py=v=>c.height-B-Math.max(0,Math.min(1,v))*H;
+  $('gateNote').textContent=`checkpoint at iteration ${D[D.length-1].it}, one agent, two trips of ${D[D.length-1].t_out} s wander`;
+  [['speed','--ink-3',v=>v/1.7,1.2],['food','--teal',v=>v,1.2],['dist','--blue',v=>v/8,1.5],['write','--amber',v=>v,2],['erase','--red',v=>v,2]].forEach(([k,col,f,wd])=>{x.strokeStyle=cv(col);x.lineWidth=wd;x.beginPath();tr[k].forEach((v,i)=>{i?x.lineTo(px(i),py(f(v))):x.moveTo(px(i),py(f(v)));});x.stroke();});}
+function drawParams(){const c=$('paramChart'),L=36,B=24,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const Ls=log?log.lines:[];if(!Ls.length)return;const G=Math.max(Ls[Ls.length-1].it+1,300),ymax=Math.max(0.3,...Ls.map(r=>Math.max(r.ws,r.A_abs,r.W_abs)))*1.1;x.fillText(ymax.toFixed(2),L-30,16);x.fillText('0',L-12,c.height-B+3);const px=i=>L+i/G*W,py=v=>c.height-B-v/ymax*H;
+  [['W_abs','--ink-3'],['A_abs','--purple'],['ws','--amber']].forEach(([k,col])=>{x.strokeStyle=cv(col);x.lineWidth=2;x.beginPath();Ls.forEach((r,i)=>{i?x.lineTo(px(r.it),py(r[k])):x.moveTo(px(r.it),py(r[k]));});x.stroke();});}
+function fillCkpts(){const s=$('ckpt'),prev=s.value;s.innerHTML='';(log&&log.ckpts?log.ckpts:[]).slice().reverse().forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;s.appendChild(o);});if(prev&&[...s.options].some(o=>o.value===prev))s.value=prev;}
+async function loadTest(){test=await api('/api/test?run='+cur);if(!test||!test.bars){$('inside').hidden=true;$('verdict').hidden=true;drawBars(null);return;}drawBars(test.bars);drawInside();}
+function drawBars(bars){const c=$('bars'),g=c.getContext('2d'),W=c.width,H=c.height;g.clearRect(0,0,W,H);const L=40,B=40,bw=110,gap=60,x0=100,py=v=>H-B-Math.min(8,v)/8*(H-B-20);g.strokeStyle=cv('--line');g.beginPath();g.moveTo(L,10);g.lineTo(L,H-B);g.lineTo(W-16,H-B);g.stroke();g.fillStyle=cv('--ink-3');g.font='11px IBM Plex Mono';g.fillText('0',L-10,H-B+3);g.fillText('8',L-10,py(8)+4);g.strokeStyle=cv('--teal');g.setLineDash([4,3]);g.beginPath();g.moveTo(L,py(1.5));g.lineTo(W-16,py(1.5));g.stroke();g.setLineDash([]);
+  const names=['A · trained, F allowed','B · same, F held at 0','C · random walk'],cols=[cv('--amber'),cv('--blue'),cv('--ink-3')];
+  ['A','B','C'].forEach((k,i)=>{const x=x0+i*(bw+gap);g.fillStyle=cv('--ink-3');g.fillText(names[i],x-14,H-B+16);if(!bars)return;const v=bars[k].score;g.fillStyle=cols[i];g.fillRect(x,py(v),bw,H-B-py(v));g.fillStyle=cv('--ink');g.font='13px IBM Plex Mono';g.fillText(v.toFixed(2)+' · '+Math.round(bars[k].arrived*100)+'%',x-4,py(v)-6);g.font='11px IBM Plex Mono';});
+  if(!bars)return;const vd=$('verdict');vd.hidden=false;const a=bars.A.score,b=bars.B.score,cc=bars.C.score;
+  if(a<1.5&&b>0.6*cc){vd.className='verdict ok';vd.textContent=`Success: A homes (${a.toFixed(2)}), B with the same numbers is lost (${b.toFixed(2)}). The memory lived in F.`;}
+  else if(a<1.5){vd.className='verdict';vd.textContent=`A homes (${a.toFixed(2)}) but so does B (${b.toFixed(2)}): the memory is in activity, not F. Not the fly. See the playbook.`;}
+  else{vd.className='verdict';vd.textContent=`A does not home (${a.toFixed(2)} vs random ${cc.toFixed(2)}). Training has not found homing yet.`;}}
+function drawInside(){$('inside').hidden=false;
+  // tuning
+  {const c=$('tuning'),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);const T=test.tuning,rows=T.curves.length,cell=(H-30)/rows;x.fillStyle=cv('--ink-3');x.font='10px IBM Plex Mono';x.fillText('heading 0° → 360°, one row per neuron (16 most tuned)',10,14);
+   T.curves.forEach((cur,r)=>{const mn=Math.min(...cur),mx=Math.max(...cur);cur.forEach((v,b)=>{const a=(v-mn)/(mx-mn+1e-9);x.fillStyle=cv('--amber');x.globalAlpha=0.15+0.85*a;x.fillRect(60+b*(W-70)/16,22+r*cell,(W-70)/16-1,cell-1);x.globalAlpha=1;});x.fillStyle=cv('--ink-3');x.fillText('n'+T.neurons[r],8,22+r*cell+cell-2);});
+   $('tuneNote').textContent=`${T.n_tuned} of ${test.n} neurons have a clear single bump around the compass (resultant > 0.25). Brighter = more active.`;}
+  // F traces
+  {const c=$('ftrace'),L=30,B=24,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const tr=test.traces,n=tr.t.length,px=i=>L+i/(n-1)*W,py=v=>c.height-B-(v+1)/2*H;x.fillText('+1',L-18,16);x.fillText('−1',L-18,c.height-B+3);x.strokeStyle=cv('--line');x.setLineDash([3,3]);x.beginPath();x.moveTo(L,py(0));x.lineTo(c.width-10,py(0));x.stroke();x.setLineDash([]);
+   tr.food.forEach((f,i)=>{if(f>0){x.fillStyle=cv('--teal');x.globalAlpha=.25;x.fillRect(px(i),10,2,c.height-B-10);x.globalAlpha=1;}});
+   tr.F.forEach((row,k)=>{x.strokeStyle=`hsl(${k*30},60%,50%)`;x.lineWidth=1.5;x.beginPath();row.forEach((v,i)=>{i?x.lineTo(px(i),py(v)):x.moveTo(px(i),py(v));});x.stroke();});}
+  // A heatmap
+  {const c=$('aheat'),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);const A=test.A_heat,n=A.length,mx=Math.max(...A.flat().map(Math.abs))+1e-9,cw=(W-20)/n,ch=(H-30)/n;x.fillStyle=cv('--ink-3');x.font='10px IBM Plex Mono';x.fillText('row = receiving neuron, column = sending neuron',10,14);
+   for(let i=0;i<n;i++)for(let j=0;j<n;j++){const v=A[i][j];x.fillStyle=v>0?cv('--amber'):cv('--red');x.globalAlpha=Math.abs(v)/mx;x.fillRect(10+j*cw,20+i*ch,cw,ch);}x.globalAlpha=1;
+   $('aNote').textContent=`mean |A| ${test.A_abs_mean.toFixed(3)}, write strength ${test.ws.toFixed(3)}. Bright cells are connections whose fast strength counts most.`;}}
+$('run').addEventListener('change',async()=>{cur=$('run').value;await refresh();await loadTest();});
+$('start').addEventListener('click',async()=>{await api('/api/start',{run:cur});setTimeout(refresh,1500);});
+$('stop').addEventListener('click',async()=>{await api('/api/stop',{run:cur});setTimeout(refresh,1500);});
+$('runTest').addEventListener('click',async()=>{$('testNote').textContent='running… (about a minute)';const r=await api('/api/test',{run:cur,ckpt:$('ckpt').value,t_out:+$('tOut').value});$('testNote').textContent=r.ok?'done':'failed: '+r.log.slice(-300);await loadTest();});
+(async()=>{const code=await api('/api/code');const tabs=$('tabs');Object.keys(code).forEach((f,i)=>{const b=document.createElement('button');b.textContent=f;b.className=i?'quiet':'on';b.addEventListener('click',()=>{tabs.querySelectorAll('button').forEach(o=>o.className='quiet');b.className='on';$('code').textContent=code[f];});tabs.appendChild(b);});$('code').textContent=code['flynet.py'];})();
+(async()=>{await refreshRuns();await refresh();await loadTest();setInterval(async()=>{if(cur)await refresh();},3000);})();
+})();
+</script>
+</body>
+</html>

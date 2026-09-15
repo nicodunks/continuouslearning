@@ -472,7 +472,7 @@ distractor = np.clip(0.5 + 0.5*np.sin(0.7*s['t'] + 1.3) + 0.1*rng.normal(), 0, 1
   </div></details>
 
   <h3>The search, level 2</h3>
-  <p>Same loop as level 1, but with 11 numbers: three dials (write, rotation, gain) and the eight unit weights. Watch what the units learn.</p>
+  <p>Same loop as level 1, but with 11 numbers instead of six. Three of the level 1 dials stay: write, rotation, gain. The other three, speed dependence and erase and fade, are gone, because the two units now do those jobs. Each unit brings four weights of its own (bias, speed, food, distractor), so the two of them add eight. Six, minus three, plus eight is eleven. Watch what the units learn.</p>
   <div class="ctl"><button id="evo2Start">Start evolution</button><button id="evo2Stop" class="quiet" disabled>Pause</button><button id="evo2Reset" class="quiet">Reset</button><button id="evo2Load" class="quiet" disabled>Load best into the units and dials</button><span class="mono" id="evo2Gen" style="font-size:13px;color:var(--ink-2)">generation 0</span></div>
   <div class="stage" style="margin-top:12px">
     <div class="panel"><canvas id="evo2Chart" width="520" height="280"></canvas><div class="legend" id="evo2Legend"></div></div>

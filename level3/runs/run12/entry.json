@@ -1,0 +1,30 @@
+{
+ "run": "run12",
+ "knob": "third erase-bias shift (+1.5) on top of run 10: ratchet again toward a full reset (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run10 (final, 2.10 at 30 s, erase ratio 7.4)",
+ "prediction": "If each shift ratchets the reset, the 200-trip ratio passes 12 and at-food erase passes 0.15 with peaks near 0.4, while away-from-food erase stays near 0.01 and the score holds near 2.1. If the ratio comes back near 7, two shifts were the limit.",
+ "args": [
+  "--init",
+  "runs/run10/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "1.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

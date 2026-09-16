@@ -58,5 +58,9 @@
  "run11": {
   "title": "Seed 1 replication of run 3",
   "lesson": "The 10-second learning replicated from a different random start, and faster: promoted at iteration 619 against run 3's 804, with a frozen gap of 0.9 (1.46 with F, 2.40 without). The transfer to 20 seconds did not: 400 iterations after promotion the gap had not opened, and the driver's stop rule ended the run. The write gate sat near 0.7 with write strength 0.10, the run 1 pattern where the tallies saturate on longer trips. So the compass-and-tally recipe is robust to the seed; how quickly a given seed adapts to longer trips is not. Queued as 11B: the same network continued at 20 s with the gap rule suspended, since run 3 also needed time after its promotion."
+ },
+ "run12": {
+  "title": "Third bias shift",
+  "lesson": "The ratchet held a third time. On the 200-trip test the erase gate fires 0.213 per tick at food against 0.010 away, a ratio of 20, with peaks of 0.50 on the test trip and 0.57 to 0.67 during training. The reset is now a spike that opens more than halfway at food and nowhere else. The score held: 2.21 at 30 s on the standard exam, 24% arriving, against 2.10 for run 10. Prediction met: ratio target 12, at-food target 0.15."
  }
 }

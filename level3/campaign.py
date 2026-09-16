@@ -68,12 +68,37 @@ def run_test(run, ckpt, t_out, tag):
     T = json.load(open(out)); return dict(ckpt=ckpt, t_out=t_out, bars=T['bars'], n_tuned=T['tuning']['n_tuned'], file=os.path.basename(out))
 
 
-def execute(entry):
+class Adopted:
+    """Stands in for a Popen when the driver restarts while a trainer it launched earlier is still running."""
+    def __init__(self, pid): self.pid = pid
+    def poll(self):
+        try: os.kill(self.pid, 0); return None
+        except OSError: return 0
+    def terminate(self):
+        try: os.kill(self.pid, 15)
+        except OSError: pass
+
+
+def orphan():
+    """A run with entry.json, no results.json, and a live trainer pid: adopt it instead of starting anew."""
+    for d in sorted(glob.glob(os.path.join(RUNS, 'run*'))):
+        e, r, st = [os.path.join(d, f) for f in ('entry.json', 'results.json', 'status.json')]
+        if os.path.exists(e) and not os.path.exists(r) and os.path.exists(st):
+            s = load(st, {})
+            try: os.kill(int(s.get('pid', -1)), 0); return load(e, None), int(s['pid'])
+            except (OSError, ValueError, TypeError): pass
+    return None, None
+
+
+def execute(entry, adopt_pid=None):
     run = entry['run']; args = entry['args']; os.makedirs(os.path.join(RUNS, run), exist_ok=True)
     json.dump(entry, open(os.path.join(RUNS, run, 'entry.json'), 'w'), indent=1)
-    say(f"starting {run}: knob = {entry.get('knob')}; parent = {entry.get('parent')}")
-    proc = subprocess.Popen([sys.executable, '-u', os.path.join(HERE, 'train.py'), '--run', run] + args,
-                            stdout=open(os.path.join(RUNS, run + '.out'), 'a'), stderr=subprocess.STDOUT)
+    if adopt_pid:
+        say(f'adopting {run} (pid {adopt_pid}) from a previous driver'); proc = Adopted(adopt_pid)
+    else:
+        say(f"starting {run}: knob = {entry.get('knob')}; parent = {entry.get('parent')}")
+        proc = subprocess.Popen([sys.executable, '-u', os.path.join(HERE, 'train.py'), '--run', run] + args,
+                                stdout=open(os.path.join(RUNS, run + '.out'), 'a'), stderr=subprocess.STDOUT)
     stopped = None; t0 = time.time()
     while proc.poll() is None:
         time.sleep(60)
@@ -106,6 +131,10 @@ def execute(entry):
 
 if __name__ == '__main__':
     say('campaign driver up'); idle_since = None
+    e, pid = orphan()
+    if e:
+        try: execute(e, adopt_pid=pid)
+        except Exception as ex: say(f'error adopting {e.get("run")}: {ex!r}')
     while True:
         q = load(QUEUE, [])
         if q:

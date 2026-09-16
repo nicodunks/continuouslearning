@@ -29,3 +29,7 @@
 21:54:23 run11: stopping early: F-vs-noF gap closed for three checkpoints ([0.02, -0.02, -0.1])
 21:54:37 run11 done in 16 min; ckpt_01000.pt@20s A 4.59 B 4.52 C 3.61; ckpt_01000.pt@30s A 5.77 B 5.71 C 4.38; ckpt_00700.pt@30s A 5.51 B 5.71 C 4.38
 21:54:37 starting run12: knob = third erase-bias shift (+1.5) on top of run 10: ratchet again toward a full reset (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine); parent = run10 (final, 2.10 at 30 s, erase ratio 7.4)
+21:55:46 campaign driver up
+21:55:46 adopting run12 (pid 7683) from a previous driver
+22:21:57 run12 done in 26 min; final.pt@20s A 2.17 B 4.73 C 3.61; final.pt@30s A 2.21 B 5.93 C 4.38; ckpt_00700.pt@30s A 2.20 B 5.93 C 4.38
+22:21:57 starting run13: knob = speed profile 'legs' (slow half / fast half wanders), warm from run 10, so time-facing and distance-walked disagree on purpose (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine); parent = run10 (final, 2.10 at 30 s, write~speed +0.67)

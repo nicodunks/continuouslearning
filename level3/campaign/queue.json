@@ -1,35 +1,5 @@
 [
  {
-  "run": "run13",
-  "knob": "speed profile 'legs' (slow half / fast half wanders), warm from run 10, so time-facing and distance-walked disagree on purpose (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
-  "parent": "run10 (final, 2.10 at 30 s, write~speed +0.67)",
-  "prediction": "A tally that counts time instead of distance points the wrong way in this world, so the write gate must become strongly speed-weighted: write~speed correlation above 0.9. Score on the standard exam should hold near 2.1 (the exam world is unchanged); on the legs world the hand brain floor is 1.08.",
-  "args": [
-   "--init",
-   "runs/run10/final.pt",
-   "--food_stand",
-   "4.0",
-   "--erase_penalty",
-   "20",
-   "--speed_profile",
-   "legs",
-   "--stages",
-   "30",
-   "--iters",
-   "800",
-   "--batch",
-   "32",
-   "--lr",
-   "3e-4",
-   "--lr_decay",
-   "1"
-  ],
-  "test_t_outs": [
-   20,
-   30
-  ]
- },
- {
   "run": "run11B",
   "knob": "run 11 continued at 20 s with the gap stop-rule suspended (a fairness fix, not a knob) (hygiene: lr 1e-3 cosine)",
   "parent": "run11 (ckpt_01000, seed 1, stalled at 20 s)",

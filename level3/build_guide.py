@@ -236,6 +236,16 @@ td.n,th.n{text-align:right}
  <svg viewBox="0 0 900 330" id="depositSvg"></svg>
 </div>
 
+<h4>How ws and the write gate differ, and which one depends on speed</h4>
+<p>Both are multiplied into the amount added, so it is natural to ask how they differ. The difference is this: <b>ws cannot depend on anything, and the write gate can.</b></p>
+<p>ws is a single stored number, 0.074 in run 19. It is not computed from the inputs or from the neurons; it is looked up, the same at every tick of every trip. So it cannot vary with speed or with being at food or with anything else that happens during a trip. Training chose its value once, by the same downhill steps as every other parameter. What it sets is the size of a full-strength addition: with the gate wide open at 1, the most a cell can gain in one tick is ws times the pairing.</p>
+<p>The write gate is computed fresh every tick. It is one of the three outputs: the 64 activities times the gate's 64 weights in W_out, plus its bias, squashed to lie between 0 and 1. Because the neurons are listening to the four inputs, the gate can depend on speed, and in run 19 it does: training shaped the wiring so that faster movement opens the gate more. The gate cannot go above 1, so it can only scale the addition down from the maximum that ws allows.</p>
+<p>So the two multiply. ws says how big one full unit is. The write gate says what fraction of a unit to add this tick. Only the gate is a decision the network makes in the moment, and all of the speed dependence lives in the gate. Here are both over a real trip.</p>
+<div class="panel real">
+ <div class="eyebrow">Real: run 19, the fly's speed, the write gate and ws over one exam trip</div>
+ <canvas id="wsGate" width="1700" height="520"></canvas>
+ <div class="how"><b>How to read it.</b> Time runs left to right over the first thirty seconds of the traced trip. The grey line is the fly's speed. The amber line is the write gate, tick by tick: it rises and falls with the speed (their correlation over the whole trip is +0.69). The flat teal line is ws, at 0.074, which never moves. The dashed line at the bottom is their product, ws times the write gate, which is the multiplier applied to every cell's pairing that tick. That product is what moves; ws alone never does.</div>
+</div>
 <h4>Why "sender a tick ago" and "receiver now", rather than the other way round</h4>
 <p>The order is not arbitrary. It matches the direction the wire is used in when the neuron computes its activity. At every tick, neuron i's new activity is worked out from the other neurons' activities from the <em>previous</em> tick. So the wire from j to i always carries "what j was doing a tick ago" into "what i does now". The cell F[i,j] sits on that wire, and when it is read it multiplies x_old[j] and feeds x_new[i].</p>
 <p>If the cell records the same pairing, "j a tick ago, i now", then the next time j is active the strengthened cell pushes i toward what i did last time. The memory is written in the same direction of time that it is later used in. If we recorded the opposite pairing, "i a tick ago, j now", the cell would remember something about i-then-j but would still be used to push i from j, so the record would run backwards relative to how it is applied.</p>
@@ -953,6 +963,11 @@ function drawCF(){const [x,W,H]=ctx('compassF');x.clearRect(0,0,W,H);const names
  out+=cell(560,220,2,2,' (diagonal)');out+=`<path d="M280,108 C280,150 620,160 625,220" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#ar)"/><path d="M280,124 C300,170 640,170 645,220" fill="none" stroke="var(--mute)" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ar)"/>`;
  out+='<text x="450" y="315" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">solid teal: the receiving neuron\'s activity now · dashed grey: the sending neuron\'s activity a tick ago</text>';
  g.innerHTML=out;})();
+
+(function(){const [x,W,H]=ctx('wsGate');x.clearRect(0,0,W,H);const M=D.motif;const n=Math.min(M.t.length,100);const t=M.t.slice(0,n),sp=M.speed.slice(0,n),wr=M.write.slice(0,n);const ws=M.ws;const p={l:44,r:20,t:30,b:40};const cw=W-p.l-p.r,ch=H-p.t-p.b;const X=k=>p.l+k/(n-1)*cw,Y=v=>H-p.b-v/1.5*ch;frame(x,W,H,p);[0,0.5,1,1.5].forEach(v=>txt(x,v,p.l-6,Y(v)+4,css('--mute'),'right'));txt(x,'seconds →',W-p.r,H-6,css('--mute'),'right');[0,10,20,30].forEach(sec=>{const k=Math.round(sec/ (t[1]-t[0]));if(k<n)txt(x,sec,X(k),H-p.b+16,css('--mute'),'center');});
+ const line=(arr,col,w,dash)=>{x.strokeStyle=col;x.lineWidth=w;x.setLineDash(dash||[]);x.beginPath();arr.forEach((v,k)=>k?x.lineTo(X(k),Y(v)):x.moveTo(X(k),Y(v)));x.stroke();x.setLineDash([]);};
+ line(sp,css('--rand'),2);line(wr,css('--amber'),2.5);line(new Array(n).fill(ws),css('--teal'),3);line(wr.map(v=>v*ws),css('--ink'),1.5,[5,4]);
+ txt(x,'speed (grey)',X(n-1),Y(sp[n-1])-8,css('--rand'),'right');txt(x,'write gate (amber)',X(n-1),Y(wr[n-1])+16,css('--amber'),'right');txt(x,`ws = ${ws.toFixed(3)} (teal, flat)`,X(2),Y(ws)-8,css('--teal'),'left');txt(x,'ws × write gate (dashed)',X(2),Y(0)-10,css('--ink'),'left');})();
 function all(){drawSig();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

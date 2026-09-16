@@ -1,35 +1,5 @@
 [
  {
-  "run": "run16",
-  "knob": "fifth erase-bias shift (+1.5) on top of run 14: is the wipe complete? (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
-  "parent": "run14 (final)",
-  "prediction": "Peaks at food already reach 0.85-0.9 in run 14. A fifth shift should push the mean at-food erase past 0.4 and peaks past 0.95, a clean wipe, with away-from-food near 0.01 and score holding near 2.0. If the mean stops rising while peaks are already near 1, the spike is as sharp as a four-second stand allows and the ratchet is finished.",
-  "args": [
-   "--init",
-   "runs/run14/final.pt",
-   "--food_stand",
-   "4.0",
-   "--erase_penalty",
-   "20",
-   "--erase_bias_shift",
-   "1.5",
-   "--stages",
-   "30",
-   "--iters",
-   "800",
-   "--batch",
-   "32",
-   "--lr",
-   "3e-4",
-   "--lr_decay",
-   "1"
-  ],
-  "test_t_outs": [
-   20,
-   30
-  ]
- },
- {
   "run": "run17",
   "knob": "polish of the best-scoring line (run 13, legs-trained) back on the standard world at a tenth of the learning rate, no other change (hygiene only)",
   "parent": "run13 (ckpt_00200, 1.91 at 30 s)",

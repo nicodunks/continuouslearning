@@ -1,0 +1,92 @@
+{
+ "run": "run15",
+ "knob": "learning rule Hebb -> delta (write only the surprise, Gated DeltaNet), cold start with run 3's recipe so only the rule differs (hygiene: lr 1e-3 cosine)",
+ "parent": "random start, same seed as run 3 (Peter's suggestion, docs/flynet-delta-rule.md)",
+ "prediction": "Peter's prediction, on record before running: delta should keep a wider F-allowed versus F-held-at-zero gap on 20 s and 30 s wanders, and the erase gate should become food-selective sooner because it is no longer fighting saturation. Ours added: saturation under 5%, and a 20 s score at or under run 3's 1.90. If delta homes worse, that is a result too.",
+ "args": [
+  "--rule",
+  "delta",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1000",
+  "--iters",
+  "3000",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 10.1,
+ "stopped_early": "F-vs-noF gap closed for three checkpoints ([-0.01, 0.03, 0.03])",
+ "tests": [
+  {
+   "ckpt": "ckpt_00800.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 4.147181987762451,
+     "arrived": 0.054999999701976776
+    },
+    "B": {
+     "score": 4.237139701843262,
+     "arrived": 0.054999999701976776
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 15,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "ckpt_00800.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 5.2736592292785645,
+     "arrived": 0.054999999701976776
+    },
+    "B": {
+     "score": 5.345916271209717,
+     "arrived": 0.05000000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 14,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 5.2736592292785645,
+     "arrived": 0.054999999701976776
+    },
+    "B": {
+     "score": 5.345916271209717,
+     "arrived": 0.05000000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 14,
+   "file": "test_best_30.json",
+   "drift_F": 2.0827856063842773
+  }
+ ],
+ "finished": 1789541068.1456032
+}

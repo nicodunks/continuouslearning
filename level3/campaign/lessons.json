@@ -74,5 +74,9 @@
  "run14": {
   "title": "Fourth bias shift",
   "lesson": "The ratchet keeps working: on the 200-trip test the erase gate fires 0.37 per tick at food against 0.011 away, a ratio of 33, with peaks of 0.78 on the test trip and 0.83 to 0.91 during training. Away from food it has never moved from about 0.01. The score is 2.06 at 30 s, 26% arriving, the best of the ratchet line and within noise of the campaign best. Ratios across the shifts: 3, 7, 20, 33. Prediction partly met: at-food target 0.4, peaks target 0.8."
+ },
+ "run15": {
+  "title": "Delta rule, cold start (Peter's proposal)",
+  "lesson": "Stopped by the gap rule at iteration 800: no memory formed at all. Under the delta rule F writes only what it failed to predict, so F converged on predicting the network's own next activity from its last, and once it did that it stopped writing; the tallies never accumulated steps, and the write strength and A did not move from their starting values after iteration 100 (0.108 and 0.082, flat). Peter's prediction, that delta would keep a wider memory gap and free the erase gate, did not hold in this form. Two honest caveats: this was a cold start with the deaf-gate recipe, and a warm start from a Hebb-trained network, or a delta rule applied only on the columns A selects, might behave differently. As run, the delta rule is a predictor, not a tally."
  }
 }

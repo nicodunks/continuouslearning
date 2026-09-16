@@ -1,35 +1,5 @@
 [
  {
-  "run": "run18",
-  "knob": "delta rule again, but warm from run 14 (a working Hebb-trained tally with a reset), so the rule change is the only difference (hygiene: lr 3e-4, cosine)",
-  "parent": "run14 (final, 2.06 at 30 s, reset ratio 33)",
-  "prediction": "The fair second form of Peter's proposal. If the delta rule can keep a tally that already exists, the memory gap should survive the switch (30 s score under 2.5, B near 5.9) and saturation should fall below run 14's 7%. If F stops accumulating once it predicts, the gap will close within 300 iterations, as in run 15, and the negative result stands in both forms.",
-  "args": [
-   "--init",
-   "runs/run14/final.pt",
-   "--rule",
-   "delta",
-   "--food_stand",
-   "4.0",
-   "--erase_penalty",
-   "20",
-   "--stages",
-   "30",
-   "--iters",
-   "600",
-   "--batch",
-   "32",
-   "--lr",
-   "3e-4",
-   "--lr_decay",
-   "1"
-  ],
-  "test_t_outs": [
-   20,
-   30
-  ]
- },
- {
   "run": "run19",
   "knob": "the reset line (run 14) trained on the slow-half fast-half world, the change that gave run 13 the best score (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
   "parent": "run14 (final, 2.06 at 30 s, reset ratio 33)",

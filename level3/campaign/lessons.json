@@ -82,5 +82,9 @@
  "run16": {
   "title": "Fifth bias shift",
   "lesson": "Five shifts: on the 200-trip test the erase gate averages 0.52 per tick across the food stand and reaches 0.93 at its peak, against 0.010 away from food, a ratio of 53. During training the peaks were 0.95 to 0.98. The reset is now a wipe: the board is cleared at food and untouched elsewhere. Score 2.14 at 30 s, 25% arriving, within noise of runs 10, 12 and 14, so five rounds of the same move took the mean at food from 0.03 to 0.52 and the peak from 0.06 to 1 without costing the memory or the score. Ratios across the shifts: 3, 7, 20, 33, 53."
+ },
+ "run17": {
+  "title": "Low-rate polish of the best line",
+  "lesson": "Small steps from run 13's best checkpoint on the standard world: 1.89 at 30 s on the final network and 1.81 at its best checkpoint, with 25% arriving and the memory in F (5.91 without). That is the lowest earned 30-second score of the night, about 2.4 times the hand brain's 0.75 floor. Frozen checks during training reached 1.28. The reset it inherited from run 10 is a mild one (ratio 9), since this line branched before the ratchet; the score line and the reset line are separate networks. Prediction met: target was at or under 1.85."
  }
 }

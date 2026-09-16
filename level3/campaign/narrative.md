@@ -106,3 +106,6 @@ Peter's one-line change replaces "write the pattern" with "write only the surpri
 
 ## The wipe (run 16)
 After the fifth shift the erase gate averages 0.52 per tick across the food stand and reaches 0.93 at its peak on the test trip, with away-from-food still at 0.01. The ratios across the five shifts went 3, 7, 20, 33, 53. The board is now cleared at food and left alone everywhere else, which is the fly's octopamine reset as we described it on the first page of the roadmap. The score did not move (2.14 at 30 s), so the reset line ends here with the memory, the speed-weighted writing and the wipe all present in one network, each of them found by the network rather than drawn in.
+
+## The score line's best number (run 17)
+A tenth of the learning rate, from run 13's best checkpoint, on the standard world: 1.81 at 30 seconds at its best checkpoint, 1.89 at the end, with the memory in F. That is where the score stands at the close of the campaign: 1.81 earned at 30 seconds against a random walk's 4.4 and the hand brain's 0.75. The remaining gap to the floor is the write gate (0.75 correlation with speed rather than 1) and a reset that on this line is still mild; the reset line (runs 10 to 16) has the wipe but scores 2.1. Merging the two, training the wiped network on the legs world, is run 19.

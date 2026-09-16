@@ -73,10 +73,11 @@ def md_to_html(md):
 def build():
     runs = collect(); floor = jload(os.path.join(CAMP, 'floor.json'), {}); lessons = jload(os.path.join(CAMP, 'lessons.json'), {})
     narrative = md_to_html(open(os.path.join(CAMP, 'narrative.md')).read()) if os.path.exists(os.path.join(CAMP, 'narrative.md')) else ''
+    summary = md_to_html(open(os.path.join(CAMP, 'summary.md')).read()) if os.path.exists(os.path.join(CAMP, 'summary.md')) else ''
     stress = jload(os.path.join(CAMP, 'stress.json'), None)
     data = json.dumps(dict(runs=runs, floor=floor, lessons=lessons, stress=stress, built=__import__('time').strftime('%Y-%m-%d %H:%M')), separators=(',', ':'))
     tpl = open(os.path.join(HERE, 'report_template.html')).read()
-    page = tpl.replace('__DATA__', data).replace('__NARRATIVE__', narrative)
+    page = tpl.replace('__DATA__', data).replace('__NARRATIVE__', narrative).replace('__SUMMARY__', summary)
     body = page
     full = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
             re.search(r'<title>.*?</title>', body, re.S).group(0) + '\n' + '\n'.join(re.findall(r'<link[^>]+>', body)) + '\n' + re.search(r'<style>.*?</style>', body, re.S).group(0) +

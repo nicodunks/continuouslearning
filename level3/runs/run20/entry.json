@@ -1,0 +1,31 @@
+{
+ "run": "run20",
+ "knob": "the rival: the same network with fast weights disabled (A frozen at zero), so it can only hold the sum in activity; run 3's recipe, full curriculum (hygiene: lr 1e-3 cosine)",
+ "parent": "random start, same seed as run 3",
+ "prediction": "The level 4 comparison. Predicted: it homes at 10 s (an activity loop can hold a short sum), struggles at 20 s, and degrades further at 30 s and 60 s in the stress test, where the fast-weight networks hold. If it matches the fast-weight line at every length, the plan's central claim, that synaptic memory beats activity memory on long trips, is not supported by this task.",
+ "args": [
+  "--use_fast",
+  "0",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1000",
+  "--iters",
+  "3000",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "lenient": true,
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

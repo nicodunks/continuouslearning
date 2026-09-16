@@ -13,7 +13,7 @@ from flynet import FlyNet
 from handbrain import HandBrain
 
 BRAINS = [('hand brain', None), ('run17 · score line', 'runs/run17/ckpt_00200.pt'), ('run19 · all three ingredients', 'runs/run19/final.pt'),
-          ('run16 · reset line', 'runs/run16/final.pt'), ('run3 · first homing network', 'runs/run3/ckpt_02300.pt'), ('run20 · rival (activity only)', 'runs/run20/final.pt')]
+          ('run16 · reset line', 'runs/run16/final.pt'), ('run3 · first homing network', 'runs/run3/ckpt_02300.pt'), ('run20 · rival (activity only)', 'runs/run20/ckpt_01000.pt')]
 CONDS = [dict(name='30 s', t_out=30.0, drift=0.0), dict(name='45 s', t_out=45.0, drift=0.0), dict(name='60 s', t_out=60.0, drift=0.0),
          dict(name='30 s · drift 0.05', t_out=30.0, drift=0.05), dict(name='30 s · drift 0.15', t_out=30.0, drift=0.15)]
 

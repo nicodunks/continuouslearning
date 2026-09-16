@@ -94,5 +94,9 @@
  "run19": {
   "title": "The wiped network on the legs world",
   "lesson": "The two ingredients stack. Trained on the slow-half fast-half world from run 14, then tested on the standard world: 1.62 at 30 s and 1.63 at 20 s, 33% arriving, the lowest earned scores of the campaign, with the memory in F (5.93 without). The reset survived the change of world: erase at food 0.38 against 0.008 away (ratio 49, peak 0.77). Write-versus-speed is +0.69. Prediction met on score (under 2.0) and reset (intact); write-versus-speed at +0.69 fell short of the 0.8 predicted. This is the best network of the night by every measure at once."
+ },
+ "run20": {
+  "title": "The rival: fast weights disabled",
+  "lesson": "With A frozen at zero, the same 64-neuron network trained with run 3's exact recipe never learned to home at 10 seconds: running score between 2.35 and 2.43 for a thousand iterations, the random level, where the fast-weight version was at 1.96 by iteration 300 and promoted by 804. It hit the stage cap without earning it and was stopped rather than moved to 20 seconds. This is the level 4 comparison the plan was built for, and it came out one-sided: on this task and with this training, an activity-only memory did not form at all. Caveat, stated plainly: one recipe and one seed; an activity integrator might be trainable with a different learning rate, more neurons or more iterations. What the result does show is that the fast-weight version is far easier to train into a homing memory than the activity-only version, from the same start."
  }
 }

@@ -53,6 +53,6 @@
  },
  "run10": {
   "title": "Second bias shift, the ratchet test",
-  "lesson": "The ratio did not ratchet: on the 200-trip test it is 7.5 (food 0.075, away 0.010), the same fixed point as runs 7B and 8B. What changed is the shape: the erase gate now shows real peaks at food, up to 0.20 on the test trip and 0.2 to 0.3 on the training checks, where earlier runs peaked near 0.06. And the score is the best earned 30-second number so far: 2.10 on the standard exam, with frozen checks reaching 1.49. Prediction on the ratio failed; the peaks and the score are the result."
+  "lesson": "The ratio did ratchet, once measured properly. On the single training-check trip it looked stuck near 1.8, but on the 200-trip test the erase gate fires 0.075 per tick at food against 0.010 away: a ratio of 7.4, up from 3 in runs 7B and 8B, with peaks of 0.20 on the test trip and 0.2 to 0.3 during training. The gate is learning a spike at food, one tick at a time. It is also the best earned 30-second score of the night: 2.10 on the standard exam, 23% arriving, with frozen checks under 1.5. Prediction met on the ratio (above 5) and on the score; at-food erase 0.075 is above the 0.05 target. Still not a full reset (that would be near 1 at food), but the clearest one yet."
  }
 }

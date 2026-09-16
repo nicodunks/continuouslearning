@@ -1,0 +1,92 @@
+{
+ "run": "run14",
+ "knob": "fourth erase-bias shift (+1.5) on top of run 12: does the ratchet reach a full wipe? (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run12 (final, 2.21 at 30 s, erase ratio 20, at-food 0.21)",
+ "prediction": "Ratios have gone 3, 7, 20. A fourth shift should take at-food erase past 0.4 with peaks near 0.8, away staying near 0.01, and the score holding near 2.2. If at-food erase stops rising, the gate has hit the most a scalar output can do with this signal.",
+ "args": [
+  "--init",
+  "runs/run12/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "1.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 20.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.059349775314331,
+     "arrived": 0.20499999821186066
+    },
+    "B": {
+     "score": 4.714564323425293,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.0643982887268066,
+     "arrived": 0.25999999046325684
+    },
+    "B": {
+     "score": 5.9359636306762695,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.075521230697632,
+     "arrived": 0.27000001072883606
+    },
+    "B": {
+     "score": 5.932919979095459,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_best_30.json",
+   "drift_F": 1.5110218524932861
+  }
+ ],
+ "finished": 1789540452.327679
+}

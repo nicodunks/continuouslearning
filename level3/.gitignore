@@ -1,3 +1,5 @@
 runs/*/ckpt*.pt
 runs/*/final.pt
 runs/*.out
+campaign/driver.out
+runs/*/status.json

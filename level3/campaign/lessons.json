@@ -70,5 +70,9 @@
  "run11B": {
   "title": "Seed 1, continued at 20 s",
   "lesson": "Given 800 more iterations with the gap rule suspended, seed 1 did begin to transfer: the frozen gap opened from zero to about 0.8 and the running score fell from 4.4 to 3.7. But on the 200-trip test at 20 s it scores 3.87 with F against 4.61 without, still worse than the random walk's 3.61, with 26 compass cells and tallies saturated 59% of the time (write strength 0.165, twice seed 0's). Verdict: the recipe's 10-second stage replicates across seeds; its 20-second transfer is much slower for seed 1 and was not complete after 1,200 iterations. The robustness claim is narrowed to: compass cells and a working tally emerge from any seed; how fast the tally adapts to longer trips depends on the seed."
+ },
+ "run14": {
+  "title": "Fourth bias shift",
+  "lesson": "The ratchet keeps working: on the 200-trip test the erase gate fires 0.37 per tick at food against 0.011 away, a ratio of 33, with peaks of 0.78 on the test trip and 0.83 to 0.91 during training. Away from food it has never moved from about 0.01. The score is 2.06 at 30 s, 26% arriving, the best of the ratchet line and within noise of the campaign best. Ratios across the shifts: 3, 7, 20, 33. Prediction partly met: at-food target 0.4, peaks target 0.8."
  }
 }

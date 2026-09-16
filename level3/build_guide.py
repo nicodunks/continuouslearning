@@ -608,6 +608,18 @@ td.n,th.n{text-align:right}
  <div class="eyebrow">The two numbers on every card</div>
  <p style="font-size:15px;margin:8px 0 0"><b>Score</b> is the exam: 200 fresh trips (seed 4242), and for each trip the closest the fly ever gets to home on its return, averaged. Lower is better; 0 would be perfect; a random walk scores about 4.4 at 30 s; the hand-built brain 0.75. "With F" is the trained brain; "without F" is the same brain with F forced to zero every tick. <b>Loss</b> is what training minimises: the mean distance from home over the last ten seconds of each return, plus the erase penalty. The two track each other but are not the same number, which is why the dashboard shows both.</p>
 </div>
+<h3>How the loss is computed, exactly</h3>
+<p>It is easy to assume the loss is "steps away from home". It is two terms added together, and the main one is more specific than that.</p>
+<p><b>Term 1, the distance term.</b> For each fly and each trip, look only at the last ten seconds of the return leg. At every tick in that window, measure the fly's distance from home. Average those distances. Then average over both trips and all 32 flies in the batch. This rewards getting home <em>and staying there</em>: a fly that passes home once and wanders off again is charged for the wandering.</p>
+<p><b>Term 2, the erase penalty.</b> At every tick where the food input is 0, take the erase gate's value. Average those over the whole episode. Multiply by the penalty coefficient (20 in the later runs).</p>
+<div class="eq">loss = (mean distance from home over the last 10 s of each return) + penalty × (mean erase gate on ticks with no food)</div>
+<p>Real sizes, from run 19's last training iteration on the two-speed world: the whole loss was 3.45. The penalty part was about 20 × 0.008 = 0.16, so the distance part was about 3.3. Training is mostly chasing the distance term; the penalty is a nudge on top.</p>
+<p><b>The score is a third thing.</b> The leaderboard number is the closest the fly ever gets to home on its return (any tick, not just the last ten seconds), averaged over the 200 exam trips. It is easier to read than the loss, but it is not what training minimises. Run 19's running score on that same iteration was 2.73, against a loss of 3.45: same network, two different rulers.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: where on a trip each number is measured</div>
+ <canvas id="lossDraw" width="1700" height="520"></canvas>
+ <div class="how"><b>How to read it.</b> The line is the fly's distance from home over one trip: it rises during the wander, then falls during the return. The shaded band is the last ten seconds of the return; the distance term is the average height of the line inside that band (the dashed horizontal line). The red dot is the lowest point the line ever reaches on the return, which is the score. Below the trip, the erase gate's value is drawn, with the ticks at food shaded: the penalty term is the average of the gate's height outside the shaded ticks, times the coefficient.</div>
+</div>
 <div class="panel">
  <div class="stepper" id="steps"></div>
  <canvas id="lineage" width="1700" height="300"></canvas>
@@ -1193,6 +1205,21 @@ function drawSpeedWorld(){const [x,W,H]=ctx('speedWorld');x.clearRect(0,0,W,H);c
  const angT=Math.atan2(tn,te)*180/Math.PI,angD=Math.atan2(dn,de)*180/Math.PI;txt(x,`time counter says ${angT.toFixed(0)}° south of west; distance counter and truth say ${angD.toFixed(0)}°`,1120,H-12,css('--mute'));
  if(SP.world==='drift')txt(x,'in the steady-speed world the three arrows agree: nothing forces a choice',1120,H-30,css('--teal'));else txt(x,`in the two-speed world they split by ${Math.abs(angT-angD).toFixed(0)}°: only the distance counter gets home`,1120,H-30,css('--coral'));}
 $('spDrift').addEventListener('click',()=>{SP.world='drift';$('spDrift').setAttribute('aria-pressed','true');$('spLegs').setAttribute('aria-pressed','false');drawSpeedWorld();});$('spLegs').addEventListener('click',()=>{SP.world='legs';$('spLegs').setAttribute('aria-pressed','true');$('spDrift').setAttribute('aria-pressed','false');drawSpeedWorld();});$('spSwap').addEventListener('click',()=>{SP.flip=!SP.flip;drawSpeedWorld();});
+
+(function(){const [x,W,H]=ctx('lossDraw');x.clearRect(0,0,W,H);const N=600;const T=[];for(let k=0;k<N;k++){const t=k/10;let d;if(t<30)d=Math.max(0,8.5*(1-Math.exp(-t/12))+0.6*Math.sin(t*0.7));else{const u=t-30;d=Math.max(0.3,8.2*Math.exp(-u/9)+0.5*Math.sin(u*1.3)+(u>18?0.4*Math.sin(u*2):0));}T.push(d);}
+ const p={l:44,r:20,t:30,b:20};const h1=300;const cw=W-p.l-p.r;const X=k=>p.l+k/N*cw,Y=v=>h1-v/9*(h1-p.t);
+ // last 10 s band
+ x.fillStyle=css('--soft');x.fillRect(X(500),p.t,X(600)-X(500),h1-p.t);txt(x,'last 10 s of the return',X(550),p.t+14,css('--mute'),'center');
+ x.strokeStyle=css('--line');x.beginPath();x.moveTo(p.l,p.t);x.lineTo(p.l,h1);x.lineTo(W-p.r,h1);x.stroke();[0,4,8].forEach(v=>txt(x,v,p.l-6,Y(v)+4,css('--mute'),'right'));txt(x,'distance from home',p.l+4,p.t-8,css('--mute'));txt(x,'wander (30 s)',X(150),h1+14,css('--mute'),'center');txt(x,'return (30 s)',X(450),h1+14,css('--mute'),'center');
+ x.strokeStyle=css('--teal');x.lineWidth=3;x.beginPath();T.forEach((d,k)=>k?x.lineTo(X(k),Y(d)):x.moveTo(X(k),Y(d)));x.stroke();
+ const win=T.slice(500);const mean=win.reduce((a,v)=>a+v,0)/win.length;x.setLineDash([6,4]);x.strokeStyle=css('--ink');x.lineWidth=2;x.beginPath();x.moveTo(X(500),Y(mean));x.lineTo(X(600),Y(mean));x.stroke();x.setLineDash([]);txt(x,`distance term = average in the band = ${mean.toFixed(2)}`,X(495),Y(mean)-10,css('--ink'),'right','13px "Bricolage Grotesque"');
+ let mi=300;for(let k=300;k<N;k++)if(T[k]<T[mi])mi=k;x.fillStyle=css('--coral');x.beginPath();x.arc(X(mi),Y(T[mi]),7,0,7);x.fill();txt(x,`score = closest approach = ${T[mi].toFixed(2)}`,X(mi)-12,Y(T[mi])-12,css('--coral'),'right','13px "Bricolage Grotesque"');
+ // erase gate strip
+ const y0=h1+50,hh=110;txt(x,'erase gate over the same trip',p.l+4,y0-6,css('--mute'));x.strokeStyle=css('--line');x.beginPath();x.moveTo(p.l,y0+hh);x.lineTo(W-p.r,y0+hh);x.stroke();
+ x.fillStyle=css('--soft');x.fillRect(X(0),y0,X(40)-X(0),hh);x.fillRect(X(560),y0,X(600)-X(560),hh);txt(x,'at food',X(20),y0+hh+14,css('--mute'),'center');txt(x,'at food',X(580),y0+hh+14,css('--mute'),'center');
+ x.strokeStyle=css('--coral');x.lineWidth=2.5;x.beginPath();for(let k=0;k<N;k++){const e=(k<40||k>=560)?0.35+0.3*Math.sin(k*0.5):0.008+0.004*Math.sin(k*0.3);const py=y0+hh-e*hh;k?x.lineTo(X(k),py):x.moveTo(X(k),py);}x.stroke();
+ txt(x,'penalty term = 20 × (average gate height outside the shaded ticks) ≈ 20 × 0.008 = 0.16',X(300),y0+30,css('--coral'),'center','13px "Bricolage Grotesque"');
+ txt(x,`loss = ${mean.toFixed(2)} + 0.16 = ${(mean+0.16).toFixed(2)} for this trip`,W-p.r,H-8,css('--ink'),'right','13px "Bricolage Grotesque"');})();
 function all(){drawSig();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

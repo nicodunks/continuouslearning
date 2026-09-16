@@ -42,5 +42,17 @@
  "run8B": {
   "title": "Food stand 4 s with an audible gate",
   "lesson": "Doubling the food ticks did not sharpen the reset: on the 200-trip test the erase ratio is 3.0 (food 0.027, away 0.009), no better than run 7B's 3, with peaks at food of 0.06. The score held rather than improved: 2.28 at 30 s on the standard exam, though its frozen checks on other trips reached 1.76. Prediction failed on the ratio, met on the score holding. Lesson: once the gate can hear, more food ticks are not the missing signal; the preference for food is real but small, and nothing on the warm-start line has pushed it past a ratio of about 3."
+ },
+ "run9": {
+  "title": "Cold start, audible gate, penalty 20",
+  "lesson": "From scratch, the penalty of 20 did what it did in run 2: it drove the erase gate shut within 200 iterations (0.0001 per tick away from food, 0.001 at food), which puts the sigmoid back on its flat part, deaf again, before any memory had formed. No F-versus-no-F gap by iteration 300. Killed under the five-minute rule. Lesson: on a cold start the penalty must be small enough that the gate stays audible while the memory is being built; 20 is a warm-start number."
+ },
+ "run9B": {
+  "title": "Cold start, audible gate, penalty 2",
+  "lesson": "Killed at 500 by its own prediction: no memory gap formed (F 2.42, no-F 2.42). The gate closed to 0.001 per tick by iteration 200 even at a penalty of 2, because before any memory exists erasing has no benefit and every gradient says erase less. Worse, the strong early fade (0.07 per tick at the start) wiped the tallies during the phase when the memory had to form; run 3, same seed and a deaf gate, had a 0.5 gap by iteration 300. Lesson: an audible erase gate helps a network that already has a memory (run 7B) and hurts one that does not. The reset can only be learned second, after the tally."
+ },
+ "run10": {
+  "title": "Second bias shift, the ratchet test",
+  "lesson": "The ratio did not ratchet: on the 200-trip test it is 7.5 (food 0.075, away 0.010), the same fixed point as runs 7B and 8B. What changed is the shape: the erase gate now shows real peaks at food, up to 0.20 on the test trip and 0.2 to 0.3 on the training checks, where earlier runs peaked near 0.06. And the score is the best earned 30-second number so far: 2.10 on the standard exam, with frozen checks reaching 1.49. Prediction on the ratio failed; the peaks and the score are the result."
  }
 }

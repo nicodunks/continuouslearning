@@ -20,3 +20,9 @@
 20:33:39 starting run8B: knob = food stand 2 s -> 4 s, now that the erase gate can hear (penalty 20) (hygiene: lr 3e-4, cosine); parent = run8 (ckpt_00300, score about 2.2, erase ratio about 1.5)
 20:59:50 run8B done in 26 min; final.pt@20s A 2.18 B 4.72 C 3.61; final.pt@30s A 2.28 B 5.94 C 4.38; ckpt_00700.pt@30s A 2.29 B 5.94 C 4.38
 20:59:50 starting run9: knob = cold start with an audible erase gate from the beginning (erase bias -2.5 instead of -5) and penalty 20; food stand 2 s; full 10 -> 20 -> 30 s curriculum (hygiene: lr 1e-3 cosine); parent = random start, same seed as runs 1-3
+21:04:01 run9 done in 4 min; ckpt_00300.pt@20s A 4.59 B 4.56 C 3.61; ckpt_00300.pt@30s A 5.80 B 5.71 C 4.38; ckpt_00100.pt@30s A 5.45 B 5.32 C 4.38
+21:04:01 starting run9B: knob = run 9 with the penalty cut 20 -> 2 so the gate stays audible during the cold start (erase bias -2.5, food 2 s, full curriculum) (hygiene: lr 1e-3 cosine); parent = random start, same seed as runs 1-3
+21:11:12 run9B done in 7 min; ckpt_00600.pt@20s A 4.71 B 4.68 C 3.61; ckpt_00600.pt@30s A 5.89 B 5.90 C 4.38; ckpt_00100.pt@30s A 5.62 B 5.50 C 4.38
+21:11:12 starting run10: knob = second erase-bias shift (+1.5) on top of run 8B, the ratchet test (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine); parent = run8B (final, 2.28 at 30 s, erase ratio 3)
+21:38:23 run10 done in 27 min; final.pt@20s A 2.03 B 4.71 C 3.61; final.pt@30s A 2.10 B 5.90 C 4.38; ckpt_00700.pt@30s A 2.12 B 5.90 C 4.38
+21:38:23 starting run11: knob = seed replication of run 3's recipe from a cold start (seed 1; food 2 s, penalty 0.05, no bias shift, full curriculum) (hygiene: lr 1e-3 cosine); parent = random start, seed 1

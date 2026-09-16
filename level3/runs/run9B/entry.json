@@ -1,0 +1,30 @@
+{
+ "run": "run9B",
+ "knob": "run 9 with the penalty cut 20 -> 2 so the gate stays audible during the cold start (erase bias -2.5, food 2 s, full curriculum) (hygiene: lr 1e-3 cosine)",
+ "parent": "random start, same seed as runs 1-3",
+ "prediction": "The gate should settle near 0.01 per tick away from food, audible, while a memory forms (F-vs-no-F gap by iteration 500). Then, over the 20 s and 30 s stages, the food:away erase ratio should climb past 5 with at-food erase above 0.05. If a fresh network that can hear its gate and pays for fading still ends near a ratio of 3, the reset needs a signal this world lacks.",
+ "args": [
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "2",
+  "--erase_bias_shift",
+  "2.5",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1000",
+  "--iters",
+  "3000",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

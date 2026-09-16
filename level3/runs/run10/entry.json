@@ -1,0 +1,30 @@
+{
+ "run": "run10",
+ "knob": "second erase-bias shift (+1.5) on top of run 8B, the ratchet test (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run8B (final, 2.28 at 30 s, erase ratio 3)",
+ "prediction": "The first shift took the ratio from 1 to 3 as the network brought fading back down. A second shift restarts that pressure from a higher starting point. If the preference ratchets, the ratio passes 5 and at-food erase passes 0.05; if it returns to 3, the ratio is a fixed point of this signal and the reset needs something else. Score at 30 s should dip then return near 2.3.",
+ "args": [
+  "--init",
+  "runs/run8B/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "1.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

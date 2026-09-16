@@ -1,0 +1,92 @@
+{
+ "run": "run10",
+ "knob": "second erase-bias shift (+1.5) on top of run 8B, the ratchet test (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run8B (final, 2.28 at 30 s, erase ratio 3)",
+ "prediction": "The first shift took the ratio from 1 to 3 as the network brought fading back down. A second shift restarts that pressure from a higher starting point. If the preference ratchets, the ratio passes 5 and at-food erase passes 0.05; if it returns to 3, the ratio is a fixed point of this signal and the reset needs something else. Score at 30 s should dip then return near 2.3.",
+ "args": [
+  "--init",
+  "runs/run8B/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "1.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 27.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.028576612472534,
+     "arrived": 0.20499999821186066
+    },
+    "B": {
+     "score": 4.714939594268799,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 36,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.098954439163208,
+     "arrived": 0.23250000178813934
+    },
+    "B": {
+     "score": 5.900887966156006,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 35,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.122325897216797,
+     "arrived": 0.24500000476837158
+    },
+    "B": {
+     "score": 5.901095390319824,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 35,
+   "file": "test_best_30.json",
+   "drift_F": 1.4914406538009644
+  }
+ ],
+ "finished": 1789533503.5860028
+}

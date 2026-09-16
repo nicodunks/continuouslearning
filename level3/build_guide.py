@@ -255,6 +255,11 @@ td.n,th.n{text-align:right}
 </div>
 <h4>One cell, or the whole grid? Both: the same rule runs on every cell at once</h4>
 <p>Drawing 3a is about one cell, the one on the wire from j to i. But the rule is applied to all 4,096 cells in the same tick. The gates and ws are shared: one erase value, one write value and one ws for the whole board. What differs from cell to cell is the pairing, because each cell sits between a different pair of neurons. If you write the 64 "now" activities down the left edge of the grid and the 64 "a tick ago" activities along the top edge, then every cell's amount added is simply its row's number times its column's number, times the shared ws × write. Move your pointer over the grid to see this for any cell.</p>
+<p>Before the grid, one thing to be clear about, because the grid can mislead. <b>Activities belong to neurons; cells belong to wires.</b> A neuron has one activity number. A cell sits on the wire between two neurons, and the grid is not a map of anything; its rows and columns are just the list of neurons written twice, once as receivers (down the side) and once as senders (along the top). So for the cell in row i and column j: the row names the receiving neuron i, and you take that neuron's activity now; the column names the sending neuron j, and you take that neuron's activity a tick ago; then you multiply. Usually i and j are two different neurons. On the diagonal, where i equals j, it is the same neuron at two moments, now and a tick ago, which is the wire from a neuron back to itself.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing 3b′: the eight neurons and their activities, and where two cells get their numbers from</div>
+ <svg viewBox="0 0 900 330" id="neurCells"></svg>
+</div>
 <div class="sketch">
  <div class="eyebrow">Drawing 3c: one tick's additions for the whole grid, an eight-neuron version</div>
  <canvas id="gridPair" width="1700" height="640"></canvas>
@@ -938,6 +943,16 @@ function drawCF(){const [x,W,H]=ctx('compassF');x.clearRect(0,0,W,H);const names
   txt(x,'each cell = (its row number) × (its column number); then the whole grid is multiplied by the shared ws × write and added to F',x0,y0+8*u+30,css('--mute'));
   const u2=u;c.onmousemove=e=>{const r=c.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H;const j=Math.floor((px-x0)/u2),i=Math.floor((py-y0)/u2);if(i>=0&&i<8&&j>=0&&j<8){hov=[i,j];$('gridPairDetail').textContent=`cell F[${i+1}, ${j+1}]: x_new[${i+1}] × x_old[${j+1}] = ${xn[i].toFixed(1)} × ${xo[j].toFixed(1)} = ${(xn[i]*xo[j]).toFixed(2)}; with ws 0.074 and write 0.4 the amount added this tick is ${(0.074*0.4*xn[i]*xo[j]).toFixed(4)}`;draw();}};}
  draw();})();
+
+(function(){const g=$('neurCells');const xn=[0.8,-0.3,0.5,0.1,-0.7,0.0,0.6,-0.2],xo=[0.6,0.2,-0.4,0.7,0.1,-0.5,0.3,0.0];let out='';const f=v=>(v>=0?'+':'')+v.toFixed(1);
+ out+='<text x="20" y="24" font-family="Bricolage Grotesque" font-size="14" font-weight="700" fill="var(--ink)">the eight neurons (each has one activity now, and one from a tick ago)</text>';
+ for(let k=0;k<8;k++){const cx=80+k*100;out+=`<circle cx="${cx}" cy="70" r="22" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><text x="${cx}" y="75" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" fill="var(--ink)">${k+1}</text><text x="${cx}" y="108" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--teal)">now ${f(xn[k])}</text><text x="${cx}" y="124" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--mute)">ago ${f(xo[k])}</text>`;}
+ // two cells
+ const cell=(x,y,i,j,label)=>`<rect x="${x}" y="${y}" width="150" height="70" rx="8" fill="var(--panel)" stroke="var(--amber)" stroke-width="2"/><text x="${x+75}" y="${y+22}" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" font-weight="700" fill="var(--ink)">cell [${i+1}, ${j+1}]${label}</text><text x="${x+75}" y="${y+42}" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--ink)">now of ${i+1} × ago of ${j+1}</text><text x="${x+75}" y="${y+60}" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--ink)">${f(xn[i])} × ${f(xo[j])} = ${(xn[i]*xo[j]).toFixed(2)}</text>`;
+ out+=cell(150,220,2,4,'');out+=`<path d="M280,108 C280,170 225,180 225,220" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#ar)"/><path d="M480,124 C480,180 235,180 235,220" fill="none" stroke="var(--mute)" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ar)"/>`;
+ out+=cell(560,220,2,2,' (diagonal)');out+=`<path d="M280,108 C280,150 620,160 625,220" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#ar)"/><path d="M280,124 C300,170 640,170 645,220" fill="none" stroke="var(--mute)" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ar)"/>`;
+ out+='<text x="450" y="315" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">solid teal: the receiving neuron\'s activity now · dashed grey: the sending neuron\'s activity a tick ago</text>';
+ g.innerHTML=out;})();
 function all(){drawSig();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

@@ -1,0 +1,86 @@
+{
+ "run": "run6",
+ "knob": "stage 20 s -> 30 s (hygiene: cosine learning-rate decay)",
+ "parent": "run5 (ckpt_00400, best frozen exam 1.41 at 20 s)",
+ "prediction": "Training at 30 s with a decaying learning rate: no collapse after iteration 600, and an earned 30 s score at or under 2.0 with the memory in F (B near random). The untrained-at-30 baseline to beat is 2.37 (runs 4 and 5 best checkpoints).",
+ "args": [
+  "--init",
+  "runs/run5/ckpt_00400.pt",
+  "--food_stand",
+  "2.0",
+  "--stages",
+  "30",
+  "--iters",
+  "1200",
+  "--batch",
+  "32",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 21.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "ckpt_00600.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 3.3634872436523438,
+     "arrived": 0.07750000059604645
+    },
+    "B": {
+     "score": 4.320669174194336,
+     "arrived": 0.05000000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 42,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "ckpt_00600.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 4.155177116394043,
+     "arrived": 0.10999999940395355
+    },
+    "B": {
+     "score": 5.362228870391846,
+     "arrived": 0.05999999865889549
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 45,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00400.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.1900086402893066,
+     "arrived": 0.20749999582767487
+    },
+    "B": {
+     "score": 5.847553730010986,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 43,
+   "file": "test_best_30.json",
+   "drift_F": 1.7723512649536133
+  }
+ ],
+ "finished": 1789525018.182328
+}

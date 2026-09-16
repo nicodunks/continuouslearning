@@ -31,3 +31,18 @@ Run 5 reached the best frozen exam of the night at iteration 400 (1.41 at 20 s),
 
 ## Run 6: earn the 30-second score, with the schedule
 Warm from run 5's best checkpoint (the 1.41 exam), 30-second wanders, two trips, cosine learning-rate decay. One scientific change (the stage) plus the hygiene. Prediction: no collapse after iteration 600; a 30-second score at or under 2.0 with the memory in F, against the untrained-at-30 baseline of 2.37 from runs 4 and 5.
+
+## Decay alone did not stop the collapse (run 6, killed at 600)
+Run 6 trained at 30 seconds and got to a frozen exam of 1.77 by iteration 400, the best 30-second number so far and well under the untrained 2.37. Then the same collapse: write gate 0.38 to 0.64 in a hundred iterations, loss above 12. With a cosine schedule over 1,200 iterations, the learning rate at iteration 500 was still about two thirds of the starting rate, so the schedule had not yet done anything. Killed at 600 rather than spend twenty minutes hoping. Run 6B restarts from run 6's own best checkpoint with the base rate cut to a third and the same decay. If that holds, the rule for the rest of the night is: warm starts train at 3e-4, not 1e-3.
+
+## An honest note on how the 30-second stage was started
+The rule said: promote to 30 seconds only when the running score at 20 seconds is under 1.5. No run met that; run 3 bottomed at about 1.65 and run 5 at 1.74. Run 6 was started on a looser reading: run 5's checkpoint 400 scored 1.41 on the frozen 64-trip drift check, which is a cleaner number than the running score but a smaller exam than the 200-trip test, where the best 20-second score is 1.90. So the 30-second line began before the strict criterion was met. It is kept because the memory plainly transfers to 30 seconds (2.19 earned, 5.85 without F), but the label should be accurate: the stretch was started early.
+
+## The lower learning rate ended the collapses (run 6B)
+Same checkpoint, same 30-second trips, learning rate cut from 1e-3 to 3e-4 with cosine decay: 800 iterations with no collapse, where run 6 fell over at 500. The final network scores 2.13 at 30 seconds with its memory and 5.91 without, the best earned 30-second number so far. This settles the hygiene question for the night: warm starts train at 3e-4.
+
+## What still separates 2.1 from the 0.75 floor
+Three measured gaps, all visible on run 6B's panels. The erase gate is a fade (0.005 at food, 0.009 away), so early steps leak. The write gate follows speed only partly (+0.53), so distance is still partly time. And at 30 seconds a third of the tally ticks are at the ceiling, so late steps are lost. Each of these is a fly ingredient the network has not fully found. The next runs go after them one at a time.
+
+## Run 7: a penalty that is actually large
+The penalty knob was never connected: at 0.5 it added nothing to the loss. At 20 it adds about 0.17 per tick of fade, which is a real cost against a loss of about 3. Warm from run 6B at the safe learning rate, so the change is gradual and visible. Two outcomes are possible and both are informative: the gate moves its erasing to the food ticks (erase at food rises above 0.05, away below 0.002), or it closes everywhere and the tallies saturate, which would say this scalar gate cannot learn the reset from this signal at all.

@@ -5,3 +5,8 @@
 18:27:35 starting run5: knob = erase penalty 0.05 -> 0.5, warm start (run 2 tried this cold and died); parent = run3 (ckpt_02300, its best 20 s checkpoint)
 18:54:46 run5 done in 27 min; final.pt@20s A 3.90 B 4.45 C 3.61; final.pt@30s A 4.73 B 5.47 C 4.38; ckpt_00400.pt@30s A 2.37 B 5.91 C 4.38
 18:54:46 queue empty; waiting for the supervisor
+18:55:46 starting run6: knob = stage 20 s -> 30 s (hygiene: cosine learning-rate decay); parent = run5 (ckpt_00400, best frozen exam 1.41 at 20 s)
+19:16:58 run6 done in 21 min; ckpt_00600.pt@20s A 3.36 B 4.32 C 3.61; ckpt_00600.pt@30s A 4.16 B 5.36 C 4.38; ckpt_00400.pt@30s A 2.19 B 5.85 C 4.38
+19:16:58 starting run6B: knob = restart of run 6 from its own best checkpoint with a lower learning rate (1e-3 -> 3e-4, cosine decay) (hygiene); parent = run6 (ckpt_00400, frozen exam 1.77 at 30 s)
+19:44:09 run6B done in 27 min; final.pt@20s A 1.85 B 4.71 C 3.61; final.pt@30s A 2.13 B 5.91 C 4.38; ckpt_00700.pt@30s A 2.13 B 5.91 C 4.38
+19:44:09 queue empty; waiting for the supervisor

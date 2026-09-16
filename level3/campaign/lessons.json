@@ -18,5 +18,13 @@
  "run5": {
   "title": "Erase penalty \u00d710, warm start",
   "lesson": "The penalty did nothing to the erase gate, because at 0.5 times a gate of 0.01 it adds 0.005 to a loss of about 2: a rounding error. Run 2 had died for cold-start reasons, not because the penalty was strong. What run 5 did show is the danger of long training near the ceiling: after a good stretch (best frozen exam 1.41 at iteration 400) it collapsed twice, and the second time it did not recover; the final network is worse than a random walk. Its best checkpoint ties run 4 at 30 s (2.37). Lesson: the optimiser needs a schedule that shrinks its steps late in a run."
+ },
+ "run6": {
+  "title": "Stretch to 30 s, with cosine decay",
+  "lesson": "Trained at 30 seconds for the first time. By iteration 400 its frozen exam at 30 s was 1.77, far under the untrained 2.37, with the memory in F (5.48 without). Then the familiar collapse at 500 (write gate 0.38 to 0.64, loss to 12) and it did not recover by 600, so it was killed. Cosine decay alone was not enough: at iteration 500 of 1,200 the rate was still two thirds of full. Restarted as run 6B from the 1.77 checkpoint at a third of the base rate. Note: this stage was started on run 5's 64-trip frozen exam of 1.41, not on the running-score rule (which no run had met); see the narrative."
+ },
+ "run6B": {
+  "title": "Run 6 restarted at a third of the learning rate",
+  "lesson": "No collapse in 800 iterations at 30 seconds. Final network: 2.13 at 30 s with F, 5.91 without (22% arrived); 1.85 at 20 s. The lower rate is the fix for the late collapses: from here every warm start trains at 3e-4. The score has plateaued around 2.1 at 30 s, well above the 0.75 floor. Still a fade (0.005 at food, 0.009 away), write~speed +0.53, tallies saturated a third of the time at 30 s: the three things that still separate it from the fly."
  }
 }

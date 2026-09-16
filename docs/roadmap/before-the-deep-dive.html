@@ -54,7 +54,8 @@ td.n,th.n{text-align:right}
 .knob .turned{color:var(--blue);font-family:"JetBrains Mono",monospace;font-size:11px;display:block;margin-top:4px}
 .knobwrap{display:grid;grid-template-columns:minmax(0,1fr) 460px;gap:16px;align-items:start}
 @media (max-width:1000px){.knobwrap{grid-template-columns:1fr}}
-.knobdetail{position:sticky;top:16px}
+.knobdetail{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
+@media (max-width:1000px){.knobdetail{position:static;max-height:none;overflow:visible}}
 .knobdetail .detail{margin-top:18px;font-size:14.5px}
 .knobdetail canvas{margin:8px 0 10px;border-radius:6px}
 .knobdetail h4{margin-top:0}

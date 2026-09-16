@@ -573,6 +573,24 @@ td.n,th.n{text-align:right}
  <div class="legend"><span><i style="background:var(--teal)"></i>Hebb: keeps adding, hits the lid</span><span><i style="background:var(--blue)"></i>delta: writes the surprise, then settles</span><span><i style="background:var(--coral)"></i>the ±1 lid</span></div>
  <div class="how"><b>How to read it.</b> Across the bottom is time in ticks. Up the side is the strength of one connection. The fly holds one heading for the whole time, so the same two neurons fire together tick after tick. The teal line is the connection under the Hebb rule: it grows on every tick, until it reaches the coral line, which is the ±1 lid. This is what a tally needs, because a tally has to keep counting the steps for as long as the fly keeps walking. The blue line is the same connection under the delta rule: it grows only until it can predict the pattern, and then it flattens out. That is what a memory of "what usually follows what" needs, because once the pattern is learned there is nothing more to learn. But it is exactly the wrong behaviour for counting: after the line flattens, twenty steps and sixty steps leave the connection at the same value, so the count is lost. Move the "ticks walking" slider to see this.</div>
 </div>
+<h3>The delta rule's math, with three neurons and every sum written out</h3>
+<p>Everything in delta is Hebb with one substitution, and the substitution hinges on one expression: <b>pred = F · x_old</b>. Here is what that dot means, and then the whole rule, on a three-neuron board where every number is visible.</p>
+<p><b>What F · x_old is.</b> F is the board (here 3 × 3). x_old is the list of the three activities from a tick ago. To compute pred for receiver 1, go along row 1 of the board: multiply cell [1,1] by x_old[1], cell [1,2] by x_old[2], cell [1,3] by x_old[3], and add the three products. Do the same for rows 2 and 3. The result is three numbers, one per receiver. This is exactly how the neurons read the board during a tick (the fast part of the recurrent drive, before A scales it), so pred[i] is "what the board, used as wiring, would push onto neuron i right now, from last tick's activities". It is F's guess at neuron i's new activity.</p>
+<p><b>The substitution.</b> Hebb deposits x_new[i] × x_old[j] into cell [i,j]. Delta deposits (x_new[i] − pred[i]) × x_old[j]: the receiver's actual activity, minus the board's guess for it, times the sender's old activity. That bracket is the surprise. When the board is empty, pred is all zeros and the two rules deposit exactly the same table. As the board fills, pred climbs toward x_new, the bracket shrinks toward zero, and the deposits fade out. Nothing else changes: ws, the write gate and the erase gate are used exactly as before.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: one tick of both rules on a three-neuron board, every product and sum shown</div>
+ <div class="controls">
+  <div class="ctl"><label>x_old[1] <output id="dxo1">1.0</output></label><input id="xo1" type="range" min="-1" max="1" step="0.1" value="1"></div>
+  <div class="ctl"><label>x_old[2] <output id="dxo2">0.0</output></label><input id="xo2" type="range" min="-1" max="1" step="0.1" value="0"></div>
+  <div class="ctl"><label>x_old[3] <output id="dxo3">0.5</output></label><input id="xo3" type="range" min="-1" max="1" step="0.1" value="0.5"></div>
+  <div class="ctl"><label>x_new[1] <output id="dxn1">0.8</output></label><input id="xn1" type="range" min="-1" max="1" step="0.1" value="0.8"></div>
+  <div class="ctl"><label>x_new[2] <output id="dxn2">0.0</output></label><input id="xn2" type="range" min="-1" max="1" step="0.1" value="0"></div>
+  <div class="ctl"><label>x_new[3] <output id="dxn3">0.4</output></label><input id="dxn3_" type="range" min="-1" max="1" step="0.1" value="0.4"></div>
+ </div>
+ <div class="row"><button class="btn" id="d3Tick">apply this tick to both boards</button><button class="btn" id="d3Ten">ten ticks</button><button class="btn" id="d3Reset">new episode (both boards to zero)</button><span class="eyebrow" id="d3N">tick 0</span></div>
+ <div id="d3Out" style="font-size:14px;margin-top:12px"></div>
+ <div class="how"><b>How to read it.</b> The sliders set the three activities from a tick ago and the three activities now, held fixed so you can watch the boards evolve as the fly would if it held a heading. Each press applies one tick of the rule to two separate boards, one under Hebb and one under delta, with ws = 0.1 and the write gate at 1 and no erasing. The delta panel shows the three row-sums that make pred, the three surprises, and the deposit table those produce; the Hebb panel shows its deposit table for comparison. Press "ten ticks": the Hebb board keeps growing toward the lid, and the delta board settles at the point where pred equals x_new and the surprises are zero. Then change x_new and press again: delta starts writing again, because the board's guess is wrong again.</div>
+</div>
 <h3>The two rules, slowly, one cell and one tick at a time</h3>
 <p>Take one cell and suppose the sender was at 1.0 a tick ago and the receiver is at 0.8 now, tick after tick, as when the fly holds a heading. Write strength 0.1, gate open, no erasing. Press the button and watch both rules fill the same cell.</p>
 <p><b>Hebb</b> has one step: add write strength × pairing to the cell. The pairing is 0.8 × 1.0 = 0.8, so each tick adds 0.08. The cell climbs 0.08, 0.16, 0.24 and keeps climbing until the lid.</p>
@@ -1261,6 +1279,26 @@ function drawSigZoom(){const z=+$('Z').value;$('oZ').textContent=(z>0?'+':'')+z.
  x.strokeStyle=css('--coral');x.setLineDash([4,3]);x.beginPath();x.moveTo(X(z),Y(sg));x.lineTo(X(z+1),Y(sg));x.lineTo(X(z+1),Y(sg+form));x.stroke();x.setLineDash([]);txt(x,'run = 1',X(z+0.5),Y(sg)+14,css('--coral'),'center');txt(x,'rise = '+form.toFixed(4),X(z+1)+6,Y(sg+form/2)+4,css('--coral'),'left');
  x.fillStyle=css('--coral');x.beginPath();x.arc(X(z),Y(sg),6,0,7);x.fill();txt(x,'slope = rise ÷ run = '+form.toFixed(4),p.l+6,p.t+14,css('--blue'),'left','13px "Bricolage Grotesque"');}
 $('Z').addEventListener('input',drawSigZoom);
-function all(){drawSig();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
+
+const D3={n:0,H:[[0,0,0],[0,0,0],[0,0,0]],Dl:[[0,0,0],[0,0,0],[0,0,0]]};
+const d3get=()=>({xo:[+$('xo1').value,+$('xo2').value,+$('xo3').value],xn:[+$('xn1').value,+$('xn2').value,+$('dxn3_').value]});
+function d3Show(){const {xo,xn}=d3get();['xo1','xo2','xo3'].forEach((id,k)=>$('d'+id).textContent=xo[k].toFixed(1));$('dxn1').textContent=xn[0].toFixed(1);$('dxn2').textContent=xn[1].toFixed(1);$('dxn3').textContent=xn[2].toFixed(1);const ws=0.1;const f=v=>(v>=0?'+':'')+v.toFixed(3);
+ const pred=D3.Dl.map(row=>row.reduce((a,v,j)=>a+v*xo[j],0));const sur=xn.map((v,i)=>v-pred[i]);const depD=sur.map(si=>xo.map(oj=>ws*si*oj));const depH=xn.map(ni=>xo.map(oj=>ws*ni*oj));
+ const tbl=(M,title,hl)=>`<div><div class="eyebrow" style="margin-bottom:4px">${title}</div><table style="margin:0;font-family:'JetBrains Mono';font-size:12px"><tr><th></th><th>from 1</th><th>from 2</th><th>from 3</th></tr>${M.map((r,i)=>`<tr><th>to ${i+1}</th>${r.map(v=>`<td class="n" style="${hl&&Math.abs(v)>0.999?'color:var(--coral)':''}">${f(v)}</td>`).join('')}</tr>`).join('')}</table></div>`;
+ $('d3Out').innerHTML=`<div class="two">
+ <div><h4 style="color:var(--blue)">delta</h4>
+  <p style="margin:6px 0;font-family:'JetBrains Mono';font-size:12.5px;line-height:1.8">pred[1] = ${D3.Dl[0].map((v,j)=>`${f(v)}×${xo[j].toFixed(1)}`).join(' + ')} = <b>${f(pred[0])}</b><br>pred[2] = ${D3.Dl[1].map((v,j)=>`${f(v)}×${xo[j].toFixed(1)}`).join(' + ')} = <b>${f(pred[1])}</b><br>pred[3] = ${D3.Dl[2].map((v,j)=>`${f(v)}×${xo[j].toFixed(1)}`).join(' + ')} = <b>${f(pred[2])}</b></p>
+  <p style="margin:6px 0;font-family:'JetBrains Mono';font-size:12.5px;line-height:1.8">surprise[i] = x_new[i] − pred[i]:  ${sur.map((v,i)=>`${xn[i].toFixed(1)} − ${f(pred[i])} = <b>${f(v)}</b>`).join(' · ')}</p>
+  ${tbl(depD,'deposit this tick = 0.1 × surprise[i] × x_old[j]')}
+  <div style="margin-top:8px">${tbl(D3.Dl,'delta board F (after '+D3.n+' ticks)',true)}</div></div>
+ <div><h4 style="color:var(--teal)">Hebb, for comparison</h4>
+  <p style="margin:6px 0;font-family:'JetBrains Mono';font-size:12.5px;line-height:1.8">no prediction step: the receiver\'s activity is used as is</p>
+  ${tbl(depH,'deposit this tick = 0.1 × x_new[i] × x_old[j]')}
+  <div style="margin-top:8px">${tbl(D3.H,'Hebb board F (after '+D3.n+' ticks)',true)}</div></div></div>
+ <p style="margin:10px 0 0;color:var(--mute);font-size:13.5px">sum of |surprise| under delta: <b>${sur.reduce((a,v)=>a+Math.abs(v),0).toFixed(3)}</b> (when this reaches zero, delta has stopped writing) · red cells are at the lid</p>`;}
+function d3Apply(){const {xo,xn}=d3get();const ws=0.1;const pred=D3.Dl.map(row=>row.reduce((a,v,j)=>a+v*xo[j],0));D3.Dl=D3.Dl.map((row,i)=>row.map((v,j)=>Math.max(-1,Math.min(1,v+ws*(xn[i]-pred[i])*xo[j]))));D3.H=D3.H.map((row,i)=>row.map((v,j)=>Math.max(-1,Math.min(1,v+ws*xn[i]*xo[j]))));D3.n++;$('d3N').textContent='tick '+D3.n;}
+$('d3Tick').addEventListener('click',()=>{d3Apply();d3Show();});$('d3Ten').addEventListener('click',()=>{for(let k=0;k<10;k++)d3Apply();d3Show();});$('d3Reset').addEventListener('click',()=>{D3.n=0;D3.H=[[0,0,0],[0,0,0],[0,0,0]];D3.Dl=[[0,0,0],[0,0,0],[0,0,0]];$('d3N').textContent='tick 0';d3Show();});
+['xo1','xo2','xo3','xn1','xn2','dxn3_'].forEach(id=>$(id).addEventListener('input',d3Show));
+function all(){drawSig();d3Show();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

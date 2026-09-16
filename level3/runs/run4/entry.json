@@ -1,0 +1,24 @@
+{
+ "run": "run4",
+ "knob": "trips per episode 2 -> 5",
+ "parent": "run3 (ckpt_02300, its best 20 s checkpoint)",
+ "prediction": "With five trips in a row, leftover tallies hurt more, so the erase gate should start to fire at food (erase at food > 0.3) or, failing that, the fade should deepen. Score at 20 s should stay at or below run 3's 1.90; if it gets worse, the dirty board is winning.",
+ "args": [
+  "--init",
+  "runs/run3/ckpt_02300.pt",
+  "--food_stand",
+  "2.0",
+  "--trips",
+  "5",
+  "--stages",
+  "20",
+  "--iters",
+  "1200",
+  "--batch",
+  "32"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

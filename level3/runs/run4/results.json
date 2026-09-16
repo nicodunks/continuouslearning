@@ -1,0 +1,86 @@
+{
+ "run": "run4",
+ "knob": "trips per episode 2 -> 5",
+ "parent": "run3 (ckpt_02300, its best 20 s checkpoint)",
+ "prediction": "With five trips in a row, leftover tallies hurt more, so the erase gate should start to fire at food (erase at food > 0.3) or, failing that, the fade should deepen. Score at 20 s should stay at or below run 3's 1.90; if it gets worse, the dirty board is winning.",
+ "args": [
+  "--init",
+  "runs/run3/ckpt_02300.pt",
+  "--food_stand",
+  "2.0",
+  "--trips",
+  "5",
+  "--stages",
+  "20",
+  "--iters",
+  "1200",
+  "--batch",
+  "32"
+ ],
+ "minutes": 67.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.303574562072754,
+     "arrived": 0.1525000035762787
+    },
+    "B": {
+     "score": 4.653501987457275,
+     "arrived": 0.02500000037252903
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 44,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.808342695236206,
+     "arrived": 0.1574999988079071
+    },
+    "B": {
+     "score": 5.8185625076293945,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 43,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00400.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.371175527572632,
+     "arrived": 0.22499999403953552
+    },
+    "B": {
+     "score": 5.79513692855835,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 40,
+   "file": "test_best_30.json",
+   "drift_F": 1.503890037536621
+  }
+ ],
+ "finished": 1789521965.777886
+}

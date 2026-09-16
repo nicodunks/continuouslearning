@@ -74,7 +74,7 @@ tr.sel td{background:var(--amber-soft)}
   <h1>Night Report</h1>
   <p class="lede">Every experiment we ran, side by side, drawn from the real numbers. Start with the leaderboard, then pick any two runs and compare them panel by panel. Every picture says how to read it and how it was measured. Words you have not met are explained where they first appear.</p>
   <div class="kpis" id="kpis"></div>
-  <nav class="toc"><a href="#board">Leaderboard</a><a href="#tree">Family tree</a><a href="#journeys">Journeys</a><a href="#compare">Compare two runs</a><a href="#knobs">Knob → effect</a><a href="#cards">Run cards</a><a href="#learned">What we learned</a><a href="#words">Words</a></nav>
+  <nav class="toc"><a href="#board">Leaderboard</a><a href="#stress">Stress test</a><a href="#tree">Family tree</a><a href="#journeys">Journeys</a><a href="#compare">Compare two runs</a><a href="#knobs">Knob → effect</a><a href="#cards">Run cards</a><a href="#learned">What we learned</a><a href="#words">Words</a></nav>
 </header>
 
 <section id="board">
@@ -119,6 +119,14 @@ tr.sel td{background:var(--amber-soft)}
   <h2>Knob → effect</h2>
   <p>For every run that had a parent, the change in each measurement compared with that parent, on the same test length. Green means it moved toward the fly-like answer, red away. This is the table that says what each knob actually did.</p>
   <div class="matrix"><table id="knob_t"><thead><tr><th>run</th><th>knob</th><th>vs</th><th class="n">Δ A score</th><th class="n">Δ B − A gap</th><th class="n">Δ compass cells</th><th class="n">Δ write~speed</th><th class="n">Δ erase at food</th><th class="n">Δ fade</th><th class="n">Δ saturated</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="stress">
+  <h2>Stress test: longer trips and a drifting compass, no retraining</h2>
+  <p>This is level 4 of the plan. Freeze each network and make the world harder than anything it trained on: wanders of 45 and 60 seconds, and a compass that lies a little. Each network is run twice, with its fast strengths allowed (solid) and held at zero (dashed). The hand-built fly brain and a random walk are the two reference lines. If a synaptic memory beats an activity memory on long trips, the solid lines should stay low where the dashed ones and the rival climb.</p>
+  <div class="term"><b>Drift.</b> The heading the network is told wanders away from the true heading by a random walk with the given spread per root-second. At 0.15 the compass is off by tens of degrees after a minute. A memory that stores directions in the compass frame inherits every degree of that error.</div>
+  <div class="panel"><canvas id="stressC" width="1140" height="340"></canvas><div class="legend" id="stressL"></div><p class="note" id="stressN"></p></div>
+  <div class="matrix"><table id="stress_t"><thead></thead><tbody></tbody></table></div>
 </section>
 
 <section id="cards">
@@ -217,6 +225,21 @@ compare();drawBoard();
   const cell=(v,better,d=2,unit='')=>{const good=better==='lower'?v<0:v>0;const cls=Math.abs(v)<1e-9?'dim':good?'ok':'bad';return `<td class="n"><span class="pill ${cls}">${v>0?'+':''}${v.toFixed(d)}${unit}</span></td>`;};
   tb.insertAdjacentHTML('beforeend',`<tr><td><b style="color:${col(r)}">${r}</b></td><td>${R[r].knob}</td><td class="note">${pr} @ ${tp.t_out} s → ${tr.t_out} s</td>${cell(b.A-a.A,'lower')}${cell((b.B-b.A)-(a.B-a.A),'higher')}${cell(b.tuned-a.tuned,'higher',0)}${cell(b.corr-a.corr,'higher')}${cell(b.ef-a.ef,'higher',3)}${cell(b.enf-a.enf,'lower',4)}${cell((b.sat-a.sat)*100,'lower',0,'%')}</tr>`);});
   if(!tb.children.length)tb.innerHTML='<tr><td colspan="10" class="note">No warm-started runs have finished yet.</td></tr>';})();
+
+/* ---- stress ---- */
+(function(){const S=D.stress;const c=$('stressC');if(!S){c.getContext('2d').clearRect(0,0,c.width,c.height);$('stressN').textContent='The stress test has not been run yet.';return;}
+  const L=40,B=44,W=c.width-L-12,H=c.height-B-14,x=axes(c,L,B);const n=S.conds.length,px=i=>L+(i+0.5)*W/n;const vals=[...S.random,...S.brains.flatMap(b=>[...b.F,...b.noF.filter(v=>v!==null)])];const ymax=Math.max(...vals)*1.08;const py=v=>c.height-B-Math.min(ymax,v)/ymax*H;
+  for(let v=0;v<=ymax;v+=Math.max(1,Math.ceil(ymax/6)))x.fillText(v,L-22,py(v)+4);S.conds.forEach((k,i)=>x.fillText(k,px(i)-30,c.height-B+16));x.fillText('mean closest approach (lower is better)',L+4,12);
+  x.strokeStyle=cv('--ink-3');x.setLineDash([2,3]);x.lineWidth=1.5;x.beginPath();S.random.forEach((v,i)=>{i?x.lineTo(px(i),py(v)):x.moveTo(px(i),py(v));});x.stroke();x.setLineDash([]);
+  const lg=$('stressL');lg.innerHTML='<span><i style="background:var(--ink-3);height:2px"></i>random walk</span>';
+  S.brains.forEach((b,k)=>{const col=b.name.startsWith('hand')?cv('--teal'):COLORS[(k*2+1)%COLORS.length];x.strokeStyle=col;x.lineWidth=2.5;x.beginPath();b.F.forEach((v,i)=>{i?x.lineTo(px(i),py(v)):x.moveTo(px(i),py(v));});x.stroke();b.F.forEach((v,i)=>{x.fillStyle=col;x.beginPath();x.arc(px(i),py(v),4,0,7);x.fill();});
+    if(b.noF.some(v=>v!==null)){x.setLineDash([5,4]);x.lineWidth=1.5;x.beginPath();b.noF.forEach((v,i)=>{if(v===null)return;i?x.lineTo(px(i),py(v)):x.moveTo(px(i),py(v));});x.stroke();x.setLineDash([]);}
+    lg.insertAdjacentHTML('beforeend',`<span><i style="background:${col}"></i>${b.name}${b.noF.some(v=>v!==null)?' (dashed: F held at 0)':''}</span>`);});
+  const th=document.querySelector('#stress_t thead'),tb=document.querySelector('#stress_t tbody');th.innerHTML='<tr><th>brain</th>'+S.conds.map(k=>`<th class="n">${k}</th>`).join('')+'</tr>';tb.innerHTML='';
+  tb.insertAdjacentHTML('beforeend','<tr><td>random walk</td>'+S.random.map(v=>`<td class="n">${v.toFixed(2)}</td>`).join('')+'</tr>');
+  S.brains.forEach(b=>{tb.insertAdjacentHTML('beforeend',`<tr><td>${b.name}</td>`+b.F.map((v,i)=>`<td class="n">${v.toFixed(2)}${b.noF[i]!==null?`<br><span class="note">no F ${b.noF[i].toFixed(2)}</span>`:''}<br><span class="note">${Math.round(b.arr[i]*100)}% arrived</span></td>`).join('')+'</tr>');});
+  const best=S.brains.filter(b=>!b.name.startsWith('hand')&&!b.name.includes('rival')).sort((a,b)=>a.F[2]-b.F[2])[0];const riv=S.brains.find(b=>b.name.includes('rival'));
+  $('stressN').textContent=best?`At 60 s, twice the longest wander any network trained on, the best fast-weight network scores ${best.F[2].toFixed(2)} with F and ${best.noF[2]===null?'–':best.noF[2].toFixed(2)} without; the random walk scores ${S.random[2].toFixed(2)}.${riv?` The activity-only rival scores ${riv.F[2].toFixed(2)}.`:' The rival (run 20) is not in yet.'}`:'';})();
 
 /* ---- cards ---- */
 (function(){const g=$('cardGrid');names.forEach(r=>{const t=anyTest(r),m=t?t.m:null,les=D.lessons[r]||{};const verdict=!m?'<span class="pill dim">not tested yet</span>':(m.A<m.C-0.5&&m.B>m.A+0.5?'<span class="pill ok">homes · memory in F</span>':m.A<m.C-0.5?'<span class="pill warn">homes · memory in activity</span>':'<span class="pill bad">did not home</span>')+(m&&isReset(m)?' <span class="pill ok">reset found</span>':'')+(m&&m.corr>0.6?' <span class="pill ok">write follows speed</span>':'');

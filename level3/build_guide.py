@@ -562,12 +562,28 @@ td.n,th.n{text-align:right}
 </div>
 
 <!-- ============ Q4 ============ -->
-<h2 id="q4"><span class="q">QUESTION 4</span>What Peter's delta rule was</h2>
-<p>Our rule writes the whole pattern every tick. Peter's note pointed out that this is a very old rule (Hebb, 1949: "fire together, wire together") and that the modern sequence-model world has moved to a cousin of it, the <b>delta rule</b>: write only the part you could not already predict. Here are both, with the words under the symbols.</p>
-<div class="eq">Hebb (ours): F ← (1 − <span class="b">erase</span>)·F + ws·<span class="c">write</span>·<span class="a">x_new ⊗ x_old</span></div>
-<p style="font-size:15px;margin-top:6px">Read: shrink the board a little (erase), then add the write strength times the write gate times <span class="term" title="outer product: a table with one row per neuron now and one column per neuron a tick ago; each cell is the product of those two activities. It records 'who was active after whom'">the table of who was active after whom</span>.</p>
-<div class="eq">Delta (Peter's): pred = F·x_old;   F ← (1 − <span class="b">erase</span>)·F + ws·<span class="c">write</span>·<span class="a">(x_new − pred) ⊗ x_old</span></div>
-<p style="font-size:15px;margin-top:6px">Read: first ask F what it expects the new activity to be, given the old. Then write only the difference between what happened and what F expected. Once F predicts well, the difference is zero and writing stops on its own.</p>
+<h2 id="q4"><span class="q">QUESTION 4</span>Peter's delta rule</h2>
+<p><b>Hebb</b> (our rule): every tick, add the pairing to the cell. <b>Delta</b> (Peter's): every tick, first guess the receiver from what the cell already holds, then add only the part the guess got wrong. Same ws, same gates, same lid. One line differs.</p>
+<div class="eq">Hebb:   add   ws × write × <span class="a">x_new</span> × x_old<br>Delta:  add   ws × write × <span class="a">(x_new − guess)</span> × x_old,   where guess = cell × x_old</div>
+<p><b>The pain point.</b> A guesser that only corrects its mistakes stops changing once it is right. For a memory of "what follows what" that is a feature. For a count of steps it is fatal: ten ticks north and fifty ticks north leave the same cell. Watch it on the same little board.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: the same four-compass-cell fly, the same walk, one board under each rule</div>
+ <div class="row"><button class="btn" id="bN">walk north one tick</button><button class="btn" id="bN10">walk north ten ticks</button><button class="btn" id="bE">walk east one tick</button><button class="btn" id="bReset">new trip</button><span class="eyebrow" id="bT">tick 0</span></div>
+ <canvas id="bothBoards" width="1700" height="560"></canvas>
+ <div class="how"><b>How to read it.</b> Four neurons, N, E, S, W, each at 1 while the fly walks its direction. Left board: Hebb. Right board: delta. Under each, the count a reader gets from the cells: N→N minus S→S, in ticks. Walk north ten ticks, then ten more: the Hebb count goes 10, then 20. The delta count climbs for a few ticks, then freezes near 10, because once the N→N cell predicts N from N the surprise is zero and nothing more is written. The fly has walked twice as far and the board cannot tell.</div>
+</div>
+<div class="sketch">
+ <div class="eyebrow">Drawing: one cell, one tick at a time, both rules</div>
+ <div class="row"><button class="btn" id="s1Tick">next tick</button><button class="btn" id="s1Reset">start over</button><span class="eyebrow" id="s1N">tick 0</span></div>
+ <canvas id="s1" width="1700" height="520"></canvas>
+ <div class="how"><b>How to read it.</b> Sender 1.0, receiver 0.8, write strength 0.1. Hebb adds 0.08 every tick and climbs to the lid. Delta shows its three boxes each tick, guess, surprise, add; the additions shrink and the cell stops at 0.8, where the guess is exactly right.</div>
+</div>
+<p><b>What happened.</b> Run 15 (cold start, only the rule changed): no memory formed, score with F equal to score without F. Run 18 (rule switched on a working Hebb tally): memory gone within 100 iterations. Peter's prediction that delta would free the erase gate from fighting saturation did not hold on this task. It would likely hold on a task about what follows what.</p>
+<details style="margin-top:18px"><summary style="cursor:pointer;font-family:'Bricolage Grotesque';font-weight:600;color:var(--mute)">For later: the longer explanations (why Peter proposed it, the original toy chart, the one-cell text, the tick table, three neurons with every sum)</summary>
+<h3>Why it was a good idea and why it failed here</h3>
+<p>Peter's argument was sound: Hebb has no natural stopping point, which is why F needs a lid and why the erase gate had to fight saturation. Delta self-limits, so the lid becomes unnecessary and the erase gate is freed to do only one job, forgetting the last trip. Written down before running: delta should keep a wider F-versus-no-F gap and find the reset sooner.</p>
+<p>What happened: run 15 (a cold start, with the rule swapped and nothing else changed) never formed a memory at all; the gap between the score with F and the score without F stayed at zero for 800 iterations, and the write strength never moved. Run 18 (a warm start from run 14's working Hebb tally) lost its memory within 100 iterations of the rule swap. The drawing above shows why. This task needs a counter. A rule that stops writing as soon as it can predict its input stops counting at exactly the moment the count matters. The negative result is clear, and it appeared in both forms of the test, the cold start and the warm start. But it is a result about this task, not about the delta rule in general. On a task that asks "what usually follows what", the outcome would very likely be the other way round.</p>
+
 <div class="sketch">
  <div class="eyebrow">Drawing: one connection under each rule, while the fly walks in the same direction for many ticks</div>
  <div class="controls"><div class="ctl"><label>ticks walking the same direction <output id="oN">60</output></label><input id="N" type="range" min="5" max="150" step="1" value="60"></div>
@@ -585,12 +601,7 @@ td.n,th.n{text-align:right}
 <p>Step 3, <b>add only the surprise</b>. Add 0.1 × surprise × sender = 0.1 × 0.8 × 1.0 = 0.08. Same as Hebb on this first tick, because an empty cell guesses nothing.</p>
 <p>Second tick. Guess = 0.08 × 1.0 = 0.08. Surprise = 0.8 − 0.08 = 0.72. Add 0.1 × 0.72 = 0.072. Cell is now 0.152. Third tick: guess 0.152, surprise 0.648, add 0.065. Each tick the guess gets closer to 0.8, the surprise gets smaller, and the amount added shrinks. When the cell reaches 0.8, the guess is 0.8 × 1.0 = 0.8, exactly right, the surprise is 0, and the rule adds 0. The cell stops there and stays there, no matter how many more ticks pass.</p>
 <p>So the one idea is: <b>Hebb adds every time it sees the pair; delta adds only what it got wrong.</b> A guesser that only corrects its mistakes stops changing once it is right.</p>
-<div class="sketch">
- <div class="eyebrow">Drawing: one cell, one tick at a time, both rules side by side</div>
- <div class="row"><button class="btn" id="s1Tick">next tick</button><button class="btn" id="s1Reset">start over</button><span class="eyebrow" id="s1N">tick 0</span></div>
- <canvas id="s1" width="1700" height="520"></canvas>
- <div class="how"><b>How to read it.</b> Top row, Hebb: one box, "add 0.08", and the cell filling up in steps of 0.08. Bottom row, delta: three boxes, guess, surprise, add, with this tick's numbers in them, and the cell filling in shrinking steps. The dashed line at 0.8 is where delta stops: at that height the guess is exactly right. The red line at 1 is the lid, where Hebb stops. Press "next tick" a dozen times and watch the surprise box go to zero.</div>
-</div>
+
 <p>One last step to connect this to the real board. With 64 neurons, the guess for one receiver is just this same idea added up over all the senders: cell × sender activity for each sender, summed. That sum is what the equation writes as F · x_old. Everything else is identical to the one-cell case.</p>
 <details style="margin-top:18px"><summary style="cursor:pointer;font-family:'Bricolage Grotesque';font-weight:600;color:var(--mute)">For later: the same thing with three neurons, every sum written out</summary>
 <p>Everything in delta is Hebb with one substitution, and the substitution hinges on one expression: <b>pred = F · x_old</b>. Here is what that dot means, and then the whole rule, on a three-neuron board where every number is visible.</p>
@@ -622,10 +633,7 @@ td.n,th.n{text-align:right}
  <canvas id="dtChart" width="1700" height="380"></canvas>
 </div>
 <p>Now the consequence for homing. Ten ticks of walking north and thirty ticks of walking north must leave different marks on the board, or the fly cannot know how far to walk back. Under Hebb they do: 0.8 versus 1.0 (the lid). Under delta they do not: both leave 0.8, because the cell stopped changing once its guess was right. Delta remembers <em>that</em> the sender predicts the receiver, which is a fine thing to remember, but it forgets <em>how long</em> that has been true, and the how-long is the count. That is the whole reason it failed in runs 15 and 18.</p>
-<h3>Why it was a good idea and why it failed here</h3>
-<p>Peter's argument was sound: Hebb has no natural stopping point, which is why F needs a lid and why the erase gate had to fight saturation. Delta self-limits, so the lid becomes unnecessary and the erase gate is freed to do only one job, forgetting the last trip. Written down before running: delta should keep a wider F-versus-no-F gap and find the reset sooner.</p>
-<p>What happened: run 15 (a cold start, with the rule swapped and nothing else changed) never formed a memory at all; the gap between the score with F and the score without F stayed at zero for 800 iterations, and the write strength never moved. Run 18 (a warm start from run 14's working Hebb tally) lost its memory within 100 iterations of the rule swap. The drawing above shows why. This task needs a counter. A rule that stops writing as soon as it can predict its input stops counting at exactly the moment the count matters. The negative result is clear, and it appeared in both forms of the test, the cold start and the warm start. But it is a result about this task, not about the delta rule in general. On a task that asks "what usually follows what", the outcome would very likely be the other way round.</p>
-
+</details>
 <!-- ============ Q5 ============ -->
 <h2 id="q5"><span class="q">QUESTION 5</span>Is comparing "F allowed" with "F held at zero" a fair test?</h2>
 <p>Your instinct is right, and it is worth being precise about what the test does and does not show. There are two different comparisons in the campaign and they answer two different questions.</p>
@@ -1332,7 +1340,15 @@ function s1Draw(){const [x,W,H]=ctx('s1');x.clearRect(0,0,W,H);const xo=1.0,xn=0
  if(S1.h>=0.999)txt(x,'Hebb is pinned at the lid: 10 more ticks and 100 more ticks look the same from here',20,410,css('--coral'));if(Math.abs(sur)<0.005)txt(x,'delta has stopped: the surprise is zero, so nothing more is added, however long the fly keeps walking',20,435,css('--blue'));}
 $('s1Tick').addEventListener('click',()=>{const xo=1.0,xn=0.8,ws=0.1;const g=S1.d*xo;S1.d=S1.d+ws*(xn-g)*xo;S1.h=Math.min(1,S1.h+ws*xn*xo);S1.n++;$('s1N').textContent='tick '+S1.n;s1Draw();});
 $('s1Reset').addEventListener('click',()=>{S1.n=0;S1.h=0;S1.d=0;$('s1N').textContent='tick 0';s1Draw();});
-function all(){drawSig();s1Draw();d3Show();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
+
+const BB={n:0,H:[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],Dl:[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],xo:[0,0,0,0]};
+function bbWalk(d){const idx={N:0,E:1,S:2,W:3};const xn=[0,0,0,0];xn[idx[d]]=1;const ws=0.1;const pred=BB.Dl.map(row=>row.reduce((a,v,j)=>a+v*BB.xo[j],0));BB.Dl=BB.Dl.map((row,i)=>row.map((v,j)=>Math.max(-1,Math.min(1,v+ws*(xn[i]-pred[i])*BB.xo[j]))));BB.H=BB.H.map((row,i)=>row.map((v,j)=>Math.max(-1,Math.min(1,v+ws*xn[i]*BB.xo[j]))));BB.xo=xn;BB.n++;$('bT').textContent='tick '+BB.n;bbDraw();}
+function bbDraw(){const [x,W,H]=ctx('bothBoards');x.clearRect(0,0,W,H);const names=['N','E','S','W'];const u=64;const board=(M,x0,title,col)=>{txt(x,title,x0,24,col,'left','15px "Bricolage Grotesque"');names.forEach((n,k)=>{txt(x,'from '+n,x0+k*u+u/2,44,css('--mute'),'center');txt(x,'to '+n,x0-8,56+k*u+u/2+4,css('--mute'),'right');});M.forEach((row,i)=>row.forEach((v,j)=>{x.fillStyle=`rgba(217,72,43,${0.1+Math.min(1,Math.abs(v))*0.85})`;x.fillRect(x0+j*u,56+i*u,u-3,u-3);txt(x,v.toFixed(2),x0+j*u+u/2-1,56+i*u+u/2+5,'#fff','center','13px "JetBrains Mono"');}));const cnt=(M[0][0]-M[2][2])/0.1;txt(x,`count from the board: N→N − S→S = ${(M[0][0]-M[2][2]).toFixed(2)} → ${cnt.toFixed(1)} ticks north`,x0,56+4*u+28,col,'left','14px "Bricolage Grotesque"');};
+ board(BB.H,80,'Hebb board',css('--teal'));board(BB.Dl,500,'delta board',css('--blue'));
+ const trueN=BB.trueN||0;txt(x,`the fly has actually walked ${trueN} ticks north`,80,H-16,css('--ink'),'left','14px "Bricolage Grotesque"');
+ if(trueN>=15)txt(x,'Hebb keeps up with the fly (until the lid). Delta froze.',500,H-16,css('--coral'),'left','14px "Bricolage Grotesque"');}
+$('bN').addEventListener('click',()=>{BB.trueN=(BB.trueN||0)+1;bbWalk('N');});$('bN10').addEventListener('click',()=>{for(let k=0;k<10;k++){BB.trueN=(BB.trueN||0)+1;bbWalk('N');}});$('bE').addEventListener('click',()=>{bbWalk('E');});$('bReset').addEventListener('click',()=>{BB.n=0;BB.trueN=0;BB.H=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];BB.Dl=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];BB.xo=[0,0,0,0];$('bT').textContent='tick 0';bbDraw();});
+function all(){drawSig();bbDraw();s1Draw();d3Show();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>
 '''

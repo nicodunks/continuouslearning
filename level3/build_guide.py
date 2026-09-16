@@ -386,6 +386,7 @@ td.n,th.n{text-align:right}
 <p>A note on how these relate to training in general, because most of them are not special to flies. For each knob, separate the <b>mechanism</b> from the <b>target</b>. The erase penalty is a good example: the mechanism, "add an extra term to the loss with a coefficient in front, so training is charged for a behaviour you want less of", is one of the commonest moves in machine learning and is called a regulariser. Only the target, erasing away from food, is ours. The same split applies down the list: learning rate, schedule, batch, seed and warm start are identical everywhere; the bias shift is a known initialisation trick; the rule and neuron count are architecture and model-size choices; the fast-weights switch is an ablation. Each non-world knob\'s panel ends with a blue box saying what it is called and how it is used in general AI training.</p>
 <p>Every knob below has a drawing and a note on what it means in practice. Click one and the panel on the right shows it without scrolling away from the list. The world knobs come first, then the ones you have not seen before: how training is run, and where the network starts.</p>
 <div class="knobwrap"><div class="panel" id="knobBoard"></div><div class="knobdetail" id="knobDetail"><div class="detail">Click a knob to see its drawing here.</div></div>
+</div>
 <h3>The words in the blue boxes, defined</h3>
 <p>The "in AI training generally" boxes use the field's own words. Here is each one in plain language, with the knob whose drawing shows it. The ones marked <b>worth learning</b> come up in almost every conversation about training a model.</p>
 <div class="sketch">
@@ -419,7 +420,7 @@ td.n,th.n{text-align:right}
 <tr><td>reinforcement learning</td><td>Training a model by letting it act in a world and rewarding outcomes, rather than showing it correct answers. Our fly is close to this: it acts (turns), and the loss is about where it ends up.</td><td>steering</td></tr>
 <tr><td><b>train, validation and test sets</b> (worth learning)</td><td>Three separate piles of examples. Train is what the model learns from. Validation is used during development to make choices. Test is touched only at the end, to report a number nobody tuned against.</td><td>test seed and exam world</td></tr>
 </tbody></table>
-</div>
+
 
 <!-- ============ Q2 ============ -->
 <h2 id="q2"><span class="q">QUESTION 2</span>Why the erase-bias shift was "not a knob change but something else"</h2>

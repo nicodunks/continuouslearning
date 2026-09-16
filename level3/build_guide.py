@@ -564,20 +564,10 @@ td.n,th.n{text-align:right}
 <!-- ============ Q4 ============ -->
 <h2 id="q4"><span class="q">QUESTION 4</span>Peter's delta rule</h2>
 <p><b>Hebb</b> (our rule): every tick, add the pairing to the cell. <b>Delta</b> (Peter's): every tick, first guess the receiver from what the cell already holds, then add only the part the guess got wrong. Same ws, same gates, same lid. One line differs.</p>
-<div class="eq">Hebb:    F  =  (1 − <span class="b">erase</span>) · F  +  ws · <span class="c">write</span> · outer(<span class="a">x_new</span>, x_old)</div>
-<div class="eq">Delta:   pred  =  F x_old<br>         F  =  (1 − <span class="b">erase</span>) · F  +  ws · <span class="c">write</span> · outer(<span class="a">x_new − pred</span>, x_old)</div>
-<p style="font-size:15px">These are written for the whole board at once, which is shorter. Two pieces of notation carry it:</p>
-<table><thead><tr><th>piece</th><th>what it means</th></tr></thead><tbody>
-<tr><td>F</td><td>the whole board, all 4,096 cells</td></tr>
-<tr><td>x_old, x_new</td><td>the 64 activities a tick ago, and the 64 activities now</td></tr>
-<tr><td>(1 − erase) · F</td><td>every cell shrunk by the same fraction, the removing step</td></tr>
-<tr><td>outer(a, b)</td><td>the table whose cell [i,j] is a[i] × b[j]: one number for every pair. outer(x_new, x_old) is the pairing table from question 1, "receiver now times sender a tick ago", for all pairs at once</td></tr>
-<tr><td>ws · write · outer(…)</td><td>that table scaled by the write strength and the write gate: the amounts added to every cell this tick</td></tr>
-<tr><td>F x_old</td><td>the board applied to the old activities: for each neuron, go along its row of F, multiply each cell by that sender's old activity, add them up. One number per neuron. It is exactly how the neurons read the board, so it is the board's guess for every neuron at once</td></tr>
-<tr><td>pred</td><td>that list of 64 guesses</td></tr>
-<tr><td>x_new − pred</td><td>the 64 surprises: what each neuron did minus what the board guessed</td></tr>
-</tbody></table>
-<p style="font-size:15px">So the only difference between the rules is what goes into the first slot of outer: the activity itself (Hebb) or the activity minus the board's guess (delta). For one cell with a single sender, F x_old is just cell × sender, which is the "guess" in the drawings below.</p>
+<div class="eq">Hebb:    F[i,j]  =  (1 − <span class="b">erase</span>) × F[i,j]   +   ws × <span class="c">write</span> × <span class="a">x_new[i]</span> × x_old[j]</div>
+<div class="eq">Delta:   F[i,j]  =  (1 − <span class="b">erase</span>) × F[i,j]   +   ws × <span class="c">write</span> × <span class="a">(x_new[i] − pred[i])</span> × x_old[j]</div>
+<p style="font-size:15px">Same removing step, same ws, same write gate, same sender activity x_old[j]. The one new thing is <b>pred[i]</b>: the board's guess for neuron i, made the way the neurons read the board. Go along row i of F, multiply each cell by that sender's old activity, add them up. For one cell with a single sender, that is just cell × sender, which is the "guess" in the drawings below. Hebb records the receiver's activity; delta records the receiver's activity minus the board's guess for it, the surprise.</p>
+<p style="font-size:14px;color:var(--mute)">Peter's note writes the same two rules for the whole board at once, as F = (1 − erase)·F + ws·write·outer(x_new − pred, x_old) with pred = F x_old. "outer(a, b)" means "a[i] × b[j] for every cell", and "F x_old" means the row-by-row guess above for every neuron. It is the same arithmetic in fewer symbols.</p>
 <p><b>The pain point.</b> A guesser that only corrects its mistakes stops changing once it is right. For a memory of "what follows what" that is a feature. For a count of steps it is fatal: ten ticks north and fifty ticks north leave the same cell. Watch it on the same little board.</p>
 <div class="sketch">
  <div class="eyebrow">Drawing: the same four-compass-cell fly, the same walk, one board under each rule</div>

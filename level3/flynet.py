@@ -22,9 +22,10 @@ TURN_MAX = 8.0     # radians per second; a smooth ceiling on the turn output
 
 
 class FlyNet(nn.Module):
-    def __init__(self, n=N, use_fast=True, f_max=1.0):
+    def __init__(self, n=N, use_fast=True, f_max=1.0, rule='hebb'):
         super().__init__()
         self.n = n; self.use_fast = use_fast; self.zero_F = False; self.f_max = f_max   # f_max: the tally ceiling
+        self.rule = rule   # 'hebb': write the full pattern; 'delta': write only what F failed to predict (Gated DeltaNet)
         self.W_in = nn.Linear(4, n)                            # 4 inputs -> neurons (weights + biases)
         self.W = nn.Parameter(0.1 * torch.randn(n, n))         # slow strengths, j -> i
         self.A = nn.Parameter(0.1 * torch.randn(n, n))         # how much each connection's fast strength counts
@@ -50,7 +51,13 @@ class FlyNet(nn.Module):
         out = self.W_out(x)
         turn = TURN_MAX * torch.tanh(out[:, 0] / TURN_MAX)
         write = torch.sigmoid(out[:, 1]); erase = torch.sigmoid(out[:, 2])
-        hebb = x.unsqueeze(2) * x_old.unsqueeze(1)                           # outer(x_new, x_old)
+        if self.rule == 'delta':
+            # delta rule: F already predicts pred = F x_old; write only the surprise (x_new - pred).
+            # Self-limiting: once F predicts x_new it stops writing, so the erase gate is freed from fighting saturation.
+            pred = torch.bmm(self.F, x_old.unsqueeze(2)).squeeze(2)
+            hebb = (x - pred).unsqueeze(2) * x_old.unsqueeze(1)
+        else:
+            hebb = x.unsqueeze(2) * x_old.unsqueeze(1)                       # outer(x_new, x_old)
         F = (1 - erase[:, None, None]) * self.F + self.ws * write[:, None, None] * hebb
         F = F.clamp(-self.f_max, self.f_max)
         if active is not None:                                               # frozen agents: nothing changes

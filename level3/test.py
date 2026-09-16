@@ -23,7 +23,7 @@ args = p.parse_args()
 
 ck = torch.load(args.ckpt)
 n = ck['net']['W'].shape[0]
-net = FlyNet(n=n, f_max=float(ck.get('args', {}).get('f_max', 1.0))); net.load_state_dict(ck['net']); net.eval()
+net = FlyNet(n=n, f_max=float(ck.get('args', {}).get('f_max', 1.0)), rule=ck.get('args', {}).get('rule', 'hebb')); net.load_state_dict(ck['net']); net.eval()
 
 
 class RandomWalk:

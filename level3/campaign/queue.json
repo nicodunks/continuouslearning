@@ -28,5 +28,35 @@
    20,
    30
   ]
+ },
+ {
+  "run": "run15",
+  "knob": "learning rule Hebb -> delta (write only the surprise, Gated DeltaNet), cold start with run 3's recipe so only the rule differs (hygiene: lr 1e-3 cosine)",
+  "parent": "random start, same seed as run 3 (Peter's suggestion, docs/flynet-delta-rule.md)",
+  "prediction": "Peter's prediction, on record before running: delta should keep a wider F-allowed versus F-held-at-zero gap on 20 s and 30 s wanders, and the erase gate should become food-selective sooner because it is no longer fighting saturation. Ours added: saturation under 5%, and a 20 s score at or under run 3's 1.90. If delta homes worse, that is a result too.",
+  "args": [
+   "--rule",
+   "delta",
+   "--food_stand",
+   "2.0",
+   "--erase_penalty",
+   "0.05",
+   "--stages",
+   "10,20,30",
+   "--stage_cap",
+   "1000",
+   "--iters",
+   "3000",
+   "--batch",
+   "32",
+   "--lr",
+   "1e-3",
+   "--lr_decay",
+   "1"
+  ],
+  "test_t_outs": [
+   20,
+   30
+  ]
  }
 ]

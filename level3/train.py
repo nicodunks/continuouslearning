@@ -25,6 +25,7 @@ p.add_argument('--speed_profile', default='drift')            # 'drift' or 'legs
 p.add_argument('--f_max', type=float, default=1.0)            # tally ceiling on F
 p.add_argument('--lr_decay', type=int, default=0)             # 1 = cosine decay of the learning rate over the run (hygiene)
 p.add_argument('--seed', type=int, default=0)                 # seed for the initial network
+p.add_argument('--rule', default='hebb')                    # 'hebb' or 'delta' (Peter's note, docs/flynet-delta-rule.md)
 p.add_argument('--erase_bias_shift', type=float, default=0.0) # added to the erase gate's bias after loading: moves the gate out of the flat part of the sigmoid
 args = p.parse_args()
 
@@ -33,7 +34,7 @@ LOG = os.path.join(RUN, 'log.jsonl'); CK = os.path.join(RUN, 'ckpt.pt'); STATUS 
 stages = [float(s) for s in args.stages.split(',')]
 
 torch.manual_seed(int(args.seed))
-net = FlyNet(n=args.neurons, use_fast=bool(args.use_fast), f_max=args.f_max)
+net = FlyNet(n=args.neurons, use_fast=bool(args.use_fast), f_max=args.f_max, rule=args.rule)
 opt = torch.optim.Adam([q for q in net.parameters() if q.requires_grad], lr=args.lr)
 state = dict(it=0, stage=0, stage_start=0, recent=[])
 if args.init and os.path.exists(args.init):                     # run 2 starts from run 1's weights

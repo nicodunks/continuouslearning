@@ -1,0 +1,92 @@
+{
+ "run": "run7B",
+ "knob": "erase gate bias +2.5 at start (moves the sigmoid off its flat part); penalty 20 kept (hygiene: lr 3e-4, cosine)",
+ "parent": "run6B (final, 2.13 at 30 s)",
+ "prediction": "With the gate able to hear gradients, away-from-food erase falls below 0.01 within 300 iterations while at-food erase stays above 0.05, and the 30 s score recovers to about 2.1 or better. If instead both fall together to the old 0.005, the gate can move but chooses fade over reset, which would be a real negative result.",
+ "args": [
+  "--init",
+  "runs/run6B/final.pt",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "2.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 27.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.4415111541748047,
+     "arrived": 0.1525000035762787
+    },
+    "B": {
+     "score": 4.739016532897949,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.5461413860321045,
+     "arrived": 0.1899999976158142
+    },
+    "B": {
+     "score": 5.9530720710754395,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.5480899810791016,
+     "arrived": 0.1850000023841858
+    },
+    "B": {
+     "score": 5.953060150146484,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_best_30.json",
+   "drift_F": 1.916657567024231
+  }
+ ],
+ "finished": 1789528827.7867782
+}

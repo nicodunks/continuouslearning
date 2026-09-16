@@ -1,0 +1,69 @@
+{
+ "run": "run7",
+ "knob": "erase penalty 0.05 -> 20 (a real cost; 0.5 was a rounding error) (hygiene: lr 3e-4, cosine)",
+ "parent": "run6B (final, 2.13 at 30 s)",
+ "prediction": "Erase away from food falls below 0.002. Either erase at food rises above 0.05 (the reset appears) or the gate closes everywhere and saturation rises with the score getting worse (the reset is not learnable from this signal). Score at 30 s stays near 2.1 in the first case.",
+ "args": [
+  "--init",
+  "runs/run6B/final.pt",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "20",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 8.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.00565242767334,
+     "arrived": 0.22499999403953552
+    },
+    "B": {
+     "score": 4.721653938293457,
+     "arrived": 0.012500000186264515
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 42,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.0365829467773438,
+     "arrived": 0.2574999928474426
+    },
+    "B": {
+     "score": 5.938816547393799,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 41,
+   "file": "test_final_30.json"
+  }
+ ],
+ "finished": 1789527196.628024
+}

@@ -26,5 +26,13 @@
  "run6B": {
   "title": "Run 6 restarted at a third of the learning rate",
   "lesson": "No collapse in 800 iterations at 30 seconds. Final network: 2.13 at 30 s with F, 5.91 without (22% arrived); 1.85 at 20 s. The lower rate is the fix for the late collapses: from here every warm start trains at 3e-4. The score has plateaued around 2.1 at 30 s, well above the 0.75 floor. Still a fade (0.005 at food, 0.009 away), write~speed +0.53, tallies saturated a third of the time at 30 s: the three things that still separate it from the fly."
+ },
+ "run7": {
+  "title": "Erase penalty 20, warm",
+  "lesson": "Even a real penalty barely moved the gate: away-from-food erase went 0.0081 to 0.0075 in 200 iterations, and at-food erase fell rather than rose. The diagnosis is structural. The erase gate is a sigmoid whose bias sits near -5, where the curve is almost flat: its slope there is about 0.007, so every gradient reaching the gate, penalty or benefit, is multiplied by 0.007 before it can move anything. The gate is not refusing to learn the reset; it cannot hear the signal. Killed at 200; the fix is tested as run 7B."
+ },
+ "run7B": {
+  "title": "Erase gate given a voice (bias +2.5)",
+  "lesson": "The first run in which the erase gate prefers food. On the 200-trip test it erases 0.027 per tick at food against 0.009 away, a ratio of 3, with peaks of 0.06 at food; every earlier run was at or below 1. The ratio grew through training (1.1 at iteration 200, 1.5 at 700). It is a leaning, not yet a reset: the fly-like target is near 1 at food and near 0 away. The strong starting fade cost score, 2.55 at 30 s against the parent's 2.13, and 800 iterations were not enough to recover it. Prediction partly met: away-from-food erase did fall below 0.01; at-food erase reached 0.027 mean, short of 0.05; score did not recover."
  }
 }

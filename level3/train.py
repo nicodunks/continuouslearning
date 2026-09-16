@@ -25,6 +25,7 @@ p.add_argument('--speed_profile', default='drift')            # 'drift' or 'legs
 p.add_argument('--f_max', type=float, default=1.0)            # tally ceiling on F
 p.add_argument('--lr_decay', type=int, default=0)             # 1 = cosine decay of the learning rate over the run (hygiene)
 p.add_argument('--seed', type=int, default=0)                 # seed for the initial network
+p.add_argument('--erase_bias_shift', type=float, default=0.0) # added to the erase gate's bias after loading: moves the gate out of the flat part of the sigmoid
 args = p.parse_args()
 
 RUN = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'runs', args.run); os.makedirs(RUN, exist_ok=True)
@@ -37,6 +38,9 @@ opt = torch.optim.Adam([q for q in net.parameters() if q.requires_grad], lr=args
 state = dict(it=0, stage=0, stage_start=0, recent=[])
 if args.init and os.path.exists(args.init):                     # run 2 starts from run 1's weights
     net.load_state_dict(torch.load(args.init)['net']); print('initialised from', args.init)
+if args.erase_bias_shift:
+    with torch.no_grad(): net.W_out.bias[2] += args.erase_bias_shift
+    print('erase gate bias shifted by', args.erase_bias_shift, '-> resting erase', float(torch.sigmoid(net.W_out.bias[2])))
 if os.path.exists(CK):                                          # resume
     ck = torch.load(CK); net.load_state_dict(ck['net']); opt.load_state_dict(ck['opt']); state = ck['state']
     print('resumed at iteration', state['it'])

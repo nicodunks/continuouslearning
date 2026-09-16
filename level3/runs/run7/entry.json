@@ -1,0 +1,28 @@
+{
+ "run": "run7",
+ "knob": "erase penalty 0.05 -> 20 (a real cost; 0.5 was a rounding error) (hygiene: lr 3e-4, cosine)",
+ "parent": "run6B (final, 2.13 at 30 s)",
+ "prediction": "Erase away from food falls below 0.002. Either erase at food rises above 0.05 (the reset appears) or the gate closes everywhere and saturation rises with the score getting worse (the reset is not learnable from this signal). Score at 30 s stays near 2.1 in the first case.",
+ "args": [
+  "--init",
+  "runs/run6B/final.pt",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "20",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

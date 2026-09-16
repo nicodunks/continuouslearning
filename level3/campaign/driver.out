@@ -10,3 +10,8 @@
 19:16:58 starting run6B: knob = restart of run 6 from its own best checkpoint with a lower learning rate (1e-3 -> 3e-4, cosine decay) (hygiene); parent = run6 (ckpt_00400, frozen exam 1.77 at 30 s)
 19:44:09 run6B done in 27 min; final.pt@20s A 1.85 B 4.71 C 3.61; final.pt@30s A 2.13 B 5.91 C 4.38; ckpt_00700.pt@30s A 2.13 B 5.91 C 4.38
 19:44:09 queue empty; waiting for the supervisor
+19:45:09 starting run7: knob = erase penalty 0.05 -> 20 (a real cost; 0.5 was a rounding error) (hygiene: lr 3e-4, cosine); parent = run6B (final, 2.13 at 30 s)
+19:53:16 run7 done in 8 min; ckpt_00200.pt@20s A 2.01 B 4.72 C 3.61; ckpt_00200.pt@30s A 2.04 B 5.94 C 4.38
+19:53:16 starting run7B: knob = erase gate bias +2.5 at start (moves the sigmoid off its flat part); penalty 20 kept (hygiene: lr 3e-4, cosine); parent = run6B (final, 2.13 at 30 s)
+20:20:27 run7B done in 27 min; final.pt@20s A 2.44 B 4.74 C 3.61; final.pt@30s A 2.55 B 5.95 C 4.38; ckpt_00700.pt@30s A 2.55 B 5.95 C 4.38
+20:20:27 queue empty; waiting for the supervisor

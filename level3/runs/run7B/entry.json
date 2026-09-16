@@ -1,0 +1,30 @@
+{
+ "run": "run7B",
+ "knob": "erase gate bias +2.5 at start (moves the sigmoid off its flat part); penalty 20 kept (hygiene: lr 3e-4, cosine)",
+ "parent": "run6B (final, 2.13 at 30 s)",
+ "prediction": "With the gate able to hear gradients, away-from-food erase falls below 0.01 within 300 iterations while at-food erase stays above 0.05, and the 30 s score recovers to about 2.1 or better. If instead both fall together to the old 0.005, the gate can move but chooses fade over reset, which would be a real negative result.",
+ "args": [
+  "--init",
+  "runs/run6B/final.pt",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "2.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

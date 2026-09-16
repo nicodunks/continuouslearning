@@ -109,3 +109,12 @@ After the fifth shift the erase gate averages 0.52 per tick across the food stan
 
 ## The score line's best number (run 17)
 A tenth of the learning rate, from run 13's best checkpoint, on the standard world: 1.81 at 30 seconds at its best checkpoint, 1.89 at the end, with the memory in F. That is where the score stands at the close of the campaign: 1.81 earned at 30 seconds against a random walk's 4.4 and the hand brain's 0.75. The remaining gap to the floor is the write gate (0.75 correlation with speed rather than 1) and a reset that on this line is still mild; the reset line (runs 10 to 16) has the wipe but scores 2.1. Merging the two, training the wiped network on the legs world, is run 19.
+
+## The delta rule fails warm as well as cold (run 18)
+Given run 14's finished tally and reset, switching the write rule to delta wiped the memory in the first hundred iterations and it never came back. So the answer to Peter's note is clean: on this task a rule that writes only the surprise is the wrong rule, in both forms. The tally must keep adding the same direction step after step, and that is what a Hebbian write does and a delta write refuses to do. What the delta rule is good for, storing an association once and then leaving it, is a different memory from the one the fly needs on its way home.
+
+## Run 20: the rival, at last
+Level 4 of the plan was a race between the fast-weight network and the same network with its fast weights disabled, which can only hold the running sum in activity, the way every published model of path integration does. Run 20 trains that rival from scratch with run 3's recipe. The gap rule is suspended for it, since it has no F for a gap to measure. After it finishes, both kinds of network get the stress tests the plan called for: longer wanders than they trained on, and a drifting compass, with no retraining.
+
+## The ingredients stack (run 19)
+Take the network with the wipe (run 14) and train it on the world where time and distance disagree (run 13's trick): 1.62 at 30 seconds and 1.63 at 20, 33% of trips reaching the food, the campaign's best scores, with the reset intact (ratio 49, peak 0.77) and write-versus-speed at +0.69. Compass cells, speed-weighted writing and a reset at food, in one 64-neuron network, found by gradient descent from cos, sin, speed and food, homing at about twice the hand-built fly brain's error. That is where the night ends on the science. The rival, run 20, is what remains for the comparison.

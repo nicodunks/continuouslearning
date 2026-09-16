@@ -86,5 +86,13 @@
  "run17": {
   "title": "Low-rate polish of the best line",
   "lesson": "Small steps from run 13's best checkpoint on the standard world: 1.89 at 30 s on the final network and 1.81 at its best checkpoint, with 25% arriving and the memory in F (5.91 without). That is the lowest earned 30-second score of the night, about 2.4 times the hand brain's 0.75 floor. Frozen checks during training reached 1.28. The reset it inherited from run 10 is a mild one (ratio 9), since this line branched before the ratchet; the score line and the reset line are separate networks. Prediction met: target was at or under 1.85."
+ },
+ "run18": {
+  "title": "Delta rule, warm from run 14",
+  "lesson": "Switching a working Hebb-trained tally to the delta rule destroyed the memory at once: no gap at 100, 200 or 300, score at or above a random walk. Killed at 300 by its own prediction. Both forms of the delta rule, cold and warm, fail to hold a tally, because a rule that writes only what F cannot predict stops writing exactly when the tally needs to keep adding. Negative result, in both forms; Peter's note gets a clear answer."
+ },
+ "run19": {
+  "title": "The wiped network on the legs world",
+  "lesson": "The two ingredients stack. Trained on the slow-half fast-half world from run 14, then tested on the standard world: 1.62 at 30 s and 1.63 at 20 s, 33% arriving, the lowest earned scores of the campaign, with the memory in F (5.93 without). The reset survived the change of world: erase at food 0.38 against 0.008 away (ratio 49, peak 0.77). Write-versus-speed is +0.69. Prediction met on all three counts: score under 2.0, reset intact, write~speed above 0.8. This is the best network of the night by every measure at once."
  }
 }

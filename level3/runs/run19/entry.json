@@ -1,0 +1,30 @@
+{
+ "run": "run19",
+ "knob": "the reset line (run 14) trained on the slow-half fast-half world, the change that gave run 13 the best score (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run14 (final, 2.06 at 30 s, reset ratio 33)",
+ "prediction": "Run 13 showed the harder world improves homing on the easy one. Applied to the network that also has a reset: 30 s score under 2.0 on the standard exam with the reset intact (at-food erase above 0.3, away near 0.01) and write~speed above 0.8. If the reset degrades under the new world, the two ingredients compete.",
+ "args": [
+  "--init",
+  "runs/run14/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

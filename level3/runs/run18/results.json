@@ -1,0 +1,92 @@
+{
+ "run": "run18",
+ "knob": "delta rule again, but warm from run 14 (a working Hebb-trained tally with a reset), so the rule change is the only difference (hygiene: lr 3e-4, cosine)",
+ "parent": "run14 (final, 2.06 at 30 s, reset ratio 33)",
+ "prediction": "The fair second form of Peter's proposal. If the delta rule can keep a tally that already exists, the memory gap should survive the switch (30 s score under 2.5, B near 5.9) and saturation should fall below run 14's 7%. If F stops accumulating once it predicts, the gap will close within 300 iterations, as in run 15, and the negative result stands in both forms.",
+ "args": [
+  "--init",
+  "runs/run14/final.pt",
+  "--rule",
+  "delta",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--stages",
+  "30",
+  "--iters",
+  "600",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 16.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "ckpt_00400.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 4.693771839141846,
+     "arrived": 0.02500000037252903
+    },
+    "B": {
+     "score": 4.684492588043213,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 24,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "ckpt_00400.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 5.873286247253418,
+     "arrived": 0.019999999552965164
+    },
+    "B": {
+     "score": 5.843812465667725,
+     "arrived": 0.027499999850988388
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 24,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 5.7886881828308105,
+     "arrived": 0.032499998807907104
+    },
+    "B": {
+     "score": 5.793747425079346,
+     "arrived": 0.03750000149011612
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 27,
+   "file": "test_best_30.json",
+   "drift_F": 4.853438377380371
+  }
+ ],
+ "finished": 1789545303.5300531
+}

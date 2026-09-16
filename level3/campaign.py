@@ -28,8 +28,9 @@ def say(msg):
     print(time.strftime('%H:%M:%S'), msg, flush=True)
 
 
-def stop_rules(run):
-    """Return a reason string if the run should be killed, else None."""
+def stop_rules(run, lenient=False):
+    """Return a reason string if the run should be killed, else None.  lenient: skip the gap rule
+    (used for continuations across a curriculum promotion, where the gap closes for a while by design)."""
     f = os.path.join(RUNS, run, 'log.jsonl')
     if not os.path.exists(f): return None
     L = [json.loads(l) for l in open(f)]
@@ -37,7 +38,7 @@ def stop_rules(run):
     last = L[-1]
     if last['loss'] != last['loss']: return 'loss is NaN'
     D = [r for r in L if 'drift' in r]
-    if last['it'] >= 800 and len(D) >= 3:
+    if not lenient and last['it'] >= 800 and len(D) >= 3:
         gaps = [d['drift']['score_noF'] - d['drift']['score_F'] for d in D[-3:]]
         if all(g <= 0.15 for g in gaps): return f'F-vs-noF gap closed for three checkpoints ({[round(g,2) for g in gaps]})'
     stage_lines = [r for r in L if r['stage'] == last['stage']]
@@ -76,7 +77,7 @@ def execute(entry):
     stopped = None; t0 = time.time()
     while proc.poll() is None:
         time.sleep(60)
-        why = stop_rules(run)
+        why = stop_rules(run, lenient=bool(entry.get('lenient')))
         if why:
             stopped = why; say(f'{run}: stopping early: {why}'); proc.terminate(); time.sleep(3); break
     minutes = (time.time() - t0) / 60

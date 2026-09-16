@@ -1,0 +1,92 @@
+{
+ "run": "run11",
+ "knob": "seed replication of run 3's recipe from a cold start (seed 1; food 2 s, penalty 0.05, no bias shift, full curriculum) (hygiene: lr 1e-3 cosine)",
+ "parent": "random start, seed 1",
+ "prediction": "Compass cells and a speed-following write gate should reappear from a different random start, and the memory should be in F at 20 s. If the write-speed correlation is again above 0.6 and tuned neurons above 30, the emergence is robust and not a property of seed 0.",
+ "args": [
+  "--seed",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--stages",
+  "10,20",
+  "--stage_cap",
+  "1200",
+  "--iters",
+  "2400",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 16.1,
+ "stopped_early": "F-vs-noF gap closed for three checkpoints ([0.02, -0.02, -0.1])",
+ "tests": [
+  {
+   "ckpt": "ckpt_01000.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 4.585729598999023,
+     "arrived": 0.017500000074505806
+    },
+    "B": {
+     "score": 4.522904872894287,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 15,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "ckpt_01000.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 5.772733688354492,
+     "arrived": 0.032499998807907104
+    },
+    "B": {
+     "score": 5.711623668670654,
+     "arrived": 0.042500000447034836
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 15,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 5.514172554016113,
+     "arrived": 0.03999999910593033
+    },
+    "B": {
+     "score": 5.710752964019775,
+     "arrived": 0.04500000178813934
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 25,
+   "file": "test_best_30.json",
+   "drift_F": 3.694234848022461
+  }
+ ],
+ "finished": 1789534477.663975
+}

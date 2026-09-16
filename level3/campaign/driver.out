@@ -26,3 +26,6 @@
 21:11:12 starting run10: knob = second erase-bias shift (+1.5) on top of run 8B, the ratchet test (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine); parent = run8B (final, 2.28 at 30 s, erase ratio 3)
 21:38:23 run10 done in 27 min; final.pt@20s A 2.03 B 4.71 C 3.61; final.pt@30s A 2.10 B 5.90 C 4.38; ckpt_00700.pt@30s A 2.12 B 5.90 C 4.38
 21:38:23 starting run11: knob = seed replication of run 3's recipe from a cold start (seed 1; food 2 s, penalty 0.05, no bias shift, full curriculum) (hygiene: lr 1e-3 cosine); parent = random start, seed 1
+21:54:23 run11: stopping early: F-vs-noF gap closed for three checkpoints ([0.02, -0.02, -0.1])
+21:54:37 run11 done in 16 min; ckpt_01000.pt@20s A 4.59 B 4.52 C 3.61; ckpt_01000.pt@30s A 5.77 B 5.71 C 4.38; ckpt_00700.pt@30s A 5.51 B 5.71 C 4.38
+21:54:37 starting run12: knob = third erase-bias shift (+1.5) on top of run 10: ratchet again toward a full reset (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine); parent = run10 (final, 2.10 at 30 s, erase ratio 7.4)

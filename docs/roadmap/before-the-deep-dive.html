@@ -130,6 +130,36 @@ td.n,th.n{text-align:right}
  <canvas id="winBars" width="1600" height="300"></canvas>
 </div>
 
+
+<h3>Where the counts come from, and the math of one tick</h3>
+<p>Every wire has one weight and every neuron or output has one <span class="term" title="bias: a resting offset added to a neuron's or output's sum before squashing; it sets where the unit sits when nothing is driving it">bias</span>. That is the whole counting rule.</p>
+<table><thead><tr><th>table</th><th>shape</th><th class="n">weights</th><th class="n">biases</th><th class="n">total</th><th>trained?</th></tr></thead><tbody>
+<tr><td>W_in</td><td>4 inputs × 64 neurons</td><td class="n">256</td><td class="n">64</td><td class="n">320</td><td>yes</td></tr>
+<tr><td>W</td><td>64 × 64</td><td class="n">4,096</td><td class="n">0</td><td class="n">4,096</td><td>yes</td></tr>
+<tr><td>A</td><td>64 × 64</td><td class="n">4,096</td><td class="n">0</td><td class="n">4,096</td><td>yes</td></tr>
+<tr><td>W_out</td><td>64 neurons × 3 outputs</td><td class="n">192</td><td class="n">3</td><td class="n">195</td><td>yes</td></tr>
+<tr><td>ws</td><td>one number</td><td class="n">1</td><td class="n">0</td><td class="n">1</td><td>yes</td></tr>
+<tr><td><b>parameters</b></td><td></td><td></td><td></td><td class="n"><b>8,708</b></td><td></td></tr>
+<tr><td>F</td><td>64 × 64</td><td class="n">4,096</td><td class="n"></td><td class="n">4,096</td><td>no: state, zero at episode start, rewritten every tick</td></tr>
+</tbody></table>
+<p>So the machine holds more than 8,708 numbers, but only 8,708 are <span class="term" title="parameter: a number that training sets and then freezes">parameters</span>. F is the same size as W but it is state, like the neurons' activity: nothing about training ever touches it directly. Training shapes the rule that writes it.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · one tick by hand, on a three-neuron version of the same machine</div>
+ <p style="font-size:15px;margin-top:6px">Same equations, 3 neurons instead of 64 so every number fits on screen. Set the four inputs, press "one tick", and read the five steps. The little tables are made-up trained weights; the F table starts at zero and changes as you tick, exactly as the real one does. Press "at food" and watch what the erase gate does to F.</p>
+ <div class="controls">
+  <div class="ctl"><label>compass east-west <output id="oi0">0.7</output></label><input id="i0" type="range" min="-1" max="1" step="0.1" value="0.7"></div>
+  <div class="ctl"><label>compass north-south <output id="oi1">0.7</output></label><input id="i1" type="range" min="-1" max="1" step="0.1" value="0.7"></div>
+  <div class="ctl"><label>speed <output id="oi2">1.0</output></label><input id="i2" type="range" min="0" max="1.4" step="0.1" value="1"></div>
+  <div class="ctl"><label>at food <output id="oi3">0</output></label><input id="i3" type="range" min="0" max="1" step="1" value="0"></div>
+ </div>
+ <div class="row"><button class="btn" id="tick">one tick</button><button class="btn" id="tick10">ten ticks</button><button class="btn" id="tickReset">new episode (F and activity to zero)</button><span class="eyebrow" id="tickCount">tick 0</span></div>
+ <div id="tickOut" style="font-size:14.5px;margin-top:12px"></div>
+</div>
+<h3>How training changes the 8,708 numbers</h3>
+<p>Training never touches F or the activities. It touches the parameters, and it does so with one formula, applied to every one of the 8,708 numbers after each batch of 32 episodes:</p>
+<div class="eq">new value = old value − <span class="c">learning rate</span> × <span class="b">(how much the loss would rise if this number went up by a tiny bit)</span></div>
+<p>The bracket is the <span class="term" title="gradient: for one parameter, the slope of the loss with respect to that parameter; positive means raising the parameter raises the loss">gradient</span>. If raising a weight would raise the loss, the formula lowers it, and the other way round. The learning rate is the step size: 0.001 for cold starts, 0.0003 for warm starts, 0.0001 for the polish. The <span class="term" title="loss: the single number training tries to make small. Here: the fly's mean distance from home over the last ten seconds of each return, plus the erase penalty">loss</span> here is the mean distance from home over the last ten seconds of each return, plus the erase penalty.</p>
+<p>How does a gradient reach ws, or A, or the erase bias, when they only act on the fly's position through hundreds of ticks of the F rule? By <span class="term" title="backpropagation through time: unroll every tick of the episode into one long chain of arithmetic, then apply the chain rule backwards along it to find each parameter's slope">backpropagation through time</span>. The episode is unrolled into one long chain: tick 1's arithmetic feeds tick 2's, and so on for 900 ticks, ending at the loss. The chain rule of calculus is walked backwards along that chain, multiplying slopes together at every step. A parameter's gradient is the sum of all the paths by which it could have changed the final distance. The erase bias has a path through every tick's erase gate, and each of those paths is multiplied by that tick's sigmoid slope, which is the whole of question 3.</p>
 <h3>So what is a knob?</h3>
 <p>A knob is any number or choice we fix <em>before</em> a run starts and hold fixed during it. It is not something the network learns. The 8,708 slow weights are learned, so they are not knobs. The fast weights F are rewritten by the network itself, so they are not knobs either. Everything else is. Here is the whole board, grouped by what part of the experiment it lives in. Click a knob to see what it does and which runs turned it.</p>
 <div class="panel" id="knobBoard"></div>
@@ -172,6 +202,18 @@ td.n,th.n{text-align:right}
  <canvas id="sig" width="1700" height="520"></canvas>
  <div class="row"><span class="eyebrow">the campaign's path</span><button class="btn" data-b="-5">start −5</button><button class="btn" data-b="-2.5">run 7B −2.5</button><button class="btn" data-b="-1">run 10 −1</button><button class="btn" data-b="0.5">run 12 +0.5</button><button class="btn" data-b="2">run 14 +2</button><button class="btn" data-b="3.5">run 16 +3.5</button><button class="btn" data-b="1.86">run 19 trained: +1.86</button></div>
  <div class="how"><b>How to read it.</b> The curve is the gate's output for every possible raw input. The dot is where the gate rests. The short bar under the dot is how far one training nudge moves the output: it is the nudge times the curve's <span class="term" title="slope: how steep the curve is at that point, which is exactly how much the output changes for a small change in the input">slope</span> there. At −5 the slope is 0.007, so a nudge of 1 moves the gate by seven thousandths. At 0 the slope is 0.25, thirty-five times more.</div>
+</div>
+<div class="panel">
+ <div class="eyebrow">The sigmoid in numbers</div>
+ <div class="eq">σ(z) = 1 / (1 + e<sup>−z</sup>)     slope at z = σ(z) × (1 − σ(z))</div>
+ <table><thead><tr><th class="n">raw z</th><th class="n">gate σ(z)</th><th class="n">slope</th><th>meaning</th></tr></thead><tbody>
+ <tr><td class="n">−5</td><td class="n">0.0067</td><td class="n">0.0066</td><td>where the erase gate started: nearly shut, nearly deaf</td></tr>
+ <tr><td class="n">−2.5</td><td class="n">0.076</td><td class="n">0.070</td><td>after the first shift: ten times louder</td></tr>
+ <tr><td class="n">0</td><td class="n">0.5</td><td class="n">0.25</td><td>the loudest point on the curve</td></tr>
+ <tr><td class="n">+1.86</td><td class="n">0.87</td><td class="n">0.11</td><td>run 19's trained resting position</td></tr>
+ <tr><td class="n">+5</td><td class="n">0.9933</td><td class="n">0.0066</td><td>deaf again, at the top</td></tr>
+ </tbody></table>
+ <p style="font-size:15px"><b>Why the slope multiplies the nudge.</b> Training wants to change the gate's output. It can only change the raw z (through the bias and W_out). A small change in z changes the output by slope × that change: that is what slope means. So every gradient that reaches the gate is multiplied by the slope on its way to the bias. At −5 the multiplier is 0.0066. A push that would have moved the gate by 0.1 at z = 0 moves it by 0.0026 at z = −5. The gate is not stubborn; it is being whispered to.</p>
 </div>
 <h3>How that played out for us</h3>
 <p>We started the erase gate at −5 on purpose, the way people start the "forget gate" of an LSTM mostly closed: if the network erased freely from the first iteration, the tallies could never build up and nothing would be learned. That worked. The cost was that the gate sat on the flat part of the S, where <span class="term" title="gradient descent: the training method. Compute which direction each number should move to lower the loss, then move a small step that way">gradient descent</span> could barely move it. Runs 2, 5 and 7 pushed on the gate with penalties of 0.5 and 20 and got nothing, because every push was multiplied by 0.007 before it reached the bias.</p>
@@ -244,6 +286,10 @@ td.n,th.n{text-align:right}
 <h2 id="q7"><span class="q">QUESTION 7</span>Every run in order: why that knob, what I predicted, what happened</h2>
 <p>This is questions 2 and 7 from your list in one place. Step through the runs. Each card has four parts: the situation I was looking at, the one knob I chose and why that one, the prediction written before the run started, and the finding with a verdict. The chart above the cards is the 30-second score for the run on the card and its ancestors, so you can see the line it belongs to.</p>
 <div class="panel">
+ <div class="eyebrow">The two numbers on every card</div>
+ <p style="font-size:15px;margin:8px 0 0"><b>Score</b> is the exam: 200 fresh trips (seed 4242), and for each trip the closest the fly ever gets to home on its return, averaged. Lower is better; 0 would be perfect; a random walk scores about 4.4 at 30 s; the hand-built brain 0.75. "With F" is the trained brain; "without F" is the same brain with F forced to zero every tick. <b>Loss</b> is what training minimises: the mean distance from home over the last ten seconds of each return, plus the erase penalty. The two track each other but are not the same number, which is why the dashboard shows both.</p>
+</div>
+<div class="panel">
  <div class="stepper" id="steps"></div>
  <canvas id="lineage" width="1700" height="300"></canvas>
  <div class="card" id="runCard"></div>
@@ -256,14 +302,21 @@ td.n,th.n{text-align:right}
 <h3>Motif 1: compass cells</h3>
 <div class="sketch">
  <div class="eyebrow">Drawn · what a compass cell is</div>
- <p style="font-size:15px;margin-top:6px">Turn the fly through all sixteen directions and record one neuron's activity at each. A compass cell fires for one preferred direction and goes quiet opposite it (left). A cell that is not a compass cell fires about the same everywhere (right). The <span class="term" title="tuning curve: a neuron's average activity plotted against some feature of the world, here the heading; 'tuned' means the curve has a clear peak">tuning curve</span> is the shape; a cell counts as tuned if the peak stands more than 0.25 above the trough.</p>
+ <p style="font-size:15px;margin-top:6px">Turn the fly through all sixteen directions and record one neuron's activity at each. A compass cell fires for one preferred direction and goes quiet opposite it (left). A cell that is not a compass cell fires about the same everywhere (right). The <span class="term" title="tuning curve: a neuron's average activity plotted against some feature of the world, here the heading; 'tuned' means the curve has a clear peak">tuning curve</span> is the shape; a cell counts as tuned if its curve is "one-bumped" enough, by the rule in the panel below.</p>
  <svg viewBox="0 0 900 220"><g transform="translate(60,20)"><text x="120" y="0" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" font-weight="700" fill="var(--ink)">tuned to north-east</text><polyline points="0,150 20,120 40,80 60,40 80,20 100,30 120,70 140,110 160,140 180,155 200,160 220,158 240,150" fill="none" stroke="var(--blue)" stroke-width="3"/><line x1="0" y1="170" x2="240" y2="170" stroke="var(--line)"/><text x="0" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">E</text><text x="60" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">N</text><text x="120" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">W</text><text x="180" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">S</text><text x="240" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">E</text></g>
  <g transform="translate(520,20)"><text x="120" y="0" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" font-weight="700" fill="var(--ink)">not tuned</text><polyline points="0,100 20,96 40,104 60,99 80,101 100,97 120,103 140,100 160,98 180,102 200,99 220,101 240,100" fill="none" stroke="var(--mute)" stroke-width="3"/><line x1="0" y1="170" x2="240" y2="170" stroke="var(--line)"/><text x="0" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">E</text><text x="60" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">N</text><text x="120" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">W</text><text x="180" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">S</text><text x="240" y="188" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">E</text></g></svg>
+</div>
+<div class="panel">
+ <div class="eyebrow">How the tuning curves and the other leaderboard numbers are computed</div>
+ <p style="font-size:15px;margin:8px 0 0"><b>Tuning curve.</b> Run the frozen network on eight fresh trips. At every tick while the fly is moving, note its heading and every neuron's activity. Sort the ticks into sixteen heading bins (east, east-north-east, and so on) and average each neuron's activity within each bin. That gives 64 curves of 16 points.</p>
+ <p style="font-size:15px"><b>Tuning strength.</b> Treat the 16 points as weights on a circle and find how far the average leans in one direction (the <span class="term" title="resultant: add up 16 arrows, one per heading bin, each as long as that bin's activity; the resultant is the single arrow you get. A curve with one bump gives a long resultant; a flat or two-bumped curve gives a short one">resultant</span>), divided by the total size of the curve. A clean single bump scores high, a flat curve near zero. The cutoff for "compass cell" is 0.25. It is a choice; the count of 32 depends on it.</p>
+ <p style="font-size:15px"><b>Write follows speed.</b> The <span class="term" title="correlation: a number from −1 to +1 saying how much two series rise and fall together; +1 is lockstep, 0 is no relation">correlation</span> between the write gate and the fly's speed, tick by tick over the traced trip, ignoring pauses. Run 19: +0.69.</p>
+ <p style="font-size:15px;margin-bottom:0"><b>Erase at food versus away.</b> The mean of the erase gate over ticks with the food input on, and over ticks with it off, across the 200 exam trips.</p>
 </div>
 <div class="panel real">
  <div class="eyebrow">Real · all 64 tuning curves of run 19, strongest first</div>
  <div class="grid16" id="curves"></div>
- <div class="how"><b>How to read it.</b> One small chart per neuron, headings east, north, west, south, east across the bottom, activity up. Teal curves are the 32 that pass the 0.25 test; grey are the rest. The number is the peak-to-trough height. Notice that the tuned cells are not all copies: their peaks fall in different places. The histogram below counts them by preferred direction. A perfect compass would spread evenly around the circle; ours clusters (six cells prefer north-north-east, six prefer west-south-west, and two of the sixteen bins are empty), which is one of the ways it is still cruder than the fly.</div>
+ <div class="how"><b>How to read it.</b> One small chart per neuron, headings east, north, west, south, east across the bottom, activity up. Teal curves are the 32 that pass the 0.25 test; grey are the rest. The number is the tuning strength. Notice that the tuned cells are not all copies: their peaks fall in different places. The histogram below counts them by preferred direction. A perfect compass would spread evenly around the circle; ours clusters (six cells prefer north-north-east, six prefer west-south-west, and two of the sixteen bins are empty), which is one of the ways it is still cruder than the fly.</div>
  <canvas id="prefHist" width="1700" height="260"></canvas>
 </div>
 
@@ -299,6 +352,10 @@ td.n,th.n{text-align:right}
 <!-- ============ Q9 ============ -->
 <h2 id="q9"><span class="q">QUESTION 9</span>Backpropamine, and how our network compares</h2>
 <p><b>Backpropamine</b> is a 2019 paper by Miconi, Rawal, Clune and Stanley. The name is a pun on backpropagation and dopamine. The idea in one sentence: let a network have connections that change while it runs, in a Hebbian way, and let the network itself produce a signal (like dopamine in the brain) that says how much those changes should happen right now; then train everything by ordinary gradient descent. Toggle the rules to see the family tree our network sits in.</p>
+<div class="panel">
+ <div class="eyebrow">Notation used below</div>
+ <p style="font-size:15px;margin:8px 0 0"><b>x_old ⊗ x_new</b> is the <span class="term" title="outer product">outer product</span>: a table with one cell per pair of neurons, each cell the product of the sender's activity last tick and the receiver's now. Step 6 of the calculator in question 1 fills exactly this table. <b>clip</b> and <b>clamp</b> both mean "if above +1 make it +1, if below −1 make it −1". <b>σ</b> is the sigmoid from question 3. <b>tanh</b> is its cousin that runs from −1 to +1 instead of 0 to 1. <b>η</b> (eta) is a fixed writing rate; <b>α</b> (alpha) is a per-connection scale, the same thing as our A.</p>
+</div>
 <div class="panel">
  <div class="row"><button class="btn rule on" data-r="0">plain recurrent network</button><button class="btn rule" data-r="1">differentiable plasticity (2018)</button><button class="btn rule" data-r="2">Backpropamine, simple (2019)</button><button class="btn rule" data-r="3">Backpropamine, retroactive</button><button class="btn rule" data-r="4">FlyNet (ours)</button></div>
  <div id="ruleBox"></div>
@@ -556,6 +613,31 @@ const RULES=[
  ['<div class="eq">E ← (1 − <span class="c">η</span>)·E + <span class="c">η</span>·x_old ⊗ x_new<br>Hebb ← clip( Hebb + <span class="c">M(t)</span>·E )</div><p style="font-size:15px">Backpropamine, retroactive form. Activity first leaves a fading trace E (an <span class="term" title="eligibility trace: a short-lived record of which connections were recently active, waiting to be confirmed or discarded">eligibility trace</span>). Only when M(t) fires does the trace become a real change. So a reward signal can reach back about a second and stamp in what led to it, which is what dopamine does in real synapses.</p>'],
  ['<div class="eq">x_new = tanh( (<span class="d">W</span> + <span class="a">A</span>·F) · x_old + input )<br>F ← clamp( (1 − <span class="b">erase(t)</span>)·F + ws·<span class="c">write(t)</span>·x_new ⊗ x_old )</div><p style="font-size:15px">FlyNet. Take the simple Backpropamine rule, call α "A" and Hebb "F", make M(t) = ws × write(t), and add a second self-produced gate, erase(t), that multiplies the old F. That erase gate is the whole difference, and it exists because the fly needs to wipe its tally at food. Everything else is inherited.</p>']];
 document.querySelectorAll('.rule').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.rule').forEach(q=>q.classList.remove('on'));b.classList.add('on');$('ruleBox').innerHTML=RULES[+b.dataset.r][0];}));$('ruleBox').innerHTML=RULES[0][0];
+
+// ---- Q1 one tick by hand (3 neurons)
+const M3={Win:[[0.8,0.1,0.3,-0.2],[-0.2,0.9,0.4,0.1],[0.1,-0.3,0.2,0.9]],bin:[0,0,-0.2],W:[[0,0.3,-0.2],[0.4,0,0.1],[-0.1,0.2,0]],A:[[0,0.6,0.2],[0.5,0,0.3],[0.1,0.4,0]],Wout:[[0.5,-0.6,0.1],[0.3,0.4,-0.2],[-0.3,-0.2,0.9]],bout:[0,1.0,-1.0],ws:0.3};
+let S3={x:[0,0,0],F:[[0,0,0],[0,0,0],[0,0,0]],n:0};
+const f2=v=>(v>=0?'+':'')+v.toFixed(2);
+function tick3(show=true){const inp=[+$('i0').value,+$('i1').value,+$('i2').value,+$('i3').value];['i0','i1','i2','i3'].forEach((id,k)=>$('o'+id).textContent=inp[k].toFixed(1));
+ const xo=S3.x;const drive=[],rec=[],xn=[];for(let i=0;i<3;i++){let d=M3.bin[i];for(let k=0;k<4;k++)d+=M3.Win[i][k]*inp[k];drive.push(d);let r=0;for(let j=0;j<3;j++)r+=(M3.W[i][j]+M3.A[i][j]*S3.F[i][j])*xo[j];rec.push(r);xn.push(Math.tanh(d+r));}
+ const out=[0,1,2].map(m=>{let o=M3.bout[m];for(let i=0;i<3;i++)o+=M3.Wout[m][i]*xn[i];return o;});const turn=8*Math.tanh(out[0]/8),write=sig(out[1]),erase=sig(out[2]);
+ const Fn=S3.F.map((row,i)=>row.map((v,j)=>Math.max(-1,Math.min(1,(1-erase)*v+M3.ws*write*xn[i]*xo[j]))));
+ if(show){const T=(name,rows,head)=>`<div><div class="eyebrow" style="margin-bottom:4px">${name}</div><table style="margin:0;font-family:'JetBrains Mono';font-size:12.5px"><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(v=>`<td class="n">${typeof v==='number'?f2(v):v}</td>`).join('')}</tr>`).join('')}</table></div>`;
+  const eff=S3.F.map((row,i)=>row.map((v,j)=>M3.W[i][j]+M3.A[i][j]*v));
+  $('tickOut').innerHTML=`
+  <p style="margin:0 0 10px"><b>Step 1, input drive.</b> For each neuron: the four inputs times its four W_in weights, plus its bias. Neuron 1: ${M3.Win[0].map((w,k)=>`${f2(w)}×${inp[k].toFixed(1)}`).join(' + ')} + ${f2(M3.bin[0])} = <b>${f2(drive[0])}</b>. Same for neurons 2 and 3: ${f2(drive[1])}, ${f2(drive[2])}.</p>
+  <p style="margin:0 0 10px"><b>Step 2, effective connections.</b> W + A·F, cell by cell. F right now is what the trip has written so far.</p>
+  <div class="three">${T('W (permanent)',M3.W,['from 1','from 2','from 3'])}${T('A·F (fast part, allowance × state)',S3.F.map((row,i)=>row.map((v,j)=>M3.A[i][j]*v)),['from 1','from 2','from 3'])}${T('W + A·F (used this tick)',eff,['from 1','from 2','from 3'])}</div>
+  <p style="margin:10px 0"><b>Step 3, recurrent drive.</b> Each neuron adds up the other neurons' activity from last tick (${xo.map(f2).join(', ')}) times the effective connections in its row: ${rec.map(f2).join(', ')}.</p>
+  <p style="margin:0 0 10px"><b>Step 4, squash.</b> New activity = tanh(input drive + recurrent drive) = <b>${xn.map(f2).join(', ')}</b>. Always between −1 and +1.</p>
+  <p style="margin:0 0 10px"><b>Step 5, outputs.</b> Each output = its three W_out weights times the three activities, plus its bias, then squashed. Raw: ${out.map(f2).join(', ')}. Turn = 8·tanh(raw/8) = <b>${f2(turn)}</b>. Write gate = sigmoid(${f2(out[1])}) = <b>${write.toFixed(2)}</b>. Erase gate = sigmoid(${f2(out[2])}) = <b>${erase.toFixed(2)}</b>.</p>
+  <p style="margin:0 0 10px"><b>Step 6, rewrite F.</b> Every cell: (1 − ${erase.toFixed(2)}) × old + ${M3.ws} × ${write.toFixed(2)} × (activity of the receiving neuron now) × (activity of the sending neuron last tick), then clamped to ±1. The deposit this tick is what "fire together, wire together" means: cells where both are active get a bigger number.</p>
+  <div class="two">${T('F before',S3.F,['from 1','from 2','from 3'])}${T('F after this tick',Fn,['from 1','from 2','from 3'])}</div>
+  <p style="margin:10px 0 0;color:var(--mute)">Note the sizes: 3 neurons here means W_in has 3×4 = 12 weights + 3 biases, W and A have 3×3 = 9 each, W_out has 3×3 = 9 + 3 biases. The real network does the identical arithmetic with 64 in place of 3.</p>`;}
+ S3.x=xn;S3.F=Fn;S3.n++;$('tickCount').textContent='tick '+S3.n;}
+$('tick').addEventListener('click',()=>tick3(true));$('tick10').addEventListener('click',()=>{for(let k=0;k<9;k++)tick3(false);tick3(true);});$('tickReset').addEventListener('click',()=>{S3={x:[0,0,0],F:[[0,0,0],[0,0,0],[0,0,0]],n:0};$('tickCount').textContent='tick 0';$('tickOut').innerHTML='<p style="color:var(--mute)">Fresh episode: F is all zeros and so is the activity. Press "one tick".</p>';});
+['i0','i1','i2','i3'].forEach(id=>$(id).addEventListener('input',()=>$('o'+id).textContent=(+$(id).value).toFixed(1)));
+$('tickReset').click();
 function all(){drawSig();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

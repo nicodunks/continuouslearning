@@ -62,5 +62,9 @@
  "run12": {
   "title": "Third bias shift",
   "lesson": "The ratchet held a third time. On the 200-trip test the erase gate fires 0.213 per tick at food against 0.010 away, a ratio of 20, with peaks of 0.50 on the test trip and 0.57 to 0.67 during training. The reset is now a spike that opens more than halfway at food and nowhere else. The score held: 2.21 at 30 s on the standard exam, 24% arriving, against 2.10 for run 10. Prediction met: ratio target 12, at-food target 0.15."
+ },
+ "run13": {
+  "title": "Slow-half fast-half world",
+  "lesson": "Trained on a world where time and distance disagree, then tested on the standard world: 1.98 at 30 s on the final checkpoint and 1.91 at its best, the lowest earned 30-second scores of the night, with 25% arriving. Write-versus-speed on the standard exam is +0.69 (+0.67 at the best checkpoint), up from run 10's +0.67 but short of the 0.9 predicted. The harder training world made a better brain for the easy one: forcing distance-weighting during training improved homing where speed merely drifts. The reset survived the change of world (ratio 7)."
  }
 }

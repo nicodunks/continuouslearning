@@ -1,0 +1,92 @@
+{
+ "run": "run13",
+ "knob": "speed profile 'legs' (slow half / fast half wanders), warm from run 10, so time-facing and distance-walked disagree on purpose (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run10 (final, 2.10 at 30 s, write~speed +0.67)",
+ "prediction": "A tally that counts time instead of distance points the wrong way in this world, so the write gate must become strongly speed-weighted: write~speed correlation above 0.9. Score on the standard exam should hold near 2.1 (the exam world is unchanged); on the legs world the hand brain floor is 1.08.",
+ "args": [
+  "--init",
+  "runs/run10/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 27.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.1088151931762695,
+     "arrived": 0.17749999463558197
+    },
+    "B": {
+     "score": 4.71595573425293,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.9798468351364136,
+     "arrived": 0.24500000476837158
+    },
+    "B": {
+     "score": 5.9108662605285645,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.912259817123413,
+     "arrived": 0.23999999463558197
+    },
+    "B": {
+     "score": 5.926434516906738,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_best_30.json",
+   "drift_F": 2.5876593589782715
+  }
+ ],
+ "finished": 1789537749.3030841
+}

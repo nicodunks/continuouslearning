@@ -33,3 +33,5 @@
 21:55:46 adopting run12 (pid 7683) from a previous driver
 22:21:57 run12 done in 26 min; final.pt@20s A 2.17 B 4.73 C 3.61; final.pt@30s A 2.21 B 5.93 C 4.38; ckpt_00700.pt@30s A 2.20 B 5.93 C 4.38
 22:21:57 starting run13: knob = speed profile 'legs' (slow half / fast half wanders), warm from run 10, so time-facing and distance-walked disagree on purpose (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine); parent = run10 (final, 2.10 at 30 s, write~speed +0.67)
+22:49:09 run13 done in 27 min; final.pt@20s A 2.11 B 4.72 C 3.61; final.pt@30s A 1.98 B 5.91 C 4.38; ckpt_00200.pt@30s A 1.91 B 5.93 C 4.38
+22:49:09 starting run11B: knob = run 11 continued at 20 s with the gap stop-rule suspended (a fairness fix, not a knob) (hygiene: lr 1e-3 cosine); parent = run11 (ckpt_01000, seed 1, stalled at 20 s)

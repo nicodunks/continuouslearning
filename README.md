@@ -6,6 +6,9 @@ Nico's learning fork of [pwang724/fly-circuit-exploration](https://github.com/pw
 - [The Homing Exam](docs/roadmap/homing-exam.html): the level 1 experiment as a live, playable simulation.
 - [Level 3 Training Plan](docs/roadmap/level3-plan.html): build order, decisions, compute, curriculum, checks, success and the failure playbook, before any code runs.
 - [Inside Runs 1, 2 and 3](docs/roadmap/inside-runs.html): what the level 3 networks actually learned, drawn from their checkpoints, explained for a beginner.
+- [Night Report](docs/roadmap/night-report.html): every overnight run compared: leaderboard, family tree, journeys, two-run compare, stress test, and a "read this first" summary.
+- [Counter With a Lid](docs/roadmap/counter-lid.html): why the learned tallies leak on long trips: a playable counter with a ceiling, and run 19's real fast weights hitting ±1.
+- [Before the Deep Dive](docs/roadmap/before-the-deep-dive.html): ten study questions answered with drawings and real data: knobs, the deaf sigmoid, the delta rule, ablation fairness, every run's reasoning, circuit motifs, Backpropamine, and the head-direction paper.
 - `level1/` and `level2/`: local apps that run the level 1 and level 2 searches (`python3 level1/server.py`, `python3 level2/server.py`); `level3/` trains the network and serves a live dashboard (`python3 level3/server.py`).
 
 Original project README follows.

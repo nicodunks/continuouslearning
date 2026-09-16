@@ -253,6 +253,14 @@ td.n,th.n{text-align:right}
   <text x="450" y="240" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">While walking steadily, x_old ≈ x_new, so the order barely matters. At a turn, it is what makes the E→N cell grow.</text>
  </svg>
 </div>
+<h4>One cell, or the whole grid? Both: the same rule runs on every cell at once</h4>
+<p>Drawing 3a is about one cell, the one on the wire from j to i. But the rule is applied to all 4,096 cells in the same tick. The gates and ws are shared: one erase value, one write value and one ws for the whole board. What differs from cell to cell is the pairing, because each cell sits between a different pair of neurons. If you write the 64 "now" activities down the left edge of the grid and the 64 "a tick ago" activities along the top edge, then every cell's amount added is simply its row's number times its column's number, times the shared ws × write. Move your pointer over the grid to see this for any cell.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing 3c: one tick's additions for the whole grid, an eight-neuron version</div>
+ <canvas id="gridPair" width="1700" height="640"></canvas>
+ <div class="detail" id="gridPairDetail">Move the pointer over a cell.</div>
+ <div class="how"><b>How to read it.</b> The column of numbers on the left is x_new, each neuron's activity now. The row of numbers along the top is x_old, each neuron's activity a tick ago. The cell where row i meets column j is coloured by x_new[i] × x_old[j]: red positive, blue negative, pale near zero. When you point at a cell, its row and column light up and the arithmetic is written underneath. The real board is 64 by 64 instead of 8 by 8, and the same construction fills all 4,096 cells in one tick.</div>
+</div>
 <h4>Why record the pairing at all? Because that is how a count of steps gets stored</h4>
 <p>This is the part that deserves the most patience, because it is the reason the whole design works.</p>
 <p>A connection between two neurons can only know two things: what the sending neuron is doing and what the receiving neuron is doing. If we want the connections to record something about the trip, those two activities are the only raw material available at each connection. Multiplying them gives a number that is large only when both neurons were active at the same moment. So over a whole trip, each cell adds up "how often, and how strongly, did these two neurons fire together?" This way of changing a connection was proposed by Donald Hebb in 1949 and is usually summarised as "cells that fire together wire together". We chose it as the rule for this network (it is the "learning rule" knob on the board in question 1). The network did not invent it. What the network does learn is which neurons should carry which signals, so that this fixed rule ends up storing something useful.</p>
@@ -922,6 +930,14 @@ function drawCF(){const [x,W,H]=ctx('compassF');x.clearRect(0,0,W,H);const names
  const ax=R.x0+60,ay=300;x.strokeStyle=css('--line');x.beginPath();x.moveTo(ax-50,ay);x.lineTo(ax+50,ay);x.moveTo(ax,ay-50);x.lineTo(ax,ay+50);x.stroke();const L2=Math.hypot(ee,nn);if(L2>0){const ux=-ee/L2,uy=nn/L2;x.strokeStyle=css('--teal');x.lineWidth=4;x.beginPath();x.moveTo(ax,ay);x.lineTo(ax+ux*45,ay+uy*45);x.stroke();txt(x,'home is this way',ax+60,ay+4,css('--teal'),'left','13px "Bricolage Grotesque"');}else txt(x,'at home: nothing to point to',ax+60,ay+4,css('--mute'));
  txt(x,'N',ax,ay-56,css('--mute'),'center');txt(x,'E',ax+58,ay+4,css('--mute'),'left');}
 [['wN','N'],['wE','E'],['wS','S'],['wW','W']].forEach(([id,d])=>$(id).addEventListener('click',()=>walk(d)));$('wReset').addEventListener('click',()=>{CF.pos=[0,0];CF.path=[[0,0]];CF.F=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];CF.xo=[0,0,0,0];CF.last='';drawCF();});
+
+(function(){const c=$('gridPair');const xn=[0.8,-0.3,0.5,0.1,-0.7,0.0,0.6,-0.2],xo=[0.6,0.2,-0.4,0.7,0.1,-0.5,0.3,0.0];let hov=null;
+ function draw(){const [x,W,H]=ctx('gridPair');x.clearRect(0,0,W,H);const u=54,x0=120,y0=80;txt(x,'x_old, a tick ago →',x0,30,css('--mute'));txt(x,'x_new, now ↓',20,y0-16,css('--mute'));
+  xo.forEach((v,j)=>txt(x,(v>=0?'+':'')+v.toFixed(1),x0+j*u+u/2,y0-8,hov&&hov[1]===j?css('--amber'):css('--ink'),'center','13px "JetBrains Mono"'));xn.forEach((v,i)=>txt(x,(v>=0?'+':'')+v.toFixed(1),x0-10,y0+i*u+u/2+5,hov&&hov[0]===i?css('--amber'):css('--ink'),'right','13px "JetBrains Mono"'));
+  xn.forEach((a,i)=>xo.forEach((b,j)=>{const v=a*b;const al=0.1+Math.min(1,Math.abs(v))*0.85;x.fillStyle=v>0?`rgba(217,72,43,${al})`:`rgba(47,91,234,${al})`;x.fillRect(x0+j*u,y0+i*u,u-2,u-2);if(hov&&(hov[0]===i||hov[1]===j)){x.strokeStyle=css('--amber');x.lineWidth=hov[0]===i&&hov[1]===j?4:1.5;x.strokeRect(x0+j*u+1,y0+i*u+1,u-4,u-4);}txt(x,(v>=0?'+':'')+v.toFixed(2),x0+j*u+u/2-1,y0+i*u+u/2+4,'#fff','center','10px "JetBrains Mono"');}));
+  txt(x,'each cell = (its row number) × (its column number); then the whole grid is multiplied by the shared ws × write and added to F',x0,y0+8*u+30,css('--mute'));
+  const u2=u;c.onmousemove=e=>{const r=c.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H;const j=Math.floor((px-x0)/u2),i=Math.floor((py-y0)/u2);if(i>=0&&i<8&&j>=0&&j<8){hov=[i,j];$('gridPairDetail').textContent=`cell F[${i+1}, ${j+1}]: x_new[${i+1}] × x_old[${j+1}] = ${xn[i].toFixed(1)} × ${xo[j].toFixed(1)} = ${(xn[i]*xo[j]).toFixed(2)}; with ws 0.074 and write 0.4 the amount added this tick is ${(0.074*0.4*xn[i]*xo[j]).toFixed(4)}`;draw();}};}
+ draw();})();
 function all(){drawSig();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

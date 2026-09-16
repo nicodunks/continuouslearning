@@ -1,0 +1,92 @@
+{
+ "run": "run16",
+ "knob": "fifth erase-bias shift (+1.5) on top of run 14: is the wipe complete? (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
+ "parent": "run14 (final)",
+ "prediction": "Peaks at food already reach 0.85-0.9 in run 14. A fifth shift should push the mean at-food erase past 0.4 and peaks past 0.95, a clean wipe, with away-from-food near 0.01 and score holding near 2.0. If the mean stops rising while peaks are already near 1, the spike is as sharp as a four-second stand allows and the ratchet is finished.",
+ "args": [
+  "--init",
+  "runs/run14/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--erase_bias_shift",
+  "1.5",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 27.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.1571991443634033,
+     "arrived": 0.19499999284744263
+    },
+    "B": {
+     "score": 4.723453998565674,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 28,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.1390607357025146,
+     "arrived": 0.2549999952316284
+    },
+    "B": {
+     "score": 5.9256272315979,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 29,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.205080509185791,
+     "arrived": 0.2224999964237213
+    },
+    "B": {
+     "score": 5.927495002746582,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 29,
+   "file": "test_best_30.json",
+   "drift_F": 1.5043964385986328
+  }
+ ],
+ "finished": 1789542699.32772
+}

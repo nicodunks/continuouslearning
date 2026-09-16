@@ -78,5 +78,9 @@
  "run15": {
   "title": "Delta rule, cold start (Peter's proposal)",
   "lesson": "Stopped by the gap rule at iteration 800: no memory formed at all. Under the delta rule F writes only what it failed to predict, so F converged on predicting the network's own next activity from its last, and once it did that it stopped writing; the tallies never accumulated steps, and the write strength and A did not move from their starting values after iteration 100 (0.108 and 0.082, flat). Peter's prediction, that delta would keep a wider memory gap and free the erase gate, did not hold in this form. Two honest caveats: this was a cold start with the deaf-gate recipe, and a warm start from a Hebb-trained network, or a delta rule applied only on the columns A selects, might behave differently. As run, the delta rule is a predictor, not a tally."
+ },
+ "run16": {
+  "title": "Fifth bias shift",
+  "lesson": "The peak is now a full wipe: 0.93 at its sharpest tick on the test trip, 0.95 to 0.98 during training. The mean over the four-second food stand is 0.52 against 0.010 away (ratio 53), which says the spike is narrow: it opens fully for a few ticks and not for the whole stand. Score 2.14 at 30 s, 25% arriving, within noise of runs 10, 12 and 14. Five shifts took the peak from 0.06 to 1; the mean stopped rising at about 0.4 because the gate has learned a spike, not a plateau, and a four-second stand is longer than the spike. The ratchet is finished: the reset is as sharp as a scalar gate on this signal can make it."
  }
 }

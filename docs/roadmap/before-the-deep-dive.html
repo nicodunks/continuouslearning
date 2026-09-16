@@ -500,6 +500,18 @@ td.n,th.n{text-align:right}
 <!-- ============ Q3 ============ -->
 <h2 id="q3"><span class="q">QUESTION 3</span>What "the sigmoid was parked at −5" means</h2>
 <p>The erase gate is one output of the network: a raw number, call it z, that can be anything from very negative to very positive. But a gate has to be between 0 (erase nothing) and 1 (erase everything). The <span class="term" title="sigmoid: the S-shaped squashing function, 1 / (1 + e^−z). It turns any number into a value between 0 and 1">sigmoid</span> does that squashing. It is a <span class="term" title="A function whose output is not simply proportional to its input: doubling the input does not double the output. Every squashing function is nonlinear">nonlinearity</span>: its output is not proportional to its input. That squashing is the reason the gate was "deaf" to training, and the drawing below shows how. Drag the bias slider and watch the dot move along the curve.</p>
+<h3>The symbols, from scratch</h3>
+<p><b>σ</b> is only a name. It is the Greek letter sigma, and it is used as the name of the squashing function the way a maths class uses f. "σ(z)" reads "sigma of z": put the number z in, get the squashed number out.</p>
+<p><b>e</b> is a fixed number, 2.718..., in the same way that π is 3.14.... It appears because e raised to a power is the natural way to write anything that grows or shrinks by a constant factor per step.</p>
+<p><b>e<sup>−z</sup></b> is e raised to the power of minus z. When z is a large positive number this is tiny (e<sup>−5</sup> = 0.0067). When z is a large negative number it is huge (e<sup>5</sup> = 148). At z = 0 it is exactly 1.</p>
+<p><b>The formula</b> σ(z) = 1 / (1 + e<sup>−z</sup>) is a four-step recipe: flip the sign of z, raise e to that power, add 1, take one divided by the result. Because the denominator is always bigger than 1, the answer is always between 0 and 1. That is the whole reason it is used for a gate.</p>
+<p><b>Slope</b> means: if you nudge z by a tiny amount, how much does σ(z) move, per unit of nudge? Rise over run, on a very small run. You can find it by trial: work out σ at z and at z plus a small step, subtract, divide by the step. Calculus gives a formula for the same number without the trial, and for this particular function the formula is neat: slope = σ(z) × (1 − σ(z)). The calculator below does it both ways so you can see they agree.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: the formula and the slope, computed step by step for any z</div>
+ <div class="controls"><div class="ctl"><label>z, the raw input <output id="oZ">−5.0</output></label><input id="Z" type="range" min="-8" max="8" step="0.1" value="-5"></div></div>
+ <div class="two"><div id="sigSteps" style="font-family:'JetBrains Mono';font-size:13px;line-height:1.9"></div><div><canvas id="sigZoom" width="820" height="420"></canvas></div></div>
+ <div class="how"><b>How to read it.</b> Left: the four steps of the formula with the numbers filled in for the z you chose, then the slope worked out twice: by nudging z a little and dividing, and by the formula σ × (1 − σ). Right: a close-up of the curve around your z. The straight segment through the dot has the slope just computed, and the small triangle under it shows rise over run. Where the curve is flat the triangle is thin; where it is steep the triangle is tall.</div>
+</div>
 <div class="sketch">
  <div class="eyebrow">Drawing: the S-shaped sigmoid curve, and how far one training nudge moves the gate at each resting position</div>
  <div class="controls"><div class="ctl"><label>bias (where the gate rests) <output id="oB">−5.0</output></label><input id="B" type="range" min="-8" max="4" step="0.1" value="-5"><small>The raw number z when no neuron is pushing on the gate. Training moves this number slowly; the bias shift moved it by hand.</small></div>
@@ -1240,6 +1252,15 @@ $('spDrift').addEventListener('click',()=>{SP.world='drift';$('spDrift').setAttr
   x.strokeStyle=css('--ink');x.lineWidth=3;x.beginPath();for(let z=-8;z<=4;z+=0.05){const v=Math.max(1e-4,sig(z));z===-8?x.moveTo(X(z),Y(v)):x.lineTo(X(z),Y(v));}x.stroke();
   [[-5,css('--rand'),'−5'],[-2.5,css('--coral'),'−2.5']].forEach(([z,c,l])=>{x.fillStyle=c;x.beginPath();x.arc(X(z),Y(sig(z)),6,0,7);x.fill();txt(x,l+': '+sig(z).toFixed(4),X(z)+8,Y(sig(z))-8,c);});};
  panel(0,false,'ordinary axis: the tail looks flat');panel(half,true,'log scale: the tail is a straight line, an exponential');})();
-function all(){drawSig();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
+
+function drawSigZoom(){const z=+$('Z').value;$('oZ').textContent=(z>0?'+':'')+z.toFixed(1);const ez=Math.exp(-z),den=1+ez,sg=1/den;const h=0.001;const num=(sig(z+h)-sig(z))/h;const form=sg*(1-sg);const f=v=>v>=1000?v.toFixed(0):v>=1?v.toFixed(4):v.toFixed(6);
+ $('sigSteps').innerHTML=`<div>step 1: flip the sign of z → −z = <b>${(-z>=0?'+':'')+(-z).toFixed(1)}</b></div><div>step 2: e to that power → e<sup>${(-z).toFixed(1)}</sup> = <b>${f(ez)}</b></div><div>step 3: add 1 → <b>${f(den)}</b></div><div>step 4: one divided by that → σ(z) = <b>${sg.toFixed(4)}</b></div><div style="margin-top:8px;color:var(--mute)">slope, by trial: (σ(z + 0.001) − σ(z)) ÷ 0.001 = <b>${num.toFixed(4)}</b></div><div style="color:var(--mute)">slope, by formula: ${sg.toFixed(4)} × (1 − ${sg.toFixed(4)}) = <b>${form.toFixed(4)}</b></div>`;
+ const [x,W,H]=ctx('sigZoom');x.clearRect(0,0,W,H);const p={l:54,r:14,t:26,b:30};const cw=W-p.l-p.r,ch=H-p.t-p.b;const z0=z-2,z1=z+2;const lo=Math.max(0,sig(z0)-0.05),hi=Math.min(1,sig(z1)+0.05);const X=v=>p.l+(v-z0)/(z1-z0)*cw,Y=v=>H-p.b-(v-lo)/(hi-lo)*ch;frame(x,W,H,p);txt(x,'z →',W-p.r,H-6,css('--mute'),'right');[lo,(lo+hi)/2,hi].forEach(v=>txt(x,v.toFixed(3),p.l-6,Y(v)+4,css('--mute'),'right'));[z0,z,z1].forEach(v=>txt(x,v.toFixed(1),X(v),H-p.b+16,css('--mute'),'center'));
+ x.strokeStyle=css('--ink');x.lineWidth=3;x.beginPath();for(let v=z0;v<=z1;v+=0.02){v===z0?x.moveTo(X(v),Y(sig(v))):x.lineTo(X(v),Y(sig(v)));}x.stroke();
+ x.strokeStyle=css('--blue');x.lineWidth=2;x.beginPath();x.moveTo(X(z-1),Y(sg-form));x.lineTo(X(z+1),Y(sg+form));x.stroke();
+ x.strokeStyle=css('--coral');x.setLineDash([4,3]);x.beginPath();x.moveTo(X(z),Y(sg));x.lineTo(X(z+1),Y(sg));x.lineTo(X(z+1),Y(sg+form));x.stroke();x.setLineDash([]);txt(x,'run = 1',X(z+0.5),Y(sg)+14,css('--coral'),'center');txt(x,'rise = '+form.toFixed(4),X(z+1)+6,Y(sg+form/2)+4,css('--coral'),'left');
+ x.fillStyle=css('--coral');x.beginPath();x.arc(X(z),Y(sg),6,0,7);x.fill();txt(x,'slope = rise ÷ run = '+form.toFixed(4),p.l+6,p.t+14,css('--blue'),'left','13px "Bricolage Grotesque"');}
+$('Z').addEventListener('input',drawSigZoom);
+function all(){drawSig();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

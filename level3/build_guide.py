@@ -91,6 +91,7 @@ td.n,th.n{text-align:right}
  <a href="#q8"><span class="q">Q8</span>The circuit motifs, in depth</a>
  <a href="#q9"><span class="q">Q9</span>Backpropamine</a>
  <a href="#q10"><span class="q">Q10</span>Peter's head-direction paper</a>
+ <a href="#q11"><span class="q">Q11</span>Follow-ups on the lid</a>
 </nav>
 <main>
 <div class="eyebrow">Level 3 · a study guide · ten questions</div>
@@ -356,6 +357,32 @@ td.n,th.n{text-align:right}
 </div>
 <p>One more parallel that is worth saying out loud. Their claim was not "this network is the fly." It was that the fly's design is what optimisation finds when the task is this task, and that anatomy can be predicted from function. Our version of that claim, smaller and with its caveats attached in question 2, is: given a homing task with a place to reset, gradient descent will build a compass, a speed-weighted tally and a wipe, provided the gate that does the wiping can hear its gradients.</p>
 <p class="caveat">Two reading notes on the paper text you sent. The arXiv version has a draft paragraph left in ("Now mention something about the P-EN2 neurons here"), which is a nice reminder that papers are written by people. And the numbers in its figure titles (33 ring, 29 and 26 shifters, error 0.57%) are from one trained network; they trained many and report the pattern was consistent.</p>
+
+<!-- ============ Q11 ============ -->
+<h2 id="q11"><span class="q">QUESTION 11</span>Follow-ups on the Counter With a Lid page</h2>
+<h3>Are we only tallying on the way out?</h3>
+<p>No. The rule runs every tick of every trip, out and back, with no switch. That is the point of a home vector: walking away adds to it, walking home subtracts from it, and it reads zero when you are back. Whether the network actually does the subtraction is a question the data can answer, so here is the same run 19 trip with the average size of the twelve traced fast weights marked at a few moments.</p>
+<div class="panel real">
+ <div class="eyebrow">Real · run 19, one exam trip, the tally rising on the way out and falling on the way back</div>
+ <table><thead><tr><th class="n">time</th><th class="n">distance from home</th><th class="n">mean |F| of the twelve</th><th>what the fly is doing</th></tr></thead><tbody>
+ <tr><td class="n">0 s</td><td class="n">0.00</td><td class="n">0.00</td><td>standing at food, board wiped (erase 0.77)</td></tr>
+ <tr><td class="n">10 s</td><td class="n">3.88</td><td class="n">0.41</td><td>wandering out</td></tr>
+ <tr><td class="n">16 s</td><td class="n">8.50</td><td class="n">0.68</td><td>the far point, turns for home</td></tr>
+ <tr><td class="n">25 s</td><td class="n">6.20</td><td class="n">0.47</td><td>walking home: the tally is being counted down</td></tr>
+ <tr><td class="n">35 s</td><td class="n">4.26</td><td class="n">0.30</td><td>still walking home, tally still shrinking</td></tr>
+ <tr><td class="n">50 s</td><td class="n">2.80</td><td class="n">0.46</td><td>searching near home; tally grows again as it circles</td></tr>
+ </tbody></table>
+ <div class="how"><b>How to read it.</b> Outbound, the size of the fast weights climbs with distance. Inbound, it falls as the fly closes on home. It does not reach zero, because on this trip the fly never quite got there (its closest approach was 1.5, and then it circled), and every circle adds a little back in. So: two-way counting, confirmed on the real trace, with the return leg less clean than the outbound one. Which is another way of saying what the stress test says.</div>
+</div>
+<h3>How do we know the count is in the fast weights? Isn't that what the experiment is for?</h3>
+<p>Yes, exactly, and it is worth separating two claims. The first, <b>"the memory that homes lives in F"</b>, is what the F-held-at-zero test establishes: the same weights, F forced to zero, and the fly walks at random. There is also a structural reason: the neurons' activity is wiped to zero at the start of every trip, so inside an episode nothing except F can carry information across a trip boundary. That claim is solid.</p>
+<p>The second, <b>"F holds a running distance count"</b>, is a hypothesis about <em>what</em> F stores, and it is only partly tested. The evidence for it is circumstantial: the write gate follows speed (+0.69), the network has compass cells, the size of F rises and falls with distance as in the table above, and the hand-built vector tally is the simplest thing that fits. What we have not done is read the count out of F directly: take the 4,096 numbers at each tick and fit a straight-line readout to the true home vector. If that fit is good, the tally is in there in a form we can point to. If it is poor, the network homes some other way and the "counter with a lid" story is only an analogy. That decoding test is a one-afternoon job and it is the first thing I would add to the level 4 list.</p>
+<h3>How can the lid be 5 or 50 if every fast weight is between −1 and +1?</h3>
+<p>It cannot, and I muddled two scales on that page. In the network every one of the 4,096 fast weights is clamped to ±1, full stop. The "lid" slider on the drawn page was in counts of a toy counter, and 25 was an arbitrary number chosen so the shape was visible. It was not a weight value. The mapping is: the toy's lid ↔ the ±1 clamp; the toy's "count per second" ↔ how much a weight moves per tick, which is ws × write × the product of two activities (run 19: 0.074 × about 0.4 × something under 1, so a few hundredths per tick).</p>
+<p>Two more things clear the rest of the confusion up. First, a fast weight is <em>not</em> squashed after the clamp. It enters the effective connection W + A·F as it is, and it is the receiving neuron's total input that gets squashed by tanh. So raising the clamp really does give the count more room. But A can scale F up or down, and if A·F gets large the neuron saturates instead, which is the risk of raising the lid that the page mentioned. Second, the tally is not one weight. It is spread across many weights, each holding a piece. Total room = the clamp × how many weights are used × how A weights them. That is why "more neurons" and "spread the count" are on the same list as "raise the lid": they are three ways to make the same room bigger.</p>
+<h3>How does counting in smaller steps help, and how does training on longer trips help?</h3>
+<p><b>Smaller steps.</b> The clamp is fixed at 1. If a weight moves by 0.05 per tick of walking in one direction, it hits the clamp after 20 ticks, two seconds. If it moves by 0.005 per tick, it lasts 200 ticks, twenty seconds. Smaller steps do not add room; they make the existing room last longer. The price is a fainter count: the readout through A has to be more sensitive, so noise and the small always-on erase matter more. That trade-off is what training would have to find, and a penalty on the size of F is one way to tilt it toward smaller steps. It is a hypothesis, not a known fix.</p>
+<p><b>Longer trips in training.</b> This one does not change the network's capacity at all. It changes what the network is punished for. Gradient descent only fixes what costs loss. Today the network is never scored on a trip longer than 30 seconds, so a counter that overflows at 40 seconds costs nothing and nothing pushes it to change. Train at 45 seconds and the overflow starts to cost, and the optimiser is pushed toward whichever of the fixes above it can reach: smaller steps, more weights sharing the count, less leak. It is the same move as the "legs" world in runs 13 and 19, and the same move as Peter's slow-turning and fast-turning conditions: change the statistics of the world and the network reallocates. Whether it can reallocate enough is the experiment.</p>
 </main></div>
 <script>
 const D=__DATA__;

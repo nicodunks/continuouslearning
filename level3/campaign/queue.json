@@ -1,22 +1,22 @@
 [
  {
-  "run": "run5",
-  "knob": "erase penalty 0.05 -> 0.5, warm start (run 2 tried this cold and died)",
-  "parent": "run3 (ckpt_02300, its best 20 s checkpoint)",
-  "prediction": "With a working memory already in place, a tenfold charge on erasing away from food should move erasing to the food ticks: erase at food > 0.1, away < 0.003. Score at 20 s stays near 1.9. Failure looks like run 2: gate closes everywhere, F saturates, score climbs to random.",
+  "run": "run6",
+  "knob": "stage 20 s -> 30 s (hygiene: cosine learning-rate decay)",
+  "parent": "run5 (ckpt_00400, best frozen exam 1.41 at 20 s)",
+  "prediction": "Training at 30 s with a decaying learning rate: no collapse after iteration 600, and an earned 30 s score at or under 2.0 with the memory in F (B near random). The untrained-at-30 baseline to beat is 2.37 (runs 4 and 5 best checkpoints).",
   "args": [
    "--init",
-   "runs/run3/ckpt_02300.pt",
+   "runs/run5/ckpt_00400.pt",
    "--food_stand",
    "2.0",
-   "--erase_penalty",
-   "0.5",
    "--stages",
-   "20",
+   "30",
    "--iters",
    "1200",
    "--batch",
-   "32"
+   "32",
+   "--lr_decay",
+   "1"
   ],
   "test_t_outs": [
    20,

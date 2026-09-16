@@ -1,0 +1,7 @@
+17:18:53 campaign driver up
+17:18:53 starting run4: knob = trips per episode 2 -> 5; parent = run3 (ckpt_02300, its best 20 s checkpoint)
+18:26:05 run4 done in 67 min; final.pt@20s A 2.30 B 4.65 C 3.61; final.pt@30s A 2.81 B 5.82 C 4.38; ckpt_00400.pt@30s A 2.37 B 5.80 C 4.38
+18:26:05 queue empty; waiting for the supervisor
+18:27:35 starting run5: knob = erase penalty 0.05 -> 0.5, warm start (run 2 tried this cold and died); parent = run3 (ckpt_02300, its best 20 s checkpoint)
+18:54:46 run5 done in 27 min; final.pt@20s A 3.90 B 4.45 C 3.61; final.pt@30s A 4.73 B 5.47 C 4.38; ckpt_00400.pt@30s A 2.37 B 5.91 C 4.38
+18:54:46 queue empty; waiting for the supervisor

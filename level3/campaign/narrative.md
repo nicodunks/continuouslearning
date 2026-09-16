@@ -22,3 +22,12 @@ Lowering the tally ceiling looked like the other way to force a reset. But the w
 
 ## Run 5: the penalty again, but from a warm start
 Run 2 raised the erase penalty from a cold start and got a dead network: with nothing yet learned, the penalty just closed the gate. Run 3's best checkpoint already homes, already has compass cells and a speed-following write gate, and a fade of about one percent per tick. Charging that fade ten times more, now that there is a working memory to protect, may push the erasing that remains into the one place it is free: the food ticks. Same parent as run 4, two trips, penalty 0.5. Prediction: erase at food rises above 0.1 while erase away from food falls below 0.003; score at 20 s stays near 1.9. Failure looks like run 2: the gate closes everywhere and the tallies saturate.
+
+## The penalty knob was never really connected (run 5)
+Warm from run 3, erase penalty 0.5. The gate did not move, and the arithmetic says why: 0.5 times a gate of 0.01 adds about 0.005 to a loss of about 2. Run 2's death was a cold-start problem, not the penalty biting. If we want the penalty to matter it needs to be in the tens, and that is a legal knob still on the table.
+
+## Late collapses are now the main enemy (runs 3, 4, 5)
+Run 5 reached the best frozen exam of the night at iteration 400 (1.41 at 20 s), then collapsed at 500, recovered, and collapsed again at 1000 without recovering; its final network scores worse than a random walk. Every collapse looks the same in the log: the write gate jumps, the tallies saturate, and the loss goes above random because a saturated tally steers the wrong way. Adam's step size is constant through the run, so late in a run, when the network sits close to its best, one noisy batch can still throw it. From run 6 on, the learning rate decays with a cosine schedule to zero over the run, declared as hygiene rather than a scientific knob, so late steps are small.
+
+## Run 6: earn the 30-second score, with the schedule
+Warm from run 5's best checkpoint (the 1.41 exam), 30-second wanders, two trips, cosine learning-rate decay. One scientific change (the stage) plus the hygiene. Prediction: no collapse after iteration 600; a 30-second score at or under 2.0 with the memory in F, against the untrained-at-30 baseline of 2.37 from runs 4 and 5.

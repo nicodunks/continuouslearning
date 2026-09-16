@@ -1,0 +1,86 @@
+{
+ "run": "run5",
+ "knob": "erase penalty 0.05 -> 0.5, warm start (run 2 tried this cold and died)",
+ "parent": "run3 (ckpt_02300, its best 20 s checkpoint)",
+ "prediction": "With a working memory already in place, a tenfold charge on erasing away from food should move erasing to the food ticks: erase at food > 0.1, away < 0.003. Score at 20 s stays near 1.9. Failure looks like run 2: gate closes everywhere, F saturates, score climbs to random.",
+ "args": [
+  "--init",
+  "runs/run3/ckpt_02300.pt",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.5",
+  "--stages",
+  "20",
+  "--iters",
+  "1200",
+  "--batch",
+  "32"
+ ],
+ "minutes": 27.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 3.9025802612304688,
+     "arrived": 0.03750000149011612
+    },
+    "B": {
+     "score": 4.448836803436279,
+     "arrived": 0.03750000149011612
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 4.732921600341797,
+     "arrived": 0.05000000074505806
+    },
+    "B": {
+     "score": 5.474702835083008,
+     "arrived": 0.042500000447034836
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 29,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00400.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.3687326908111572,
+     "arrived": 0.2224999964237213
+    },
+    "B": {
+     "score": 5.914032459259033,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 40,
+   "file": "test_best_30.json",
+   "drift_F": 1.4062120914459229
+  }
+ ],
+ "finished": 1789523686.941309
+}

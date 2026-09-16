@@ -1,0 +1,27 @@
+hand brain                       30 s               F 0.75  noF None  arrived 56%
+hand brain                       45 s               F 0.79  noF None  arrived 53%
+hand brain                       60 s               F 0.77  noF None  arrived 57%
+hand brain                       30 s · drift 0.05  F 0.91  noF None  arrived 53%
+hand brain                       30 s · drift 0.15  F 2.01  noF None  arrived 32%
+run17 · score line               30 s               F 1.81  noF 5.91  arrived 25%
+run17 · score line               45 s               F 2.51  noF 7.62  arrived 19%
+run17 · score line               60 s               F 3.21  noF 8.46  arrived 13%
+run17 · score line               30 s · drift 0.05  F 2.13  noF 5.91  arrived 20%
+run17 · score line               30 s · drift 0.15  F 3.29  noF 5.91  arrived 12%
+run19 · all three ingredients    30 s               F 1.62  noF 5.93  arrived 33%
+run19 · all three ingredients    45 s               F 2.15  noF 7.66  arrived 19%
+run19 · all three ingredients    60 s               F 2.71  noF 8.52  arrived 18%
+run19 · all three ingredients    30 s · drift 0.05  F 2.01  noF 5.93  arrived 23%
+run19 · all three ingredients    30 s · drift 0.15  F 3.25  noF 5.93  arrived 13%
+run16 · reset line               30 s               F 2.14  noF 5.93  arrived 25%
+run16 · reset line               45 s               F 2.69  noF 7.7  arrived 20%
+run16 · reset line               60 s               F 3.19  noF 8.57  arrived 14%
+run16 · reset line               30 s · drift 0.05  F 2.54  noF 5.92  arrived 19%
+run16 · reset line               30 s · drift 0.15  F 3.68  noF 5.92  arrived 10%
+run3 · first homing network      30 s               F 2.43  noF 5.83  arrived 19%
+run3 · first homing network      45 s               F 3.58  noF 7.47  arrived 14%
+run3 · first homing network      60 s               F 4.48  noF 8.28  arrived 12%
+run3 · first homing network      30 s · drift 0.05  F 2.59  noF 5.84  arrived 18%
+run3 · first homing network      30 s · drift 0.15  F 3.38  noF 5.83  arrived 18%
+skip run20 · rival (activity only)
+stress.json written

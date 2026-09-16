@@ -90,7 +90,7 @@ td.n,th.n{text-align:right}
 <div class="wrap">
 <nav class="side" aria-label="questions">
  <a href="#q1"><span class="q">Q1</span>Inputs, outputs, and what a knob is</a>
- <a href="#q2"><span class="q">Q2</span>Why the erase shift was not a knob</a>
+ <a href="#q2"><span class="q">Q2</span>The erase-bias shift: a starting-point knob</a>
  <a href="#q3"><span class="q">Q3</span>A sigmoid parked at −5</a>
  <a href="#q4"><span class="q">Q4</span>Peter's delta rule</a>
  <a href="#q5"><span class="q">Q5</span>Is F versus no-F a fair test?</a>
@@ -423,19 +423,19 @@ td.n,th.n{text-align:right}
 
 
 <!-- ============ Q2 ============ -->
-<h2 id="q2"><span class="q">QUESTION 2</span>Why the erase-bias shift was "not a knob change but something else"</h2>
-<p>Look at the last group on the board: <b>where the network starts</b>. Most knobs describe the world the fly lives in or the way training is run. The bias shift is a different kind of thing. It reaches inside the network and moves one of the 8,708 learned numbers by hand, before training resumes. It does not change what the network is asked to do, and it does not change how the network is scored. What it changes is the network's starting position before training begins to move it. In the drawing below, the curved line is the loss curve from the training picture in question 1 (the "hill"), and the dot on it is the network's current set of parameter values (the "climber"). Training moves the climber downhill.</p>
+<h2 id="q2"><span class="q">QUESTION 2</span>The erase-bias shift is a knob, but a starting-point knob, and that changes what it can prove</h2>
+<p>First, to be clear: the erase-bias shift is a knob. It is set before a run and held fixed during it, like every other knob on the board. It belongs to the third group, <b>where the network starts</b>, next to the warm start, the neuron count and the learning rule. Most knobs describe the world the fly lives in or the way training is run. The bias shift is a different kind of thing. It reaches inside the network and moves one of the 8,708 learned numbers by hand, before training resumes. It does not change what the network is asked to do, and it does not change how the network is scored. What it changes is the network's starting position before training begins to move it. In the drawing below, the curved line is the loss curve from the training picture in question 1 (the "hill"), and the dot on it is the network's current set of parameter values (the "climber"). Training moves the climber downhill.</p>
 <div class="sketch">
- <div class="eyebrow">Drawing: an ordinary knob changes the shape of the hill; the bias shift moves the climber instead</div>
+ <div class="eyebrow">Drawing: a world or training knob changes the shape of the hill; a starting-point knob moves the climber instead</div>
  <svg viewBox="0 0 900 260">
   <g transform="translate(40,20)">
-   <text x="0" y="0" font-family="Bricolage Grotesque" font-size="16" font-weight="700" fill="var(--ink)">A knob: reshape the hill</text>
+   <text x="0" y="0" font-family="Bricolage Grotesque" font-size="16" font-weight="700" fill="var(--ink)">A world or training knob: reshape the hill</text>
    <path id="hillA" d="M0,180 C60,170 90,60 150,80 C210,100 250,180 320,120 C360,90 380,40 400,60" fill="none" stroke="var(--mute)" stroke-width="3"/>
    <circle cx="150" cy="80" r="9" fill="var(--teal)"/><text x="150" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--teal)">network</text>
    <text x="0" y="215" font-family="Literata" font-size="13" fill="var(--mute)">food stand, penalty, world speed: the valleys move,</text><text x="0" y="232" font-family="Literata" font-size="13" fill="var(--mute)">the climber stays where it was.</text>
   </g>
   <g transform="translate(480,20)">
-   <text x="0" y="0" font-family="Bricolage Grotesque" font-size="16" font-weight="700" fill="var(--ink)">The bias shift: move the climber</text>
+   <text x="0" y="0" font-family="Bricolage Grotesque" font-size="16" font-weight="700" fill="var(--ink)">A starting-point knob (the bias shift): move the climber</text>
    <path d="M0,180 C60,170 90,60 150,80 C210,100 250,180 320,120 C360,90 380,40 400,60" fill="none" stroke="var(--mute)" stroke-width="3"/>
    <circle cx="150" cy="80" r="9" fill="var(--mute)" opacity=".4"/><circle cx="300" cy="140" r="9" fill="var(--coral)"/>
    <path d="M160,78 C220,60 260,110 292,134" fill="none" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar)"/>
@@ -444,7 +444,7 @@ td.n,th.n{text-align:right}
   </g>
  </svg>
 </div>
-<p>Why count it separately from the other knobs? There are three reasons, and each one limits what we are allowed to conclude from the runs.</p>
+<p>Why does its group matter? Because a starting-point knob supports a narrower claim than a world or training knob. There are three reasons, and each one limits what we are allowed to conclude from the runs.</p>
 <p><b>It is not a property of the task.</b> If someone else reproduces our world and our training exactly, they will not rediscover the reset unless they also perform the shift by hand. So we cannot claim that "the fly's reset emerges from this task on its own." What we can say is "once the erase gate is in a position where training can move it, the task rewards a reset."</p>
 <p><b>It is a warm start plus one adjustment made by hand.</b> A warm start means that a run begins from the previous run's trained weights instead of from random ones. Every shifted run was a warm start. On top of that, we changed one number out of the 8,708, the erase gate's bias, by hand, and only then let gradient descent take over. So the finding is real: the network itself chose to fire the gate at food rather than away from food. But the starting point from which it made that choice was chosen by us.</p>
 <p><b>It was repeated, which turns it from a one-off into a measured series.</b> We made the same move five times (runs 7B, 10, 12, 14 and 16), and before each run we wrote down what we predicted would happen. Because the move was repeated, we can report the outcome as a series of measurements rather than a single event: the ratio of erasing at food to erasing away from food went 3, then 7, then 20, then 33, then 53. Question 3 explains why the move works at all.</p>

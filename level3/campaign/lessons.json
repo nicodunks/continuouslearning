@@ -66,5 +66,9 @@
  "run13": {
   "title": "Slow-half fast-half world",
   "lesson": "Trained on a world where time and distance disagree, then tested on the standard world: 1.98 at 30 s on the final checkpoint and 1.91 at its best, the lowest earned 30-second scores of the night, with 25% arriving. Write-versus-speed on the standard exam is +0.69 (+0.67 at the best checkpoint), up from run 10's +0.67 but short of the 0.9 predicted. The harder training world made a better brain for the easy one: forcing distance-weighting during training improved homing where speed merely drifts. The reset survived the change of world (ratio 7)."
+ },
+ "run11B": {
+  "title": "Seed 1, continued at 20 s",
+  "lesson": "Given 800 more iterations with the gap rule suspended, seed 1 did begin to transfer: the frozen gap opened from zero to about 0.8 and the running score fell from 4.4 to 3.7. But on the 200-trip test at 20 s it scores 3.87 with F against 4.61 without, still worse than the random walk's 3.61, with 26 compass cells and tallies saturated 59% of the time (write strength 0.165, twice seed 0's). Verdict: the recipe's 10-second stage replicates across seeds; its 20-second transfer is much slower for seed 1 and was not complete after 1,200 iterations. The robustness claim is narrowed to: compass cells and a working tally emerge from any seed; how fast the tally adapts to longer trips depends on the seed."
  }
 }

@@ -1,0 +1,92 @@
+{
+ "run": "run11B",
+ "knob": "run 11 continued at 20 s with the gap stop-rule suspended (a fairness fix, not a knob) (hygiene: lr 1e-3 cosine)",
+ "parent": "run11 (ckpt_01000, seed 1, stalled at 20 s)",
+ "prediction": "If seed 1 only needed time, the gap opens within 600 iterations and the score at 20 s drops under 2.5, replicating run 3. If it stays closed, seeds differ in how easily the write gate comes down for longer trips, and the recipe's robustness claim has to be narrowed to the 10-second stage.",
+ "args": [
+  "--init",
+  "runs/run11/ckpt_01000.pt",
+  "--seed",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--stages",
+  "20",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 18.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 3.8706891536712646,
+     "arrived": 0.057500001043081284
+    },
+    "B": {
+     "score": 4.611684799194336,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 26,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 4.8654046058654785,
+     "arrived": 0.05249999836087227
+    },
+    "B": {
+     "score": 5.759446620941162,
+     "arrived": 0.032499998807907104
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 21,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 4.860052585601807,
+     "arrived": 0.057500001043081284
+    },
+    "B": {
+     "score": 5.755138397216797,
+     "arrived": 0.03750000149011612
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 21,
+   "file": "test_best_30.json",
+   "drift_F": 3.245685577392578
+  }
+ ],
+ "finished": 1789538840.3847091
+}

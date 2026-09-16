@@ -1,35 +1,5 @@
 [
  {
-  "run": "run14",
-  "knob": "fourth erase-bias shift (+1.5) on top of run 12: does the ratchet reach a full wipe? (penalty 20, food 4 s) (hygiene: lr 3e-4, cosine)",
-  "parent": "run12 (final, 2.21 at 30 s, erase ratio 20, at-food 0.21)",
-  "prediction": "Ratios have gone 3, 7, 20. A fourth shift should take at-food erase past 0.4 with peaks near 0.8, away staying near 0.01, and the score holding near 2.2. If at-food erase stops rising, the gate has hit the most a scalar output can do with this signal.",
-  "args": [
-   "--init",
-   "runs/run12/final.pt",
-   "--food_stand",
-   "4.0",
-   "--erase_penalty",
-   "20",
-   "--erase_bias_shift",
-   "1.5",
-   "--stages",
-   "30",
-   "--iters",
-   "800",
-   "--batch",
-   "32",
-   "--lr",
-   "3e-4",
-   "--lr_decay",
-   "1"
-  ],
-  "test_t_outs": [
-   20,
-   30
-  ]
- },
- {
   "run": "run15",
   "knob": "learning rule Hebb -> delta (write only the surprise, Gated DeltaNet), cold start with run 3's recipe so only the rule differs (hygiene: lr 1e-3 cosine)",
   "parent": "random start, same seed as run 3 (Peter's suggestion, docs/flynet-delta-rule.md)",

@@ -1,0 +1,31 @@
+{
+ "run": "run11B",
+ "knob": "run 11 continued at 20 s with the gap stop-rule suspended (a fairness fix, not a knob) (hygiene: lr 1e-3 cosine)",
+ "parent": "run11 (ckpt_01000, seed 1, stalled at 20 s)",
+ "lenient": true,
+ "prediction": "If seed 1 only needed time, the gap opens within 600 iterations and the score at 20 s drops under 2.5, replicating run 3. If it stays closed, seeds differ in how easily the write gate comes down for longer trips, and the recipe's robustness claim has to be narrowed to the 10-second stage.",
+ "args": [
+  "--init",
+  "runs/run11/ckpt_01000.pt",
+  "--seed",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--stages",
+  "20",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

@@ -81,6 +81,6 @@
  },
  "run16": {
   "title": "Fifth bias shift",
-  "lesson": "The peak is now a full wipe: 0.93 at its sharpest tick on the test trip, 0.95 to 0.98 during training. The mean over the four-second food stand is 0.52 against 0.010 away (ratio 53), which says the spike is narrow: it opens fully for a few ticks and not for the whole stand. Score 2.14 at 30 s, 25% arriving, within noise of runs 10, 12 and 14. Five shifts took the peak from 0.06 to 1; the mean stopped rising at about 0.4 because the gate has learned a spike, not a plateau, and a four-second stand is longer than the spike. The ratchet is finished: the reset is as sharp as a scalar gate on this signal can make it."
+  "lesson": "Five shifts: on the 200-trip test the erase gate averages 0.52 per tick across the food stand and reaches 0.93 at its peak, against 0.010 away from food, a ratio of 53. During training the peaks were 0.95 to 0.98. The reset is now a wipe: the board is cleared at food and untouched elsewhere. Score 2.14 at 30 s, 25% arriving, within noise of runs 10, 12 and 14, so five rounds of the same move took the mean at food from 0.03 to 0.52 and the peak from 0.06 to 1 without costing the memory or the score. Ratios across the shifts: 3, 7, 20, 33, 53."
  }
 }

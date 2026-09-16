@@ -131,6 +131,31 @@ td.n,th.n{text-align:right}
 </div>
 
 
+<h3>What W is, what ws is, and what gets computed every tick</h3>
+<p>Two different kinds of number live in the machine and it is easy to blur them. Some are <b>computed fresh every tick</b>: the 64 activities, the 3 outputs, and the 4,096 cells of F. The rest are <b>read every tick but never computed</b>: W, A, W_in, W_out and ws. Those are the parameters. Training set them once; during a trip they are looked up, the same values at tick 1 and tick 900.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · W is the wiring diagram, on a six-neuron version</div>
+ <svg viewBox="0 0 900 300" id="wsketch"></svg>
+ <p style="font-size:15px;margin:8px 0 0">Each arrow is one cell of W. Cell W[i,j] answers "how strongly does neuron j's activity last tick push neuron i this tick?" Positive (red) means j excites i, negative (blue) means j quiets i, near zero means i barely listens to j. Six neurons have 6 × 6 = 36 cells; ours has 64 × 64 = 4,096. That is all W is: the complete list of who listens to whom and how much, and it does not change during a trip. The activities are what each neuron is saying this tick; W is how much each neuron trusts each other neuron.</p>
+</div>
+<div class="sketch">
+ <div class="eyebrow">Drawn · ws is the darkness of the pen; the write gate is its cap</div>
+ <svg viewBox="0 0 900 170">
+  <rect x="30" y="40" width="250" height="90" rx="10" fill="var(--panel)" stroke="var(--line)"/><text x="155" y="70" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">ws = 0.074</text><text x="155" y="92" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">one trained number</text><text x="155" y="112" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">never changes during a trip</text>
+  <text x="310" y="90" font-family="Bricolage Grotesque" font-size="26" fill="var(--ink)">×</text>
+  <rect x="350" y="40" width="250" height="90" rx="10" fill="var(--panel)" stroke="var(--amber)" stroke-width="2"/><text x="475" y="70" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">write(t) = 0 to 1</text><text x="475" y="92" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">one number per tick, shared</text><text x="475" y="112" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">by all 4,096 connections</text>
+  <text x="630" y="90" font-family="Bricolage Grotesque" font-size="26" fill="var(--ink)">×</text>
+  <rect x="670" y="40" width="210" height="90" rx="10" fill="var(--panel)" stroke="var(--teal)" stroke-width="2"/><text x="775" y="70" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">x_new[i] · x_old[j]</text><text x="775" y="92" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">a different number</text><text x="775" y="112" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">for each of the 4,096 cells</text>
+  <text x="450" y="158" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">= the deposit added to F[i,j] this tick   (ws × write(t) together is what the Backpropamine paper calls M(t))</text>
+ </svg>
+</div>
+<table><thead><tr><th>number</th><th>how many</th><th>changes during a trip?</th><th>who sets it</th></tr></thead><tbody>
+<tr><td>activity of a neuron</td><td class="n">64</td><td>every tick</td><td>the arithmetic of the tick</td></tr>
+<tr><td>turn, write gate, erase gate</td><td class="n">3</td><td>every tick</td><td>the arithmetic of the tick</td></tr>
+<tr><td>F, the fast table</td><td class="n">4,096</td><td>every tick</td><td>the rule, using the two gates and ws</td></tr>
+<tr><td>W, A, W_in, W_out</td><td class="n">8,707</td><td>never</td><td>training, then frozen</td></tr>
+<tr><td>ws</td><td class="n">1</td><td>never</td><td>training, then frozen</td></tr>
+</tbody></table>
 <h3>Where the counts come from, and the math of one tick</h3>
 <p>Every wire has one weight and every neuron or output has one <span class="term" title="bias: a resting offset added to a neuron's or output's sum before squashing; it sets where the unit sits when nothing is driving it">bias</span>. That is the whole counting rule.</p>
 <table><thead><tr><th>table</th><th>shape</th><th class="n">weights</th><th class="n">biases</th><th class="n">total</th><th>trained?</th></tr></thead><tbody>
@@ -638,6 +663,12 @@ function tick3(show=true){const inp=[+$('i0').value,+$('i1').value,+$('i2').valu
 $('tick').addEventListener('click',()=>tick3(true));$('tick10').addEventListener('click',()=>{for(let k=0;k<9;k++)tick3(false);tick3(true);});$('tickReset').addEventListener('click',()=>{S3={x:[0,0,0],F:[[0,0,0],[0,0,0],[0,0,0]],n:0};$('tickCount').textContent='tick 0';$('tickOut').innerHTML='<p style="color:var(--mute)">Fresh episode: F is all zeros and so is the activity. Press "one tick".</p>';});
 ['i0','i1','i2','i3'].forEach(id=>$(id).addEventListener('input',()=>$('o'+id).textContent=(+$(id).value).toFixed(1)));
 $('tickReset').click();
+
+(function(){const g=$('wsketch');const n=6;const cx=450,cy=150,R=100;const pos=[];for(let i=0;i<n;i++){const a=-Math.PI/2+i/n*2*Math.PI;pos.push([cx+Math.cos(a)*R,cy+Math.sin(a)*R]);}
+ const W=[[0,0.6,-0.3,0,0.2,0],[0.5,0,0.4,-0.5,0,0],[0,0.3,0,0.6,0,-0.4],[-0.2,0,0.5,0,0.7,0],[0,0,-0.3,0.4,0,0.6],[0.3,-0.6,0,0,0.5,0]];
+ let s='';for(let i=0;i<n;i++)for(let j=0;j<n;j++){const w=W[i][j];if(!w)continue;const [x1,y1]=pos[j],[x2,y2]=pos[i];const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);const ux=dx/L,uy=dy/L;const sx=x1+ux*22,sy=y1+uy*22,ex=x2-ux*22,ey=y2-uy*22;const mx=(sx+ex)/2-uy*14,my=(sy+ey)/2+ux*14;s+=`<path d="M${sx},${sy} Q${mx},${my} ${ex},${ey}" fill="none" stroke="${w>0?'var(--coral)':'var(--blue)'}" stroke-width="${Math.abs(w)*6}" opacity=".85" marker-end="url(#ar)"/><text x="${mx}" y="${my}" font-family="JetBrains Mono" font-size="10" fill="var(--mute)" text-anchor="middle">${(w>0?'+':'')+w.toFixed(1)}</text>`;}
+ for(let i=0;i<n;i++){const [x,y]=pos[i];s+=`<circle cx="${x}" cy="${y}" r="20" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" fill="var(--ink)">${i+1}</text>`;}
+ s+='<text x="30" y="30" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">arrow from j to i, thickness = |W[i,j]|, red excites, blue quiets</text><text x="30" y="280" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">e.g. W[2,1] = +0.5: when neuron 1 was active last tick, neuron 2 is pushed up by half that much now</text>';g.innerHTML=s;})();
 function all(){drawSig();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

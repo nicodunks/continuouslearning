@@ -162,6 +162,14 @@ td.n,th.n{text-align:right}
  <div class="ctl"><label>F[i,j], written so far <output id="oF1">0.00</output></label><input id="F1" type="range" min="-1" max="1" step="0.05" value="0"><small>Zero at the start of an episode; changed by the rule every tick.</small></div></div>
  <svg viewBox="0 0 900 200" id="wire"></svg>
 </div>
+<h3>W is the whole table, not a summary of it</h3>
+<p>When the page says "W", it means all 4,096 cells together, the way "the spreadsheet" means every cell in it. W[i,j] is one cell. Nothing is averaged: the network needs every cell separately on every tick. Here is run 19's actual W, all of it, and beside it what a summary would be.</p>
+<div class="panel real">
+ <div class="eyebrow">Real · run 19's W, all 4,096 cells, and its A</div>
+ <div class="two"><div><canvas id="Wfull" width="820" height="860"></canvas></div><div><canvas id="Afull" width="820" height="860"></canvas></div></div>
+ <div class="detail" id="wfullDetail">Hover a cell to read it.</div>
+ <div class="how"><b>How to read it.</b> Row i, column j is the cell W[i,j]: how hard neuron j pushes neuron i. Red positive, blue negative, white near zero. This whole picture is what "W" means. A single summary number of it (the average, +0.00, or the mean size, 0.10) is written at the bottom, and it tells you almost nothing about how the network works, which is the point: the information is in the pattern of the cells, not in any total.</div>
+</div>
 <div class="sketch">
  <div class="eyebrow">Drawn · W is the wiring diagram, on a six-neuron version</div>
  <svg viewBox="0 0 900 300" id="wsketch"></svg>
@@ -188,6 +196,25 @@ td.n,th.n{text-align:right}
   <rect x="670" y="40" width="210" height="90" rx="10" fill="var(--panel)" stroke="var(--teal)" stroke-width="2"/><text x="775" y="70" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">x_new[i] · x_old[j]</text><text x="775" y="92" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">a different number</text><text x="775" y="112" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">for each of the 4,096 cells</text>
   <text x="450" y="158" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">= the deposit added to F[i,j] this tick   (ws × write(t) together is what the Backpropamine paper calls M(t))</text>
  </svg>
+ <div class="eyebrow" style="margin-top:14px">Drawn · the erase side has no pen: the gate is used as a fraction, directly</div>
+ <svg viewBox="0 0 900 150">
+  <rect x="30" y="40" width="250" height="90" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-dasharray="6 5"/><text x="155" y="80" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" fill="var(--mute)">no ws here</text><text x="155" y="104" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">nothing to scale: a fraction is already 0 to 1</text>
+  <text x="310" y="90" font-family="Bricolage Grotesque" font-size="26" fill="var(--ink)">·</text>
+  <rect x="350" y="40" width="250" height="90" rx="10" fill="var(--panel)" stroke="var(--coral)" stroke-width="2"/><text x="475" y="70" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">(1 − erase(t))</text><text x="475" y="92" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">one number per tick, shared</text><text x="475" y="112" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">by all 4,096 cells</text>
+  <text x="630" y="90" font-family="Bricolage Grotesque" font-size="26" fill="var(--ink)">×</text>
+  <rect x="670" y="40" width="210" height="90" rx="10" fill="var(--panel)" stroke="var(--teal)" stroke-width="2"/><text x="775" y="70" text-anchor="middle" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">F[i,j] as it was</text><text x="775" y="92" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">every cell shrinks by the</text><text x="775" y="112" text-anchor="middle" font-family="Literata" font-size="13" fill="var(--mute)">same fraction this tick</text>
+ </svg>
+ <p style="font-size:15px;margin:10px 0 0">So the two sides are not symmetric. Writing is pen pressure (ws, trained) × cap (write gate, per tick) × deposit (per cell). Erasing is just the gate, applied as a fraction to the whole board. The only "resting level" on the erase side is the erase gate's bias inside W_out, and that is the number the shifts in question 2 moved.</p>
+</div>
+<h3>ws and A are at opposite ends of the board</h3>
+<p>First, the scope: ws appears in exactly one line of the whole machine, the rule that rewrites F. It never touches W, A, W_in, W_out, the activities or the outputs. During a trip, F is the only table that gets written at all (the others are read and never written), so ws is the pressure of the one pen the network owns, and that pen only writes on F.</p>
+<p>Both multiply F somewhere, which is why they look alike. But ws is on the <b>writing</b> side and A is on the <b>reading</b> side. Watch F fill up over ticks with the fly walking one heading. ws sets how fast the board fills and therefore when it hits the lid. A sets how loudly the board is heard once it is there, and cannot change when the lid is hit.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · writing with ws, reading with A</div>
+ <div class="controls"><div class="ctl"><label>ws, pen pressure (one number for all cells) <output id="oWS3">0.10</output></label><input id="WS3" type="range" min="0.01" max="0.5" step="0.01" value="0.1"></div>
+ <div class="ctl"><label>A for this cell, reader's trust <output id="oA3">0.50</output></label><input id="A3" type="range" min="0" max="1.5" step="0.05" value="0.5"></div></div>
+ <canvas id="wsA" width="1700" height="480"></canvas>
+ <div class="how"><b>How to read it.</b> Left half: the board. The teal line is one cell of F over 60 ticks of steady walking; it climbs at a rate set by ws and stops at the lid. Move ws and the moment it hits the lid moves. Right half: what the receiving neuron feels from that cell, A × F. Move A and the height changes, but the moment the line flattens does not. So: ws decides the tally's time scale; A decides its volume. A is per connection, ws is global. And if there were no lid, the two could be traded for each other, which is why the lid is what makes ws a separate knob.</div>
 </div>
 <table><thead><tr><th>number</th><th>how many</th><th>changes during a trip?</th><th>who sets it</th></tr></thead><tbody>
 <tr><td>activity of a neuron</td><td class="n">64</td><td>every tick</td><td>the arithmetic of the tick</td></tr>
@@ -765,7 +792,19 @@ function drawGD(){const lr=+$('LR').value;$('oLR').textContent=lr.toFixed(2);con
  txt(x,`value ${GD.p.toFixed(2)} · slope ${sl.toFixed(2)} · next step = −${lr.toFixed(2)} × ${sl.toFixed(2)} = ${(-lr*sl).toFixed(2)}`,X(GD.p)+14,Y(lossF(GD.p))-14,css('--ink'),'left','13px "Bricolage Grotesque"');
  txt(x,'flat here: a big push moves it a little',X(-4),Y(lossF(-4))-24,css('--mute'));}
 $('LR').addEventListener('input',drawGD);$('gdStep').addEventListener('click',()=>{const lr=+$('LR').value;const sl=(lossF(GD.p+1e-3)-lossF(GD.p-1e-3))/2e-3;GD.p=Math.max(-5,Math.min(5,GD.p-lr*sl));GD.n++;$('gdN').textContent='step '+GD.n;drawGD();});$('gdReset').addEventListener('click',()=>{GD.p=-3.2;GD.n=0;$('gdN').textContent='step 0';drawGD();});
-function all(){drawSig();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
+
+function fullHeat(id,Mx,title,det){const c=$(id);const [x,W,H]=ctx(id);x.clearRect(0,0,W,H);const n=Mx.length;const p={l:30,r:10,t:36,b:40};const u=Math.min(W-p.l-p.r,H-p.t-p.b)/n;txt(x,title,p.l,20,css('--ink'),'left','14px "Bricolage Grotesque"');const mx=Math.max(...Mx.flat().map(Math.abs));
+ Mx.forEach((row,i)=>row.forEach((v,j)=>{const a=Math.min(1,Math.abs(v)/mx);x.fillStyle=v>0?`rgba(217,72,43,${a})`:`rgba(47,91,234,${a})`;x.fillRect(p.l+j*u,p.t+i*u,u,u);}));
+ const flat=Mx.flat();const mean=flat.reduce((a,v)=>a+v,0)/flat.length,mabs=flat.reduce((a,v)=>a+Math.abs(v),0)/flat.length;txt(x,`summary numbers: average ${(mean>=0?'+':'')+mean.toFixed(2)}, mean size ${mabs.toFixed(2)}, largest ${mx.toFixed(2)}`,p.l,H-12,css('--mute'));txt(x,'sender j →',W-p.r,p.t-6,css('--mute'),'right');txt(x,'receiver i ↓',p.l-24,p.t+12,css('--mute'),'left','10px "JetBrains Mono"');
+ c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H;const j=Math.floor((px-p.l)/u),i=Math.floor((py-p.t)/u);if(i>=0&&i<n&&j>=0&&j<n)$(det).textContent=`${id[0]}[${i+1}, ${j+1}] = ${(Mx[i][j]>=0?'+':'')+Mx[i][j].toFixed(2)}: ${id[0]==='W'?'permanent push from neuron '+(j+1)+' onto neuron '+(i+1):'how much the fast part of the wire from neuron '+(j+1)+' to neuron '+(i+1)+' counts'}`;});}
+fullHeat('Wfull',D.motif.W_full,'W: the whole table (run 19)','wfullDetail');fullHeat('Afull',D.motif.A_full,'A: the whole allowance table (run 19)','wfullDetail');
+function drawWsA(){const ws=+$('WS3').value,A=+$('A3').value;$('oWS3').textContent=ws.toFixed(2);$('oA3').textContent=A.toFixed(2);const [x,W,H]=ctx('wsA');x.clearRect(0,0,W,H);const N=60;const f=[];let v=0;for(let t=0;t<=N;t++){f.push(v);v=Math.min(1,v+ws*0.5*0.6);}
+ const half=W/2;const draw=(x0,vals,ymax,title,col,lid)=>{const p={l:x0+44,r:x0+half-20,t:30,b:36};const cw=p.r-p.l,ch=H-p.t-p.b;const X=t=>p.l+t/N*cw,Y=q=>H-p.b-q/ymax*ch;x.strokeStyle=css('--line');x.beginPath();x.moveTo(p.l,p.t);x.lineTo(p.l,H-p.b);x.lineTo(p.r,H-p.b);x.stroke();txt(x,title,p.l,p.t-10,css('--ink'),'left','14px "Bricolage Grotesque"');txt(x,'ticks →',p.r,H-6,css('--mute'),'right');[0,ymax/2,ymax].forEach(q=>txt(x,q.toFixed(1),p.l-6,Y(q)+4,css('--mute'),'right'));
+  if(lid!==null){x.setLineDash([6,5]);x.strokeStyle=css('--coral');x.lineWidth=2;x.beginPath();x.moveTo(p.l,Y(lid));x.lineTo(p.r,Y(lid));x.stroke();x.setLineDash([]);txt(x,'lid',p.r-4,Y(lid)-6,css('--coral'),'right');}
+  x.strokeStyle=col;x.lineWidth=3;x.beginPath();vals.forEach((q,t)=>t?x.lineTo(X(t),Y(q)):x.moveTo(X(t),Y(q)));x.stroke();const hit=vals.findIndex(q=>q>=0.999);if(hit>0){x.fillStyle=css('--coral');x.beginPath();x.arc(X(hit),Y(vals[hit]),6,0,7);x.fill();txt(x,`hits the lid at tick ${hit}`,X(hit)+8,Y(vals[hit])+18,css('--coral'));}};
+ draw(0,f,1.1,'the board: one cell of F, written at ws × write × deposit per tick',css('--teal'),1);draw(half,f.map(q=>A*q),1.6,'what the neuron feels: A × F',css('--blue'),null);}
+['WS3','A3'].forEach(id=>$(id).addEventListener('input',drawWsA));
+function all(){drawSig();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>
 '''

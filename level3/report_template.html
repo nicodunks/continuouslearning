@@ -1,0 +1,225 @@
+<title>Night Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#EEF1F4;--panel:#F8F9FA;--ink:#1B2330;--ink-2:#4A5563;--ink-3:#8A94A2;--line:#D3D9E0;--code:#E8ECF0;--amber:#E08A2E;--amber-soft:#F6E3C8;--teal:#1F8A8A;--teal-soft:#CDE8E6;--red:#C24A3A;--red-soft:#F5DAD5;--blue:#2E6FB5;--purple:#6C5CE7;
+ --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--serif:'Source Serif 4',Georgia,serif;--disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3B1E1B;--blue:#5B97DB;--purple:#9B8CFF}}
+:root[data-theme="dark"]{--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--code:#0F141A;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3B1E1B;--blue:#5B97DB;--purple:#9B8CFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:16.5px;line-height:1.6;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--disp);text-wrap:balance;line-height:1.12;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:26px;margin-bottom:8px}
+h3{font-size:18px;margin:18px 0 6px}
+h4{font-size:13px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px}
+p{max-width:66ch;margin:0 0 12px}
+.lede{font-size:19px;color:var(--ink-2)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+header{padding-block:50px 24px;border-bottom:1px solid var(--line)}
+section{padding-block:36px;border-bottom:1px solid var(--line)}
+.note{font-size:14px;color:var(--ink-2)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.kpi b{font-family:var(--mono);font-size:22px;font-weight:500;display:block}
+.kpi span{font-size:12.5px;color:var(--ink-2)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+nav.toc a{font-family:var(--disp);font-weight:700;font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--panel)}
+canvas{max-width:100%;display:block}
+button{font-family:var(--disp);font-weight:700;font-size:13px;padding:6px 11px;border-radius:4px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+button.on{background:var(--amber);border-color:var(--amber);color:#1B2330}
+select{font-family:var(--mono);font-size:13px;padding:5px 7px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}
+table{border-collapse:collapse;font-size:13.5px;width:100%;margin:8px 0}
+td,th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:500;cursor:pointer}
+td.n,th.n{text-align:right;font-family:var(--mono)}
+tr.sel td{background:var(--amber-soft)}
+.matrix{overflow-x:auto}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:6px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
+.checks{display:flex;gap:10px;flex-wrap:wrap;font-family:var(--disp);font-weight:700;font-size:13px}
+.checks label{display:flex;align-items:center;gap:5px;padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media (max-width:860px){.cmp{grid-template-columns:1fr}}
+.cmp .panel h4{color:var(--amber)}
+.cmp .panel.y h4{color:var(--blue)}
+.diff{border-left:3px solid var(--teal);padding-left:14px;margin:12px 0;color:var(--ink-2);max-width:70ch;font-size:15px}
+.diff b{color:var(--ink);font-family:var(--disp)}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.ok{background:var(--teal-soft);color:var(--teal)}.warn{background:var(--amber-soft);color:var(--amber)}.bad{background:var(--red-soft);color:var(--red)}.dim{background:var(--line);color:var(--ink-2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;font-size:17px}
+.card .k{font-family:var(--mono);font-size:12px;color:var(--amber)}
+.card p{font-size:14.5px;margin:0;color:var(--ink-2)}
+.card .pred{border-left:3px solid var(--purple);padding-left:10px}
+.card .les{border-left:3px solid var(--teal);padding-left:10px;color:var(--ink)}
+.term{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:10px 0;max-width:66ch;font-size:15px}
+.term b{font-family:var(--disp);color:var(--amber)}
+.sk{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:10px 0}
+.sk div{background:var(--panel);border:1px dashed var(--line);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--ink-2)}
+.sk b{font-family:var(--disp);color:var(--ink);display:block;margin-bottom:4px}
+.narr h2{margin-top:10px}.narr h3{color:var(--ink);margin-top:16px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Level 3 · the overnight campaign · every run compared</div>
+  <h1>Night Report</h1>
+  <p class="lede">Every experiment we ran, side by side, drawn from the real numbers. Start with the leaderboard, then pick any two runs and compare them panel by panel. Every picture says how to read it and how it was measured. Words you have not met are explained where they first appear.</p>
+  <div class="kpis" id="kpis"></div>
+  <nav class="toc"><a href="#board">Leaderboard</a><a href="#tree">Family tree</a><a href="#journeys">Journeys</a><a href="#compare">Compare two runs</a><a href="#knobs">Knob → effect</a><a href="#cards">Run cards</a><a href="#learned">What we learned</a><a href="#words">Words</a></nav>
+</header>
+
+<section id="board">
+  <h2>Leaderboard</h2>
+  <p>One row per run. Click a column heading to sort. Click a row to load that run into the comparison below. Scores are mean closest approach to the food over 200 test trips, lower is better; the <b>floor</b> is what the hand-built level 1 brain scores on the same trips.</p>
+  <div class="term"><b>How to read A, B and C.</b> A is the trained brain. B is the same brain with its fast strengths held at zero, so it can only use activity. C is a random walk. A low and B high means the memory lived in the fast strengths. "Reset" is yes only if the erase gate fires much harder at food than away from it.</div>
+  <div class="matrix"><table id="board_t"><thead><tr><th>run</th><th>knob</th><th>parent</th><th class="n">20 s · A</th><th class="n">20 s · B</th><th class="n">30 s · A</th><th class="n">30 s · B</th><th class="n">arrived</th><th class="n">compass cells</th><th class="n">write~speed</th><th>reset</th><th class="n">saturated</th><th class="n">min</th><th>status</th></tr></thead><tbody></tbody></table></div>
+  <p class="note" id="floorNote"></p>
+</section>
+
+<section id="tree">
+  <h2>Family tree</h2>
+  <p>Which run started from which. An arrow from a parent to a child means the child began from the parent's weights (a warm start) and changed the one knob written on the arrow. Runs with no arrow in started from random numbers. Colour is the best 20-second score: greener is better.</p>
+  <div class="panel"><canvas id="treeC" width="1140" height="300"></canvas></div>
+</section>
+
+<section id="journeys">
+  <h2>Journeys, overlaid</h2>
+  <p>The training score of every selected run on one chart. Tick the runs to show. The solid line is the running score; the shaded band under each is the drift gap, the space between the frozen brain's score with F allowed and with F held at zero. A wide band means the memory is in F.</p>
+  <div class="term"><b>Iteration.</b> One round of training: run a batch of trips, measure, nudge every slow strength a little. <b>Stage.</b> The curriculum: 10-second wanders first, then 20, then 30. The dotted verticals mark a run moving up a stage.</div>
+  <div class="checks" id="jchecks"></div>
+  <div class="panel" style="margin-top:8px"><canvas id="journeyC" width="1140" height="320"></canvas><div class="legend" id="jlegend"></div></div>
+</section>
+
+<section id="compare">
+  <h2>Compare two runs, panel by panel</h2>
+  <p>Pick a run for the left column and one for the right. Each row is the same measurement on both, so differences are visible by looking across. Under the panels is a plain-language summary of what differs.</p>
+  <div class="row"><span class="note">Left:</span><select id="selX"></select><select id="selXt"></select><span class="note" style="margin-left:14px">Right:</span><select id="selY"></select><select id="selYt"></select></div>
+  <div class="sk">
+    <div><b>Three brains</b>Shorter bars are better. Want: A short, B tall.</div>
+    <div><b>Write gate vs speed</b>Each dot is one tick. Want: dots climbing to the right (writes more when faster).</div>
+    <div><b>Erase gate over a trip</b>Want: a spike inside the teal food stripes, near zero elsewhere. A flat low line is a fade.</div>
+    <div><b>Fast strengths</b>Twelve most-used connections. Want: climb during the wander, stay off the ±1 ceiling, drop at food.</div>
+    <div><b>Compass cells</b>Each bar is one neuron's direction preference. Want: many bars above the 0.25 line.</div>
+    <div><b>A map</b>Where memory is allowed to act. Bright rows would be store cells.</div>
+  </div>
+  <div id="diffs"></div>
+  <div class="cmp" id="cmpGrid"></div>
+</section>
+
+<section id="knobs">
+  <h2>Knob → effect</h2>
+  <p>For every run that had a parent, the change in each measurement compared with that parent, on the same test length. Green means it moved toward the fly-like answer, red away. This is the table that says what each knob actually did.</p>
+  <div class="matrix"><table id="knob_t"><thead><tr><th>run</th><th>knob</th><th>vs</th><th class="n">Δ A score</th><th class="n">Δ B − A gap</th><th class="n">Δ compass cells</th><th class="n">Δ write~speed</th><th class="n">Δ erase at food</th><th class="n">Δ fade</th><th class="n">Δ saturated</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="cards">
+  <h2>Run cards</h2>
+  <p>For each run: the prediction written before it started, what happened, and the one thing it taught. The verdict compares the prediction with the result.</p>
+  <div class="cards" id="cardGrid"></div>
+</section>
+
+<section id="learned" class="narr">
+  __NARRATIVE__
+</section>
+
+<section id="words">
+  <h2>Words</h2>
+  <div class="term"><b>Neuron</b> a dot holding one number, its activity. <b>Connection</b> an arrow between two neurons carrying a strength. <b>Slow strength</b> fixed by training. <b>Fast strength (F)</b> changes while the brain runs; the tally marks. <b>A</b> how much each connection's F counts. <b>Gate</b> a 0-to-1 number the brain outputs: write lets F grow, erase makes it shrink. <b>Score</b> mean closest approach to food on the return, lower is better. <b>Iteration</b> one training round. <b>Checkpoint</b> a saved copy of the brain. <b>Frozen</b> training off. <b>Warm start</b> beginning a run from another run's saved weights. <b>Correlation</b> a number from −1 to +1 for how much two things rise and fall together. <b>Saturated</b> a fast strength stuck at its ceiling, unable to record more.</div>
+</section>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function(){
+'use strict';
+const D=JSON.parse(document.getElementById('data').textContent);const R=D.runs;const names=Object.keys(R).sort((a,b)=>+a.replace('run','')-+b.replace('run',''));
+const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();const $=id=>document.getElementById(id);
+const COLORS=['#E08A2E','#2E6FB5','#1F8A8A','#6C5CE7','#C24A3A','#8A94A2','#D4A017','#3A7D44','#B5179E','#0F766E','#7C3AED','#EA580C','#0369A1'];
+const col=r=>COLORS[names.indexOf(r)%COLORS.length];
+function bestTest(r,t){const ts=Object.values(R[r].tests).filter(x=>Math.abs(x.t_out-t)<0.5);if(!ts.length)return null;return ts.sort((a,b)=>a.m.A-b.m.A)[0];}
+function anyTest(r){const ts=Object.values(R[r].tests);if(!ts.length)return null;return ts.sort((a,b)=>b.t_out-a.t_out||a.m.A-b.m.A)[0];}
+const isReset=m=>m.ef>0.3&&m.ef>5*m.enf;
+function axes(c,L,B){const x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle=cv('--line');x.beginPath();x.moveTo(L,10);x.lineTo(L,h-B);x.lineTo(w-10,h-B);x.stroke();x.fillStyle=cv('--ink-3');x.font='11px IBM Plex Mono';return x;}
+
+/* ---- kpis ---- */
+(function(){const done=names.filter(r=>R[r].results||Object.keys(R[r].tests).length);const b20=names.map(r=>bestTest(r,20)).filter(Boolean).sort((a,b)=>a.m.A-b.m.A)[0];const b30=names.map(r=>bestTest(r,30)).filter(Boolean).sort((a,b)=>a.m.A-b.m.A)[0];
+  const items=[[names.length,'runs so far'],[b20?b20.m.A.toFixed(2):'–','best 20 s score'],[D.floor['20']!==undefined?D.floor['20'].toFixed(2):'–','floor at 20 s (hand brain)'],[b30?b30.m.A.toFixed(2):'–','best 30 s score'],[D.floor['30']!==undefined?D.floor['30'].toFixed(2):'–','floor at 30 s'],[names.filter(r=>{const t=anyTest(r);return t&&isReset(t.m);}).length,'runs with a reset'],[D.built,'report built']];
+  $('kpis').innerHTML=items.map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('');})();
+
+/* ---- leaderboard ---- */
+let sortKey='run',sortDir=1;
+function boardRows(){return names.map(r=>{const t20=bestTest(r,20),t30=bestTest(r,30),t=anyTest(r),m=t?t.m:null;const st=R[r].status||{};const status=R[r].stopped_early?'stopped: '+R[r].stopped_early:(R[r].results?'done':(st.msg||'?'));
+  return {run:r,knob:R[r].knob||'',parent:R[r].parent||'random start',A20:t20?t20.m.A:null,B20:t20?t20.m.B:null,A30:t30?t30.m.A:null,B30:t30?t30.m.B:null,arr:m?m.arr:null,tuned:m?m.tuned:null,corr:m?m.corr:null,reset:m?isReset(m):null,sat:m?m.sat:null,min:R[r].minutes,status};});}
+function fmt(v,d=2){return v===null||v===undefined?'–':(typeof v==='number'?v.toFixed(d):v);}
+function drawBoard(){const rows=boardRows();rows.sort((a,b)=>{const x=a[sortKey],y=b[sortKey];if(x===null||x===undefined)return 1;if(y===null||y===undefined)return -1;return (x<y?-1:x>y?1:0)*sortDir;});const tb=document.querySelector('#board_t tbody');tb.innerHTML='';
+  rows.forEach(r=>{const tr=document.createElement('tr');tr.dataset.run=r.run;if(r.run===selX)tr.className='sel';tr.innerHTML=`<td><b style="color:${col(r.run)}">${r.run}</b></td><td>${r.knob}</td><td class="note">${r.parent}</td><td class="n">${fmt(r.A20)}</td><td class="n">${fmt(r.B20)}</td><td class="n">${fmt(r.A30)}</td><td class="n">${fmt(r.B30)}</td><td class="n">${r.arr===null?'–':Math.round(r.arr*100)+'%'}</td><td class="n">${fmt(r.tuned,0)}</td><td class="n">${r.corr===null?'–':(r.corr>=0?'+':'')+r.corr.toFixed(2)}</td><td>${r.reset===null?'–':r.reset?'<span class="pill ok">yes</span>':'<span class="pill dim">fade</span>'}</td><td class="n">${r.sat===null?'–':Math.round(r.sat*100)+'%'}</td><td class="n">${fmt(r.min,0)}</td><td class="note">${r.status}</td>`;tr.addEventListener('click',()=>{selX=r.run;$('selX').value=selX;fillTests('X');compare();drawBoard();});tb.appendChild(tr);});}
+document.querySelectorAll('#board_t th').forEach((th,i)=>{const keys=['run','knob','parent','A20','B20','A30','B30','arr','tuned','corr','reset','sat','min','status'];th.addEventListener('click',()=>{if(sortKey===keys[i])sortDir*=-1;else{sortKey=keys[i];sortDir=1;}drawBoard();});});
+$('floorNote').textContent=`Floor: the hand-built brain scores ${D.floor['20']} at 20 s and ${D.floor['30']} at 30 s on these exact trips (seed ${D.floor.seed}). Random walks score about 3.9 at 20 s and 5 at 30 s.`;
+
+/* ---- family tree ---- */
+(function(){const c=$('treeC'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);const parentOf=r=>{const p=R[r].parent||'';const m=p.match(/run\d+/);return m?m[0]:null;};
+  const depth={};names.forEach(r=>{let d=0,p=parentOf(r);while(p&&R[p]&&d<10){d++;p=parentOf(p);}depth[r]=d;});const byDepth={};names.forEach(r=>{(byDepth[depth[r]]=byDepth[depth[r]]||[]).push(r);});const maxD=Math.max(...Object.values(depth));
+  const pos={};Object.entries(byDepth).forEach(([d,rs])=>{rs.forEach((r,i)=>{pos[r]=[80+(+d)*(w-160)/Math.max(1,maxD),50+(i+0.5)*(h-80)/rs.length];});});
+  const score=r=>{const t=bestTest(r,20)||anyTest(r);return t?t.m.A:null;};const colr=s=>s===null?cv('--ink-3'):s<1.2?'#1F8A8A':s<2?'#7FB069':s<3?'#E08A2E':'#C24A3A';
+  names.forEach(r=>{const p=parentOf(r);if(p&&pos[p]){const [x1,y1]=pos[p],[x2,y2]=pos[r];x.strokeStyle=cv('--ink-3');x.lineWidth=1.5;x.beginPath();x.moveTo(x1+22,y1);x.lineTo(x2-22,y2);x.stroke();x.fillStyle=cv('--ink-2');x.font='10px IBM Plex Mono';const k=(R[r].knob||'').slice(0,34);x.fillText(k,(x1+x2)/2-k.length*3,(y1+y2)/2-6);}});
+  names.forEach(r=>{const [px,py]=pos[r];x.fillStyle=colr(score(r));x.beginPath();x.arc(px,py,20,0,7);x.fill();x.fillStyle='#1B2330';x.font='bold 11px IBM Plex Mono';x.textAlign='center';x.fillText(r.replace('run','r'),px,py+4);x.textAlign='left';x.fillStyle=cv('--ink-2');x.font='10px IBM Plex Mono';const s=score(r);x.fillText(s===null?'…':s.toFixed(2),px-12,py+34);});
+  x.fillStyle=cv('--ink-3');x.font='11px IBM Plex Mono';x.fillText('random start →  warm starts →',20,h-8);})();
+
+/* ---- journeys ---- */
+const jsel=new Set(names.slice(-4));
+(function(){const el=$('jchecks');names.forEach(r=>{const l=document.createElement('label');l.innerHTML=`<input type="checkbox" ${jsel.has(r)?'checked':''}> <span style="color:${col(r)}">${r}</span>`;l.querySelector('input').addEventListener('change',e=>{e.target.checked?jsel.add(r):jsel.delete(r);journeys();});el.appendChild(l);});})();
+function journeys(){const c=$('journeyC'),L=36,B=26,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);x.fillText('iteration →',c.width/2-30,c.height-6);const G=Math.max(3000,...[...jsel].map(r=>R[r].log.length?R[r].log[R[r].log.length-1].it+1:0)),ymax=5.6;for(let v=0;v<=5;v++)x.fillText(v,L-12,c.height-B-v/ymax*H+4);const px=i=>L+i/G*W,py=v=>c.height-B-Math.min(ymax,v)/ymax*H;
+  x.strokeStyle=cv('--teal');x.setLineDash([4,4]);x.beginPath();x.moveTo(L,py(1.5));x.lineTo(c.width-10,py(1.5));x.stroke();x.setLineDash([]);x.fillStyle=cv('--teal');x.fillText('1.5 homing well',L+4,py(1.5)-4);
+  const lg=$('jlegend');lg.innerHTML='';[...jsel].forEach(r=>{const Lg=R[r].log;if(!Lg.length)return;const cc=col(r);const Dd=Lg.filter(q=>q.drift);
+    x.fillStyle=cc;x.globalAlpha=.13;x.beginPath();Dd.forEach((q,i)=>{const X=px(q.it),Y=py(q.drift.F);i?x.lineTo(X,Y):x.moveTo(X,Y);});for(let i=Dd.length-1;i>=0;i--){x.lineTo(px(Dd[i].it),py(Dd[i].drift.noF));}x.closePath();x.fill();x.globalAlpha=1;
+    let ps=null;Lg.forEach(q=>{if(ps!==null&&q.stage!==ps){x.strokeStyle=cc;x.setLineDash([2,4]);x.beginPath();x.moveTo(px(q.it),10);x.lineTo(px(q.it),c.height-B);x.stroke();x.setLineDash([]);}ps=q.stage;});
+    x.strokeStyle=cc;x.lineWidth=2.2;x.beginPath();Lg.forEach((q,i)=>{i?x.lineTo(px(q.it),py(q.running)):x.moveTo(px(q.it),py(q.running));});x.stroke();
+    lg.insertAdjacentHTML('beforeend',`<span><i style="background:${cc}"></i>${r} · ${(R[r].knob||'').slice(0,40)}</span>`);});}
+journeys();
+
+/* ---- compare ---- */
+let selX=names[names.length-1],selY=names[Math.max(0,names.length-2)],selXt=null,selYt=null;
+function fillSel(id,val){const s=$(id);s.innerHTML='';names.forEach(r=>{const o=document.createElement('option');o.value=r;o.textContent=r;s.appendChild(o);});s.value=val;}
+function fillTests(side){const r=side==='X'?selX:selY,s=$('sel'+side+'t');s.innerHTML='';const ts=Object.entries(R[r].tests).sort((a,b)=>b[1].t_out-a[1].t_out||a[1].m.A-b[1].m.A);ts.forEach(([f,t])=>{const o=document.createElement('option');o.value=f;o.textContent=`${t.ckpt} @ ${t.t_out} s`;s.appendChild(o);});if(side==='X')selXt=ts.length?ts[0][0]:null;else selYt=ts.length?ts[0][0]:null;s.value=side==='X'?selXt:selYt;}
+fillSel('selX',selX);fillSel('selY',selY);fillTests('X');fillTests('Y');
+$('selX').addEventListener('change',()=>{selX=$('selX').value;fillTests('X');compare();drawBoard();});$('selY').addEventListener('change',()=>{selY=$('selY').value;fillTests('Y');compare();});
+$('selXt').addEventListener('change',()=>{selXt=$('selXt').value;compare();});$('selYt').addEventListener('change',()=>{selYt=$('selYt').value;compare();});
+function panel(title,id,w,h,cls){return `<div class="panel ${cls}"><h4>${title}</h4><canvas id="${id}" width="${w}" height="${h}"></canvas><p class="note" id="${id}n"></p></div>`;}
+function compare(){const TX=selXt?R[selX].tests[selXt]:null,TY=selYt?R[selY].tests[selYt]:null;const g=$('cmpGrid');g.innerHTML='';
+  const rows=[['bars','Three brains',200],['scat','Write gate vs speed',230],['erase','Erase gate over a trip',200],['ftr','Fast strengths over a trip',220],['tune','Compass cells: 64 neurons',200],['aheat','A map',420]];
+  rows.forEach(([k,t,h])=>{g.insertAdjacentHTML('beforeend',panel(`${selX} · ${t}`,k+'X',540,h,''));g.insertAdjacentHTML('beforeend',panel(`${selY} · ${t}`,k+'Y',540,h,'y'));});
+  [['X',TX],['Y',TY]].forEach(([s,T])=>{if(!T){['bars','scat','erase','ftr','tune','aheat'].forEach(k=>{$(k+s+'n').textContent='no test for this run yet';});return;}bars(k=>k+s,T);scatter('scat'+s,T);eraseT('erase'+s,T);ftrace('ftr'+s,T);tune('tune'+s,T);aheat('aheat'+s,T);});
+  diffs(TX,TY);}
+function bars(idf,T){const c=$(idf('bars')),g=c.getContext('2d'),W=c.width,H=c.height;g.clearRect(0,0,W,H);const b=T.bars,YM=5.5,L=36,B=36,bw=110,gap=60,x0=100,py=v=>H-B-Math.min(YM,v)/YM*(H-B-20);g.strokeStyle=cv('--line');g.beginPath();g.moveTo(L,10);g.lineTo(L,H-B);g.lineTo(W-10,H-B);g.stroke();g.fillStyle=cv('--ink-3');g.font='11px IBM Plex Mono';g.fillText('0',L-10,H-B+3);g.fillText('5',L-10,py(5)+4);const fl=D.floor[String(Math.round(T.t_out))];if(fl){g.strokeStyle=cv('--teal');g.setLineDash([4,3]);g.beginPath();g.moveTo(L,py(fl));g.lineTo(W-10,py(fl));g.stroke();g.setLineDash([]);g.fillStyle=cv('--teal');g.fillText('floor '+fl,W-80,py(fl)-3);}
+  ['A','B','C'].forEach((k,i)=>{const x=x0+i*(bw+gap),v=b[k].score;g.fillStyle=[cv('--amber'),cv('--blue'),cv('--ink-3')][i];g.fillRect(x,py(v),bw,H-B-py(v));g.fillStyle=cv('--ink');g.font='12px IBM Plex Mono';g.fillText(v.toFixed(2)+' · '+Math.round(b[k].arrived*100)+'%',x,py(v)-5);g.fillStyle=cv('--ink-3');g.font='10px IBM Plex Mono';g.fillText(['A trained','B F held at 0','C random'][i],x,H-B+14);});
+  const m=T.m;$(idf('bars')+'n').innerHTML=m.A<m.C-0.5&&m.B>m.A+0.5?`<span class="pill ok">memory in F</span> A homes, B does not.`:m.A<m.C-0.5?`<span class="pill warn">memory in activity</span> B homes too.`:`<span class="pill bad">no homing</span> A is no better than random.`;}
+function scatter(id,T){const c=$(id),L=34,B=26,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);x.fillText('speed →',c.width/2-20,c.height-6);x.fillText('1',L-12,16);x.fillText('0',L-12,c.height-B+3);const tr=T.traces;const px=s=>L+s/1.7*W,py=v=>c.height-B-v*H;x.fillStyle=cv('--amber');x.globalAlpha=.5;tr.speed.forEach((s,i)=>{if(s>0){x.beginPath();x.arc(px(s),py(tr.write[i]),2.8,0,7);x.fill();}});x.globalAlpha=1;const r=T.m.corr;$(id+'n').innerHTML=`correlation ${r>=0?'+':''}${r.toFixed(2)} ${r>0.6?'<span class="pill ok">follows speed</span>':r>0.3?'<span class="pill warn">weakly</span>':'<span class="pill dim">ignores speed</span>'}`;}
+function eraseT(id,T){const c=$(id),L=40,B=24,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const tr=T.traces,n=tr.t.length,px=i=>L+i/(n-1)*W;const lo=1e-4;const py=v=>c.height-B-(Math.log10(Math.max(lo,v))+4)/4*H;[1,0.1,0.01,0.001].forEach(v=>{x.fillText(v,4,py(v)+4);x.strokeStyle=cv('--line');x.setLineDash([2,3]);x.beginPath();x.moveTo(L,py(v));x.lineTo(c.width-10,py(v));x.stroke();x.setLineDash([]);});tr.food.forEach((f,i)=>{if(f>0){x.fillStyle=cv('--teal');x.globalAlpha=.35;x.fillRect(px(i),10,3,c.height-B-10);x.globalAlpha=1;}});x.strokeStyle=cv('--red');x.lineWidth=2;x.beginPath();tr.erase.forEach((v,i)=>{i?x.lineTo(px(i),py(v)):x.moveTo(px(i),py(v));});x.stroke();const m=T.m;$(id+'n').innerHTML=`at food ${m.ef.toFixed(3)} · away ${m.enf.toFixed(4)} per tick ${isReset(m)?'<span class="pill ok">reset</span>':m.enf>0.003?'<span class="pill dim">fade</span>':'<span class="pill bad">never erases</span>'}`;}
+function ftrace(id,T){const c=$(id),L=30,B=24,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);const tr=T.traces,n=tr.t.length,px=i=>L+i/(n-1)*W,py=v=>c.height-B-(v+1)/2*H;x.fillText('+1',L-20,py(1)+4);x.fillText('−1',L-20,py(-1)+4);[1,-1].forEach(v=>{x.strokeStyle=cv('--ink-3');x.setLineDash([4,3]);x.beginPath();x.moveTo(L,py(v));x.lineTo(c.width-10,py(v));x.stroke();x.setLineDash([]);});tr.food.forEach((f,i)=>{if(f>0){x.fillStyle=cv('--teal');x.globalAlpha=.3;x.fillRect(px(i),10,3,c.height-B-10);x.globalAlpha=1;}});tr.F.forEach((row,k)=>{x.strokeStyle=`hsl(${k*30},60%,50%)`;x.lineWidth=1.4;x.beginPath();row.forEach((v,i)=>{i?x.lineTo(px(i),py(v)):x.moveTo(px(i),py(v));});x.stroke();});$(id+'n').innerHTML=`saturated ${Math.round(T.m.sat*100)}% of ticks ${T.m.sat<0.1?'<span class="pill ok">room to record</span>':T.m.sat<0.3?'<span class="pill warn">sometimes full</span>':'<span class="pill bad">mostly full</span>'}`;}
+function tune(id,T){const c=$(id),L=30,B=22,W=c.width-L-10,H=c.height-B-12,x=axes(c,L,B);x.fillText('1',L-12,16);x.fillText('0',L-12,c.height-B+3);const s=T.strength.slice().sort((a,b)=>b-a);const py=v=>c.height-B-v*H;x.strokeStyle=cv('--teal');x.setLineDash([4,3]);x.beginPath();x.moveTo(L,py(0.25));x.lineTo(c.width-10,py(0.25));x.stroke();x.setLineDash([]);s.forEach((v,i)=>{const bw=W/s.length;x.fillStyle=v>0.25?cv('--amber'):cv('--ink-3');x.fillRect(L+i*bw+1,py(v),bw-2,c.height-B-py(v));});$(id+'n').textContent=`${T.m.tuned} of ${T.n} neurons are direction-tuned`;}
+function aheat(id,T){const c=$(id),x=c.getContext('2d'),S=Math.min(c.width,c.height);x.clearRect(0,0,c.width,c.height);const A=T.A,n=A.length,mx=Math.max(...A.flat().map(Math.abs))+1e-9,cw=(S-20)/n;for(let i=0;i<n;i++)for(let j=0;j<n;j++){const v=A[i][j];x.fillStyle=v>0?cv('--amber'):cv('--red');x.globalAlpha=Math.abs(v)/mx;x.fillRect(10+j*cw,10+i*cw,cw,cw);}x.globalAlpha=1;$(id+'n').textContent=`mean |A| ${T.A_abs.toFixed(3)} · write strength ${T.ws.toFixed(3)}`;}
+function diffs(TX,TY){const d=$('diffs');if(!TX||!TY){d.innerHTML='';return;}const a=TX.m,b=TY.m;const s=[];const say=(name,va,vb,unit,better)=>{const diff=vb-va;if(Math.abs(diff)<1e-9)return;const dir=better==='lower'?(diff<0?'better':'worse'):(diff>0?'better':'worse');s.push(`<b>${name}:</b> ${selX} ${va}${unit}, ${selY} ${vb}${unit} (${selY} is ${dir}).`);};
+  say('Score with memory (A)',a.A.toFixed(2),b.A.toFixed(2),'','lower');say('Memory gap (B minus A)',(a.B-a.A).toFixed(2),(b.B-b.A).toFixed(2),'','higher');say('Compass cells',a.tuned,b.tuned,'','higher');say('Write follows speed (correlation)',a.corr.toFixed(2),b.corr.toFixed(2),'','higher');say('Erase at food',a.ef.toFixed(3),b.ef.toFixed(3),'/tick','higher');say('Erase away from food (fade)',a.enf.toFixed(4),b.enf.toFixed(4),'/tick','lower');say('Saturated ticks',Math.round(a.sat*100),Math.round(b.sat*100),'%','lower');
+  d.innerHTML=`<div class="diff">${TX.t_out!==TY.t_out?`<b>Note:</b> these tests are at different wander lengths (${TX.t_out} s vs ${TY.t_out} s); longer is harder.<br>`:''}${s.join('<br>')}</div>`;}
+compare();drawBoard();
+
+/* ---- knob -> effect ---- */
+(function(){const tb=document.querySelector('#knob_t tbody');names.forEach(r=>{const p=(R[r].parent||'').match(/run\d+/);if(!p||!R[p[0]])return;const pr=p[0];const tr=anyTest(r);if(!tr)return;const tp=bestTest(pr,tr.t_out)||anyTest(pr);if(!tp)return;const a=tp.m,b=tr.m;
+  const cell=(v,better,d=2,unit='')=>{const good=better==='lower'?v<0:v>0;const cls=Math.abs(v)<1e-9?'dim':good?'ok':'bad';return `<td class="n"><span class="pill ${cls}">${v>0?'+':''}${v.toFixed(d)}${unit}</span></td>`;};
+  tb.insertAdjacentHTML('beforeend',`<tr><td><b style="color:${col(r)}">${r}</b></td><td>${R[r].knob}</td><td class="note">${pr} @ ${tp.t_out} s → ${tr.t_out} s</td>${cell(b.A-a.A,'lower')}${cell((b.B-b.A)-(a.B-a.A),'higher')}${cell(b.tuned-a.tuned,'higher',0)}${cell(b.corr-a.corr,'higher')}${cell(b.ef-a.ef,'higher',3)}${cell(b.enf-a.enf,'lower',4)}${cell((b.sat-a.sat)*100,'lower',0,'%')}</tr>`);});
+  if(!tb.children.length)tb.innerHTML='<tr><td colspan="10" class="note">No warm-started runs have finished yet.</td></tr>';})();
+
+/* ---- cards ---- */
+(function(){const g=$('cardGrid');names.forEach(r=>{const t=anyTest(r),m=t?t.m:null,les=D.lessons[r]||{};const verdict=!m?'<span class="pill dim">not tested yet</span>':(m.A<m.C-0.5&&m.B>m.A+0.5?'<span class="pill ok">homes · memory in F</span>':m.A<m.C-0.5?'<span class="pill warn">homes · memory in activity</span>':'<span class="pill bad">did not home</span>')+(m&&isReset(m)?' <span class="pill ok">reset found</span>':'')+(m&&m.corr>0.6?' <span class="pill ok">write follows speed</span>':'');
+  g.insertAdjacentHTML('beforeend',`<div class="card"><h3 style="color:${col(r)}">${r}${les.title?' · '+les.title:''}</h3><div class="k">knob: ${R[r].knob||'?'} · parent: ${R[r].parent||'random start'}</div>${R[r].prediction?`<p class="pred"><b>Prediction:</b> ${R[r].prediction}</p>`:''}<p><b>Result:</b> ${m?`A ${m.A.toFixed(2)} · B ${m.B.toFixed(2)} · C ${m.C.toFixed(2)} at ${t.t_out} s; ${Math.round(m.arr*100)}% arrived; ${m.tuned} compass cells; write~speed ${m.corr>=0?'+':''}${m.corr.toFixed(2)}; erase at food ${m.ef.toFixed(3)}, away ${m.enf.toFixed(4)}.`:'no test yet.'} ${verdict}</p>${R[r].stopped_early?`<p><span class="pill bad">stopped early</span> ${R[r].stopped_early}</p>`:''}${les.lesson?`<p class="les"><b>What it taught:</b> ${les.lesson}</p>`:''}</div>`);});})();
+})();
+</script>

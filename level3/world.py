@@ -17,7 +17,10 @@ W_MAX = 40.0          # tally ceiling (used by the hand brain; FlyNet clamps F t
 ERASE_PENALTY = 0.05  # weight of the "erase open without food" penalty in the loss
 
 
-def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5):
+def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5, speed_profile='drift'):
+    # speed_profile: 'drift' = slow random drift around 1 (the default world);
+    #                'legs'  = each wander has a slow half (0.4) and a fast half (1.6) in random order per agent,
+    #                          so that time-facing-a-direction and distance-walked disagree on purpose.
     # food_stand: seconds spent standing at food at the start of a trip and after arriving (run 3 raises it to 2 s)
     """Run one episode of `trips` trips for `batch` agents.  `brain` must implement:
          brain.reset_fast(batch)   -> start of episode: fast state to zero
@@ -45,6 +48,7 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
         arrived = torch.zeros(batch, dtype=torch.bool)
         since_arrival = torch.zeros(batch, dtype=torch.long)
         min_d = torch.full((batch,), float('inf'))
+        flip = rand(batch) < 0.5                        # legs profile: which half is the slow one
 
         for k in range(n_ticks):
             t = k * DT
@@ -59,7 +63,13 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
             pause = torch.where(in_pause, pause - 1, pause)
             start_pause = (~in_pause) & (rand(batch) < 0.02)
             pause = torch.where(start_pause, (rand(batch) * 2 + 1).div(DT).long(), pause)
-            speed = (speed + 0.3 * randn(batch) * math.sqrt(DT) + 0.2 * (1 - speed) * DT).clamp(0.3, 1.7)
+            if speed_profile == 'legs' and not returning:
+                first_half = t < t_out / 2
+                slow_now = first_half ^ flip
+                target = torch.where(slow_now, torch.full((batch,), 0.4), torch.full((batch,), 1.6))
+                speed = (target + 0.05 * randn(batch)).clamp(0.3, 1.7)
+            else:
+                speed = (speed + 0.3 * randn(batch) * math.sqrt(DT) + 0.2 * (1 - speed) * DT).clamp(0.3, 1.7)
             speed = torch.where(in_pause | at_food | done, torch.zeros(batch), speed)
 
             # ---- what the brain sees ----

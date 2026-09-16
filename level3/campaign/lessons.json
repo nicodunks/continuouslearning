@@ -1,0 +1,14 @@
+{
+  "run1": {
+    "title": "Baseline",
+    "lesson": "Left to itself, gradient descent finds a slow fade instead of a reset, and a write gate that records time rather than distance. Both work a little at 10 seconds and not at all at 20. The memory was in F, but leaky."
+  },
+  "run2": {
+    "title": "Erase penalty times ten",
+    "lesson": "Charging more for erasing away from food did not push the gate toward food; it shut the gate everywhere. With no erase at all, the tallies filled to the ceiling within a trip and the brain could not home. A scalar gate cannot be penalised into firing on five ticks out of three hundred."
+  },
+  "run3": {
+    "title": "Two seconds at food",
+    "lesson": "Four times more food ticks did not teach the reset either, but it rebalanced the whole trip: a lower write gate, tallies off the ceiling, and, for the first time, a write gate that follows speed (+0.94). First brain to home on 20-second trips. Memory in F by a wide margin: 1.99 with it, 4.75 without."
+  }
+}

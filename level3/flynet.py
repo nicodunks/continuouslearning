@@ -22,9 +22,9 @@ TURN_MAX = 8.0     # radians per second; a smooth ceiling on the turn output
 
 
 class FlyNet(nn.Module):
-    def __init__(self, n=N, use_fast=True):
+    def __init__(self, n=N, use_fast=True, f_max=1.0):
         super().__init__()
-        self.n = n; self.use_fast = use_fast; self.zero_F = False
+        self.n = n; self.use_fast = use_fast; self.zero_F = False; self.f_max = f_max   # f_max: the tally ceiling
         self.W_in = nn.Linear(4, n)                            # 4 inputs -> neurons (weights + biases)
         self.W = nn.Parameter(0.1 * torch.randn(n, n))         # slow strengths, j -> i
         self.A = nn.Parameter(0.1 * torch.randn(n, n))         # how much each connection's fast strength counts
@@ -52,7 +52,7 @@ class FlyNet(nn.Module):
         write = torch.sigmoid(out[:, 1]); erase = torch.sigmoid(out[:, 2])
         hebb = x.unsqueeze(2) * x_old.unsqueeze(1)                           # outer(x_new, x_old)
         F = (1 - erase[:, None, None]) * self.F + self.ws * write[:, None, None] * hebb
-        F = F.clamp(-1, 1)
+        F = F.clamp(-self.f_max, self.f_max)
         if active is not None:                                               # frozen agents: nothing changes
             m = active[:, None, None].float(); F = m * F + (1 - m) * self.F
             x = active[:, None].float() * x + (1 - active[:, None].float()) * x_old

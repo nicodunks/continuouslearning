@@ -134,12 +134,49 @@ td.n,th.n{text-align:right}
 </div>
 
 
-<h3>What W is, what ws is, and what gets computed every tick</h3>
-<p>Two different kinds of number live in the machine and it is easy to blur them. Some are <b>computed fresh every tick</b>: the 64 activities, the 3 outputs, and the 4,096 cells of F. The rest are <b>read every tick but never computed</b>: W, A, W_in, W_out and ws. Those are the parameters. Training set them once; during a trip they are looked up, the same values at tick 1 and tick 900.</p>
+
+<h3>Two kinds of number: what changes every tick, and what never does</h3>
+<p>Before the arithmetic, the most important distinction in the machine. Some numbers are recomputed every tick. Others are looked up every tick but never change during a trip. Press the clock.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · press the clock and watch what moves</div>
+ <div class="row"><button class="btn" id="clockTick">advance one tick</button><button class="btn" id="clockRun">run ten ticks</button><span class="eyebrow" id="clockN">tick 0</span></div>
+ <svg viewBox="0 0 900 330" id="clock"></svg>
+ <div class="how"><b>How to read it.</b> Boxes that flash are recomputed on every tick: the 64 activities, the three outputs, and the whole F table. Boxes with a padlock never change during a trip: W, A, W_in, W_out and ws. They were set by training, once. Every parameter you have heard of is a padlock box. Everything that carries a memory of this trip is a flashing box.</div>
+</div>
+
+<h3>Counting the numbers: every square is one number</h3>
+<p>Where do 320, 195, 4,096 and 8,708 come from? Count squares. Every wire between two things has one weight, and every neuron or output has one bias, drawn as a strip on the side. Hover a square to name it.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · the five parameter tables, to scale, plus F</div>
+ <canvas id="squares" width="1700" height="620"></canvas>
+ <div class="detail" id="squareDetail">Hover a square.</div>
+ <div class="how"><b>How to read it.</b> W_in: 4 input wires × 64 neurons = 256 weights (the 4 × 64 block) + 64 biases (the strip) = 320. W and A: 64 × 64 = 4,096 each. W_out: 64 neurons × 3 outputs = 192 + 3 biases = 195. ws: one square. Add them: 320 + 4,096 + 4,096 + 195 + 1 = 8,708 parameters. F is drawn greyed because it is the same size as W but not a parameter: it starts at zero every episode and the rule writes it.</div>
+</div>
+
+<h3>One connection, up close: what W + A·F means</h3>
+<p>Pick any one pair of neurons, sender j and receiver i. Their connection is a wire made of two strands. One strand is permanent: W[i,j]. The other is temporary: A[i,j] × F[i,j], the allowance times whatever the trip has written so far. What the receiver feels is the two added together. Move the sliders.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · a two-strand wire</div>
+ <div class="controls"><div class="ctl"><label>W[i,j], permanent <output id="oW1">+0.30</output></label><input id="W1" type="range" min="-1" max="1" step="0.05" value="0.3"><small>Set by training. Same on every trip.</small></div>
+ <div class="ctl"><label>A[i,j], allowance <output id="oA1">0.60</output></label><input id="A1" type="range" min="0" max="1" step="0.05" value="0.6"><small>Set by training. How much this wire can be rewritten during a trip. Zero means never.</small></div>
+ <div class="ctl"><label>F[i,j], written so far <output id="oF1">0.00</output></label><input id="F1" type="range" min="-1" max="1" step="0.05" value="0"><small>Zero at the start of an episode; changed by the rule every tick.</small></div></div>
+ <svg viewBox="0 0 900 200" id="wire"></svg>
+</div>
 <div class="sketch">
  <div class="eyebrow">Drawn · W is the wiring diagram, on a six-neuron version</div>
  <svg viewBox="0 0 900 300" id="wsketch"></svg>
  <p style="font-size:15px;margin:8px 0 0">Each arrow is one cell of W. Cell W[i,j] answers "how strongly does neuron j's activity last tick push neuron i this tick?" Positive (red) means j excites i, negative (blue) means j quiets i, near zero means i barely listens to j. Six neurons have 6 × 6 = 36 cells; ours has 64 × 64 = 4,096. That is all W is: the complete list of who listens to whom and how much, and it does not change during a trip. The activities are what each neuron is saying this tick; W is how much each neuron trusts each other neuron.</p>
+</div>
+
+<h3>How the gates feed back into F, one tick, one cell at a time</h3>
+<p>The write and erase gates are two single numbers the network emits each tick, and the rule applies them to all 4,096 cells of F at once. Here is a 4-by-4 corner of F. Set the gates, then step through the three moves the rule makes every tick.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · the F board, one tick in three moves</div>
+ <div class="controls"><div class="ctl"><label>erase gate this tick <output id="oE2">0.01</output></label><input id="E2" type="range" min="0" max="1" step="0.01" value="0.01"><small>Fraction of every cell removed. 0.01 is a slow fade; 0.77 is what run 19 does at food.</small></div>
+ <div class="ctl"><label>write gate this tick <output id="oWr2">0.40</output></label><input id="Wr2" type="range" min="0" max="1" step="0.01" value="0.4"><small>Multiplier on the new deposit. 0 means the pen's cap is on.</small></div></div>
+ <div class="row"><button class="btn" id="fb0">start: F before</button><button class="btn" id="fb1">move 1: shrink by (1 − erase)</button><button class="btn" id="fb2">move 2: add ws × write × deposit</button><button class="btn" id="fb3">move 3: clamp to ±1</button><button class="btn" id="fbNext">make this the new "before"</button></div>
+ <canvas id="fboard" width="1700" height="520"></canvas>
+ <div class="how"><b>How to read it.</b> Left: the 16 cells of F, colour and number. Middle: the deposit, which is the receiver's activity now times the sender's activity a tick ago, one product per cell (that is the "outer product"; four neurons here, the activities are shown along the edges). Right: the result. Move 1 multiplies every cell by the same (1 − erase). Move 2 adds ws × write × deposit. Move 3 clips anything past ±1. Then the board becomes the "before" for the next tick. Try erase at 0.77 and watch move 1 nearly empty the board: that is the reset.</div>
 </div>
 <div class="sketch">
  <div class="eyebrow">Drawn · ws is the darkness of the pen; the write gate is its cap</div>
@@ -159,8 +196,9 @@ td.n,th.n{text-align:right}
 <tr><td>W, A, W_in, W_out</td><td class="n">8,707</td><td>never</td><td>training, then frozen</td></tr>
 <tr><td>ws</td><td class="n">1</td><td>never</td><td>training, then frozen</td></tr>
 </tbody></table>
-<h3>Where the counts come from, and the math of one tick</h3>
-<p>Every wire has one weight and every neuron or output has one <span class="term" title="bias: a resting offset added to a neuron's or output's sum before squashing; it sets where the unit sits when nothing is driving it">bias</span>. That is the whole counting rule.</p>
+
+<h3>The math of one tick, with all the numbers</h3>
+<p>Now every piece has been drawn. The calculator below does the whole tick on a three-neuron machine and prints each step.</p>
 <table><thead><tr><th>table</th><th>shape</th><th class="n">weights</th><th class="n">biases</th><th class="n">total</th><th>trained?</th></tr></thead><tbody>
 <tr><td>W_in</td><td>4 inputs × 64 neurons</td><td class="n">256</td><td class="n">64</td><td class="n">320</td><td>yes</td></tr>
 <tr><td>W</td><td>64 × 64</td><td class="n">4,096</td><td class="n">0</td><td class="n">4,096</td><td>yes</td></tr>
@@ -183,11 +221,17 @@ td.n,th.n{text-align:right}
  <div class="row"><button class="btn" id="tick">one tick</button><button class="btn" id="tick10">ten ticks</button><button class="btn" id="tickReset">new episode (F and activity to zero)</button><span class="eyebrow" id="tickCount">tick 0</span></div>
  <div id="tickOut" style="font-size:14.5px;margin-top:12px"></div>
 </div>
+
 <h3>How training changes the 8,708 numbers</h3>
-<p>Training never touches F or the activities. It touches the parameters, and it does so with one formula, applied to every one of the 8,708 numbers after each batch of 32 episodes:</p>
-<div class="eq">new value = old value − <span class="c">learning rate</span> × <span class="b">(how much the loss would rise if this number went up by a tiny bit)</span></div>
-<p>The bracket is the <span class="term" title="gradient: for one parameter, the slope of the loss with respect to that parameter; positive means raising the parameter raises the loss">gradient</span>. If raising a weight would raise the loss, the formula lowers it, and the other way round. The learning rate is the step size: 0.001 for cold starts, 0.0003 for warm starts, 0.0001 for the polish. The <span class="term" title="loss: the single number training tries to make small. Here: the fly's mean distance from home over the last ten seconds of each return, plus the erase penalty">loss</span> here is the mean distance from home over the last ten seconds of each return, plus the erase penalty.</p>
-<p>How does a gradient reach ws, or A, or the erase bias, when they only act on the fly's position through hundreds of ticks of the F rule? By <span class="term" title="backpropagation through time: unroll every tick of the episode into one long chain of arithmetic, then apply the chain rule backwards along it to find each parameter's slope">backpropagation through time</span>. The episode is unrolled into one long chain: tick 1's arithmetic feeds tick 2's, and so on for 900 ticks, ending at the loss. The chain rule of calculus is walked backwards along that chain, multiplying slopes together at every step. A parameter's gradient is the sum of all the paths by which it could have changed the final distance. The erase bias has a path through every tick's erase gate, and each of those paths is multiplied by that tick's sigmoid slope, which is the whole of question 3.</p>
+<p>Training never touches F or the activities. It touches the parameters, with one rule applied to every one of the 8,708 numbers after each batch of 32 episodes. First the picture, then the formula.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawn · one parameter, one step downhill</div>
+ <div class="controls"><div class="ctl"><label>learning rate <output id="oLR">0.30</output></label><input id="LR" type="range" min="0.02" max="1.2" step="0.02" value="0.3"><small>Step size. The real runs used 0.001, 0.0003 and 0.0001; the hill here is drawn steep so steps are visible.</small></div></div>
+ <div class="row"><button class="btn" id="gdStep">one training step</button><button class="btn" id="gdReset">reset the ball</button><span class="eyebrow" id="gdN">step 0</span></div>
+ <canvas id="gd" width="1700" height="420"></canvas>
+ <div class="how"><b>How to read it.</b> Across: the value of one parameter, say the erase bias. Up: the loss the network would get with that value (everything else fixed). The ball is the current value. Each step measures the slope under the ball and moves it downhill by learning rate × slope. On a steep part it moves a lot; on a flat part it barely moves, which is the deaf gate of question 3 seen from the other side. Turn the learning rate up to 1.0 and watch it overshoot and bounce: that is run 5's collapse.</div>
+</div>
+<h3>How training changes the 8,708 numbers</h3>
 <h3>So what is a knob?</h3>
 <p>A knob is any number or choice we fix <em>before</em> a run starts and hold fixed during it. It is not something the network learns. The 8,708 slow weights are learned, so they are not knobs. The fast weights F are rewritten by the network itself, so they are not knobs either. Everything else is. Here is the whole board, grouped by what part of the experiment it lives in. Click a knob to see what it does and which runs turned it.</p>
 <div class="panel" id="knobBoard"></div>
@@ -672,7 +716,56 @@ $('tickReset').click();
  let s='';for(let i=0;i<n;i++)for(let j=0;j<n;j++){const w=W[i][j];if(!w)continue;const [x1,y1]=pos[j],[x2,y2]=pos[i];const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);const ux=dx/L,uy=dy/L;const sx=x1+ux*22,sy=y1+uy*22,ex=x2-ux*22,ey=y2-uy*22;const mx=(sx+ex)/2-uy*14,my=(sy+ey)/2+ux*14;s+=`<path d="M${sx},${sy} Q${mx},${my} ${ex},${ey}" fill="none" stroke="${w>0?'var(--coral)':'var(--blue)'}" stroke-width="${Math.abs(w)*6}" opacity=".85" marker-end="url(#ar)"/><text x="${mx}" y="${my}" font-family="JetBrains Mono" font-size="10" fill="var(--mute)" text-anchor="middle">${(w>0?'+':'')+w.toFixed(1)}</text>`;}
  for(let i=0;i<n;i++){const [x,y]=pos[i];s+=`<circle cx="${x}" cy="${y}" r="20" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" fill="var(--ink)">${i+1}</text>`;}
  s+='<text x="30" y="30" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">arrow from j to i, thickness = |W[i,j]|, red excites, blue quiets</text><text x="30" y="280" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">e.g. W[2,1] = +0.5: when neuron 1 was active last tick, neuron 2 is pushed up by half that much now</text>';g.innerHTML=s;})();
-function all(){drawSig();drawDelta();drawReset();drawStep();}
+
+// ---- clock
+(function(){const g=$('clock');let n=0;const boxes=[['x','64 activities',330,60,180,50,true],['out','turn · write · erase',700,60,180,50,true],['F','F, 4,096 cells',330,230,180,50,true],['Win','W_in · 320',80,60,150,50,false],['W','W · 4,096',330,130,85,50,false],['A','A · 4,096',425,130,85,50,false],['Wout','W_out · 195',700,130,180,50,false],['ws','ws · 1',330,300,85,26,false]];
+ function draw(flash){let s='<text x="20" y="30" font-family="JetBrains Mono" font-size="12" fill="var(--mute)">flashing = recomputed this tick · padlock = frozen by training</text>';boxes.forEach(([k,l,x,y,w,h,live])=>{const on=flash&&live;s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${on?'var(--chalk)':'var(--panel)'}" stroke="${live?'var(--teal)':'var(--line)'}" stroke-width="${on?3:1.5}"/><text x="${x+w/2}" y="${y+h/2+5}" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" fill="var(--ink)">${l}</text>`;if(!live)s+=`<text x="${x+w-14}" y="${y+14}" font-size="12">🔒</text>`;});
+  s+='<path d="M230,85 L330,85" stroke="var(--mute)" stroke-width="2" marker-end="url(#ar)"/><path d="M510,85 L700,85" stroke="var(--mute)" stroke-width="2" marker-end="url(#ar)"/><path d="M420,180 L420,230" stroke="var(--mute)" stroke-width="2"/><path d="M420,230 L420,180" stroke="var(--mute)" stroke-width="2" marker-end="url(#ar)"/><path d="M790,110 C790,260 520,290 512,258" fill="none" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#ar)"/><text x="600" y="300" font-family="JetBrains Mono" font-size="11" fill="var(--mute)">gates → F rule</text><text x="20" y="320" font-family="JetBrains Mono" font-size="11" fill="var(--mute)">inputs → W_in → activities (using W + A·F) → W_out → outputs; then the rule rewrites F using the gates</text>';g.innerHTML=s;}
+ draw(false);const tick=()=>{n++;$('clockN').textContent='tick '+n;draw(true);setTimeout(()=>draw(false),350);};$('clockTick').addEventListener('click',tick);$('clockRun').addEventListener('click',()=>{let k=0;const id=setInterval(()=>{tick();if(++k>=10)clearInterval(id);},500);});})();
+// ---- squares
+(function(){const c=$('squares');const [x,W,H]=ctx('squares');x.clearRect(0,0,W,H);const blocks=[];const u=3.6;
+ function block(name,x0,y0,rows,cols,col,label,bias){for(let i=0;i<rows;i++)for(let j=0;j<cols;j++){x.fillStyle=col;x.globalAlpha=.75;x.fillRect(x0+j*u,y0+i*u,u-0.6,u-0.6);}x.globalAlpha=1;blocks.push({name,x0,y0,rows,cols,label,bias:false});
+  if(bias){for(let i=0;i<bias;i++){x.fillStyle=css('--amber');x.fillRect(x0+cols*u+4,y0+i*u,u-0.6,u-0.6);}blocks.push({name:name+' bias',x0:x0+cols*u+4,y0,rows:bias,cols:1,label:'bias',bias:true});}
+  txt(x,label,x0,y0-8,css('--ink'),'left','13px "Bricolage Grotesque"');}
+ block('W_in',20,40,64,4,css('--blue'),'W_in: 4 × 64 = 256, + 64 biases = 320',64);
+ block('W',90,40,64,64,css('--ink'),'W: 64 × 64 = 4,096');
+ block('A',350,40,64,64,css('--ink'),'A: 64 × 64 = 4,096');
+ block('W_out',610,40,3,64,css('--blue'),'W_out: 64 × 3 = 192, + 3 biases = 195',3);
+ x.fillStyle=css('--teal');x.fillRect(610,90,u*3,u*3);txt(x,'ws: 1',610,84,css('--ink'),'left','13px "Bricolage Grotesque"');blocks.push({name:'ws',x0:610,y0:90,rows:1,cols:1,label:'',bias:false});
+ x.globalAlpha=.3;block('F',610,140,64,64,css('--teal'),'F: 64 × 64 = 4,096, state, not a parameter');x.globalAlpha=1;
+ txt(x,'parameters: 320 + 4,096 + 4,096 + 195 + 1 = 8,708',20,H-14,css('--ink'),'left','15px "Bricolage Grotesque"');
+ c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H;for(const b of blocks){if(px>=b.x0&&px<b.x0+b.cols*u&&py>=b.y0&&py<b.y0+b.rows*u){const i=Math.floor((py-b.y0)/u),j=Math.floor((px-b.x0)/u);let m='';if(b.name==='W_in')m=`W_in[neuron ${i+1}, input ${['compass E-W','compass N-S','speed','food'][j]}]: how loudly neuron ${i+1} hears that input`;else if(b.name==='W')m=`W[${i+1}, ${j+1}]: permanent push from neuron ${j+1} onto neuron ${i+1}`;else if(b.name==='A')m=`A[${i+1}, ${j+1}]: how much the fast part of the wire from neuron ${j+1} to neuron ${i+1} counts`;else if(b.name==='W_out')m=`W_out[${['turn','write gate','erase gate'][i]}, neuron ${j+1}]: how much neuron ${j+1} pushes that output`;else if(b.name==='F')m=`F[${i+1}, ${j+1}]: what this trip has written on the wire from neuron ${j+1} to neuron ${i+1} (state, not a parameter)`;else if(b.name==='ws')m='ws: the one write strength, multiplies every deposit';else m=`${b.name} for row ${i+1}: the resting offset added before squashing`;$('squareDetail').textContent=m;return;}}});})();
+// ---- wire
+function drawWire(){const w=+$('W1').value,a=+$('A1').value,f=+$('F1').value;$('oW1').textContent=(w>=0?'+':'')+w.toFixed(2);$('oA1').textContent=a.toFixed(2);$('oF1').textContent=(f>=0?'+':'')+f.toFixed(2);const eff=w+a*f;const g=$('wire');const col=v=>v>=0?'var(--coral)':'var(--blue)';
+ g.innerHTML=`<circle cx="120" cy="100" r="28" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><text x="120" y="105" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" fill="var(--ink)">j</text><text x="120" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--mute)">sender, last tick</text>
+ <circle cx="780" cy="100" r="28" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><text x="780" y="105" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" fill="var(--ink)">i</text><text x="780" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--mute)">receiver, now</text>
+ <line x1="150" y1="88" x2="750" y2="88" stroke="${col(w)}" stroke-width="${Math.max(1,Math.abs(w)*14)}" opacity=".9"/><text x="450" y="70" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="${col(w)}">permanent strand W = ${(w>=0?'+':'')+w.toFixed(2)}</text>
+ <line x1="150" y1="112" x2="750" y2="112" stroke="${col(a*f)}" stroke-width="${Math.max(0.5,Math.abs(a*f)*14)}" stroke-dasharray="8 5" opacity=".9"/><text x="450" y="140" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="${col(a*f)}">temporary strand A × F = ${a.toFixed(2)} × ${(f>=0?'+':'')+f.toFixed(2)} = ${(a*f>=0?'+':'')+(a*f).toFixed(2)}</text>
+ <text x="450" y="185" text-anchor="middle" font-family="Bricolage Grotesque" font-size="16" font-weight="700" fill="var(--ink)">what neuron i feels from j this tick: W + A·F = ${(eff>=0?'+':'')+eff.toFixed(2)}</text>`;}
+['W1','A1','F1'].forEach(id=>$(id).addEventListener('input',drawWire));
+// ---- F board
+const FB={before:[[0.2,-0.1,0.4,0],[0.3,0.5,-0.2,0.1],[-0.4,0.2,0.6,0.3],[0.1,0,0.2,-0.3]],xn:[0.8,-0.3,0.5,0.1],xo:[0.6,0.2,-0.4,0.7],ws:0.3,stage:0};
+function drawFB(){const e=+$('E2').value,w=+$('Wr2').value;$('oE2').textContent=e.toFixed(2);$('oWr2').textContent=w.toFixed(2);const [x,W,H]=ctx('fboard');x.clearRect(0,0,W,H);const u=48;
+ const dep=FB.xn.map(a=>FB.xo.map(b=>a*b));const m1=FB.before.map(r=>r.map(v=>(1-e)*v));const m2=m1.map((r,i)=>r.map((v,j)=>v+FB.ws*w*dep[i][j]));const m3=m2.map(r=>r.map(v=>Math.max(-1,Math.min(1,v))));
+ const grid=(M,x0,y0,title,sub)=>{txt(x,title,x0,y0-22,css('--ink'),'left','14px "Bricolage Grotesque"');if(sub)txt(x,sub,x0,y0-7,css('--mute'));M.forEach((r,i)=>r.forEach((v,j)=>{const a=Math.min(1,Math.abs(v));x.fillStyle=v>0?`rgba(217,72,43,${0.15+a*0.8})`:`rgba(47,91,234,${0.15+a*0.8})`;x.fillRect(x0+j*u,y0+i*u,u-2,u-2);txt(x,(v>=0?'+':'')+v.toFixed(2),x0+j*u+u/2-1,y0+i*u+u/2+4,'#fff','center','11px "JetBrains Mono"');}));};
+ grid(FB.before,40,60,'F before',FB.stage>0?'':'the board at the start of this tick');
+ // deposit with activities on edges
+ grid(dep,330,60,'deposit = x_new[i] × x_old[j]','receiver now (rows) × sender last tick (cols)');FB.xo.forEach((v,j)=>txt(x,(v>=0?'+':'')+v.toFixed(1),330+j*u+u/2,60+4*u+16,css('--teal'),'center'));FB.xn.forEach((v,i)=>txt(x,(v>=0?'+':'')+v.toFixed(1),322,60+i*u+u/2+4,css('--teal'),'right'));
+ const stageM=[FB.before,m1,m2,m3][FB.stage];const titles=['result: nothing yet',`after move 1: every cell × (1 − ${e.toFixed(2)})`,`after move 2: + ${FB.ws} × ${w.toFixed(2)} × deposit`,'after move 3: clamped to ±1'];
+ grid(stageM,620,60,titles[FB.stage],'');
+ txt(x,`mean |F| before ${(FB.before.flat().reduce((a,v)=>a+Math.abs(v),0)/16).toFixed(3)} → now ${(stageM.flat().reduce((a,v)=>a+Math.abs(v),0)/16).toFixed(3)}`,40,H-16,css('--mute'));
+ FB.result=m3;}
+['E2','Wr2'].forEach(id=>$(id).addEventListener('input',drawFB));[['fb0',0],['fb1',1],['fb2',2],['fb3',3]].forEach(([id,st])=>$(id).addEventListener('click',()=>{FB.stage=st;drawFB();}));$('fbNext').addEventListener('click',()=>{FB.before=FB.result.map(r=>r.slice());FB.xo=FB.xn.slice();FB.xn=FB.xn.map(v=>Math.tanh(v*1.3+0.1));FB.stage=0;drawFB();});
+// ---- gradient descent ball
+const GD={p:-3.2,n:0};const lossF=p=>0.6*Math.cos(p*0.9)+0.12*p*p+1.0+0.5*Math.exp(-((p+4)**2)*2);
+function drawGD(){const lr=+$('LR').value;$('oLR').textContent=lr.toFixed(2);const [x,W,H]=ctx('gd');x.clearRect(0,0,W,H);const p={l:44,r:20,t:30,b:40};const cw=W-p.l-p.r,ch=H-p.t-p.b;const X=v=>p.l+(v+5)/10*cw,Y=v=>H-p.b-v/5*ch;frame(x,W,H,p);txt(x,'parameter value →',W-p.r,H-6,css('--mute'),'right');txt(x,'loss',p.l+4,p.t-8,css('--mute'));
+ x.strokeStyle=css('--ink');x.lineWidth=3;x.beginPath();for(let v=-5;v<=5;v+=0.05){const px=X(v),py=Y(lossF(v));v===-5?x.moveTo(px,py):x.lineTo(px,py);}x.stroke();
+ const sl=(lossF(GD.p+1e-3)-lossF(GD.p-1e-3))/2e-3;x.strokeStyle=css('--blue');x.lineWidth=2;x.beginPath();x.moveTo(X(GD.p-0.8),Y(lossF(GD.p)-0.8*sl));x.lineTo(X(GD.p+0.8),Y(lossF(GD.p)+0.8*sl));x.stroke();
+ x.fillStyle=css('--coral');x.beginPath();x.arc(X(GD.p),Y(lossF(GD.p)),9,0,7);x.fill();
+ txt(x,`value ${GD.p.toFixed(2)} · slope ${sl.toFixed(2)} · next step = −${lr.toFixed(2)} × ${sl.toFixed(2)} = ${(-lr*sl).toFixed(2)}`,X(GD.p)+14,Y(lossF(GD.p))-14,css('--ink'),'left','13px "Bricolage Grotesque"');
+ txt(x,'flat here: a big push moves it a little',X(-4),Y(lossF(-4))-24,css('--mute'));}
+$('LR').addEventListener('input',drawGD);$('gdStep').addEventListener('click',()=>{const lr=+$('LR').value;const sl=(lossF(GD.p+1e-3)-lossF(GD.p-1e-3))/2e-3;GD.p=Math.max(-5,Math.min(5,GD.p-lr*sl));GD.n++;$('gdN').textContent='step '+GD.n;drawGD();});$('gdReset').addEventListener('click',()=>{GD.p=-3.2;GD.n=0;$('gdN').textContent='step 0';drawGD();});
+function all(){drawSig();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>
 '''

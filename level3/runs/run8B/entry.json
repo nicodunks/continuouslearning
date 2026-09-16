@@ -1,0 +1,28 @@
+{
+ "run": "run8B",
+ "knob": "food stand 2 s -> 4 s, now that the erase gate can hear (penalty 20) (hygiene: lr 3e-4, cosine)",
+ "parent": "run8 (ckpt_00300, score about 2.2, erase ratio about 1.5)",
+ "prediction": "Doubling the food ticks doubles the gradient for erasing at food. Ratio on the sample trip above 4 within 400 iterations, at-food erase above 0.05, away below 0.008, score at 30 s holds near 2.2 with memory in F.",
+ "args": [
+  "--init",
+  "runs/run8/ckpt_00300.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

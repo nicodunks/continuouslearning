@@ -1,0 +1,28 @@
+{
+ "run": "run8",
+ "knob": "continue run 7B's line unchanged, 1,200 more iterations (penalty 20, no new bias shift) (hygiene: lr 3e-4, cosine)",
+ "parent": "run7B (final, 2.55 at 30 s, erase ratio 3)",
+ "prediction": "The food preference keeps sharpening: erase ratio food:away above 5, at-food erase above 0.05, away below 0.008; score at 30 s recovers to 2.2 or better with memory still in F. If the ratio stalls near 3, the gate has settled on a compromise.",
+ "args": [
+  "--init",
+  "runs/run7B/final.pt",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "20",
+  "--stages",
+  "30",
+  "--iters",
+  "1200",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

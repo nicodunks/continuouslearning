@@ -1,0 +1,90 @@
+{
+ "run": "run8B",
+ "knob": "food stand 2 s -> 4 s, now that the erase gate can hear (penalty 20) (hygiene: lr 3e-4, cosine)",
+ "parent": "run8 (ckpt_00300, score about 2.2, erase ratio about 1.5)",
+ "prediction": "Doubling the food ticks doubles the gradient for erasing at food. Ratio on the sample trip above 4 within 400 iterations, at-food erase above 0.05, away below 0.008, score at 30 s holds near 2.2 with memory in F.",
+ "args": [
+  "--init",
+  "runs/run8/ckpt_00300.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "minutes": 26.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 2.175891399383545,
+     "arrived": 0.1599999964237213
+    },
+    "B": {
+     "score": 4.721712112426758,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 41,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.2840073108673096,
+     "arrived": 0.20999999344348907
+    },
+    "B": {
+     "score": 5.942919731140137,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 40,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 2.2919552326202393,
+     "arrived": 0.1899999976158142
+    },
+    "B": {
+     "score": 5.942983627319336,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 40,
+   "file": "test_best_30.json",
+   "drift_F": 1.7571384906768799
+  }
+ ],
+ "finished": 1789531190.400536
+}

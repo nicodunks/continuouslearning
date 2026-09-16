@@ -15,3 +15,8 @@
 19:53:16 starting run7B: knob = erase gate bias +2.5 at start (moves the sigmoid off its flat part); penalty 20 kept (hygiene: lr 3e-4, cosine); parent = run6B (final, 2.13 at 30 s)
 20:20:27 run7B done in 27 min; final.pt@20s A 2.44 B 4.74 C 3.61; final.pt@30s A 2.55 B 5.95 C 4.38; ckpt_00700.pt@30s A 2.55 B 5.95 C 4.38
 20:20:27 queue empty; waiting for the supervisor
+20:21:27 starting run8: knob = continue run 7B's line unchanged, 1,200 more iterations (penalty 20, no new bias shift) (hygiene: lr 3e-4, cosine); parent = run7B (final, 2.55 at 30 s, erase ratio 3)
+20:33:39 run8 done in 12 min; ckpt_00300.pt@20s A 2.34 B 4.74 C 3.61; ckpt_00300.pt@30s A 2.47 B 5.96 C 4.38; ckpt_00200.pt@30s A 2.61 B 5.95 C 4.38
+20:33:39 starting run8B: knob = food stand 2 s -> 4 s, now that the erase gate can hear (penalty 20) (hygiene: lr 3e-4, cosine); parent = run8 (ckpt_00300, score about 2.2, erase ratio about 1.5)
+20:59:50 run8B done in 26 min; final.pt@20s A 2.18 B 4.72 C 3.61; final.pt@30s A 2.28 B 5.94 C 4.38; ckpt_00700.pt@30s A 2.29 B 5.94 C 4.38
+20:59:50 starting run9: knob = cold start with an audible erase gate from the beginning (erase bias -2.5 instead of -5) and penalty 20; food stand 2 s; full 10 -> 20 -> 30 s curriculum (hygiene: lr 1e-3 cosine); parent = random start, same seed as runs 1-3

@@ -1,0 +1,33 @@
+{
+ "knob": "erase-bias shift \u22120.5, warm from run 19: the smallest step toward a slower fade",
+ "parent": "run19 (final)",
+ "prediction": "Fade from 0.008 toward 0.005, readout barely disturbed. If the pair can be walked slowly toward a longer-lasting count, this lands at or under 1.6 with the reset intact and sets up a ratchet like the first night's; if it lands at 1.7 it is inside the recipe's noise.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--erase_bias_shift",
+  "-0.5"
+ ],
+ "run": "run39",
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

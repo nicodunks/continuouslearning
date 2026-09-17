@@ -1,0 +1,70 @@
+{
+ "run": "run36",
+ "knob": "run 19's recipe, seed 4: a third, fourth and fifth draw to measure the recipe's mean and spread",
+ "parent": "run14 (final)",
+ "minutes": 62.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.7811615467071533,
+     "arrived": 0.2549999952316284
+    },
+    "B": {
+     "score": 4.733824253082275,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.7291665077209473,
+     "arrived": 0.2824999988079071
+    },
+    "B": {
+     "score": 5.942888259887695,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.7291555404663086,
+     "arrived": 0.2824999988079071
+    },
+    "B": {
+     "score": 5.941931247711182,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_best_30.json"
+  }
+ ],
+ "finished": 1789630077.3918579
+}

@@ -1,0 +1,14 @@
+{
+ "runs": {
+  "run19": 1.62,
+  "run27": 1.99,
+  "run34": 1.61,
+  "run35": 1.66,
+  "run36": 1.73
+ },
+ "mean": 1.722,
+ "sd": 0.157,
+ "median": 1.66,
+ "n": 5,
+ "note": "five draws of one recipe: run 14 weights, two-speed world, food 4 s, penalty 20, 800 iterations at 3e-4 with cosine decay; only the training seed differs; exam seed 4242, 200 trips, 30 s"
+}

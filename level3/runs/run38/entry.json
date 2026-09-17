@@ -1,0 +1,33 @@
+{
+ "knob": "erase-bias shift \u22121, warm from run 19: a gentler version of run 33's slower fade",
+ "parent": "run19 (final)",
+ "prediction": "Run 33's \u22122 broke the fade-and-readout pair. \u22121 should lower the fade from 0.008 toward 0.003 while leaving the wipe at food above 0.15, and 800 iterations may be enough for the readout to re-match. Success: 30 s under 1.6 with the reset intact. Failure: frozen checks worsen past 200 as in run 33; kill at 300.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--erase_bias_shift",
+  "-1"
+ ],
+ "run": "run38",
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

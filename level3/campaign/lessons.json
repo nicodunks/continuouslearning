@@ -161,5 +161,25 @@
   "title": "Polish of run 29 on the many-speeds world",
   "lesson": "No gain: 1.78 at 30 s against run 29's 1.67 and run 19's 1.62, all inside the recipe's seed spread. Measured. The last of the optimisation-side runs; none of them moved the exam.",
   "verdict": "none"
+ },
+ "run34": {
+  "title": "Run 19's recipe, seed 2",
+  "lesson": "1.61 at 30 s (1.53 at 20 s), memory in F, reset 0.32 at food and 0.009 away, write follows speed +0.64, 34 compass cells. One of five draws of the same recipe: 1.62, 1.99, 1.61, 1.66, 1.73, mean 1.72, spread about 0.15 with one bad draw. Measured.",
+  "verdict": "control"
+ },
+ "run35": {
+  "title": "Run 19's recipe, seed 3",
+  "lesson": "1.66 at 30 s (1.55 at 20 s), memory in F, reset 0.313 at food and 0.0079 away, write follows speed +0.72, 29 compass cells. One of five draws of the same recipe: 1.62, 1.99, 1.61, 1.66, 1.73, mean 1.72, spread about 0.15 with one bad draw. Measured.",
+  "verdict": "control"
+ },
+ "run36": {
+  "title": "Run 19's recipe, seed 4",
+  "lesson": "1.73 at 30 s (1.78 at 20 s), memory in F, reset 0.2 at food and 0.0063 away, write follows speed +0.72, 30 compass cells. One of five draws of the same recipe: 1.62, 1.99, 1.61, 1.66, 1.73, mean 1.72, spread about 0.15 with one bad draw. Measured.",
+  "verdict": "control"
+ },
+ "run37": {
+  "title": "Cold start with a low erase floor",
+  "lesson": "Learned the 10-second stage and earned promotion at iteration 804 (exam at 10 s: 1.81 with F, 2.72 without; erase away from food 0.0136 per tick, so the count really did last), then stalled at 20 seconds: the gap opened to 1.4 at iteration 1200 and closed by 1400 and 1500 (exam at 20 s: 4.19 with F, 4.28 without). Stopped at 1500. Measured. Inconclusive on the question it was built for, because it never reached a 20-second memory to compare; what it does show is that a slow fade from the start does not by itself make the 10-to-20-second transfer easier.",
+  "verdict": "stalled"
  }
 }

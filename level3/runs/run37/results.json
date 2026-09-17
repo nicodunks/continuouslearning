@@ -1,0 +1,50 @@
+{
+ "run": "run37",
+ "knob": "cold start with a low erase floor (erase bias \u22127 from the start, shift \u22122), run 3's recipe otherwise; can a slow-fading count and its readout be learned together from scratch?",
+ "parent": "random start, seed 0",
+ "minutes": 58.0,
+ "stopped_early": "stopped by the supervisor at 1500: 20-second gap closed at two checkpoints",
+ "tests": [
+  {
+   "ckpt": "ckpt_00800.pt",
+   "t_out": 10,
+   "bars": {
+    "A": {
+     "score": 1.8054908514022827,
+     "arrived": 0.23999999463558197
+    },
+    "B": {
+     "score": 2.716418504714966,
+     "arrived": 0.06499999761581421
+    },
+    "C": {
+     "score": 2.59403920173645,
+     "arrived": 0.10499999672174454
+    }
+   },
+   "n_tuned": 38,
+   "file": "test_best_10.json"
+  },
+  {
+   "ckpt": "ckpt_01600.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 4.194888114929199,
+     "arrived": 0.07500000298023224
+    },
+    "B": {
+     "score": 4.275545120239258,
+     "arrived": 0.03750000149011612
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 43,
+   "file": "test_final_20.json"
+  }
+ ],
+ "finished": 1789630136.6257348
+}

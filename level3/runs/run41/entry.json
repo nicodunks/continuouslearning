@@ -1,0 +1,35 @@
+{
+ "knob": "run 28's recipe (F-size penalty 0.5) at seed 2",
+ "parent": "run19 (final), same start as run 28",
+ "prediction": "As run 40.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--f_penalty",
+  "0.5",
+  "--seed",
+  "2"
+ ],
+ "run": "run41",
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

@@ -128,5 +128,45 @@
   "why": "1.67 to 1.78 at 30 s, inside the noise.",
   "mech": "Measured. Same as run 26: small steps on a converged network change nothing the exam can see.",
   "llm": "Annealing a converged model."
+ },
+ {
+  "label": "same recipe as run 19, seed 2",
+  "parent": "run19",
+  "child": "run34",
+  "verdict": "control",
+  "kind": "training (seed): replication",
+  "why": "Only the training seed changed: 1.62 to 1.61. With runs 27, 34, 35 and 36 the recipe has five draws: 1.62, 1.99, 1.61, 1.66, 1.73; mean 1.72, spread about 0.15, one bad draw.",
+  "mech": "Measured. Different training dice, same starting weights and knobs, land in nearby but not identical places. Four of five draws are within 0.12 of each other; the fifth (run 27) is 0.35 off. That distribution is the ruler every other comparison tonight has to be read against, and none of the single-knob runs falls outside it.",
+  "llm": "Seed replication. The mean over seeds is the number to report; the best seed is not."
+ },
+ {
+  "label": "same recipe as run 19, seed 3",
+  "parent": "run19",
+  "child": "run35",
+  "verdict": "control",
+  "kind": "training (seed): replication",
+  "why": "Only the training seed changed: 1.62 to 1.66. With runs 27, 34, 35 and 36 the recipe has five draws: 1.62, 1.99, 1.61, 1.66, 1.73; mean 1.72, spread about 0.15, one bad draw.",
+  "mech": "Measured. Different training dice, same starting weights and knobs, land in nearby but not identical places. Four of five draws are within 0.12 of each other; the fifth (run 27) is 0.35 off. That distribution is the ruler every other comparison tonight has to be read against, and none of the single-knob runs falls outside it.",
+  "llm": "Seed replication. The mean over seeds is the number to report; the best seed is not."
+ },
+ {
+  "label": "same recipe as run 19, seed 4",
+  "parent": "run19",
+  "child": "run36",
+  "verdict": "control",
+  "kind": "training (seed): replication",
+  "why": "Only the training seed changed: 1.62 to 1.73. With runs 27, 34, 35 and 36 the recipe has five draws: 1.62, 1.99, 1.61, 1.66, 1.73; mean 1.72, spread about 0.15, one bad draw.",
+  "mech": "Measured. Different training dice, same starting weights and knobs, land in nearby but not identical places. Four of five draws are within 0.12 of each other; the fifth (run 27) is 0.35 off. That distribution is the ruler every other comparison tonight has to be read against, and none of the single-knob runs falls outside it.",
+  "llm": "Seed replication. The mean over seeds is the number to report; the best seed is not."
+ },
+ {
+  "label": "cold start with a low erase floor (bias \u22127)",
+  "parent": "run3",
+  "child": "run37",
+  "verdict": "stalled",
+  "kind": "starting point (initialisation), cold",
+  "why": "Earned the 10-second stage at 804 with a slow fade (0.0136 per tick) and stalled at 20 seconds like the other cold starts. Stopped at 1500.",
+  "mech": "Measured for the stall. Guess: the slow fade did what it should for the count, but the 10-to-20-second transfer fails for a different reason (the write-gate habit learned on short trips), which a low erase floor does not address.",
+  "llm": "Initialisation choice from a cold start. It changes what is easy to learn first; it does not by itself fix a curriculum transfer problem."
  }
 ]

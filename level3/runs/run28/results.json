@@ -1,0 +1,70 @@
+{
+ "run": "run28",
+ "knob": "a small charge on the size of F (f_penalty 0.5 \u00d7 mean F\u00b2), warm from run 19; the 'count in smaller steps' lever",
+ "parent": "run19 (final)",
+ "minutes": 50.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.7169101238250732,
+     "arrived": 0.24250000715255737
+    },
+    "B": {
+     "score": 4.723201751708984,
+     "arrived": 0.012500000186264515
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.597322702407837,
+     "arrived": 0.3100000023841858
+    },
+    "B": {
+     "score": 5.951442718505859,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.5989432334899902,
+     "arrived": 0.3050000071525574
+    },
+    "B": {
+     "score": 5.94790506362915,
+     "arrived": 0.019999999552965164
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_best_30.json"
+  }
+ ],
+ "finished": 1789623191.0533109
+}

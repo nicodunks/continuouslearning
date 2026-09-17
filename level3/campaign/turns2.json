@@ -38,5 +38,25 @@
   "why": "1.62 at 30 s, identical to the parent; 1.76 at 20 s against 1.63. The running score on the training world was the best of any run (2.47), but the exam did not move.",
   "mech": "Measured. Averaging 64 flies instead of 32 halves the noise in each step, and the network fitted the two-speed training world more tightly as a result. That extra fit did not transfer to the steady-speed exam. Guess: the recipe has reached the point where the remaining exam error is not optimisation noise but a limit of what the network has learned to represent, so a cleaner gradient toward the same target changes nothing on the exam.",
   "llm": "Batch size. Larger batches give cleaner gradients and better training loss per step; when held-out performance does not follow, the model is at a capacity or data limit, not an optimisation limit, and the next lever is data or architecture."
+ },
+ {
+  "label": "erase penalty 20 \u2192 5",
+  "parent": "run19",
+  "child": "run25",
+  "verdict": "bad",
+  "kind": "training (regulariser coefficient)",
+  "why": "1.62 to 1.92 (best checkpoint 1.84). The gate barely changed: erase away from food 0.0077 to 0.0071, erase at food 0.38 to 0.31, write follows speed +0.69 to +0.75.",
+  "mech": "Measured for the numbers; the cause is open. The prediction was that a cheaper penalty would let the gate fade between food visits; it did not (erase away did not rise). What changed is a slightly weaker wipe at food and a worse score, and 0.3 of score for that small a change would be surprising. The other explanation is that runs from the same warm start vary by a few tenths with the training dice. Run 27, run 19's own recipe reseeded, measures that noise, and this card's verdict should be reread against it.",
+  "llm": "Lowering a regulariser coefficient. The general lesson holds either way: a coefficient found by a sweep is near its useful value, and before crediting a change to the coefficient you need the seed-to-seed noise of the setup, which is what the reseeded control is for."
+ },
+ {
+  "label": "a charge on the size of F (f_penalty 0.5)",
+  "parent": "run19",
+  "child": "run28",
+  "verdict": "none",
+  "kind": "training (regulariser, new term)",
+  "why": "1.62 to 1.60 at 30 s, within noise. Write strength fell from 0.074 to 0.070 and erase at food rose from 0.38 to 0.51, so the board is kept smaller, but write-versus-speed did not improve (+0.69 to +0.62) and the exam did not move.",
+  "mech": "Measured. The charge is on the mean square of F at the end of the episode, and the cheapest ways to lower that are a slightly smaller write strength and a harder wipe at food. Both happened. Neither changes how faithfully each tick's addition tracks distance, which the diagnosis says is where the count's error comes from, so the count stayed as accurate as before and so did the score.",
+  "llm": "Weight decay on a memory state. The general lesson: a size penalty shrinks what it is applied to and the model compensates elsewhere; it improves accuracy only when large values were the cause of the error, and here they were not."
  }
 ]

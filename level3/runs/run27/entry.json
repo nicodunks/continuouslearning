@@ -1,0 +1,33 @@
+{
+ "run": "run27",
+ "knob": "run 19's exact recipe with the world dice reseeded (seed 1): does 1.62 survive different training worlds?",
+ "parent": "run14 (final), same start as run 19",
+ "prediction": "A robustness check, not an improvement. If it lands within 0.1 of 1.62 the recipe is stable to the training draw; if it lands at 1.9 or 1.4, the seed-to-seed noise is that large and every comparison tonight must clear it.",
+ "args": [
+  "--init",
+  "runs/run14/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--seed",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

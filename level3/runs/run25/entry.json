@@ -1,0 +1,30 @@
+{
+ "run": "run25",
+ "knob": "erase penalty 20 \u2192 5, warm from run 19; is 20 now a tax on a gate that already works?",
+ "parent": "run19 (final, 1.62 at 30 s)",
+ "prediction": "The reset holds (erase at food above 0.3) while erase-away is allowed to find its own level. Score at or under 1.62; if erase-away rises above 0.02 and the score worsens, 20 was doing real work.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "600",
+  "--erase_penalty",
+  "5"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

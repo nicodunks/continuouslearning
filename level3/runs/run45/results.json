@@ -1,0 +1,70 @@
+{
+ "run": "run45",
+ "knob": "F-size penalty recipe, seed 3 (fourth draw), warm from run 19",
+ "parent": "run19 (final)",
+ "minutes": 42.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.396172046661377,
+     "arrived": 0.3449999988079071
+    },
+    "B": {
+     "score": 4.705467700958252,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 34,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.551875114440918,
+     "arrived": 0.3199999928474426
+    },
+    "B": {
+     "score": 5.896151065826416,
+     "arrived": 0.02500000037252903
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 37,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.5560486316680908,
+     "arrived": 0.3075000047683716
+    },
+    "B": {
+     "score": 5.897140979766846,
+     "arrived": 0.02500000037252903
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 37,
+   "file": "test_best_30.json"
+  }
+ ],
+ "finished": 1789635328.5314372
+}

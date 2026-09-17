@@ -201,5 +201,25 @@
   "title": "Run 28's recipe (F-size penalty), seed 2",
   "lesson": "1.49 at 30 s with 38% arriving: the lowest exam score of both campaigns. Third draw of the penalty recipe (1.60, 1.59, 1.49). Memory in F (5.92 without), erase at food 0.36, away 0.007, write follows speed +0.70, 33 compass cells.",
   "verdict": "good"
+ },
+ "run44": {
+  "title": "Stack (F penalty + shift \u22120.5) from run 41, seed 2",
+  "lesson": "Collapsed: running score 6.00 at 200 and 5.63 at 300, frozen check 5.76; killed. Exam at the 300 checkpoint: 4.12 with F, 5.79 without. Measured. One of three draws of the stack failed outright while the other two trained normally, which says the half-unit shift on run 41 sits at the edge of what its readout can absorb: some training dice carry it over, some do not.",
+  "verdict": "bad"
+ },
+ "run42": {
+  "title": "Stack (F penalty + shift \u22120.5) from run 41, seed 0",
+  "lesson": "1.66 at 30 s from run 41's 1.49. The half-unit shift lowered the fade to 0.0046 and the wipe at food to 0.21, and the score went up, not down. Memory in F, erase at food 0.21, away 0.0046, write follows speed +0.75, 30 compass cells.",
+  "verdict": "none"
+ },
+ "run43": {
+  "title": "Stack (F penalty + shift \u22120.5) from run 41, seed 1",
+  "lesson": "1.64 at 30 s from run 41's 1.49. Same picture as run 42: fade 0.0044, wipe at food 0.21, score worse than the parent. Memory in F, erase at food 0.208, away 0.0044, write follows speed +0.71, 34 compass cells.",
+  "verdict": "none"
+ },
+ "run45": {
+  "title": "Run 28's recipe (F-size penalty), seed 3",
+  "lesson": "1.55 at 30 s and 1.40 at 20 s. Fourth draw of the penalty recipe: 1.60, 1.59, 1.49, 1.55; mean 1.56, spread 0.05, against the plain recipe's 1.72 over five draws. Memory in F, erase at food 0.389, away 0.0098, write follows speed +0.64, 37 compass cells.",
+  "verdict": "good"
  }
 }

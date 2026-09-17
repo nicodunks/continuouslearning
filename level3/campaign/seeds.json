@@ -15,10 +15,19 @@
   "runs": {
    "run28": 1.6,
    "run40": 1.59,
-   "run41": 1.49
+   "run41": 1.49,
+   "run45": 1.55
   },
-  "mean": 1.56,
-  "sd": 0.061,
-  "n": 3
+  "mean": 1.558,
+  "sd": 0.05,
+  "n": 4
+ },
+ "stack_recipe": {
+  "runs": {
+   "run42": 1.66,
+   "run43": 1.64,
+   "run44": "collapsed"
+  },
+  "note": "F penalty + erase bias shift \u22120.5 from run 41; two survivors, one collapse"
  }
 }

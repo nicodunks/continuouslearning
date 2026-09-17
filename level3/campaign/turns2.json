@@ -208,5 +208,45 @@
   "why": "1.49 at 30 s with 38% arriving: the lowest exam score of both campaigns. Third draw of the penalty recipe (1.60, 1.59, 1.49).",
   "mech": "Measured. Same mechanism as run 40. One good draw of a recipe that is on average a little better; it is the recipe's mean, not this number, that should be quoted.",
   "llm": "Seed replication of a regulariser"
+ },
+ {
+  "label": "stack: F penalty + shift \u22120.5, seed 2",
+  "parent": "run41",
+  "child": "run44",
+  "verdict": "bad",
+  "kind": "training + starting point (stack), replication",
+  "why": "Collapsed by 200 and did not recover; killed at 300 (exam 4.12 with F).",
+  "mech": "Measured. Same shift, same start, different dice: two draws survived and one did not. The half-unit shift is at the edge of what run 41's readout can absorb.",
+  "llm": "A fragile stack: an edit that works on some seeds and fails on others is not yet a recipe."
+ },
+ {
+  "label": "stack: F penalty + shift \u22120.5, seed 0",
+  "parent": "run41",
+  "child": "run42",
+  "verdict": "none",
+  "kind": "training + starting point (stack), replication",
+  "why": "1.66 at 30 s from run 41's 1.49. The half-unit shift lowered the fade to 0.0046 and the wipe at food to 0.21, and the score went up, not down.",
+  "mech": "Measured. On run 41 the shift costs what it cost on run 19 and more: the readout re-matches only partly in 800 iterations, and the wipe at food weakens. The stack did not add; the penalty alone is the better recipe.",
+  "llm": "A stack that did not add: test stacks at several seeds before believing them."
+ },
+ {
+  "label": "stack: F penalty + shift \u22120.5, seed 1",
+  "parent": "run41",
+  "child": "run43",
+  "verdict": "none",
+  "kind": "training + starting point (stack), replication",
+  "why": "1.64 at 30 s from run 41's 1.49. Same picture as run 42: fade 0.0044, wipe at food 0.21, score worse than the parent.",
+  "mech": "Measured. Two surviving draws at 1.66 and 1.64 and one collapse (run 44): the stack averages worse than the penalty alone (1.56) and is fragile.",
+  "llm": "A stack that did not add: test stacks at several seeds before believing them."
+ },
+ {
+  "label": "F-size penalty recipe, seed 3",
+  "parent": "run19",
+  "child": "run45",
+  "verdict": "good",
+  "kind": "training (regulariser, replication)",
+  "why": "1.55 at 30 s and 1.40 at 20 s. Fourth draw of the penalty recipe: 1.60, 1.59, 1.49, 1.55; mean 1.56, spread 0.05, against the plain recipe's 1.72 over five draws.",
+  "mech": "Measured. Four draws in a band of 0.11, all below four of the plain recipe's five. The charge on the size of F is the one change of the night that holds over seeds.",
+  "llm": "Seed replication."
  }
 ]

@@ -23,5 +23,14 @@ run3 · first homing network      45 s               F 3.58  noF 7.47  arrived 1
 run3 · first homing network      60 s               F 4.48  noF 8.28  arrived 12%
 run3 · first homing network      30 s · drift 0.05  F 2.59  noF 5.84  arrived 18%
 run3 · first homing network      30 s · drift 0.15  F 3.38  noF 5.83  arrived 18%
-skip run20 · rival (activity only)
+run20 · rival (activity only)    30 s               F 5.92  noF 5.92  arrived 2%
+run20 · rival (activity only)    45 s               F 7.67  noF 7.67  arrived 0%
+run20 · rival (activity only)    60 s               F 8.49  noF 8.49  arrived 1%
+run20 · rival (activity only)    30 s · drift 0.05  F 5.92  noF 5.92  arrived 2%
+run20 · rival (activity only)    30 s · drift 0.15  F 5.92  noF 5.92  arrived 2%
+run41 · F-size penalty, best of night two 30 s               F 1.49  noF 5.92  arrived 38%
+run41 · F-size penalty, best of night two 45 s               F 1.90  noF 7.66  arrived 25%
+run41 · F-size penalty, best of night two 60 s               F 2.68  noF 8.48  arrived 17%
+run41 · F-size penalty, best of night two 30 s · drift 0.05  F 1.95  noF 5.92  arrived 23%
+run41 · F-size penalty, best of night two 30 s · drift 0.15  F 3.14  noF 5.92  arrived 13%
 stress.json written

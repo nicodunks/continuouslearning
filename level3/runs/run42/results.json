@@ -1,0 +1,70 @@
+{
+ "run": "run42",
+ "knob": "stack: F-size penalty and erase bias shift \u22120.5, warm from run 41 (the best network), seed 0",
+ "parent": "run41 (final)",
+ "minutes": 42.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.790164828300476,
+     "arrived": 0.26750001311302185
+    },
+    "B": {
+     "score": 4.724694728851318,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.661991834640503,
+     "arrived": 0.35499998927116394
+    },
+    "B": {
+     "score": 5.94563102722168,
+     "arrived": 0.027499999850988388
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.6523807048797607,
+     "arrived": 0.3449999988079071
+    },
+    "B": {
+     "score": 5.945346832275391,
+     "arrived": 0.027499999850988388
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_best_30.json"
+  }
+ ],
+ "finished": 1789635328.518615
+}

@@ -1,0 +1,31 @@
+{
+ "run": "run32",
+ "knob": "cold start on the many-speeds world with run 3's recipe (food 2 s, penalty 0.05, curriculum 10 \u2192 20 \u2192 30 s); does a network raised on better data measure distance better than one adapted to it late?",
+ "parent": "random start, seed 0",
+ "prediction": "Homes at 10 s by iteration 800 like run 3. If the lineage matters, its count length error at the end is under run 19's 0.9 units and its 30 s score beats the warm-start plateau. Stopped at 02:30 whatever stage it has reached, and tested there.",
+ "args": [
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--speed_profile",
+  "steps",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1000",
+  "--iters",
+  "3000",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

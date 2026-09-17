@@ -58,5 +58,15 @@
   "why": "1.62 to 1.60 at 30 s, within noise. Write strength fell from 0.074 to 0.070 and erase at food rose from 0.38 to 0.51, so the board is kept smaller, but write-versus-speed did not improve (+0.69 to +0.62) and the exam did not move.",
   "mech": "Measured. The charge is on the mean square of F at the end of the episode, and the cheapest ways to lower that are a slightly smaller write strength and a harder wipe at food. Both happened. Neither changes how faithfully each tick's addition tracks distance, which the diagnosis says is where the count's error comes from, so the count stayed as accurate as before and so did the score.",
   "llm": "Weight decay on a memory state. The general lesson: a size penalty shrinks what it is applied to and the model compensates elsewhere; it improves accuracy only when large values were the cause of the error, and here they were not."
+ },
+ {
+  "label": "speed profile: two speeds \u2192 a new random speed every 5 s",
+  "parent": "run19",
+  "child": "run29",
+  "verdict": "none",
+  "kind": "world (data)",
+  "why": "Write-versus-speed rose from +0.69 to +0.77 as predicted; the exam gave 1.67 against 1.62, no change. The reset held.",
+  "mech": "Measured. The many-speeds world forced the write gate to track speed more closely, and it did. The count's error did not fall with it, so speed weighting was not the binding part of the count's error either. What that leaves is how the direction is encoded: the compass cells are unevenly spread (six prefer north-north-east, six west-south-west, two bins empty), so the count's gain differs by heading, and the diagnosis tool now measures whether the error is in the count's length or its direction.",
+  "llm": "Data augmentation aimed at one feature. The general lesson: augmenting the feature you believe is the bottleneck tests that belief; when the model learns the feature better and the task does not improve, the bottleneck was elsewhere."
  }
 ]

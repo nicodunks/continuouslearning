@@ -76,13 +76,16 @@ turn_i = out_idx[-1]
 _, pred_turn = r2(R['F'][turn_i][half:], -R['pos'][turn_i][half:])
 true_home = -R['pos'][turn_i][half:]
 count_err = float((pred_turn - true_home).norm(dim=1).mean()); count_rel = float(((pred_turn - true_home).norm(dim=1) / true_home.norm(dim=1)).mean())
+# split the count error at the turn into a distance (radial) part and a direction (angular) part
+tn = true_home.norm(dim=1); pn = pred_turn.norm(dim=1); radial_err = float((pn - tn).abs().mean()); radial_bias = float((pn - tn).mean())
+cosd = ((pred_turn * true_home).sum(1) / (pn * tn + 1e-9)).clamp(-1, 1); ang_err_deg = float(torch.rad2deg(torch.acos(cosd)).mean())
 # heading error in first 3 s of return: angle between mean heading vector and true home direction
 ret_idx = [i for i, r in enumerate(R['ret']) if r][:6]
 hv = torch.stack([torch.stack([torch.cos(R['hd'][i]), torch.sin(R['hd'][i])], 1) for i in ret_idx]).mean(0)
 home_dir = -R['pos'][turn_i]; home_dir = home_dir / home_dir.norm(dim=1, keepdim=True)
 cosang = (hv / hv.norm(dim=1, keepdim=True) * home_dir).sum(1).clamp(-1, 1)
 head_err_deg = float(torch.rad2deg(torch.acos(cosang)).mean())
-phase = dict(count_err_units=round(count_err, 3), count_err_relative=round(count_rel, 3), heading_err_first3s_deg=round(head_err_deg, 1),
+phase = dict(count_err_units=round(count_err, 3), count_err_relative=round(count_rel, 3), count_radial_err=round(radial_err, 3), count_radial_bias=round(radial_bias, 3), count_direction_err_deg=round(ang_err_deg, 1), heading_err_first3s_deg=round(head_err_deg, 1),
              closest_approach=round(float(R['min_d'].mean()), 3), final_distance=round(float(R['final_d'].mean()), 3), arrived=round(float(R['arrived'].float().mean()), 3),
              distance_at_turn=round(float(R['pos'][turn_i].norm(dim=1).mean()), 3))
 # ---------- 3. lesions ----------

@@ -126,5 +126,10 @@
   "title": "A charge on the size of F",
   "lesson": "No effect on the exam: 1.60 at 30 s against run 19's 1.62, 1.72 at 20 s against 1.63, memory in F (5.95 without). The charge did what a charge does: write strength fell from 0.074 to 0.070 and the wipe at food rose from 0.38 to 0.51, so the board is kept smaller. The count was not written more finely in any way the exam could see (write follows speed +0.62 against +0.69). Measured. The 'smaller steps' lever, at this size, changes the board's housekeeping, not its accuracy.",
   "verdict": "none"
+ },
+ "run29": {
+  "title": "Many-speeds training world",
+  "lesson": "The knob did what it was meant to do to the gate and not to the score: write follows speed rose from +0.69 to +0.77 (+0.79 at the best checkpoint), the reset held (0.35 at food, 0.006 away), and the exam gave 1.67 at 30 s against 1.62, within noise. Measured. A world with many speed levels made the write gate a better speedometer; a better speedometer did not make a better homing score. So the count's remaining error is not mainly the speed weighting either. Six singles from run 19 now sit between 1.60 and 2.05, and the recipe's plateau at about 1.6 is real.",
+  "verdict": "none"
  }
 }

@@ -1,0 +1,70 @@
+{
+ "run": "run29",
+ "knob": "speed profile: a new random speed level every 5 s ('steps' world), warm from run 19; forces the write gate to track speed continuously, not just slow versus fast",
+ "parent": "run19 (final)",
+ "minutes": 52.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.8266414403915405,
+     "arrived": 0.23999999463558197
+    },
+    "B": {
+     "score": 4.722043514251709,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.67022705078125,
+     "arrived": 0.29750001430511475
+    },
+    "B": {
+     "score": 5.929144382476807,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00600.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.6761060953140259,
+     "arrived": 0.3199999928474426
+    },
+    "B": {
+     "score": 5.926393985748291,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_best_30.json"
+  }
+ ],
+ "finished": 1789623319.338408
+}

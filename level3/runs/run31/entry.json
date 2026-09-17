@@ -1,0 +1,31 @@
+{
+ "run": "run31",
+ "knob": "stack: batch 64 and a low-rate finish (3e-5), warm from run 24's final; the two changes that improved the training-world score without moving the exam",
+ "parent": "run24 (final, 1.62 at 30 s)",
+ "prediction": "If the exam gap is optimisation noise, the two together settle it: 30 s under 1.55. If it lands at 1.6, the plateau is representational and no amount of cleaner training moves it.",
+ "args": [
+  "--init",
+  "runs/run24/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "64",
+  "--lr",
+  "3e-5",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "500"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

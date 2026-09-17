@@ -1,43 +1,43 @@
 {
- "ckpt": "runs/run19/final.pt",
+ "ckpt": "runs/run29/final.pt",
  "t_out": 30.0,
  "decode": {
-  "r2_heldout_all_outbound": 0.971,
+  "r2_heldout_all_outbound": 0.977,
   "by_time": [
    {
     "t": 0.0,
     "r2": -Infinity,
-    "err": 0.017,
+    "err": 0.03,
     "true": 0.0
    },
    {
     "t": 5.0,
     "r2": 0.994,
-    "err": 0.123,
+    "err": 0.127,
     "true": 1.641
    },
    {
     "t": 10.0,
-    "r2": 0.991,
-    "err": 0.286,
+    "r2": 0.994,
+    "err": 0.239,
     "true": 3.073
    },
    {
     "t": 15.0,
-    "r2": 0.983,
-    "err": 0.534,
+    "r2": 0.989,
+    "err": 0.421,
     "true": 4.321
    },
    {
     "t": 20.0,
-    "r2": 0.973,
-    "err": 0.803,
+    "r2": 0.977,
+    "err": 0.681,
     "true": 5.408
    },
    {
     "t": 25.0,
-    "r2": 0.962,
-    "err": 1.038,
+    "r2": 0.969,
+    "err": 0.882,
     "true": 5.971
    }
   ]
@@ -49,121 +49,121 @@
   ],
   [
    5.0,
-   0.0083
+   0.0015
   ],
   [
    10.0,
-   0.2452
+   0.1518
   ],
   [
    15.0,
-   0.3676
+   0.3293
   ],
   [
    20.0,
-   0.4162
+   0.4069
   ],
   [
    25.0,
-   0.4333
+   0.4375
   ],
   [
    30.0,
-   0.4319
+   0.4537
   ],
   [
    35.0,
-   0.2918
+   0.3415
   ],
   [
    40.0,
-   0.312
+   0.3552
   ],
   [
    45.0,
-   0.3224
+   0.3716
   ],
   [
    50.0,
-   0.3383
+   0.3678
   ],
   [
    55.0,
-   0.3432
+   0.3812
   ],
   [
    60.0,
-   0.3394
+   0.3856
   ],
   [
    65.0,
-   0.3396
+   0.3856
   ],
   [
    70.0,
-   0.3509
+   0.3979
   ],
   [
    75.0,
-   0.3464
+   0.3836
   ],
   [
    80.0,
-   0.3386
+   0.391
   ],
   [
    85.0,
-   0.3497
+   0.3922
   ]
  ],
  "phase": {
-  "count_err_units": 1.224,
-  "count_err_relative": 0.25,
-  "count_radial_err": 0.932,
-  "count_radial_bias": -0.359,
-  "count_direction_err_deg": 7.7,
-  "heading_err_first3s_deg": 55.1,
-  "closest_approach": 1.606,
-  "final_distance": 2.112,
-  "arrived": 0.297,
+  "count_err_units": 1.065,
+  "count_err_relative": 0.213,
+  "count_radial_err": 0.88,
+  "count_radial_bias": -0.282,
+  "count_direction_err_deg": 5.4,
+  "heading_err_first3s_deg": 61.2,
+  "closest_approach": 1.716,
+  "final_distance": 2.133,
+  "arrived": 0.281,
   "distance_at_turn": 6.909
  },
  "lesions": [
   {
    "label": "no lesion",
    "n": 0,
-   "score": 1.621,
-   "arrived": 0.327
+   "score": 1.67,
+   "arrived": 0.298
   },
   {
-   "label": "silence the 32 compass cells",
-   "n": 32,
-   "score": 5.795,
-   "arrived": 0.038
+   "label": "silence the 31 compass cells",
+   "n": 31,
+   "score": 5.82,
+   "arrived": 0.032
   },
   {
-   "label": "silence the 32 non-compass cells",
-   "n": 32,
-   "score": 4.907,
-   "arrived": 0.05
+   "label": "silence the 33 non-compass cells",
+   "n": 33,
+   "score": 4.652,
+   "arrived": 0.08
   },
   {
    "label": "silence the 8 strongest erase-gate drivers",
    "n": 8,
-   "score": 4.693,
-   "arrived": 0.06
+   "score": 4.587,
+   "arrived": 0.052
   },
   {
    "label": "silence the 8 strongest write-gate drivers",
    "n": 8,
-   "score": 3.098,
-   "arrived": 0.097
+   "score": 3.235,
+   "arrived": 0.085
   },
   {
    "label": "silence 8 random neurons",
    "n": 8,
-   "score": 3.989,
-   "arrived": 0.083
+   "score": 3.775,
+   "arrived": 0.062
   }
  ]
 }

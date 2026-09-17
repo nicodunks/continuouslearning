@@ -11,10 +11,13 @@ def pick(r):
     v=list(t.values()); return (dict(v[0],file=list(t.keys())[0]) if v else None)
 t2=json.load(open(os.path.join(L3,'campaign/turns2.json')))
 diag={}
-for name in ['run19','run21','run29','hand']:
+for name in ['run19','run21','run29','run41','hand']:
     fp=os.path.join(L3,'campaign',f'diag_{name}.json')
     if os.path.exists(fp): diag[name]=json.load(open(fp))
 motif['diag']=diag
+for extra in ['fade_test_run19','seeds']:
+    fp=os.path.join(L3,'campaign',f'{extra}.json')
+    if os.path.exists(fp): motif[extra]=json.load(open(fp))
 base=[t for t in motif['turns'] if not t.get('campaign2')]
 for t in t2:
     if t['parent'] in R and t['child'] in R and pick(t['parent']) and pick(t['child']):
@@ -882,7 +885,7 @@ td.n,th.n{text-align:right}
 <p>The score is the closest approach on the return. Splitting the trip into pieces says which piece loses the most. At the moment the fly turns for home, the decoded count is compared to the truth, in two parts: its <b>length</b> (how far) and its <b>direction</b> (which way). Then the fly's actual heading over the first three seconds of the return is compared to the true direction home. Then the closest approach and the final distance.</p>
 <div class="panel real">
  <div class="eyebrow">Real: the count at the turn, split into length and direction, and what follows</div>
- <table id="diagPhase"><thead><tr><th>measurement at the turn (6.9 units from home)</th><th class="n">run 19</th><th class="n">run 21 (lid ±2)</th><th class="n">run 29 (many speeds)</th><th class="n">hand brain</th></tr></thead><tbody></tbody></table>
+ <table id="diagPhase"><thead><tr><th>measurement at the turn (6.9 units from home)</th><th class="n">run 19</th><th class="n">run 21 (lid ±2)</th><th class="n">run 29 (many speeds)</th><th class="n">run 41 (F penalty)</th><th class="n">hand brain</th></tr></thead><tbody></tbody></table>
  <div class="how"><b>How to read it.</b> The count's direction is right to within a few degrees in every learned network. Its length is off by about 0.9 units, and biased short. The heading over the first three seconds looks bad for everyone, the hand brain included, because the compass noise in this world is large enough to swing the fly by tens of degrees in three seconds; that row is the noise, not the brain. The rows that separate the learned networks from the hand brain are the count's length and the closest approach. So the thing this network measures badly is how far, not which way.</div>
 </div>
 
@@ -894,7 +897,23 @@ td.n,th.n{text-align:right}
  <div class="how"><b>How to read it.</b> Each bar is the exam score with one group silenced; the first bar is the intact network at 1.62, and the random-walk line is at 4.4. Silencing the 32 compass cells destroys homing. So does silencing the 32 other cells, and so does silencing any 8 neurons chosen at random. Nothing in the network is spare: every part carries load. That argues for a network with more room, and it is why 128 neurons was tried (run 22), which learned faster but did not transfer within its budget.</div>
 </div>
 
+<h3>Measurement 4: is the fade a leak, or part of the code?</h3>
+<p>Every good run keeps erase away from food at about 0.007 per tick. Over a 300-tick wander that compounds to about an eighth: (1 − 0.007)<sup>300</sup> ≈ 0.12, so the additions from the start of the wander have mostly faded by the turn. That would explain a count that is biased short with a good direction. So the fade was scaled at exam time, with nothing retrained, to see whether less fade means a better score.</p>
+<div class="panel real">
+ <div class="eyebrow">Real: run 19's exam score with its between-food fade scaled down at exam time</div>
+ <canvas id="fadeTest" width="1700" height="360"></canvas>
+ <div class="how"><b>How to read it.</b> Four bars: the network as trained, then with the fade halved, quartered and removed, all at exam time with no retraining. The score gets worse the less the board fades. The readout has been calibrated to a fading count: the network's memory is a leaky integrator with a time constant of about fourteen seconds, and its readout expects exactly that. Two training runs confirmed it from the other side: shifting the erase bias down to slow the fade (runs 33 and 38) broke the readout within 300 iterations, and a cold start with the fade at 0.0009 (run 37) raised its own fade to 0.014. A half-unit shift (run 39) was small enough to absorb and scored 1.57.</div>
+</div>
+
+<h3>Measurement 5: the noise floor, and the one knob that cleared it</h3>
+<p>Run 27 was run 19's exact recipe with only the training dice reseeded, and it scored 1.99. That forced the question every leaderboard has to answer before any comparison: how much does one recipe vary from draw to draw? Five draws of the plain recipe were made, and then, because the charge on the size of F (run 28) had the lowest single score of the night, three more draws of that recipe.</p>
+<div class="panel real">
+ <div class="eyebrow">Real: every draw of the two recipes, 30-second exam</div>
+ <canvas id="seedStrip" width="1700" height="360"></canvas>
+ <div class="how"><b>How to read it.</b> Each dot is one training run of a recipe, differing only in the training seed, placed at its exam score. Top row, the plain recipe (run 14's weights, two-speed world, 800 iterations): mean 1.72 with one draw at 1.99. Bottom row, the same recipe plus a charge on the size of F: mean 1.56 with a spread of 0.06. The dashed lines are the means. Every dot of the penalty recipe sits below four of the five plain dots. That is the night's one improvement that survives the seed test; it is modest, about 0.15, and it is the number to quote rather than any single dot. Every other knob tried tonight landed inside the top row's spread.</div>
+</div>
 <h3>What the diagnosis changed about the night</h3>
+<p>The last runs of the night stacked the penalty with the half-unit fade shift on run 41 at three seeds (runs 42 to 44) and added a fourth seed of the penalty alone (run 45); their numbers are in the turn picker in question 1.</p>
 <p>Before it, the plan's first lever was the lid, on the reasoning of the Counter With a Lid page. The decoding measurement showed the pinned share rising with the count's error, which supported the lid, and run 21 was already running. Run 21 then removed the pinning and left the error alone, which ruled the lid out as the cause. The many-speeds world (run 29) was the diagnosis's second suggestion, aimed at the write gate; it improved the gate's speed tracking from +0.69 to +0.77 and did not move the count's length either. Six single-knob runs from run 19 landed between 1.60 and 2.05. The honest conclusion is that this network's remaining error is in how it measures distance, and none of the knobs on the board reaches it. The last runs of the night test the two explanations left: whether more careful optimisation can settle it (a low-rate finish, a stack with batch 64, and a reseeded control that measures the run-to-run noise) and whether the lineage matters (a cold start on the many-speeds world).</p>
 </main></div>
 <script>
@@ -1411,11 +1430,17 @@ $('bN').addEventListener('click',()=>{BB.trueN=(BB.trueN||0)+1;bbWalk('N');});$(
   if(r!=='run29'){const pin=g.pinned.filter(q=>q[0]<=30);x.setLineDash([5,4]);x.lineWidth=2;x.beginPath();pin.forEach((q,i)=>i?x.lineTo(X(q[0]),Yp(q[1])):x.moveTo(X(q[0]),Yp(q[1])));x.stroke();x.setLineDash([]);const l=pin[pin.length-1];txt(x,'pinned '+(l[1]*100).toFixed(0)+'%',X(l[0])-6,Yp(l[1])-8,col,'right');}});
  // phase table
  const rows=[['count direction error','count_direction_err_deg','°'],['count length error (units)','count_radial_err',''],['count length bias (negative = short)','count_radial_bias',''],['heading error, first 3 s of return','heading_err_first3s_deg','°'],['closest approach (the score)','closest_approach',''],['final distance','final_distance',''],['arrived (within 0.5)','arrived','']];
- const tb=document.querySelector('#diagPhase tbody');tb.innerHTML=rows.map(([l,k,u])=>`<tr><td>${l}</td>${['run19','run21','run29','hand'].map(r=>{const g=G[r];if(!g)return '<td class="n">–</td>';const v=g.phase[k];if(v===undefined||(r==='hand'&&k.startsWith('count')))return '<td class="n">–</td>';return `<td class="n">${k==='arrived'?(v*100).toFixed(0)+'%':(typeof v==='number'?v.toFixed(k.includes('deg')?1:2):v)}${u}</td>`;}).join('')}</tr>`).join('');
+ const tb=document.querySelector('#diagPhase tbody');tb.innerHTML=rows.map(([l,k,u])=>`<tr><td>${l}</td>${['run19','run21','run29','run41','hand'].map(r=>{const g=G[r];if(!g)return '<td class="n">–</td>';const v=g.phase[k];if(v===undefined||(r==='hand'&&k.startsWith('count')))return '<td class="n">–</td>';return `<td class="n">${k==='arrived'?(v*100).toFixed(0)+'%':(typeof v==='number'?v.toFixed(k.includes('deg')?1:2):v)}${u}</td>`;}).join('')}</tr>`).join('');
  // lesions
  const g19=G.run19;if(g19){const [x2,W2,H2]=ctx('diagLesion');x2.clearRect(0,0,W2,H2);const p2={l:40,r:20,t:26,b:70};const cw2=W2-p2.l-p2.r,ch2=H2-p2.t-p2.b;const L=g19.lesions;const bw=cw2/L.length;const Y2=v=>H2-p2.b-v/6.5*ch2;x2.strokeStyle=css('--line');x2.beginPath();x2.moveTo(p2.l,H2-p2.b);x2.lineTo(W2-p2.r,H2-p2.b);x2.stroke();[0,2,4,6].forEach(v=>txt(x2,v,p2.l-6,Y2(v)+4,css('--mute'),'right'));x2.setLineDash([5,4]);x2.strokeStyle=css('--rand');x2.beginPath();x2.moveTo(p2.l,Y2(4.38));x2.lineTo(W2-p2.r,Y2(4.38));x2.stroke();x2.setLineDash([]);txt(x2,'random walk 4.38',W2-p2.r-4,Y2(4.38)-6,css('--rand'),'right');
   L.forEach((l,i)=>{const h=H2-p2.b-Y2(l.score);x2.fillStyle=i===0?css('--teal'):css('--coral');x2.fillRect(p2.l+i*bw+10,Y2(l.score),bw-20,h);txt(x2,l.score.toFixed(2),p2.l+i*bw+bw/2,Y2(l.score)-6,css('--ink'),'center','13px "Bricolage Grotesque"');const words=l.label.replace('silence the ','').replace('silence ','').split(' ');let line='',ly=H2-p2.b+16;words.forEach(w=>{if((line+' '+w).length>18){txt(x2,line,p2.l+i*bw+bw/2,ly,css('--mute'),'center','11px "JetBrains Mono"');line=w;ly+=13;}else line=(line?line+' ':'')+w;});txt(x2,line,p2.l+i*bw+bw/2,ly,css('--mute'),'center','11px "JetBrains Mono"');});}
 })();
+
+(function(){const M=D.motif;if(M.fade_test_run19){const [x,W,H]=ctx('fadeTest');x.clearRect(0,0,W,H);const F=M.fade_test_run19;const keys=Object.keys(F);const p={l:44,r:20,t:26,b:50};const cw=W-p.l-p.r,ch=H-p.t-p.b;const bw=cw/keys.length;const Y=v=>H-p.b-v/3.2*ch;x.strokeStyle=css('--line');x.beginPath();x.moveTo(p.l,H-p.b);x.lineTo(W-p.r,H-p.b);x.stroke();[0,1,2,3].forEach(v=>txt(x,v,p.l-6,Y(v)+4,css('--mute'),'right'));txt(x,'30 s exam score, lower is better',p.l+4,p.t-8,css('--mute'));
+ keys.forEach((k,i)=>{const v=F[k];x.fillStyle=i?css('--coral'):css('--teal');x.fillRect(p.l+i*bw+30,Y(v),bw-60,H-p.b-Y(v));txt(x,v.toFixed(2),p.l+i*bw+bw/2,Y(v)-6,css('--ink'),'center','14px "Bricolage Grotesque"');txt(x,k,p.l+i*bw+bw/2,H-p.b+18,css('--mute'),'center','11px "JetBrains Mono"');});}
+ if(M.seeds){const [x,W,H]=ctx('seedStrip');x.clearRect(0,0,W,H);const p={l:44,r:20,t:30,b:40};const cw=W-p.l-p.r;const X=v=>p.l+(v-1.3)/(2.1-1.3)*cw;x.strokeStyle=css('--line');x.beginPath();x.moveTo(p.l,H-p.b);x.lineTo(W-p.r,H-p.b);x.stroke();[1.4,1.6,1.8,2.0].forEach(v=>{txt(x,v.toFixed(1),X(v),H-p.b+16,css('--mute'),'center');x.strokeStyle=css('--line');x.setLineDash([2,4]);x.beginPath();x.moveTo(X(v),p.t);x.lineTo(X(v),H-p.b);x.stroke();x.setLineDash([]);});txt(x,'30 s exam score →',W-p.r,H-6,css('--mute'),'right');
+  const rows=[['plain recipe',M.seeds.runs,M.seeds.mean,css('--rand'),70],['+ charge on the size of F',(M.seeds.f_penalty_recipe||{}).runs||{},(M.seeds.f_penalty_recipe||{}).mean,css('--teal'),140]];
+  rows.forEach(([lab,runs,mean,col,y])=>{txt(x,lab,p.l,y-22,css('--ink'),'left','14px "Bricolage Grotesque"');Object.entries(runs).forEach(([r,v])=>{x.fillStyle=col;x.beginPath();x.arc(X(v),y,9,0,7);x.fill();txt(x,r.replace('run',''),X(v),y+24,css('--mute'),'center','10px "JetBrains Mono"');});if(mean){x.setLineDash([5,4]);x.strokeStyle=col;x.lineWidth=2;x.beginPath();x.moveTo(X(mean),y-14);x.lineTo(X(mean),y+14);x.stroke();x.setLineDash([]);txt(x,'mean '+mean.toFixed(2),X(mean)+12,y-8,col,'left','12px "JetBrains Mono"');}});}})();
 function all(){drawSig();bbDraw();s1Draw();d3Show();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

@@ -1,0 +1,169 @@
+{
+ "ckpt": "runs/run41/final.pt",
+ "t_out": 30.0,
+ "decode": {
+  "r2_heldout_all_outbound": 0.975,
+  "by_time": [
+   {
+    "t": 0.0,
+    "r2": -Infinity,
+    "err": 0.017,
+    "true": 0.0
+   },
+   {
+    "t": 5.0,
+    "r2": 0.994,
+    "err": 0.13,
+    "true": 1.641
+   },
+   {
+    "t": 10.0,
+    "r2": 0.991,
+    "err": 0.287,
+    "true": 3.073
+   },
+   {
+    "t": 15.0,
+    "r2": 0.984,
+    "err": 0.526,
+    "true": 4.321
+   },
+   {
+    "t": 20.0,
+    "r2": 0.974,
+    "err": 0.797,
+    "true": 5.408
+   },
+   {
+    "t": 25.0,
+    "r2": 0.97,
+    "err": 0.931,
+    "true": 5.971
+   }
+  ]
+ },
+ "pinned": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   5.0,
+   0.0078
+  ],
+  [
+   10.0,
+   0.2625
+  ],
+  [
+   15.0,
+   0.381
+  ],
+  [
+   20.0,
+   0.431
+  ],
+  [
+   25.0,
+   0.4459
+  ],
+  [
+   30.0,
+   0.4527
+  ],
+  [
+   35.0,
+   0.293
+  ],
+  [
+   40.0,
+   0.305
+  ],
+  [
+   45.0,
+   0.3124
+  ],
+  [
+   50.0,
+   0.3245
+  ],
+  [
+   55.0,
+   0.3339
+  ],
+  [
+   60.0,
+   0.3399
+  ],
+  [
+   65.0,
+   0.3379
+  ],
+  [
+   70.0,
+   0.3431
+  ],
+  [
+   75.0,
+   0.3384
+  ],
+  [
+   80.0,
+   0.3418
+  ],
+  [
+   85.0,
+   0.3445
+  ]
+ ],
+ "phase": {
+  "count_err_units": 1.116,
+  "count_err_relative": 0.232,
+  "count_radial_err": 0.866,
+  "count_radial_bias": -0.359,
+  "count_direction_err_deg": 7.3,
+  "heading_err_first3s_deg": 51.5,
+  "closest_approach": 1.433,
+  "final_distance": 1.998,
+  "arrived": 0.359,
+  "distance_at_turn": 6.909
+ },
+ "lesions": [
+  {
+   "label": "no lesion",
+   "n": 0,
+   "score": 1.491,
+   "arrived": 0.377
+  },
+  {
+   "label": "silence the 33 compass cells",
+   "n": 33,
+   "score": 5.744,
+   "arrived": 0.027
+  },
+  {
+   "label": "silence the 31 non-compass cells",
+   "n": 31,
+   "score": 4.76,
+   "arrived": 0.078
+  },
+  {
+   "label": "silence the 8 strongest erase-gate drivers",
+   "n": 8,
+   "score": 4.601,
+   "arrived": 0.08
+  },
+  {
+   "label": "silence the 8 strongest write-gate drivers",
+   "n": 8,
+   "score": 2.906,
+   "arrived": 0.14
+  },
+  {
+   "label": "silence 8 random neurons",
+   "n": 8,
+   "score": 3.555,
+   "arrived": 0.093
+  }
+ ]
+}

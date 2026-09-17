@@ -9,6 +9,7 @@ Nico's learning fork of [pwang724/fly-circuit-exploration](https://github.com/pw
 - [Night Report](docs/roadmap/night-report.html): every overnight run compared: leaderboard, family tree, journeys, two-run compare, stress test, and a "read this first" summary.
 - [Counter With a Lid](docs/roadmap/counter-lid.html): why the learned tallies leak on long trips: a playable counter with a ceiling, and run 19's real fast weights hitting ±1.
 - [Before the Deep Dive](docs/roadmap/before-the-deep-dive.html): ten study questions answered with drawings and real data: knobs, the deaf sigmoid, the delta rule, ablation fairness, every run's reasoning, circuit motifs, Backpropamine, and the head-direction paper.
+- [Night two: what I tried, what happened, and what I still do not know](docs/night-two.md): the second overnight campaign (runs 21 to 45) written up in full, with every run's reason and verdict, the diagnosis, and the open questions.
 - [Nico's learning thread](docs/learning-thread/nico-learning-thread.md): the whole conversation that produced this repo, questions and answers in order, tool output omitted.
 - `level1/` and `level2/`: local apps that run the level 1 and level 2 searches (`python3 level1/server.py`, `python3 level2/server.py`); `level3/` trains the network and serves a live dashboard (`python3 level3/server.py`).
 

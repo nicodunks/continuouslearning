@@ -26,6 +26,7 @@ p.add_argument('--f_max', type=float, default=1.0)            # tally ceiling on
 p.add_argument('--lr_decay', type=int, default=0)             # 1 = cosine decay of the learning rate over the run (hygiene)
 p.add_argument('--seed', type=int, default=0)                 # seed for the initial network
 p.add_argument('--rule', default='hebb')                    # 'hebb' or 'delta' (Peter's note, docs/flynet-delta-rule.md)
+p.add_argument('--f_penalty', type=float, default=0.0)      # campaign 2: charge on the mean square of F at the end of the episode (0 = off, every run before run 26)
 p.add_argument('--erase_bias_shift', type=float, default=0.0) # added to the erase gate's bias after loading: moves the gate out of the flat part of the sigmoid
 args = p.parse_args()
 
@@ -72,7 +73,8 @@ while state['it'] < args.iters:
         import math as _m
         for g_ in opt.param_groups: g_['lr'] = args.lr * 0.5 * (1 + _m.cos(_m.pi * it / max(1, args.iters)))
     r = run_episode(net, batch=args.batch, t_out=t_out, seed=10000 + it + 1000000 * int(args.seed), erase_penalty=args.erase_penalty, food_stand=args.food_stand, trips=args.trips, speed_profile=args.speed_profile)
-    opt.zero_grad(); r['loss'].backward()
+    loss = r['loss'] + (args.f_penalty * net.F.pow(2).mean() if args.f_penalty > 0 else 0.0)
+    opt.zero_grad(); loss.backward()
     torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0); opt.step()
     state['recent'] = (state['recent'] + [r['score']])[-50:]
     running = sum(state['recent']) / len(state['recent'])

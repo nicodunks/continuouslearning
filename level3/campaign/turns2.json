@@ -1,1 +1,22 @@
-[]
+[
+ {
+  "label": "neurons 64 \u2192 128, cold start",
+  "parent": "run3",
+  "child": "run22",
+  "verdict": "mixed",
+  "kind": "network shape (model size)",
+  "why": "Run 3 is the matching 64-neuron cold start. With 128 neurons the 10-second stage was learned in 302 iterations against 804, and the best 10 s checkpoint scores 1.98 with F against 2.86 without. At 20 seconds the gap never opened in 400 iterations and the run was killed at 700. Faster to learn the short stage; no better at transferring to the long one, in the budget given.",
+  "mech": "Measured for the speed-up, guess for the stall. More neurons means more wires, so there are more ways to build a working compass-and-tally from a random start, and gradient descent finds one sooner. The stall at 20 seconds looks like run 11's: the write gate settled high during the 10-second stage (fine for short trips) and at 20 seconds the tallies saturate; unlearning that habit takes many iterations regardless of size. If that guess is right, capacity is not what unlocks the transfer; the write-gate habit is.",
+  "llm": "Model size. Scaling laws say bigger models reach a given loss in fewer steps, which is what the first stage showed. They do not say a bigger model escapes a bad habit faster once it has one; that is a curriculum and optimisation question, not a size question."
+ },
+ {
+  "label": "tally ceiling \u00b11 \u2192 \u00b12",
+  "parent": "run19",
+  "child": "run21",
+  "verdict": "bad",
+  "kind": "network shape (the lid on F)",
+  "why": "Pinned cells at 25 s fell from 43% to 7.6%, so the lid worked as a lid. The count's error hardly changed (1.04 to 0.92 units at 25 s) and the score got worse, 1.62 to 1.96 (1.83 at the best checkpoint), with the first-3-seconds heading error rising from 55\u00b0 to 66\u00b0. Saturation was not the leak.",
+  "mech": "Measured. The decoding test shows the count's error growing in proportion to distance walked with or without pinned cells, so it comes from how the count is written and read, not from the ceiling: the write gate follows speed at +0.69 rather than 1.0, so each tick's addition is only roughly proportional to distance, and those small mis-weightings add up along the wander. The score loss on top of that is a warm-start cost: every readout had been tuned to cells that stop at 1, and 800 iterations at 3e-4 did not fully re-tune them to cells that reach 2, so the steering got worse. Guess: a cold start with lid 2 would avoid the steering cost but, given the count result, would not gain much either.",
+  "llm": "Raising a clipping or normalisation bound. The general lesson is the same one this run taught: if the bound is not what limits accuracy, raising it changes the model's scale without improving it, and a model tuned to the old scale gets worse until it re-adapts."
+ }
+]

@@ -1,0 +1,31 @@
+{
+ "run": "run23",
+ "knob": "train on 45-second wanders (stage 45 only), warm from run 19; makes overflow at 30 to 45 s cost loss",
+ "parent": "run19 (final, 1.62 at 30 s; 2.15 at 45 s in the stress test)",
+ "prediction": "The count has to last 45 s, so training pushes toward smaller steps or a spread-out count. 45 s score improves from 2.15 toward 1.7; 30 s score holds within 0.1 of 1.62 or improves. If 30 s gets worse by more than 0.2, the network traded short-trip accuracy for long-trip room.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "45",
+  "--iters",
+  "600"
+ ],
+ "test_t_outs": [
+  30,
+  45
+ ],
+ "manual": true
+}

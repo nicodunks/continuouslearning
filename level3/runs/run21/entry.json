@@ -1,0 +1,32 @@
+{
+ "run": "run21",
+ "knob": "tally ceiling \u00b11 \u2192 \u00b12 (f_max 2), warm from run 19; the direct attack on saturation",
+ "parent": "run19 (final, 1.62 at 30 s)",
+ "prediction": "If saturation is the leak, the lid doubles the room: 30 s score under 1.45, 45 s and 60 s stress scores improve more than 30 s does, and the share of pinned cells falls below 5%. If the neurons saturate instead (A\u00b7F too large), the score gets worse within 200 iterations and the run is killed.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--f_max",
+  "2",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

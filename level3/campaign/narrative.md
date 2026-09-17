@@ -138,3 +138,6 @@ Three measurements on run 19's final network (diag.py), none of them training.
 
 ## What the diagnosis chose
 Lid first (run 21, already running when the diagnosis finished), 128 neurons in parallel all night (run 22), then a 45-second training stage (run 23), batch 64 (run 24), erase penalty 5 (run 25). Delta is off the list: accumulation capacity is exactly the bottleneck the diagnosis names.
+
+## 21:05. The lid was not the leak
+Run 21 doubled the lid and the pinned share at 25 s fell from 43% to 8%. The count's error hardly moved (1.04 to 0.92 units at 25 s) and the score got worse (1.96, best checkpoint 1.83). So the error in the count grows with distance for a reason other than saturation: most likely the write gate tracking speed imperfectly (+0.69), so each tick's addition is only roughly proportional to distance. The ±4 lid is off the list. The levers that remain are the ones that improve how faithfully the count is written and read: steadier gradients (batch 64, run 24), longer trips in training (run 23), a low-rate polish (run 26), and a reseeded control (run 27) so the noise floor of the comparisons is known.

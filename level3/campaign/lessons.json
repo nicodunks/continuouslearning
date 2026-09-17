@@ -98,5 +98,13 @@
  "run20": {
   "title": "The rival: fast weights disabled",
   "lesson": "With A frozen at zero, the same 64-neuron network trained with run 3's exact recipe never learned to home at 10 seconds: running score between 2.35 and 2.43 for a thousand iterations, the random level, where the fast-weight version was at 1.96 by iteration 300 and promoted by 804. It hit the stage cap without earning it and was stopped rather than moved to 20 seconds. This is the level 4 comparison the plan was built for, and it came out one-sided: on this task and with this training, an activity-only memory did not form at all. Caveat, stated plainly: one recipe and one seed; an activity integrator might be trainable with a different learning rate, more neurons or more iterations. What the result does show is that the fast-weight version is far easier to train into a homing memory than the activity-only version, from the same start."
+ },
+ "run22": {
+  "title": "128 neurons, cold start",
+  "lesson": "Twice the neurons learned the 10-second stage in far fewer iterations: promoted at 302 against run 3's 804, and its best 10 s checkpoint scores 1.98 with F against 2.86 without, with 63 of 128 cells tuned to heading. But in 400 iterations at 20 seconds the memory gap never opened (4.02 with F, 4.06 without at iteration 700), the same stall seed 1 showed in run 11. Killed at 700 to give the CPU to run 23. Measured: capacity speeds up the first stage. Not settled: whether it would transfer with more iterations (run 11B eventually did, slowly). Caveat: this is a cold start with run 3's recipe; a 128-neuron warm start is not possible from a 64-neuron parent."
+ },
+ "run21": {
+  "title": "Lid \u00b11 \u2192 \u00b12",
+  "lesson": "Negative, and informative. The lid did its job: cells pinned at the lid at 25 s fell from 43% (run 19) to 7.6%. But the decoded count barely improved (error 1.04 to 0.92 units at 25 s; 25% to 22% of the distance at the turn), and the score got worse: 1.96 at 30 s on the final network, 1.83 at its best checkpoint, against run 19's 1.62, with the return heading error rising from 55\u00b0 to 66\u00b0. So saturation was not the main source of the count's error. The error grows in proportion to distance walked whether or not cells are pinned, which points at how the count is written (the write gate tracks speed at +0.69, not 1.0) and read, not at the ceiling. Measured throughout. The warm start also had to re-tune every readout to a doubled scale, which cost it the steering that run 19 had; a cold start with lid 2 might not pay that cost, but the count result says it would not gain much either."
  }
 }

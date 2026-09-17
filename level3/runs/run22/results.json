@@ -1,0 +1,50 @@
+{
+ "run": "run22",
+ "knob": "neurons 64 \u2192 128, cold start with run 3's recipe",
+ "parent": "random start, seed 0",
+ "minutes": 22.0,
+ "stopped_early": "killed by the supervisor at 700: no F-vs-noF gap at 20 s for four checkpoints",
+ "tests": [
+  {
+   "ckpt": "ckpt_00300.pt",
+   "t_out": 10,
+   "bars": {
+    "A": {
+     "score": 1.9769375324249268,
+     "arrived": 0.16500000655651093
+    },
+    "B": {
+     "score": 2.8646557331085205,
+     "arrived": 0.05000000074505806
+    },
+    "C": {
+     "score": 2.59403920173645,
+     "arrived": 0.10499999672174454
+    }
+   },
+   "n_tuned": 63,
+   "file": "test_best_10.json"
+  },
+  {
+   "ckpt": "ckpt_00700.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 4.621766567230225,
+     "arrived": 0.02500000037252903
+    },
+    "B": {
+     "score": 4.673824787139893,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 42,
+   "file": "test_final_20.json"
+  }
+ ],
+ "finished": 1789616776.050836
+}

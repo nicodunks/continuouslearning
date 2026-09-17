@@ -88,5 +88,25 @@
   "why": "1.62 to 1.71 (1.66 at the best checkpoint). The polish that gained a tenth on run 13 did not repeat here.",
   "mech": "Measured. Small steps settle a network deeper into the valley it is already in; run 19 was already at the bottom of its valley, so there was nothing to settle. The score moved within run-to-run noise.",
   "llm": "The final annealing phase. It helps when the model has not converged; on a converged model it changes nothing."
+ },
+ {
+  "label": "same recipe as run 19, training dice reseeded (seed 1)",
+  "parent": "run19",
+  "child": "run27",
+  "verdict": "control",
+  "kind": "training (seed): the noise control",
+  "why": "Nothing changed but the seed of the training worlds, and the score went from 1.62 to 1.99. Memory in F, reset intact, compass cells 31. This is the size of the luck in a single run of this recipe.",
+  "mech": "Measured. Each training run sees a different sequence of random worlds, and with a warm start at 3e-4 for 800 iterations the network ends in a somewhat different place each time. The exam then reads that place to two decimals, which makes small differences look like findings. The spread here, about 0.4, is larger than most of the gaps between runs on the leaderboard.",
+  "llm": "Seed variance. Reporting a mean and a spread over several seeds is standard for exactly this reason, and a single-seed improvement smaller than the spread is not a result."
+ },
+ {
+  "label": "cold start on the many-speeds world",
+  "parent": "run3",
+  "child": "run32",
+  "verdict": "stalled",
+  "kind": "world (data), from a cold start",
+  "why": "Learned the 10-second stage (exam 1.51 with F, 2.61 without) and stalled at 20 seconds for 900 iterations, like seed 1 and the 128-neuron run. Stopped to free the CPU for the seed replications.",
+  "mech": "Measured for the stall; guess for the cause. Three of four cold starts this campaign and last have stalled at the 10-to-20-second transfer. The write gate settles high during the short stage and the tallies saturate on longer trips; unlearning that takes far more than the budget. Run 3's clean transfer looks like the fortunate case.",
+  "llm": "Curriculum transfer failure. When a model tuned on short sequences does not extend to long ones, the usual fixes are a gentler length ramp or training on mixed lengths from the start, not more iterations at the new length."
  }
 ]

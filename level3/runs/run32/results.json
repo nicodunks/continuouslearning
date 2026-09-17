@@ -1,0 +1,50 @@
+{
+ "run": "run32",
+ "knob": "cold start on the many-speeds world with run 3's recipe (food 2 s, penalty 0.05, curriculum 10 \u2192 20 \u2192 30 s); does a network raised on better data measure distance better than one adapted to it late?",
+ "parent": "random start, seed 0",
+ "minutes": 80.0,
+ "stopped_early": "stopped by the supervisor: 20-second stage stalled for 900 iterations",
+ "tests": [
+  {
+   "ckpt": "ckpt_01000.pt",
+   "t_out": 10,
+   "bars": {
+    "A": {
+     "score": 1.5149251222610474,
+     "arrived": 0.3050000071525574
+    },
+    "B": {
+     "score": 2.6134166717529297,
+     "arrived": 0.12250000238418579
+    },
+    "C": {
+     "score": 2.59403920173645,
+     "arrived": 0.10499999672174454
+    }
+   },
+   "n_tuned": 51,
+   "file": "test_best_10.json"
+  },
+  {
+   "ckpt": "ckpt_01900.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 3.432558059692383,
+     "arrived": 0.10750000178813934
+    },
+    "B": {
+     "score": 4.11143684387207,
+     "arrived": 0.07750000059604645
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 55,
+   "file": "test_final_20.json"
+  }
+ ],
+ "finished": 1789626968.071614
+}

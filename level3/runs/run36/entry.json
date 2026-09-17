@@ -1,0 +1,33 @@
+{
+ "run": "run36",
+ "knob": "run 19's recipe, seed 4: a third, fourth and fifth draw to measure the recipe's mean and spread",
+ "parent": "run14 (final), same start as runs 19 and 27",
+ "prediction": "Together with runs 19 (1.62) and 27 (1.99) these give five draws of one recipe. Prediction: mean near 1.8 with a spread of about 0.2 either way. Any knob claimed as an improvement must beat that mean by more than the spread, at several seeds.",
+ "args": [
+  "--init",
+  "runs/run14/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--seed",
+  "4"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

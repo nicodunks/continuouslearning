@@ -141,5 +141,15 @@
   "title": "Polish of run 19 at 3e-5",
   "lesson": "No gain: 1.71 at 30 s (1.66 at the best checkpoint) against 1.62. The move that gave run 17 a tenth of a point did not repeat on run 19. Measured. Together with runs 24 and 31 this settles that optimisation is not what holds the score at 1.6.",
   "verdict": "none"
+ },
+ "run27": {
+  "title": "Run 19's recipe, training dice reseeded",
+  "lesson": "The control that reframes the night. Same starting weights (run 14), same world, same knobs, only the seed for the training worlds changed: 1.99 at 30 s against run 19's 1.62, with the memory in F (5.90 without), the reset intact (0.31 at food, 0.009 away), 31 compass cells, write follows speed +0.57. Measured. So the recipe's seed-to-seed spread is at least 0.37 on a single run, and run 19's 1.62 was a fortunate draw as much as a better network. Every single-run comparison tonight (1.60 to 2.05) sits inside that spread, and so do several from the first night. From here on, a claim of improvement needs several seeds and a mean.",
+  "verdict": "control"
+ },
+ "run32": {
+  "title": "Cold start on the many-speeds world",
+  "lesson": "Stopped at iteration 1900 with the 20-second stage stalled: promoted by the cap at 1000 with a 10 s memory (exam at 10 s: 1.51 with F, 2.61 without), then 900 iterations at 20 s with the gap opening and closing and never a running score under 4.7 (exam at 20 s: 3.43 with F, 4.11 without). Measured. A third cold start (after seed 1 and 128 neurons) that learns the short stage and stalls at the long one; run 3's clean transfer at iteration 804 looks like the exception, not the rule. The lineage question (does a network raised on the many-speeds world measure distance better?) stays open; it could not be reached in the budget.",
+  "verdict": "stalled"
  }
 }

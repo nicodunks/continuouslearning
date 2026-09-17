@@ -136,5 +136,10 @@
   "title": "Batch 64 plus a low-rate finish",
   "lesson": "No effect: 1.64 at 30 s (1.67 at the best checkpoint) against 1.62, memory in F (5.94 without), compass cells 32, write follows speed +0.74. Its frozen checks during training reached 2.05, the best of the campaign, and again that did not carry to the exam. Measured. Two optimisation improvements stacked on the same network produced the same exam score as either alone or neither. The plateau at 1.6 is not optimisation noise.",
   "verdict": "none"
+ },
+ "run26": {
+  "title": "Polish of run 19 at 3e-5",
+  "lesson": "No gain: 1.71 at 30 s (1.66 at the best checkpoint) against 1.62. The move that gave run 17 a tenth of a point did not repeat on run 19. Measured. Together with runs 24 and 31 this settles that optimisation is not what holds the score at 1.6.",
+  "verdict": "none"
  }
 }

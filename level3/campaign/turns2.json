@@ -78,5 +78,15 @@
   "why": "1.62 to 1.64 at 30 s, within noise. Frozen checks during training reached 2.05, the campaign's best, and the exam did not move.",
   "mech": "Measured. Cleaner gradients and smaller final steps both improve how well the network fits its training world, and the frozen checks show that. The exam score is set by how accurately the network measures distance, which the diagnosis found to be about 0.9 units off at the turn, and neither change touches that. Optimisation is not the limit.",
   "llm": "Stacking two optimisation tweaks. The general lesson: when training loss improves and held-out performance does not, the model is at a representational or data limit, and further optimisation polish is wasted."
+ },
+ {
+  "label": "polish at a tenth of the rate (3e-5)",
+  "parent": "run19",
+  "child": "run26",
+  "verdict": "none",
+  "kind": "training (learning rate)",
+  "why": "1.62 to 1.71 (1.66 at the best checkpoint). The polish that gained a tenth on run 13 did not repeat here.",
+  "mech": "Measured. Small steps settle a network deeper into the valley it is already in; run 19 was already at the bottom of its valley, so there was nothing to settle. The score moved within run-to-run noise.",
+  "llm": "The final annealing phase. It helps when the model has not converged; on a converged model it changes nothing."
  }
 ]

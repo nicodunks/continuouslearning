@@ -1,0 +1,33 @@
+{
+ "run": "run33",
+ "knob": "erase-bias shift \u22122, warm from run 19, penalty 20: lower the between-food fade from 0.007 toward 0.001 and let training re-calibrate the readout to a longer-lasting count",
+ "parent": "run19 (final, 1.62 at 30 s; erase away 0.008, count biased short)",
+ "prediction": "The fade test showed run 19's readout is matched to a fading count (cutting the fade at exam time makes it worse). With the fade lowered and 800 iterations to re-match, the count's length error at the turn should fall below run 19's 0.93 and the short bias shrink; erase at food, which starts lower after the shift, should climb back above 0.3 within 300 iterations. If the readout re-matches, 30 s under 1.5. If erase at food does not recover, the reset is lost and the run is worse; kill at 300.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--erase_bias_shift",
+  "-2",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

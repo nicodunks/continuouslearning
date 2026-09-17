@@ -1,0 +1,92 @@
+{
+ "run": "run26",
+ "knob": "polish of run 19 at a tenth of the learning rate (3e-4 \u2192 3e-5), 800 iterations, nothing else; also the control for 'just more training'",
+ "parent": "run19 (final, 1.62 at 30 s)",
+ "prediction": "The same move gave run 17 about 0.1. 30 s at or under 1.55 with the memory in F. If it does not move, 1.62 is where this recipe lands and later stacks should be judged against that.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--lr",
+  "3e-5"
+ ],
+ "minutes": 54.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.757696509361267,
+     "arrived": 0.2524999976158142
+    },
+    "B": {
+     "score": 4.738220691680908,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.7108920812606812,
+     "arrived": 0.3050000071525574
+    },
+    "B": {
+     "score": 5.922311782836914,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.6615203619003296,
+     "arrived": 0.32749998569488525
+    },
+    "B": {
+     "score": 5.928400039672852,
+     "arrived": 0.014999999664723873
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 33,
+   "file": "test_best_30.json",
+   "drift_F": 2.2093350887298584
+  }
+ ],
+ "finished": 1789625771.118602
+}

@@ -1,0 +1,31 @@
+{
+ "run": "run29",
+ "knob": "speed profile: a new random speed level every 5 s ('steps' world), warm from run 19; forces the write gate to track speed continuously, not just slow versus fast",
+ "parent": "run19 (final, 1.62 at 30 s; write follows speed at +0.69)",
+ "prediction": "The diagnosis says the count's error comes from the write gate tracking speed only roughly. A world with many speed levels should push write-versus-speed past +0.85 and cut the decoded count error at 25 s from 1.04 toward 0.7. If that happens the 30 s exam score falls under 1.5. If the correlation rises but the score does not, the count error was not the binding constraint after all.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "steps",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

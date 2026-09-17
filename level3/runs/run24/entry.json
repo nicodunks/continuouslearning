@@ -1,0 +1,30 @@
+{
+ "run": "run24",
+ "knob": "batch 32 \u2192 64, warm from run 19, nothing else",
+ "parent": "run19 (final, 1.62 at 30 s)",
+ "prediction": "Steadier gradient in a narrow valley: a small gain, 30 s at or under 1.57, and fewer swings in the running score. If no change, batch is not a lever here.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "600",
+  "--batch",
+  "64"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ]
+}

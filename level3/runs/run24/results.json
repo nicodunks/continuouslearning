@@ -1,0 +1,92 @@
+{
+ "run": "run24",
+ "knob": "batch 32 \u2192 64, warm from run 19, nothing else",
+ "parent": "run19 (final, 1.62 at 30 s)",
+ "prediction": "Steadier gradient in a narrow valley: a small gain, 30 s at or under 1.57, and fewer swings in the running score. If no change, batch is not a lever here.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "600",
+  "--batch",
+  "64"
+ ],
+ "minutes": 42.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.7597758769989014,
+     "arrived": 0.25
+    },
+    "B": {
+     "score": 4.724499702453613,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 33,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.6154565811157227,
+     "arrived": 0.3125
+    },
+    "B": {
+     "score": 5.923427581787109,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.6975092887878418,
+     "arrived": 0.2524999976158142
+    },
+    "B": {
+     "score": 5.961282730102539,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_best_30.json",
+   "drift_F": 2.2056918144226074
+  }
+ ],
+ "finished": 1789620099.395962
+}

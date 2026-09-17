@@ -18,5 +18,25 @@
   "why": "Pinned cells at 25 s fell from 43% to 7.6%, so the lid worked as a lid. The count's error hardly changed (1.04 to 0.92 units at 25 s) and the score got worse, 1.62 to 1.96 (1.83 at the best checkpoint), with the first-3-seconds heading error rising from 55\u00b0 to 66\u00b0. Saturation was not the leak.",
   "mech": "Measured. The decoding test shows the count's error growing in proportion to distance walked with or without pinned cells, so it comes from how the count is written and read, not from the ceiling: the write gate follows speed at +0.69 rather than 1.0, so each tick's addition is only roughly proportional to distance, and those small mis-weightings add up along the wander. The score loss on top of that is a warm-start cost: every readout had been tuned to cells that stop at 1, and 800 iterations at 3e-4 did not fully re-tune them to cells that reach 2, so the steering got worse. Guess: a cold start with lid 2 would avoid the steering cost but, given the count result, would not gain much either.",
   "llm": "Raising a clipping or normalisation bound. The general lesson is the same one this run taught: if the bound is not what limits accuracy, raising it changes the model's scale without improving it, and a model tuned to the old scale gets worse until it re-adapts."
+ },
+ {
+  "label": "train on 45-second wanders (stage 45)",
+  "parent": "run19",
+  "child": "run23",
+  "verdict": "bad",
+  "kind": "world (data): longer training trips",
+  "why": "2.05 at 30 s against 1.62, and 2.51 at 45 s against the 2.15 run 19 scored there without ever training at that length. Memory still in F, compass cells unchanged at 32, but the reset weakened (erase at food 0.38 to 0.18) and the running score never came under 3.2.",
+  "mech": "Measured for the numbers; guess for the cause. The loss is measured on the last ten seconds of a return that is now 90 seconds long, so the signal that reaches back to what the network did in the first 45 seconds is weaker and noisier than on 30-second trips. Each training step is therefore less useful, and 600 of them left the network worse than it started. The weaker reset fits: with less pressure from a clean board, the gate drifted toward fading.",
+  "llm": "Extending the training sequence length (long-context training). The known caveat applies here too: jumping to a much longer length in one step, on a model tuned for the short one, usually needs a gentler ramp and more steps, and a loss that only looks at the end of the sequence gives weak gradients for the beginning."
+ },
+ {
+  "label": "batch 32 \u2192 64",
+  "parent": "run19",
+  "child": "run24",
+  "verdict": "none",
+  "kind": "training (batch size)",
+  "why": "1.62 at 30 s, identical to the parent; 1.76 at 20 s against 1.63. The running score on the training world was the best of any run (2.47), but the exam did not move.",
+  "mech": "Measured. Averaging 64 flies instead of 32 halves the noise in each step, and the network fitted the two-speed training world more tightly as a result. That extra fit did not transfer to the steady-speed exam. Guess: the recipe has reached the point where the remaining exam error is not optimisation noise but a limit of what the network has learned to represent, so a cleaner gradient toward the same target changes nothing on the exam.",
+  "llm": "Batch size. Larger batches give cleaner gradients and better training loss per step; when held-out performance does not follow, the model is at a capacity or data limit, not an optimisation limit, and the next lever is data or architecture."
  }
 ]

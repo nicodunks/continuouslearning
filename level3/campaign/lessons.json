@@ -106,5 +106,15 @@
  "run21": {
   "title": "Lid \u00b11 \u2192 \u00b12",
   "lesson": "Negative, and informative. The lid did its job: cells pinned at the lid at 25 s fell from 43% (run 19) to 7.6%. But the decoded count barely improved (error 1.04 to 0.92 units at 25 s; 25% to 22% of the distance at the turn), and the score got worse: 1.96 at 30 s on the final network, 1.83 at its best checkpoint, against run 19's 1.62, with the return heading error rising from 55\u00b0 to 66\u00b0. So saturation was not the main source of the count's error. The error grows in proportion to distance walked whether or not cells are pinned, which points at how the count is written (the write gate tracks speed at +0.69, not 1.0) and read, not at the ceiling. Measured throughout. The warm start also had to re-tune every readout to a doubled scale, which cost it the steering that run 19 had; a cold start with lid 2 might not pay that cost, but the count result says it would not gain much either."
+ },
+ "run23": {
+  "title": "Train on 45-second wanders",
+  "lesson": "Negative on both lengths. Warm from run 19, 600 iterations at 45 s: 2.05 at 30 s (run 19: 1.62) and 2.51 at 45 s (run 19, never trained there: 2.15). The memory stayed in F (5.92 without F at 30 s) and the compass cells held at 32, but the reset weakened, erase at food falling from 0.38 to 0.18, and the running score on the training world never came under 3.2. Measured. Best guess for why: on 45-second trips the loss is noisier and the gradients from the last ten seconds of a 90-second return are a weak signal for what happened in the first 45, so each step moved the network less usefully than a 30-second step does; and the weaker reset suggests the longer trips shifted the balance toward fading. Longer training trips did not teach a better count; they taught a worse one, in this budget.",
+  "verdict": "bad"
+ },
+ "run24": {
+  "title": "Batch 32 \u2192 64",
+  "lesson": "No effect on the exam: 1.62 at 30 s, the same as run 19, and 1.76 at 20 s against 1.63. On the training world its running score was the best of any run (2.47 against run 19's 2.73), so the steadier gradient did help the network fit the world it trains on, but the gain did not carry to the exam world. Measured. Best guess: the two-speed training world and the steady-speed exam world differ enough that fitting the first more tightly stops paying on the second, which is the same signal as run 21: the recipe is at a plateau that better optimisation alone does not move.",
+  "verdict": "none"
  }
 }

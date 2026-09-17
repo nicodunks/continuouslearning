@@ -1,0 +1,33 @@
+{
+ "run": "run28",
+ "knob": "a small charge on the size of F (f_penalty 0.5 \u00d7 mean F\u00b2), warm from run 19; the 'count in smaller steps' lever",
+ "parent": "run19 (final, 1.62 at 30 s)",
+ "prediction": "Training is charged for large cells, so it should shrink ws or the write gate and lean on A to read a fainter count. If the count is written more finely the decode error at 25 s falls below 0.9 and the 30 s score is at or under 1.55. If the charge just dims the memory, the F-vs-noF gap narrows and the score worsens.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--f_penalty",
+  "0.5"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

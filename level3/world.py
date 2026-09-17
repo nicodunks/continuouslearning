@@ -49,6 +49,7 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
         since_arrival = torch.zeros(batch, dtype=torch.long)
         min_d = torch.full((batch,), float('inf'))
         flip = rand(batch) < 0.5                        # legs profile: which half is the slow one
+        step_level = torch.ones(batch)                  # steps profile: current speed level
 
         for k in range(n_ticks):
             t = k * DT
@@ -68,6 +69,11 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
                 slow_now = first_half ^ flip
                 target = torch.where(slow_now, torch.full((batch,), 0.4), torch.full((batch,), 1.6))
                 speed = (target + 0.05 * randn(batch)).clamp(0.3, 1.7)
+            elif speed_profile == 'steps' and not returning:
+                # campaign 2 (run 29): every 5 s each agent picks a new speed level uniformly between 0.3 and 1.7,
+                # so the write gate must track speed continuously, not just tell slow from fast
+                if k % int(round(5.0 / DT)) == 0: step_level = 0.3 + 1.4 * rand(batch)
+                speed = (step_level + 0.05 * randn(batch)).clamp(0.3, 1.7)
             else:
                 speed = (speed + 0.3 * randn(batch) * math.sqrt(DT) + 0.2 * (1 - speed) * DT).clamp(0.3, 1.7)
             speed = torch.where(in_pause | at_food | done, torch.zeros(batch), speed)

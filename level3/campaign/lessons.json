@@ -151,5 +151,10 @@
   "title": "Cold start on the many-speeds world",
   "lesson": "Stopped at iteration 1900 with the 20-second stage stalled: promoted by the cap at 1000 with a 10 s memory (exam at 10 s: 1.51 with F, 2.61 without), then 900 iterations at 20 s with the gap opening and closing and never a running score under 4.7 (exam at 20 s: 3.43 with F, 4.11 without). Measured. A third cold start (after seed 1 and 128 neurons) that learns the short stage and stalls at the long one; run 3's clean transfer at iteration 804 looks like the exception, not the rule. The lineage question (does a network raised on the many-speeds world measure distance better?) stays open; it could not be reached in the budget.",
   "verdict": "stalled"
+ },
+ "run33": {
+  "title": "Erase bias shifted down by 2: a slower fade",
+  "lesson": "Killed at 300. The shift did lower the between-food fade as intended, from 0.008 to 0.0012 per tick at iteration 200, but it took the wipe at food down with it (0.38 to 0.06, peak 0.33), and the readout did not re-match to the slower fade: frozen checks went 6.06, 4.51, 6.37 and the running score was 5.87 at 300, worse than at 200. Measured. The fade and the readout are co-adapted, and moving the fade by hand broke both. Together with the exam-time fade test (less fade makes run 19 worse) this says the network's memory is a leaky integrator with its time constant and its readout learned as a pair; to get a longer-lasting count, both would have to be learned together from a start that does not first have to unlearn the short one. A cold start with a low erase floor would be the test, and it is not reachable tonight.",
+  "verdict": "bad"
  }
 }

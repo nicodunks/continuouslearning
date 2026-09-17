@@ -1,0 +1,31 @@
+{
+ "run": "run37",
+ "knob": "cold start with a low erase floor (erase bias \u22127 from the start, shift \u22122), run 3's recipe otherwise; can a slow-fading count and its readout be learned together from scratch?",
+ "parent": "random start, seed 0",
+ "prediction": "With the between-food fade at about 0.001 per tick from iteration 1, the count lasts the whole wander and the readout learns against a lasting count. If that is the right pair, the 10 s stage is learned by 800 and the 20 s transfer is cleaner than run 3's, because the tallies do not fade and do not need a high write gate. Risk: three of four cold starts have stalled at 20 s; if this one stalls too, the test is inconclusive rather than negative. Stopped at 03:00 whatever stage it reaches.",
+ "args": [
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--erase_bias_shift",
+  "-2",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1000",
+  "--iters",
+  "3000",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

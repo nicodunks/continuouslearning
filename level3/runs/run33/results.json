@@ -1,0 +1,30 @@
+{
+ "run": "run33",
+ "knob": "erase-bias shift \u22122, warm from run 19, penalty 20: lower the between-food fade from 0.007 toward 0.001 and let training re-calibrate the readout to a longer-lasting count",
+ "parent": "run19 (final)",
+ "minutes": 22.0,
+ "stopped_early": "killed by the supervisor at 300: readout not re-matching, frozen checks worsening",
+ "tests": [
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 3.964401960372925,
+     "arrived": 0.09749999642372131
+    },
+    "B": {
+     "score": 5.944351673126221,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 33,
+   "file": "test_ckpt200_30.json"
+  }
+ ],
+ "finished": 1789627066.39263
+}

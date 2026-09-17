@@ -108,5 +108,15 @@
   "why": "Learned the 10-second stage (exam 1.51 with F, 2.61 without) and stalled at 20 seconds for 900 iterations, like seed 1 and the 128-neuron run. Stopped to free the CPU for the seed replications.",
   "mech": "Measured for the stall; guess for the cause. Three of four cold starts this campaign and last have stalled at the 10-to-20-second transfer. The write gate settles high during the short stage and the tallies saturate on longer trips; unlearning that takes far more than the budget. Run 3's clean transfer looks like the fortunate case.",
   "llm": "Curriculum transfer failure. When a model tuned on short sequences does not extend to long ones, the usual fixes are a gentler length ramp or training on mixed lengths from the start, not more iterations at the new length."
+ },
+ {
+  "label": "erase bias shift \u22122 (slower fade)",
+  "parent": "run19",
+  "child": "run33",
+  "verdict": "bad",
+  "kind": "starting point (initialisation)",
+  "why": "The fade fell from 0.008 to 0.0012 per tick as intended, but the wipe at food fell to 0.06 and the readout never re-matched: frozen checks 6.06, 4.51, 6.37 at 100, 200, 300. Killed at 300.",
+  "mech": "Measured. The exam-time fade test had already shown run 19's readout expects a count that fades with a time constant of about fourteen seconds. Lowering the fade hands the readout a count it has never seen, and the shift also drags the at-food wipe down because both live on the same gate. Training at 3e-4 for 300 iterations moved the network but not back to anything that homes. The fade and the readout are a matched pair; changing one by hand breaks the pair.",
+  "llm": "Hand-editing a trained parameter that other parameters have co-adapted to. The general lesson: warm-start surgery works when the rest of the network can absorb it (run 7B); it fails when the edited quantity is one the rest of the network is calibrated against."
  }
 ]

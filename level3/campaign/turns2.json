@@ -68,5 +68,15 @@
   "why": "Write-versus-speed rose from +0.69 to +0.77 as predicted; the exam gave 1.67 against 1.62, no change. The reset held.",
   "mech": "Measured. The many-speeds world forced the write gate to track speed more closely, and it did. The count's error did not fall with it, so speed weighting was not the binding part of the count's error either. What that leaves is how the direction is encoded: the compass cells are unevenly spread (six prefer north-north-east, six west-south-west, two bins empty), so the count's gain differs by heading, and the diagnosis tool now measures whether the error is in the count's length or its direction.",
   "llm": "Data augmentation aimed at one feature. The general lesson: augmenting the feature you believe is the bottleneck tests that belief; when the model learns the feature better and the task does not improve, the bottleneck was elsewhere."
+ },
+ {
+  "label": "stack: batch 64 + low-rate finish (3e-5)",
+  "parent": "run24",
+  "child": "run31",
+  "verdict": "none",
+  "kind": "training (batch size and learning rate, stacked)",
+  "why": "1.62 to 1.64 at 30 s, within noise. Frozen checks during training reached 2.05, the campaign's best, and the exam did not move.",
+  "mech": "Measured. Cleaner gradients and smaller final steps both improve how well the network fits its training world, and the frozen checks show that. The exam score is set by how accurately the network measures distance, which the diagnosis found to be about 0.9 units off at the turn, and neither change touches that. Optimisation is not the limit.",
+  "llm": "Stacking two optimisation tweaks. The general lesson: when training loss improves and held-out performance does not, the model is at a representational or data limit, and further optimisation polish is wasted."
  }
 ]

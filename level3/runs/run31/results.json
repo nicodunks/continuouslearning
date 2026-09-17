@@ -1,0 +1,70 @@
+{
+ "run": "run31",
+ "knob": "stack: batch 64 and a low-rate finish (3e-5), warm from run 24's final; the two changes that improved the training-world score without moving the exam",
+ "parent": "run24 (final)",
+ "minutes": 38.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.8360705375671387,
+     "arrived": 0.20999999344348907
+    },
+    "B": {
+     "score": 4.723693370819092,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.643622636795044,
+     "arrived": 0.2775000035762787
+    },
+    "B": {
+     "score": 5.9424729347229,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00200.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.672951340675354,
+     "arrived": 0.2800000011920929
+    },
+    "B": {
+     "score": 5.950759410858154,
+     "arrived": 0.02500000037252903
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_best_30.json"
+  }
+ ],
+ "finished": 1789625745.3478122
+}

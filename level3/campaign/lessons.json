@@ -131,5 +131,10 @@
   "title": "Many-speeds training world",
   "lesson": "The knob did what it was meant to do to the gate and not to the score: write follows speed rose from +0.69 to +0.77 (+0.79 at the best checkpoint), the reset held (0.35 at food, 0.006 away), and the exam gave 1.67 at 30 s against 1.62, within noise. Measured. A world with many speed levels made the write gate a better speedometer; a better speedometer did not make a better homing score. So the count's remaining error is not mainly the speed weighting either. Six singles from run 19 now sit between 1.60 and 2.05, and the recipe's plateau at about 1.6 is real.",
   "verdict": "none"
+ },
+ "run31": {
+  "title": "Batch 64 plus a low-rate finish",
+  "lesson": "No effect: 1.64 at 30 s (1.67 at the best checkpoint) against 1.62, memory in F (5.94 without), compass cells 32, write follows speed +0.74. Its frozen checks during training reached 2.05, the best of the campaign, and again that did not carry to the exam. Measured. Two optimisation improvements stacked on the same network produced the same exam score as either alone or neither. The plateau at 1.6 is not optimisation noise.",
+  "verdict": "none"
  }
 }

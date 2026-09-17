@@ -1,1 +1,92 @@
-[]
+[
+ {
+  "run": "run23",
+  "knob": "train on 45-second wanders (stage 45 only), warm from run 19; makes overflow at 30 to 45 s cost loss",
+  "parent": "run19 (final, 1.62 at 30 s; 2.15 at 45 s in the stress test)",
+  "prediction": "The count has to last 45 s, so training pushes toward smaller steps or a spread-out count. 45 s score improves from 2.15 toward 1.7; 30 s score holds within 0.1 of 1.62 or improves. If 30 s gets worse by more than 0.2, the network traded short-trip accuracy for long-trip room.",
+  "args": [
+   "--init",
+   "runs/run19/final.pt",
+   "--food_stand",
+   "4.0",
+   "--erase_penalty",
+   "20",
+   "--speed_profile",
+   "legs",
+   "--batch",
+   "32",
+   "--lr",
+   "3e-4",
+   "--lr_decay",
+   "1",
+   "--stages",
+   "45",
+   "--iters",
+   "600"
+  ],
+  "test_t_outs": [
+   30,
+   45
+  ]
+ },
+ {
+  "run": "run24",
+  "knob": "batch 32 \u2192 64, warm from run 19, nothing else",
+  "parent": "run19 (final, 1.62 at 30 s)",
+  "prediction": "Steadier gradient in a narrow valley: a small gain, 30 s at or under 1.57, and fewer swings in the running score. If no change, batch is not a lever here.",
+  "args": [
+   "--init",
+   "runs/run19/final.pt",
+   "--food_stand",
+   "4.0",
+   "--erase_penalty",
+   "20",
+   "--speed_profile",
+   "legs",
+   "--lr",
+   "3e-4",
+   "--lr_decay",
+   "1",
+   "--stages",
+   "30",
+   "--iters",
+   "600",
+   "--batch",
+   "64"
+  ],
+  "test_t_outs": [
+   20,
+   30
+  ]
+ },
+ {
+  "run": "run25",
+  "knob": "erase penalty 20 \u2192 5, warm from run 19; is 20 now a tax on a gate that already works?",
+  "parent": "run19 (final, 1.62 at 30 s)",
+  "prediction": "The reset holds (erase at food above 0.3) while erase-away is allowed to find its own level. Score at or under 1.62; if erase-away rises above 0.02 and the score worsens, 20 was doing real work.",
+  "args": [
+   "--init",
+   "runs/run19/final.pt",
+   "--food_stand",
+   "4.0",
+   "--speed_profile",
+   "legs",
+   "--batch",
+   "32",
+   "--lr",
+   "3e-4",
+   "--lr_decay",
+   "1",
+   "--stages",
+   "30",
+   "--iters",
+   "600",
+   "--erase_penalty",
+   "5"
+  ],
+  "test_t_outs": [
+   20,
+   30
+  ]
+ }
+]

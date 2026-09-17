@@ -1,0 +1,166 @@
+{
+ "ckpt": "runs/run19/final.pt",
+ "t_out": 30.0,
+ "decode": {
+  "r2_heldout_all_outbound": 0.971,
+  "by_time": [
+   {
+    "t": 0.0,
+    "r2": -Infinity,
+    "err": 0.017,
+    "true": 0.0
+   },
+   {
+    "t": 5.0,
+    "r2": 0.994,
+    "err": 0.123,
+    "true": 1.641
+   },
+   {
+    "t": 10.0,
+    "r2": 0.991,
+    "err": 0.286,
+    "true": 3.073
+   },
+   {
+    "t": 15.0,
+    "r2": 0.983,
+    "err": 0.534,
+    "true": 4.321
+   },
+   {
+    "t": 20.0,
+    "r2": 0.973,
+    "err": 0.803,
+    "true": 5.408
+   },
+   {
+    "t": 25.0,
+    "r2": 0.962,
+    "err": 1.038,
+    "true": 5.971
+   }
+  ]
+ },
+ "pinned": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   5.0,
+   0.0083
+  ],
+  [
+   10.0,
+   0.2452
+  ],
+  [
+   15.0,
+   0.3676
+  ],
+  [
+   20.0,
+   0.4162
+  ],
+  [
+   25.0,
+   0.4333
+  ],
+  [
+   30.0,
+   0.4319
+  ],
+  [
+   35.0,
+   0.2918
+  ],
+  [
+   40.0,
+   0.312
+  ],
+  [
+   45.0,
+   0.3224
+  ],
+  [
+   50.0,
+   0.3383
+  ],
+  [
+   55.0,
+   0.3432
+  ],
+  [
+   60.0,
+   0.3394
+  ],
+  [
+   65.0,
+   0.3396
+  ],
+  [
+   70.0,
+   0.3509
+  ],
+  [
+   75.0,
+   0.3464
+  ],
+  [
+   80.0,
+   0.3386
+  ],
+  [
+   85.0,
+   0.3497
+  ]
+ ],
+ "phase": {
+  "count_err_units": 1.224,
+  "count_err_relative": 0.25,
+  "heading_err_first3s_deg": 55.1,
+  "closest_approach": 1.606,
+  "final_distance": 2.112,
+  "arrived": 0.297,
+  "distance_at_turn": 6.909
+ },
+ "lesions": [
+  {
+   "label": "no lesion",
+   "n": 0,
+   "score": 1.621,
+   "arrived": 0.327
+  },
+  {
+   "label": "silence the 32 compass cells",
+   "n": 32,
+   "score": 5.795,
+   "arrived": 0.038
+  },
+  {
+   "label": "silence the 32 non-compass cells",
+   "n": 32,
+   "score": 4.907,
+   "arrived": 0.05
+  },
+  {
+   "label": "silence the 8 strongest erase-gate drivers",
+   "n": 8,
+   "score": 4.693,
+   "arrived": 0.06
+  },
+  {
+   "label": "silence the 8 strongest write-gate drivers",
+   "n": 8,
+   "score": 3.098,
+   "arrived": 0.097
+  },
+  {
+   "label": "silence 8 random neurons",
+   "n": 8,
+   "score": 3.989,
+   "arrived": 0.083
+  }
+ ]
+}

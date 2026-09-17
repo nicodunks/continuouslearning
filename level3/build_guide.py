@@ -1,5 +1,21 @@
 import json
+import subprocess, os
+L3='/Users/nico/Documents/GitHub/fly-circuit-exploration/level3'
+subprocess.run(['python3', os.path.join(L3,'make_runs_seq.py'), 'runs_seq.json'], check=True)
 motif=json.load(open('motif_data.json')); runs=json.load(open('runs_seq.json')); sat=json.load(open('sat_data.json'))
+R={r['run']:r for r in runs}
+def pick(r):
+    t=R[r]['tests']
+    for k in ('test_final_30.json','test_best_30.json','test_final_20.json'):
+        if k in t: return dict(t[k],file=k)
+    v=list(t.values()); return (dict(v[0],file=list(t.keys())[0]) if v else None)
+t2=json.load(open(os.path.join(L3,'campaign/turns2.json')))
+base=[t for t in motif['turns'] if not t.get('campaign2')]
+for t in t2:
+    if t['parent'] in R and t['child'] in R and pick(t['parent']) and pick(t['child']):
+        base.append(dict(t, pm=pick(t['parent']), cm=pick(t['child']), campaign2=True))
+motif['turns']=base
+
 data=json.dumps(dict(motif=motif,runs=runs,F=sat['F'],Ft=sat['t'],dist=sat['dist']),separators=(',',':'))
 html=r'''<title>Before the Deep Dive</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,400i&family=JetBrains+Mono:wght@400;600&display=swap">

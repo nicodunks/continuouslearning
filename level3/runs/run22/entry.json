@@ -1,0 +1,31 @@
+{
+ "run": "run22",
+ "knob": "neurons 64 \u2192 128, cold start with run 3's recipe (the only capacity lever besides the lid); runs alongside the queue all night",
+ "parent": "random start, seed 0",
+ "prediction": "Homes at 10 s by iteration 700 (run 3 did by 804). At 20 and 30 s the extra room should show as lower saturation and a better 30 s score than run 3's line reached cold (2.37). If it is no better than 64 neurons by the end of the 20 s stage, capacity was not the bottleneck at this scale.",
+ "args": [
+  "--neurons",
+  "128",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1000",
+  "--iters",
+  "3000",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "1"
+ ],
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

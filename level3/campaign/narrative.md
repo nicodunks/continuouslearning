@@ -124,3 +124,17 @@ Frozen, on trips longer than anything they trained on: the hand-built fly brain 
 
 ## The rival did not learn to home (run 20)
 Level 4 asked whether a memory held in fast weights beats one held in activity. The rival, the same network with its fast weights switched off and the same recipe, sat at the random level for a thousand iterations at 10 seconds and was stopped at the stage cap. So the comparison is one-sided in the plainest way: with fast weights the network learns to home in a few hundred iterations; without them it does not learn at all, at least not with this learning rate, this seed and this many iterations. That caveat matters, and the write-up carries it. But it is also the answer the roadmap's first slider predicted: a loop that must hold a number in activity is hard to build by gradient descent, and a tally in synapses is easy.
+
+# Campaign 2 (16 to 17 September, 20:15 to 05:00 PT)
+
+## The hour of diagnosis, before any compute
+Three measurements on run 19's final network (diag.py), none of them training.
+
+**The count is in F and it is readable.** A straight-line readout fitted from the 4,096 fast weights to the true home vector, on half of 128 trips and scored on the other half, recovers the vector with R² 0.97 across all outbound ticks. So "the tally lives in F" is now measured, not inferred. The readout's error grows along the wander: 0.12 units at 5 s, 0.29 at 10 s, 0.53 at 15 s, 0.80 at 20 s, 1.04 at 25 s. Over the same span the share of cells pinned at the lid climbs from 0 to 43%. Saturation and the count's error rise together. That is the leak, measured.
+
+**Most of the score is lost after the turn.** At the turn the decoded count is 1.2 units off (25% of the 6.9 units walked). The closest approach is 1.6 and the final distance 2.1. The fly's heading in the first 3 s of the return is 55° off the true home direction; the hand-built brain, whose count is exact, is 45° off under the same compass noise. So the network's heading choice is near the noise floor, and its shortfall against the hand brain (0.78 closest approach) is mostly the count.
+
+**Nothing is spare.** Silencing the 32 compass cells: score 5.8. Silencing the 32 other cells: 4.9. Silencing the 8 strongest erase drivers: 4.7; write drivers: 3.1; 8 random neurons: 4.0. Every part is load-bearing, and 8 random neurons out of 64 cost more than doubling the wander length does. The network has no redundancy, which argues for room: a higher lid, or more neurons.
+
+## What the diagnosis chose
+Lid first (run 21, already running when the diagnosis finished), 128 neurons in parallel all night (run 22), then a 45-second training stage (run 23), batch 64 (run 24), erase penalty 5 (run 25). Delta is off the list: accumulation capacity is exactly the bottleneck the diagnosis names.

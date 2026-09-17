@@ -118,5 +118,15 @@
   "why": "The fade fell from 0.008 to 0.0012 per tick as intended, but the wipe at food fell to 0.06 and the readout never re-matched: frozen checks 6.06, 4.51, 6.37 at 100, 200, 300. Killed at 300.",
   "mech": "Measured. The exam-time fade test had already shown run 19's readout expects a count that fades with a time constant of about fourteen seconds. Lowering the fade hands the readout a count it has never seen, and the shift also drags the at-food wipe down because both live on the same gate. Training at 3e-4 for 300 iterations moved the network but not back to anything that homes. The fade and the readout are a matched pair; changing one by hand breaks the pair.",
   "llm": "Hand-editing a trained parameter that other parameters have co-adapted to. The general lesson: warm-start surgery works when the rest of the network can absorb it (run 7B); it fails when the edited quantity is one the rest of the network is calibrated against."
+ },
+ {
+  "label": "polish of run 29 at 3e-5 (many-speeds world)",
+  "parent": "run29",
+  "child": "run30",
+  "verdict": "none",
+  "kind": "training (learning rate)",
+  "why": "1.67 to 1.78 at 30 s, inside the noise.",
+  "mech": "Measured. Same as run 26: small steps on a converged network change nothing the exam can see.",
+  "llm": "Annealing a converged model."
  }
 ]

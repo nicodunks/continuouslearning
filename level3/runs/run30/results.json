@@ -1,0 +1,92 @@
+{
+ "run": "run30",
+ "knob": "polish of run 29 at a tenth of the rate (3e-5), 600 iterations on the many-speeds world; stack of the two neutral singles that improved the gates",
+ "parent": "run29 (final, 1.67 at 30 s, write~speed +0.77)",
+ "prediction": "If the plateau is optimisation noise, small steps settle it: 30 s under 1.55. If it is a representational limit, it lands at 1.6 like everything else, and that is the answer for tonight.",
+ "args": [
+  "--init",
+  "runs/run29/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "steps",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-5",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "600"
+ ],
+ "minutes": 46.0,
+ "stopped_early": null,
+ "tests": [
+  {
+   "ckpt": "final.pt",
+   "t_out": 20,
+   "bars": {
+    "A": {
+     "score": 1.969990849494934,
+     "arrived": 0.1899999976158142
+    },
+    "B": {
+     "score": 4.72341251373291,
+     "arrived": 0.017500000074505806
+    },
+    "C": {
+     "score": 3.6076855659484863,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 30,
+   "file": "test_final_20.json"
+  },
+  {
+   "ckpt": "final.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.777807593345642,
+     "arrived": 0.2824999988079071
+    },
+    "B": {
+     "score": 5.933777332305908,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_final_30.json"
+  },
+  {
+   "ckpt": "ckpt_00500.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 1.7781344652175903,
+     "arrived": 0.2874999940395355
+    },
+    "B": {
+     "score": 5.933753490447998,
+     "arrived": 0.02250000089406967
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 31,
+   "file": "test_best_30.json",
+   "drift_F": 2.320873260498047
+  }
+ ],
+ "finished": 1789628550.773993
+}

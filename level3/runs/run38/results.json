@@ -1,0 +1,30 @@
+{
+ "run": "run38",
+ "knob": "erase-bias shift \u22121, warm from run 19: a gentler version of run 33's slower fade",
+ "parent": "run19 (final)",
+ "minutes": 20.0,
+ "stopped_early": "killed by the supervisor at 300: frozen checks worsening",
+ "tests": [
+  {
+   "ckpt": "ckpt_00300.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 3.0711240768432617,
+     "arrived": 0.11249999701976776
+    },
+    "B": {
+     "score": 5.905722141265869,
+     "arrived": 0.027499999850988388
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 35,
+   "file": "test_final_30.json"
+  }
+ ],
+ "finished": 1789631229.9660249
+}

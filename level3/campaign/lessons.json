@@ -179,7 +179,27 @@
  },
  "run37": {
   "title": "Cold start with a low erase floor",
-  "lesson": "Learned the 10-second stage and earned promotion at iteration 804 (exam at 10 s: 1.81 with F, 2.72 without; erase away from food 0.0136 per tick, so the count really did last), then stalled at 20 seconds: the gap opened to 1.4 at iteration 1200 and closed by 1400 and 1500 (exam at 20 s: 4.19 with F, 4.28 without). Stopped at 1500. Measured. Inconclusive on the question it was built for, because it never reached a 20-second memory to compare; what it does show is that a slow fade from the start does not by itself make the 10-to-20-second transfer easier.",
+  "lesson": "Learned the 10-second stage and earned promotion at iteration 804 (exam at 10 s: 1.81 with F, 2.72 without), then stalled at 20 seconds and was stopped at 1500 (exam at 20 s: 4.19 with F, 4.28 without). The striking measurement is the fade itself: it started at 0.0009 per tick and training raised it to 0.014 by the end of the 10-second stage, above the 0.008 of the warm-start lineage. Given a slow-fading count from the start, gradient descent chose a faster fade. Measured. With the exam-time fade test (less fade makes run 19 worse) and run 33 (forcing a slower fade breaks the readout), this makes three results saying the same thing: on this task, with this network, a fading count is the solution training prefers, not a trap it fell into.",
   "verdict": "stalled"
+ },
+ "run38": {
+  "title": "Erase bias shift \u22121",
+  "lesson": "Killed at 300, the same shape as run 33: running score 3.52 at 200, 4.21 at 300, frozen check 4.18 and worsening. Exam at the 300 checkpoint: 3.07 with F, 5.91 without; erase at food 0.239, away 0.0030. Measured. Half the shift of run 33 gave half the damage and the same direction: the readout does not re-match to a slower fade within the budget, and the wipe at food drops with the shift.",
+  "verdict": "bad"
+ },
+ "run39": {
+  "title": "Erase bias shift \u22120.5",
+  "lesson": "1.57 at 30 s, the reset intact (0.33 at food) and the fade lowered a little (0.0062 from 0.0077). Inside the recipe's noise on its own, but the first fade shift that did not hurt, which makes it a candidate for a ratchet. Memory in F (5.92 without), erase at food 0.327, away 0.0062, write follows speed +0.76, 32 compass cells.",
+  "verdict": "none"
+ },
+ "run40": {
+  "title": "Run 28's recipe (F-size penalty), seed 1",
+  "lesson": "1.59 at 30 s. With run 28 (1.60) and run 41 (1.49) the penalty recipe has three draws: mean 1.56, spread 0.06, against the plain recipe's 1.72 over five seeds. Memory in F (5.92 without), erase at food 0.307, away 0.0065, write follows speed +0.72, 31 compass cells.",
+  "verdict": "good"
+ },
+ "run41": {
+  "title": "Run 28's recipe (F-size penalty), seed 2",
+  "lesson": "1.49 at 30 s with 38% arriving: the lowest exam score of both campaigns. Third draw of the penalty recipe (1.60, 1.59, 1.49). Memory in F (5.92 without), erase at food 0.36, away 0.007, write follows speed +0.70, 33 compass cells.",
+  "verdict": "good"
  }
 }

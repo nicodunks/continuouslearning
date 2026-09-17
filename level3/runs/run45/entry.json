@@ -1,0 +1,35 @@
+{
+ "knob": "F-size penalty recipe, seed 3 (fourth draw), warm from run 19",
+ "parent": "run19 (final)",
+ "prediction": "Firms up the penalty recipe's mean: lands between 1.45 and 1.65 if the effect is real.",
+ "args": [
+  "--init",
+  "runs/run19/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--f_penalty",
+  "0.5",
+  "--seed",
+  "3"
+ ],
+ "run": "run45",
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

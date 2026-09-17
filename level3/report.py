@@ -73,7 +73,10 @@ def md_to_html(md):
 def build():
     runs = collect(); floor = jload(os.path.join(CAMP, 'floor.json'), {}); lessons = jload(os.path.join(CAMP, 'lessons.json'), {})
     narrative = md_to_html(open(os.path.join(CAMP, 'narrative.md')).read()) if os.path.exists(os.path.join(CAMP, 'narrative.md')) else ''
-    summary = md_to_html(open(os.path.join(CAMP, 'summary.md')).read()) if os.path.exists(os.path.join(CAMP, 'summary.md')) else ''
+    summary = ''
+    for name in ('summary2.md', 'summary.md'):   # night two first, then night one
+        fp = os.path.join(CAMP, name)
+        if os.path.exists(fp): summary += md_to_html(open(fp).read())
     stress = jload(os.path.join(CAMP, 'stress.json'), None)
     data = json.dumps(dict(runs=runs, floor=floor, lessons=lessons, stress=stress, built=__import__('time').strftime('%Y-%m-%d %H:%M')), separators=(',', ':'))
     tpl = open(os.path.join(HERE, 'report_template.html')).read()

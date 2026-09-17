@@ -10,5 +10,15 @@
  "sd": 0.157,
  "median": 1.66,
  "n": 5,
- "note": "five draws of one recipe: run 14 weights, two-speed world, food 4 s, penalty 20, 800 iterations at 3e-4 with cosine decay; only the training seed differs; exam seed 4242, 200 trips, 30 s"
+ "note": "five draws of one recipe: run 14 weights, two-speed world, food 4 s, penalty 20, 800 iterations at 3e-4 with cosine decay; only the training seed differs; exam seed 4242, 200 trips, 30 s",
+ "f_penalty_recipe": {
+  "runs": {
+   "run28": 1.6,
+   "run40": 1.59,
+   "run41": 1.49
+  },
+  "mean": 1.56,
+  "sd": 0.061,
+  "n": 3
+ }
 }

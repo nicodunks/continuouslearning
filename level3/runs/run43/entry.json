@@ -1,0 +1,37 @@
+{
+ "knob": "stack: F-size penalty and erase bias shift \u22120.5, warm from run 41, seed 1",
+ "parent": "run41 (final, 1.49)",
+ "prediction": "As run 42.",
+ "args": [
+  "--init",
+  "runs/run41/final.pt",
+  "--food_stand",
+  "4.0",
+  "--erase_penalty",
+  "20",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--stages",
+  "30",
+  "--iters",
+  "800",
+  "--f_penalty",
+  "0.5",
+  "--erase_bias_shift",
+  "-0.5",
+  "--seed",
+  "1"
+ ],
+ "run": "run43",
+ "test_t_outs": [
+  20,
+  30
+ ],
+ "manual": true
+}

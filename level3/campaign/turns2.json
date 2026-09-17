@@ -165,8 +165,48 @@
   "child": "run37",
   "verdict": "stalled",
   "kind": "starting point (initialisation), cold",
-  "why": "Earned the 10-second stage at 804 with a slow fade (0.0136 per tick) and stalled at 20 seconds like the other cold starts. Stopped at 1500.",
-  "mech": "Measured for the stall. Guess: the slow fade did what it should for the count, but the 10-to-20-second transfer fails for a different reason (the write-gate habit learned on short trips), which a low erase floor does not address.",
+  "why": "Earned the 10-second stage at 804, stalled at 20 seconds, stopped at 1500. Training raised the fade from 0.0009 to 0.014 per tick on its own.",
+  "mech": "Measured. Started with a count that barely fades, the network learned to fade it faster than the warm-start lineage does. Third result in one night pointing the same way: the fading count is what training wants here, because a count that fades is easier to read with the tools the network has (a tanh readout of a bounded board) than a count that keeps growing.",
   "llm": "Initialisation choice from a cold start. It changes what is easy to learn first; it does not by itself fix a curriculum transfer problem."
+ },
+ {
+  "label": "erase bias shift \u22121 (slower fade, gentler)",
+  "parent": "run19",
+  "child": "run38",
+  "verdict": "bad",
+  "kind": "starting point (initialisation)",
+  "why": "Running score worsened from 200 to 300 (3.52 to 4.21); killed. Exam at 300: 3.07 with F, 5.91 without; erase at food 0.239.",
+  "mech": "Measured. Same mechanism as run 33 at half the size: the shift lowers the wipe at food along with the fade, and the readout, calibrated to a fourteen-second fade, does not re-match in 300 iterations.",
+  "llm": "Hand-editing a co-adapted parameter, smaller step, same outcome."
+ },
+ {
+  "label": "erase bias shift \u22120.5 (smallest step toward a slower fade)",
+  "parent": "run19",
+  "child": "run39",
+  "verdict": "none",
+  "kind": "starting point (initialisation)",
+  "why": "1.57 at 30 s, the reset intact (0.33 at food) and the fade lowered a little (0.0062 from 0.0077). Inside the recipe's noise on its own, but the first fade shift that did not hurt, which makes it a candidate for a ratchet.",
+  "mech": "Measured. A half-unit shift moves the gate's resting point by less than the readout can absorb in 800 iterations, so the network re-matched; the \u22121 and \u22122 shifts moved it past that.",
+  "llm": "A small initialisation edit that the network can absorb."
+ },
+ {
+  "label": "F-size penalty recipe, seed 1",
+  "parent": "run19",
+  "child": "run40",
+  "verdict": "good",
+  "kind": "training (regulariser, replication)",
+  "why": "1.59 at 30 s. With run 28 (1.60) and run 41 (1.49) the penalty recipe has three draws: mean 1.56, spread 0.06, against the plain recipe's 1.72 over five seeds.",
+  "mech": "Measured. The charge on F's size keeps the board smaller (write strength down, wipe at food up) and, over seeds, that lands about 0.15 lower than the plain recipe. All three draws are below four of the plain recipe's five.",
+  "llm": "Seed replication of a regulariser"
+ },
+ {
+  "label": "F-size penalty recipe, seed 2",
+  "parent": "run19",
+  "child": "run41",
+  "verdict": "good",
+  "kind": "training (regulariser, replication)",
+  "why": "1.49 at 30 s with 38% arriving: the lowest exam score of both campaigns. Third draw of the penalty recipe (1.60, 1.59, 1.49).",
+  "mech": "Measured. Same mechanism as run 40. One good draw of a recipe that is on average a little better; it is the recipe's mean, not this number, that should be quoted.",
+  "llm": "Seed replication of a regulariser"
  }
 ]

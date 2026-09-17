@@ -10,6 +10,11 @@ def pick(r):
         if k in t: return dict(t[k],file=k)
     v=list(t.values()); return (dict(v[0],file=list(t.keys())[0]) if v else None)
 t2=json.load(open(os.path.join(L3,'campaign/turns2.json')))
+diag={}
+for name in ['run19','run21','run29','hand']:
+    fp=os.path.join(L3,'campaign',f'diag_{name}.json')
+    if os.path.exists(fp): diag[name]=json.load(open(fp))
+motif['diag']=diag
 base=[t for t in motif['turns'] if not t.get('campaign2')]
 for t in t2:
     if t['parent'] in R and t['child'] in R and pick(t['parent']) and pick(t['child']):
@@ -116,6 +121,7 @@ td.n,th.n{text-align:right}
  <a href="#q9"><span class="q">Q9</span>Backpropamine</a>
  <a href="#q10"><span class="q">Q10</span>Peter's head-direction paper</a>
  <a href="#q11"><span class="q">Q11</span>Follow-ups on the lid</a>
+ <a href="#q12"><span class="q">Q12</span>Night two: the diagnosis</a>
 </nav>
 <main>
 <div class="eyebrow">Level 3 · a study guide · eleven questions</div>
@@ -859,6 +865,37 @@ td.n,th.n{text-align:right}
 <h3>How does counting in smaller steps help, and how does training on longer trips help?</h3>
 <p><b>Smaller steps.</b> The clamp is fixed at 1. If a weight moves by 0.05 per tick of walking in one direction, it hits the clamp after 20 ticks, two seconds. If it moves by 0.005 per tick, it lasts 200 ticks, twenty seconds. Smaller steps do not add room; they make the existing room last longer. The price is a fainter count: the readout through A has to be more sensitive, so noise and the small always-on erase matter more. That trade-off is what training would have to find, and a penalty on the size of F is one way to tilt it toward smaller steps. It is a hypothesis, not a known fix.</p>
 <p><b>Longer trips in training.</b> This one does not change the network's capacity at all. It changes what the network is punished for. Gradient descent only fixes what costs loss. Today the network is never scored on a trip longer than 30 seconds, so a counter that overflows at 40 seconds costs nothing and nothing pushes it to change. Train at 45 seconds and the overflow starts to cost, and the optimiser is pushed toward whichever of the fixes above it can reach: smaller steps, more weights sharing the count, less leak. It is the same move as the two-speed world in runs 13 and 19, and the same move as Peter's slow-turning and fast-turning conditions: change the statistics of the world and the network reallocates. Whether it can reallocate enough is the experiment.</p>
+
+<!-- ============ Q12 ============ -->
+<h2 id="q12"><span class="q">QUESTION 12</span>Night two: diagnose first, then turn knobs</h2>
+<p>The second overnight campaign (16 to 17 September) started with an hour of measurement before any training, using a new tool, diag.py. Three measurements on run 19's final network, none of them training. This section explains each one, shows the real numbers, and says what they changed about the plan. The runs that followed are in the turn picker in question 1, marked as campaign 2.</p>
+
+<h3>Measurement 1: can the home vector be read out of F?</h3>
+<p>Until now, "the count lives in F" rested on the ablation (question 5) and on the shape of the F traces. The direct test is to try to <em>read the count</em>. Take the 4,096 fast weights at a tick and fit a straight-line readout from them to the true home vector (the two numbers: how far east, how far north home is from the fly). Fit it on half of 128 trips and score it on the other half, so the readout cannot simply memorise. If the fit is good, the count is in F in a form a linear reader can use. The score is <span class="term" title="R squared: the share of the variation in the true value that the readout accounts for; 1 is perfect, 0 is no better than guessing the average">R²</span>.</p>
+<div class="panel real">
+ <div class="eyebrow">Real: the decoded count's error along the wander, and the share of cells pinned at the lid</div>
+ <canvas id="diagDecode" width="1700" height="480"></canvas>
+ <div class="how"><b>How to read it.</b> Across: seconds into a thirty-second wander. Left axis, solid lines: how far the decoded home vector is from the true one, in distance units, for run 19 (teal), run 21 with the doubled lid (grey) and run 29 on the many-speeds world (blue). Right axis, dashed: the share of the 4,096 cells pinned at their lid for run 19 (teal) and run 21 (grey). Run 19's R² across all outbound ticks is 0.97: the count is in F and readable. Its error grows along the wander, and so does its pinned share. Run 21 removed almost all the pinning (43% down to 8% at 25 s) and the error line barely moved. That is how we learned the lid was not the leak.</div>
+</div>
+
+<h3>Measurement 2: where along the trip is the score lost?</h3>
+<p>The score is the closest approach on the return. Splitting the trip into pieces says which piece loses the most. At the moment the fly turns for home, the decoded count is compared to the truth, in two parts: its <b>length</b> (how far) and its <b>direction</b> (which way). Then the fly's actual heading over the first three seconds of the return is compared to the true direction home. Then the closest approach and the final distance.</p>
+<div class="panel real">
+ <div class="eyebrow">Real: the count at the turn, split into length and direction, and what follows</div>
+ <table id="diagPhase"><thead><tr><th>measurement at the turn (6.9 units from home)</th><th class="n">run 19</th><th class="n">run 21 (lid ±2)</th><th class="n">run 29 (many speeds)</th><th class="n">hand brain</th></tr></thead><tbody></tbody></table>
+ <div class="how"><b>How to read it.</b> The count's direction is right to within a few degrees in every learned network. Its length is off by about 0.9 units, and biased short. The heading over the first three seconds looks bad for everyone, the hand brain included, because the compass noise in this world is large enough to swing the fly by tens of degrees in three seconds; that row is the noise, not the brain. The rows that separate the learned networks from the hand brain are the count's length and the closest approach. So the thing this network measures badly is how far, not which way.</div>
+</div>
+
+<h3>Measurement 3: which parts are load-bearing?</h3>
+<p>The lesion test from Peter's paper (question 10), finally done here. At exam time, silence a set of neurons (force their activity to zero every tick) and rerun the 200-trip exam.</p>
+<div class="panel real">
+ <div class="eyebrow">Real: run 19's score after silencing each group</div>
+ <canvas id="diagLesion" width="1700" height="400"></canvas>
+ <div class="how"><b>How to read it.</b> Each bar is the exam score with one group silenced; the first bar is the intact network at 1.62, and the random-walk line is at 4.4. Silencing the 32 compass cells destroys homing. So does silencing the 32 other cells, and so does silencing any 8 neurons chosen at random. Nothing in the network is spare: every part carries load. That argues for a network with more room, and it is why 128 neurons was tried (run 22), which learned faster but did not transfer within its budget.</div>
+</div>
+
+<h3>What the diagnosis changed about the night</h3>
+<p>Before it, the plan's first lever was the lid, on the reasoning of the Counter With a Lid page. The decoding measurement showed the pinned share rising with the count's error, which supported the lid, and run 21 was already running. Run 21 then removed the pinning and left the error alone, which ruled the lid out as the cause. The many-speeds world (run 29) was the diagnosis's second suggestion, aimed at the write gate; it improved the gate's speed tracking from +0.69 to +0.77 and did not move the count's length either. Six single-knob runs from run 19 landed between 1.60 and 2.05. The honest conclusion is that this network's remaining error is in how it measures distance, and none of the knobs on the board reaches it. The last runs of the night test the two explanations left: whether more careful optimisation can settle it (a low-rate finish, a stack with batch 64, and a reseeded control that measures the run-to-run noise) and whether the lineage matters (a cold start on the many-speeds world).</p>
 </main></div>
 <script>
 const D=__DATA__;
@@ -1366,6 +1403,19 @@ function bbDraw(){const [x,W,H]=ctx('bothBoards');x.clearRect(0,0,W,H);const nam
  const trueN=BB.trueN||0;txt(x,`the fly has actually walked ${trueN} ticks north`,90,H-22,css('--ink'),'left','15px "Bricolage Grotesque"');
  if(trueN>=15)txt(x,'Hebb keeps up with the fly (until the lid). Delta froze.',500,H-22,css('--coral'),'left','15px "Bricolage Grotesque"');}
 $('bN').addEventListener('click',()=>{BB.trueN=(BB.trueN||0)+1;bbWalk('N');});$('bN10').addEventListener('click',()=>{for(let k=0;k<10;k++){BB.trueN=(BB.trueN||0)+1;bbWalk('N');}});$('bE').addEventListener('click',()=>{bbWalk('E');});$('bReset').addEventListener('click',()=>{BB.n=0;BB.trueN=0;BB.H=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];BB.Dl=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];BB.xo=[0,0,0,0];$('bT').textContent='tick 0';bbDraw();});
+
+(function(){const G=D.motif.diag||{};const [x,W,H]=ctx('diagDecode');x.clearRect(0,0,W,H);const p={l:50,r:60,t:26,b:36};const cw=W-p.l-p.r,ch=H-p.t-p.b;const X=t=>p.l+t/30*cw,Y=v=>H-p.b-v/1.3*ch,Yp=v=>H-p.b-v*ch;frame(x,W,H,p);
+ [0,0.5,1].forEach(v=>txt(x,v,p.l-6,Y(v)+4,css('--mute'),'right'));[0,0.5,1].forEach(v=>txt(x,(v*100)+'%',W-p.r+6,Yp(v)+4,css('--mute'),'left'));[0,10,20,30].forEach(t=>txt(x,t+' s',X(t),H-p.b+16,css('--mute'),'center'));txt(x,'decode error (units)',p.l+4,p.t-8,css('--mute'));txt(x,'pinned share',W-p.r,p.t-8,css('--mute'),'right');
+ const cols={run19:css('--teal'),run21:css('--rand'),run29:css('--blue')};
+ Object.entries(cols).forEach(([r,col])=>{const g=G[r];if(!g)return;const bt=g.decode.by_time.filter(b=>b.t>0);x.strokeStyle=col;x.lineWidth=3;x.beginPath();bt.forEach((b,i)=>i?x.lineTo(X(b.t),Y(b.err)):x.moveTo(X(b.t),Y(b.err)));x.stroke();const e=bt[bt.length-1];txt(x,r.replace('run','run ')+' error '+e.err.toFixed(2),X(e.t)+6,Y(e.err)+4,col);
+  if(r!=='run29'){const pin=g.pinned.filter(q=>q[0]<=30);x.setLineDash([5,4]);x.lineWidth=2;x.beginPath();pin.forEach((q,i)=>i?x.lineTo(X(q[0]),Yp(q[1])):x.moveTo(X(q[0]),Yp(q[1])));x.stroke();x.setLineDash([]);const l=pin[pin.length-1];txt(x,'pinned '+(l[1]*100).toFixed(0)+'%',X(l[0])-6,Yp(l[1])-8,col,'right');}});
+ // phase table
+ const rows=[['count direction error','count_direction_err_deg','°'],['count length error (units)','count_radial_err',''],['count length bias (negative = short)','count_radial_bias',''],['heading error, first 3 s of return','heading_err_first3s_deg','°'],['closest approach (the score)','closest_approach',''],['final distance','final_distance',''],['arrived (within 0.5)','arrived','']];
+ const tb=document.querySelector('#diagPhase tbody');tb.innerHTML=rows.map(([l,k,u])=>`<tr><td>${l}</td>${['run19','run21','run29','hand'].map(r=>{const g=G[r];if(!g)return '<td class="n">–</td>';const v=g.phase[k];if(v===undefined||(r==='hand'&&k.startsWith('count')))return '<td class="n">–</td>';return `<td class="n">${k==='arrived'?(v*100).toFixed(0)+'%':(typeof v==='number'?v.toFixed(k.includes('deg')?1:2):v)}${u}</td>`;}).join('')}</tr>`).join('');
+ // lesions
+ const g19=G.run19;if(g19){const [x2,W2,H2]=ctx('diagLesion');x2.clearRect(0,0,W2,H2);const p2={l:40,r:20,t:26,b:70};const cw2=W2-p2.l-p2.r,ch2=H2-p2.t-p2.b;const L=g19.lesions;const bw=cw2/L.length;const Y2=v=>H2-p2.b-v/6.5*ch2;x2.strokeStyle=css('--line');x2.beginPath();x2.moveTo(p2.l,H2-p2.b);x2.lineTo(W2-p2.r,H2-p2.b);x2.stroke();[0,2,4,6].forEach(v=>txt(x2,v,p2.l-6,Y2(v)+4,css('--mute'),'right'));x2.setLineDash([5,4]);x2.strokeStyle=css('--rand');x2.beginPath();x2.moveTo(p2.l,Y2(4.38));x2.lineTo(W2-p2.r,Y2(4.38));x2.stroke();x2.setLineDash([]);txt(x2,'random walk 4.38',W2-p2.r-4,Y2(4.38)-6,css('--rand'),'right');
+  L.forEach((l,i)=>{const h=H2-p2.b-Y2(l.score);x2.fillStyle=i===0?css('--teal'):css('--coral');x2.fillRect(p2.l+i*bw+10,Y2(l.score),bw-20,h);txt(x2,l.score.toFixed(2),p2.l+i*bw+bw/2,Y2(l.score)-6,css('--ink'),'center','13px "Bricolage Grotesque"');const words=l.label.replace('silence the ','').replace('silence ','').split(' ');let line='',ly=H2-p2.b+16;words.forEach(w=>{if((line+' '+w).length>18){txt(x2,line,p2.l+i*bw+bw/2,ly,css('--mute'),'center','11px "JetBrains Mono"');line=w;ly+=13;}else line=(line?line+' ':'')+w;});txt(x2,line,p2.l+i*bw+bw/2,ly,css('--mute'),'center','11px "JetBrains Mono"');});}
+})();
 function all(){drawSig();bbDraw();s1Draw();d3Show();drawSigZoom();drawSpeedWorld();dtDraw();drawCF();drawDeposit();drawWsA();drawWire();drawFB();drawGD();drawDelta();drawReset();drawStep();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

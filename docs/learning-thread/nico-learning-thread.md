@@ -1,8 +1,8 @@
 # Nico's learning thread
 
-The conversation between Nico and Claude that produced this repository: from "I want to train a tiny model that does continual learning the way the fly does" through the five-level plan, the level 3 network, the overnight campaign of runs 1 to 20, and the study pages under `docs/roadmap/`. Tool calls, code edits and their outputs are omitted; what remains is what Nico asked and what Claude answered, in order. Times are local (Pacific).
+The conversation between Nico and Claude that produced this repository: from "I want to train a tiny model that does continual learning the way the fly does" through the five-level plan, the level 3 network, two overnight campaigns (runs 1 to 45), and the study pages under `docs/roadmap/`. Tool calls, code edits and their outputs are omitted, as are the automated overnight status notes; what remains is what Nico asked and what Claude answered, in order. Times are local (Pacific).
 
-169 messages from Nico, 482 replies. Exported from the session transcript on 2026-09-16.
+183 messages from Nico, 749 replies. Exported from the session transcript on 2026-09-17.
 
 ---
 
@@ -4609,3 +4609,876 @@ The only thing not committed is the `flight-scene/` folder, which is untracked. 
 ## Nico · 2026-09-16 15:20
 
 I also want this conversation thread commited and merged to main as nico learning thread
+
+**Claude · 2026-09-16 15:21**
+
+Done. The thread is committed on `main` and pushed to your fork as commit 423f4f9.
+
+- **File:** [docs/learning-thread/nico-learning-thread.md](docs/learning-thread/nico-learning-thread.md), linked from the README.
+- **What it holds:** every message you sent and every reply, in order, from the first "I want to train a tiny model" on 14 September through this afternoon: 169 messages from you, 482 replies, about 470 KB of text. Where screenshots were attached, a note says so. Where the context was compacted, a note marks the spot.
+- **What it leaves out:** tool calls, code edits and their outputs, and Claude's internal reasoning. What remains is the conversation as you experienced it.
+- **Checked:** no email address or other account detail ended up in the file.
+
+The transcript this was exported from keeps growing as we talk, so if you want the thread refreshed at some later point, the same export can be rerun and committed again.
+
+## Nico · 2026-09-16 15:28
+
+I need this elboartated, σ(z) = 1 / (1 + e−z) slope at z = σ(z) × (1 − σ(z)) i dont even know what σ means... can u draw out the math more
+
+**Claude · 2026-09-16 15:28**
+
+Let me take that apart symbol by symbol, then put a step-by-step calculator on the page.
+
+**σ** is just a name. It is the Greek letter sigma, and people use it as the name of the squashing function, the way you might call a function f. "σ(z)" reads "sigma of z": feed in the number z, get the squashed number out. Nothing more.
+
+**e** is a fixed number, 2.718..., like π is 3.14... It shows up because e^x is the function whose growth rate equals its own value, which makes it the natural way to write anything that grows or shrinks by a constant factor per step.
+
+**e^(−z)** is e raised to the power of minus z. When z is a big positive number, e^(−z) is tiny (e^(−5) is 0.0067). When z is a big negative number, e^(−z) is huge (e^(5) is 148). At z = 0 it is exactly 1.
+
+**The formula**, worked for three inputs:
+
+| z | e^(−z) | 1 + e^(−z) | σ(z) = 1 ÷ (1 + e^(−z)) |
+|---|---|---|---|
+| −5 | 148.4 | 149.4 | 0.0067 |
+| 0 | 1 | 2 | 0.5 |
+| +5 | 0.0067 | 1.0067 | 0.9933 |
+
+So the recipe is: flip the sign of z, raise e to it, add 1, take one over that. The result is always between 0 and 1, because the denominator is always bigger than 1.
+
+**Slope** means: if you nudge z by a tiny amount, how much does σ(z) move, per unit of nudge? Rise over run, on a very small run. You can find it by trial: σ(−5.001) − σ(−5) is 0.0000066, divided by the nudge 0.001 gives 0.0066. Calculus gives a formula for that same number without the trial, and for this function the formula happens to be neat: slope = σ(z) × (1 − σ(z)). Check it at −5: 0.0067 × 0.9933 = 0.0066. Same answer.
+
+Now the calculator, so you can move z and watch each of those steps update.
+
+The insertion point's caption had been reworded by the prose pass, so nothing was added and Version 28 is the same as 27. Finding the right spot and redoing it.
+
+Version 29 is live and pushed, and this time the section is in. In question 3, just before the S-curve drawing, there is now "The symbols, from scratch":
+
+- **σ** is only a name, the Greek letter sigma, used for the squashing function the way a maths class uses f. "σ(z)" reads "sigma of z."
+- **e** is a fixed number, 2.718..., like π is 3.14....
+- **e^(−z)** is e raised to the power of minus z: tiny for large positive z, huge for large negative z, exactly 1 at zero.
+- **The formula** as a four-step recipe: flip the sign of z, raise e to it, add 1, take one over the result. The denominator is always more than 1, so the answer is always between 0 and 1, which is why it makes a gate.
+- **Slope** as rise over run on a very small run, found two ways: by trial (nudge z by 0.001, subtract, divide) and by the formula σ × (1 − σ).
+
+Under it is a calculator with one slider for z. The left side prints the four steps with your numbers filled in, then the slope by trial and by formula, side by side so you can see they agree. The right side is a close-up of the curve around your z, with the straight segment of that slope through the dot and a small triangle showing rise over run: thin where the curve is flat, tall where it is steep. Set z to −5 and then to 0 and the triangle tells the whole story of question 3.
+
+## Nico · 2026-09-16 15:40
+
+ok! i need you to walk me through the math here with interactive examples... i finally understand hebb but. i dont understand what math is being done on delta What Peter's delta rule was
+Our rule writes the whole pattern every tick. Peter's note pointed out that this is a very old rule (Hebb, 1949: "fire together, wire together") and that the modern sequence-model world has moved to a cousin of it, the delta rule: write only the part you could not already predict. Here are both, with the words under the symbols.
+
+Hebb (ours): F ← (1 − erase)·F + ws·write·x_new ⊗ x_old
+Read: shrink the board a little (erase), then add the write strength times the write gate times the table of who was active after whom.
+
+Delta (Peter's): pred = F·x_old; F ← (1 − erase)·F + ws·write·(x_new − pred) ⊗ x_old
+Read: first ask F what it expects the new activity to be, given the old. Then write only the difference between what happened and what F expected. Once F predicts well, the difference is zero and writing stops on its own.
+
+**Claude · 2026-09-16 15:40**
+
+The piece that is doing the work in delta is `pred = F · x_old`, and it is worth taking apart on its own, because everything else is Hebb with one substitution.
+
+**What F · x_old means.** F is the 64 × 64 board. x_old is the list of 64 activities from a tick ago. "F · x_old" is: for each receiving neuron i, go along row i of the board, multiply each cell F[i,j] by the sender's old activity x_old[j], and add those up. The result is one number per receiver, pred[i]. It is exactly the way the neurons themselves read the board during a tick (the recurrent drive from the fast part, without A). So pred[i] is "what the board, used as wiring, would push onto neuron i right now, given last tick's activities." That is F's prediction of neuron i's new activity.
+
+**Then the substitution.** Hebb deposits x_new[i] × x_old[j] into cell [i,j]. Delta deposits (x_new[i] − pred[i]) × x_old[j]. The only change is that the receiver's activity is replaced by the receiver's activity *minus the board's guess for it*. When the board is empty, pred is 0 and the two rules are identical. As the board fills, pred grows toward x_new, the bracket shrinks toward zero, and the deposit fades out.
+
+A three-neuron walk-through will make the sums concrete. Building it now.
+
+The section went in but with stray backslashes in a few apostrophes (my escaping inside the HTML block). Fixing that, then committing and republishing.
+
+Version 31 is live and pushed. In question 4, between the two equations and the tick-by-tick single-cell table, there is now "The delta rule's math, with three neurons and every sum written out."
+
+What it walks through:
+
+- **What F · x_old is.** For receiver 1, go along row 1 of the board, multiply each cell by the sender's old activity, add the three products. Same for rows 2 and 3. The three results are pred, the board's guess at each neuron's new activity, computed exactly the way the neurons read the board during a tick.
+- **The substitution.** Hebb deposits x_new[i] × x_old[j]. Delta deposits (x_new[i] − pred[i]) × x_old[j]. On an empty board pred is zero and the two rules deposit the same table; as the board fills, pred climbs toward x_new and the deposits fade.
+
+The interactive part has six sliders (three old activities, three new) and runs two separate boards side by side. For each tick the delta panel prints the three row-sums that make pred with your numbers filled in, the three surprises, the deposit table they produce, and the board so far. The Hebb panel prints its deposit table and board for comparison. Press "ten ticks" and the Hebb board climbs to the lid while the delta board settles where the surprises read zero, with the sum of the surprises printed underneath so you can watch it reach zero. Then change one x_new slider and press again: delta starts writing again, because its guess is wrong again.
+
+## Nico · 2026-09-16 15:44
+
+im sorry that was not beginner friendly. neeeds to be way more simple
+
+**Claude · 2026-09-16 15:44**
+
+You're right. Let me do it with one sender and one receiver, one cell, no tables, and put the three-neuron version behind a "for later" fold.
+
+Version 32 is live and pushed. Question 4 now opens the delta explanation with one sender, one receiver and one cell, no tables.
+
+The idea in the fewest words: **Hebb adds every time it sees the pair; delta adds only what it got wrong.**
+
+On the page, with the numbers (sender 1.0, receiver 0.8, write strength 0.1):
+- **Hebb, one step.** Add 0.1 × 0.8 × 1.0 = 0.08, every tick. The cell goes 0.08, 0.16, 0.24... until the lid.
+- **Delta, three steps.** Guess what the receiver will be, using the cell: guess = cell × sender. Compare: surprise = 0.8 − guess. Add only 0.1 × surprise × sender. First tick the cell is empty, so the guess is 0, the surprise is 0.8, and it adds 0.08, same as Hebb. Second tick the guess is 0.08, the surprise 0.72, it adds 0.072. Each tick the guess improves, the surprise shrinks, and when the cell reaches 0.8 the guess is exactly right, the surprise is 0, and nothing more is added.
+
+The drawing has a "next tick" button. The Hebb row shows one box ("add 0.08") and a bar filling in equal steps. The delta row shows three boxes (guess, surprise, add) with the tick's numbers, and a bar filling in shrinking steps that stops at the dashed line at 0.8. Press it a dozen times and watch the surprise box reach zero. One closing sentence connects it to the real board: with 64 neurons, the guess for a receiver is this same cell × sender, added up over all senders, and that sum is what the equation writes as F · x_old.
+
+The three-neuron version with all the sums is still there, folded under "For later," for when the one-cell version feels solid.
+
+## Nico · 2026-09-16 15:45
+
+I want to see the same little f and interactive for both rules, way less messy content. just the pain points
+
+**Claude · 2026-09-16 15:45**
+
+Understood. Let me strip question 4 down to the two rules on the same little F board, one interactive that shows the pain point, and fold everything else away.
+
+Version 33 is live and pushed. Question 4 is now short, and it is built around one thing.
+
+**What is on the page now**
+- Two sentences: Hebb adds the pairing every tick; delta first guesses the receiver from the cell, then adds only what the guess got wrong. Same ws, gates and lid. One line differs, and the two lines are written out side by side.
+- **The pain point,** stated once: a guesser that only corrects its mistakes stops changing once it is right, which is fatal for a count.
+- **The main drawing: the same little F under both rules.** The four-compass-cell fly from question 1, with a Hebb board on the left and a delta board on the right, and under each the count a reader gets from the cells in ticks. Walk north ten ticks, then ten more: the Hebb count reads 10, then 20. The delta count climbs for a few ticks and freezes near 10. A line at the bottom tells you how far the fly has really walked, so the gap is visible.
+- **The one-cell stepper** (guess, surprise, add) kept as the second drawing.
+- One short paragraph on what happened in runs 15 and 18.
+
+Everything else from before, Peter's reasoning, the original toy chart, the long one-cell text, the tick table, and the three-neuron sums, is folded under one "For later" line at the end of the section.
+
+## Nico · 2026-09-16 15:47
+
+these are not the full frmulas.. also your diagrams are not even visible. please fix and be high taste
+
+*[Nico attached 2 screenshots]*
+
+**Claude · 2026-09-16 15:47**
+
+Two real bugs, thank you. The equations were the short forms without the erase term and the board, and both canvases were drawn taller than their own height, so the bottom halves were cut off. Fixing both and tightening the layout.
+
+Scrolling the live page down to question 4 to confirm both drawings now show in full.
+
+Both drawings now render in full on the live page: the two boards show all four rows, the count line and the "fly has actually walked" line underneath, and the one-cell drawing shows the Hebb row and the delta row with room to spare. Version 34 is what you see, and it is pushed.
+
+What changed in question 4:
+
+- **The formulas are complete now.** Hebb: F[i,j] ← (1 − erase) × F[i,j] + ws × write × x_new[i] × x_old[j]. Delta: first pred[i] = Σ over j of F[i,j] × x_old[j], the board's guess for neuron i read the same way the neurons read it; then the same line as Hebb with (x_new[i] − pred[i]) in place of x_new[i]. A sentence under them reads the delta line in words and notes that for one cell with one sender the guess is simply cell × x_old, which is what the drawings use.
+- **The drawings were being cut off** because I had drawn below the bottom edge of each canvas. Both canvases are taller now and the layouts sit inside them: the boards drawing has the two boards, the two count lines and the "actually walked" line; the one-cell drawing has the Hebb row (one box, one bar) and the delta row (three boxes, one bar), with the 0.8 line and the lid labelled under each bar.
+
+## Nico · 2026-09-16 15:51
+
+woah.. what the fuck is this  Σj.... also need very plain explanations for each oart of the fomrula
+
+**Claude · 2026-09-16 15:51**
+
+Fair. Σ is a capital sigma (a different sigma from the small σ of the sigmoid, which is annoying), and all it means is "add up." Σ over j of (something) means: take that something for j = 1, then for j = 2, and so on up to 64, and add them all together. So:
+
+```
+pred[i] = F[i,1]×x_old[1] + F[i,2]×x_old[2] + ... + F[i,64]×x_old[64]
+```
+
+That is the whole of pred[i]: go along row i of the board, multiply each cell by that sender's old activity, add them up. The Σ is just the shorthand so you do not have to write 64 terms. I will avoid it on the page and write the sum out.
+
+Every part of the two formulas, in plain words:
+
+| piece | meaning |
+|---|---|
+| F[i,j] | the cell on the wire from neuron j to neuron i, one number between −1 and +1 |
+| ← | "becomes"; the left side gets the new value |
+| (1 − erase) | the fraction of the cell kept this tick; erase is the erase gate, 0 to 1 |
+| (1 − erase) × F[i,j] | what is left of the cell after the removing step |
+| ws | the write strength, 0.074, fixed |
+| write | the write gate this tick, 0 to 1 |
+| x_new[i] | the receiving neuron's activity now |
+| x_old[j] | the sending neuron's activity one tick ago |
+| x_new[i] × x_old[j] | the pairing, the raw thing Hebb records |
+| ws × write × x_new[i] × x_old[j] | the amount added this tick under Hebb |
+| pred[i] | the board's guess for neuron i, the sum written above |
+| x_new[i] − pred[i] | the surprise: what neuron i did minus what the board guessed |
+| ws × write × (x_new[i] − pred[i]) × x_old[j] | the amount added this tick under delta |
+
+Putting that table on the page in place of the bare equations.
+
+My blanket apostrophe replacement broke one JavaScript string, and Version 35 went out with that error, which stops the page's script. Fixing it right now.
+
+Version 36 is live, syntax-checked, and pushed. If you had Version 35 open for a minute, its drawings would have been blank; reload and it is fine.
+
+In question 4 the bare equations are replaced by:
+
+- **The two lines with the sum written out.** No Σ. pred[i] is written as F[i,1]×x_old[1] + F[i,2]×x_old[2] + … + F[i,64]×x_old[64], with a note that maths books abbreviate that with a capital sigma, Σ, meaning "add these up over all j," and that it is not the small σ of the sigmoid.
+- **A table of every piece**, thirteen rows, each in plain words: F[i,j], the arrow, erase, what is left after removing, ws, write, x_new[i], x_old[j], the pairing, the Hebb addition, pred[i] (go along row i, multiply each cell by that sender's old activity, add up the 64 products), the surprise, and the delta addition.
+- One line saying that for a single cell with one sender, pred has only one term, cell × sender, which is what the drawings below use.
+
+## Nico · 2026-09-16 16:01
+
+peters definintion is way fucking better pred  = F x_old
+F = (1 - erase) * F + ws * write * outer(x_new - pred, x_old)... use it here to siplify the math and stuff
+
+**Claude · 2026-09-16 16:01**
+
+Agreed, that is cleaner. Whole-board notation, one line each, and only two new words to define: "F x_old" and "outer".
+
+Version 37 is live and pushed. Question 4 now uses Peter's whole-board form:
+
+```
+Hebb:   F = (1 − erase)·F + ws·write·outer(x_new, x_old)
+Delta:  pred = F x_old
+        F = (1 − erase)·F + ws·write·outer(x_new − pred, x_old)
+```
+
+Under them, a short table defines the pieces that carry it: F is the whole board; x_old and x_new are the 64 activities then and now; (1 − erase)·F shrinks every cell; **outer(a, b)** is the table whose cell [i,j] is a[i] × b[j], so outer(x_new, x_old) is the pairing table for all pairs at once; **F x_old** is the board applied to the old activities, one guess per neuron, computed exactly the way the neurons read the board; pred is that list of guesses; x_new − pred is the list of surprises.
+
+The closing line says the only difference between the rules is what goes into the first slot of outer: the activity itself, or the activity minus the board's guess. The per-cell index version and the Σ are gone.
+
+## Nico · 2026-09-16 16:04
+
+sorry but he says "outer" we just multiplied it before right? it was ws x wg x ___ ? i dont want to add taht unless we must
+
+**Claude · 2026-09-16 16:04**
+
+Right, it is the same multiplication. "outer(x_new, x_old)" is only the whole-board way of writing "x_new[i] × x_old[j] for every cell." Nothing new, so let's not add the word. Back to the form you already know, with only pred added:
+
+```
+Hebb:   F[i,j] = (1 − erase) × F[i,j] + ws × write × x_new[i] × x_old[j]
+Delta:  F[i,j] = (1 − erase) × F[i,j] + ws × write × (x_new[i] − pred[i]) × x_old[j]
+```
+
+where pred[i] is the board's guess for neuron i, made the way the neurons read the board: row i of F times the old activities, added up. For one cell with a single sender that is just cell × sender.
+
+Version 38 is live and pushed. Question 4 now shows the two rules in the same per-cell form as question 1, with one addition, pred[i]:
+
+```
+Hebb:   F[i,j] = (1 − erase) × F[i,j] + ws × write × x_new[i] × x_old[j]
+Delta:  F[i,j] = (1 − erase) × F[i,j] + ws × write × (x_new[i] − pred[i]) × x_old[j]
+```
+
+The paragraph under them says the one new thing is pred[i], the board's guess for neuron i, made the way the neurons read the board (row i of F times the old activities, added up), and that for a single cell with one sender it is just cell × sender, the "guess" in the drawings. A small grey note at the end mentions that Peter's note writes the same rules for the whole board with "outer" and "F x_old", and says in one sentence what each of those means, so you can read his version when you meet it. No new symbols in the main line.
+
+## Nico · 2026-09-16 16:08
+
+push commit emrge to main
+
+**Claude · 2026-09-16 16:08**
+
+Already done. Every change is committed on `main` and pushed to your fork; local `main` and `mine/main` are both at fecb9d4 with nothing ahead or behind. The only untracked item is still the `flight-scene/` folder, which predates this session and which I have left alone.
+
+## Nico · 2026-09-16 20:09
+
+ok, i have a question... ive learned so much! 
+
+If I let you run another 10-20 experiments overnight... how much better you think we can get to on score?
+
+**Claude · 2026-09-16 20:10**
+
+Honest estimate, then the reasoning.
+
+**My guess for the 30-second score after one more night:**
+
+| outcome | score | what it would take |
+|---|---|---|
+| likely | 1.3 to 1.4 | polish run 19, raise the lid, train at 45 s |
+| optimistic | 1.1 to 1.2 | one of those turns out to be a big lever, and they stack |
+| unlikely in one night | under 1.0 | a change to how the network reads its count, not just how it writes it |
+
+For scale: we started the first night at 2.43 and ended at 1.62, and the hand-built brain sits at 0.75.
+
+**Why I think the easy gains are mostly spent.** The first night's improvement came from two large moves, the reset and the two-speed world, plus one polish. Those addressed the start of each trip (a clean board) and the middle (counting distance rather than time). What is left is the leak: error that grows with trip length because the count saturates or fades. The stress test shows it clearly, and the "Counter with a Lid" page has the four levers for it. Each is a real hypothesis, none is a sure thing.
+
+**What I would run, in order, and what each might buy:**
+1. Polish run 19 at a tenth of the rate. Almost free; the same move gave run 17 about 0.1.
+2. Raise the lid (f_max 2, then 4) on run 19. The most direct attack on saturation. Could be worth 0.1 to 0.3, or could destabilise the neurons; either answer is useful.
+3. Add a 45-second stage to the curriculum. Makes overflow cost something during training. Unknown size.
+4. A small penalty on the size of F, to push toward smaller steps. Speculative.
+5. 128 neurons. More room for the count, four times the compute per tick, so fewer iterations in the night. I would try it last.
+6. Combine whichever of 1 to 4 helped, since run 19 showed that independent fixes stack.
+
+**Two things I would do first, before any of that, because they change what the night is worth.** A decoding test: fit a straight line from the 4,096 fast weights to the true home vector, so we know whether the count is really in F in readable form and how it degrades along a trip. And a second seed of run 19's whole line, so that whatever number we end on is not one lucky draw. Neither improves the score directly; both make the score mean something.
+
+**The cost side.** A run is about 27 minutes, so 20 runs is a full nine or ten hours with no slack, and roughly half of one-knob experiments come back negative. I would plan for twelve to fifteen and let the driver stop the ones that fail early.
+
+One honest caveat about the 0.75 floor. The hand brain has a perfect adding machine and still scores 0.75, because of compass noise and the search near home. Getting under 1.0 with a learned network would mean it is within striking distance of that machine, which is a much bigger claim than anything we have made so far. I would not promise it.
+
+## Nico · 2026-09-16 20:10
+
+and would you try multipleknobs at once? how do you disambibugate
+
+**Claude · 2026-09-16 20:11**
+
+Sometimes, yes, and there is a standard way to keep it honest. The rule is not "one knob per run," it is "one knob per *comparison*." Every run you look at must differ from some other run you have by exactly one thing. That leaves room for two designs beyond the single-knob chain.
+
+**1. The stacking test.** If knob A helped on its own and knob B helped on its own, run A+B. You now have four runs: neither, A, B, both. Each pair that differs by one knob is a clean comparison, and the fourth run answers a question the singles cannot: do the gains add? Run 19 was exactly this: the two-speed world (A) and the reset line (B), and it stacked. The catch is that if A+B comes out worse, you cannot tell from that run alone which one broke the other; you need the singles, which you already have.
+
+**2. The fair rival.** When comparing two designs rather than two settings, you sometimes must change several knobs at once so that each design gets its own best settings. Run 20 is the example: the rival with no fast weights got run 3's exact recipe, which was tuned over twenty runs for the fast-weight version. A fairer rival would get its own learning-rate sweep and a longer first stage. That is three or four knobs different from run 3, and it is right to do it, because the question is "best rival versus best fast-weight network," not "same recipe with one switch flipped."
+
+**What I would not do** is change two knobs in a single warm-start step just to save time, with no singles to compare against. The saving is one run; the cost is that if it helps you do not know why, so you cannot build on it, and if it hurts you do not know what to undo.
+
+**For tomorrow night, concretely:** the singles first (polish, lid, 45-second stage, F penalty), each from run 19, each one knob. Then the stacks: the best single plus the second best, then all that helped. That is about eight to ten runs and every one of them is readable against a neighbour. The stress test and the decoding test run on each checkpoint afterwards, which costs no training time.
+
+One more tool for disambiguating that we have not used and should: **seeds.** Two runs that differ by one knob can also differ by luck. When a difference is small, the honest move is to rerun both at a second seed. If the ordering holds, believe it; if it flips, the knob did nothing and the first result was noise. That is what runs 11 and 11B were about, and it is why I keep flagging that most of the campaign is seed 0.
+
+## Nico · 2026-09-16 20:11
+
+if you had to push it to the limit in anoather 10-20 runs, if you had to be a world class researcher without changing the rules, what would you do tonight?
+
+**Claude · 2026-09-16 20:12**
+
+Here is what I would actually do, as a schedule, with the reasoning a good researcher would insist on before spending a night of compute.
+
+**Hour 0, before any training: an hour of diagnosis, because the biggest mistake would be guessing which lever matters.** Three cheap measurements on run 19's final network, no training needed:
+1. **Decode the count.** Fit a straight-line readout from the 4,096 fast weights to the true home vector at every tick of 200 trips. This tells us where the count lives, how accurate it is, and, crucially, *when* it degrades: at the moment cells hit the lid (saturation), slowly across the whole wander (leak), or not at all (the count is fine and the steering is the problem).
+2. **Split the error by phase.** How much of the 1.62 comes from the outbound count being wrong, from the return heading being wrong given a correct count, and from the search once near home. Three different fixes, and only the data can say which bucket is biggest.
+3. **Lesions.** Silence the 32 compass cells; silence the erase drivers; silence the write drivers. Ten minutes, and it tells us which parts are load-bearing so no run wastes time on a part that is not.
+
+**Then the runs, ordered by expected information per hour, all from run 19, one knob each, killed by the five-minute rule if the F gap closes.**
+
+| # | knob | why this one | prediction I would write down |
+|---|---|---|---|
+| 1 | lid ±1 → ±2 | the diagnosis will most likely name saturation; this is the direct attack | 30 s under 1.45, stress-test slope halves |
+| 2 | curriculum stage 45 s added | makes overflow cost loss during training | 30 s holds, 45 s improves from 2.15 toward 1.7 |
+| 3 | batch 32 → 64 | steadier gradient for a network already in a narrow valley; cheap | small gain, 0.05 |
+| 4 | erase penalty 20 → 5 | the gate now works; the penalty may be over-holding erase-away and costing a cleaner fade | slightly better or no change; tells us if 20 is a tax |
+| 5 | F-size penalty (small) | the "smaller steps" lever | speculative; useful either way |
+| 6 | neurons 64 → 128, warm start impossible, so cold with run 3's recipe | the only capacity lever besides the lid; slow, so start it early in the night in parallel | homes at 10 s by 600, unknown at 30 s |
+
+Runs 1 to 5 are about 27 minutes each and can be paired: the Mac ran two trainers at once on the first night, so I would run them two at a time and accept each being slower. Run 6 is four times the compute per tick and would run alongside everything else for the whole night.
+
+**Second half of the night: stack and confirm.**
+- 7: best single + second-best single.
+- 8: all singles that helped.
+- 9: polish of the best stack at a tenth of the learning rate.
+- 10: **the same winner from seed 1**, the run I would not skip, because a number that holds at two seeds is worth more than a lower number that holds at one.
+- 11 and 12: whatever the diagnosis and the first results say. I would leave these open on purpose; the first night's best moves (the two-speed world, the ratchet) were not on the plan at 5 pm.
+
+**What "not changing the rules" holds fixed:** the exam (seed 4242, 200 trips, standard world), the loss, the arrival radius, the compass noise, the steering cap. Every number above is on the same ruler as 1.62.
+
+**What I would tell you at 7 am.** A leaderboard where the best entry is stated with its seed-1 replication beside it, the diagnosis charts (where the count degrades, which phase carries the error, what the lesions broke), and a "why it happened" for every run, marked measured or guess. If the diagnosis says the count is fine and the steering is the problem, the whole run list above changes, and I would rather tell you that at hour one than discover it at hour nine.
+
+My honest expectation for the number: 1.3 to 1.4, with a real chance of 1.2 if the lid is the story, and a promise only that whatever it is will be earned, replicated, and explained.
+
+## Nico · 2026-09-16 20:12
+
+theres also got to be something to the delta rule right? like everyone uses it?
+
+**Claude · 2026-09-16 20:13**
+
+Yes, there is real substance to it, and the fair way to say it is: the delta rule is the right tool for a different job than the one we handed it.
+
+**What everyone uses it for.** Modern sequence models (DeltaNet, Gated DeltaNet, Titans, the test-time-training family) use the fast weights as a lookup table: store "when you see this key, produce this value," then retrieve. For that job delta is close to ideal. Each write only corrects the part of the answer the table had wrong, so new pairs do not smear over old ones, nothing saturates, and mathematically the board ends up as the best-fitting table for everything it has seen (it is online least-squares regression). Hebb, for the same job, keeps piling the same association on top of itself and the table drifts, which is why those models moved away from it. At language-model scale this shows up as measurably better recall over long contexts. So the popularity is earned.
+
+**Why it failed for us.** Our job is not lookup, it is accumulation: keep adding steps. A rule that stops writing when its guess is right cannot accumulate on its own, and Hebb with a lid is, by accident, a decent adding machine. The drawings in question 4 are the whole story of that mismatch.
+
+**The part I should be careful about.** Delta *can* count, if the network arranges things so that the thing being predicted is itself the running total plus a step. Concretely: the neurons already read the board's guess (that is what A·F·x_old feeds them). If the network learned to produce x_new = (the guess) + (this tick's step), then the surprise each tick would be exactly the step, and delta would write the step onto the board. The count would accumulate, and without hitting a lid the way Hebb does. That is how a DeltaNet-style layer would integrate. Our runs 15 and 18 did not find that arrangement. So the honest statement is narrower than "delta cannot do this task": it is "gradient descent, from those two starting points and with that budget, did not find the delta solution to this task, while it found the Hebb solution easily." A cold Hebb start homed by iteration 800; a cold delta start had no memory at 800. That is a real difference in how easy each rule makes the problem, which matters, but it is not a proof.
+
+**If I wanted to give delta a fair shot** in a future night, I would give it two things it did not get: a longer first stage, and a warm start from a network that already reads the board's guess well (a fresh readout is what run 18 lacked). Also worth trying is the hybrid Peter's note hints at, the "gated delta" with momentum (the Titans update), which keeps some of Hebb's tendency to accumulate. I would rank that behind the lid and the 45-second stage for tomorrow, because the diagnosis will tell us whether accumulation capacity is even the bottleneck. But "everyone uses it" is right, and the reason is that most memories worth having in a language model are associations, not tallies.
+
+## Nico · 2026-09-16 20:14
+
+ok.... i want you to give your self a goal prompt to do this and be done by 5am pt. be insanely high research taste and get this score way way way improved. you can do as many runs as you need to by the timeline, and you can end runs qhen you want,  etc... 
+
+Also, I want you to update the deep dive just so that we have the stores for each run now added there too (in that awesome drop down and elsewhere).
+
+**Claude · 2026-09-16 20:14**
+
+Let me check the clock and the machine before I write the charter.
+
+Both runs are training and the monitor is armed. Now the diagnosis script: decode the home vector from F along the trip, split the error by phase, and lesion the compass cells and gate drivers.
+
+Campaign 2 is running. Here is the charter I wrote for myself and where things stand at 20:20.
+
+**Goal prompt (saved as [charter2.md](level3/campaign/charter2.md)):** lower the honest 30-second score as far as it will go from run 19's 1.62 by 05:00 PT, without touching the exam, the loss, the arrival radius, the compass noise or the steering. Diagnose before spending compute. One knob per comparison: singles from run 19, then stacks of what helped, then a polish, then the winner replicated at a second seed. Two trainers at once. Kill within five minutes if the memory gap closes. Prediction before every run, lesson after, mechanisms marked measured or guess. Deliver by 05:00: Night Report, the deep dive with every new run in the turn picker, notes, memory, commit and push.
+
+**The diagnosis, done first, and what it changed.** A new tool, [diag.py](level3/diag.py), measured three things on run 19:
+
+| finding | number |
+|---|---|
+| home vector decodable from F (R², held-out trips) | 0.97 |
+| decode error at 5 s / 25 s of the wander | 0.12 / 1.04 units |
+| cells pinned at the lid at 25 s | 43% |
+| heading error, first 3 s of return: run 19 / hand brain | 55° / 45° |
+| score after silencing 8 random neurons | 4.0 (from 1.6) |
+
+So the count is real and readable, saturation is what degrades it, the network's steering is close to the noise floor, and nothing in the network is spare. That puts the lid and capacity first and takes the delta rule off tonight's list.
+
+**Running now, two at a time:**
+- Run 21, lid ±1 to ±2, warm from run 19. Prediction: 30 s under 1.45 if saturation is the leak. It started worse than run 19 because a doubled lid changes what the warm-started network expects; it has 800 iterations to re-adapt.
+- Run 22, 128 neurons from a cold start, alongside the queue all night. Prediction: homes at 10 s by iteration 700.
+- Queued behind 21: run 23 trains on 45-second wanders, run 24 batch 64, run 25 erase penalty 5. Stacks, polish and the seed-1 replication come after those results.
+
+Run 21's dashboard is open in Chrome. A monitor wakes me on every checkpoint, promotion and finish, so the lessons and next runs get written as the night goes. The diagnosis is already in the narrative and committed.
+
+Run 22 at iteration 100: running score 2.08 at 10 seconds, no memory gap yet, which is normal this early (run 3 had none at 100 either). Nothing to change; waiting for the next checkpoints.
+
+Run 22 at 200: a first small gap opening (2.04 with F, 2.24 without). Run 3 at the same point was similar. Waiting.
+
+Run 21 at 100 is in trouble: running score 6.89 on the training world against run 19's 2.7, loss 7.4 against 3.45. Doubling the lid let cells that used to stop at 1 keep growing, so every readout the network had tuned is now wrong. There is still a memory gap (5.6 with F, 8.2 without), so it is not dead, but the prediction said "worse within 200 iterations means kill." I'll give it to iteration 200 and, if it has not turned, kill it and start run 21B: same lid but a smaller learning rate so it can re-adapt without being thrown around.
+
+Run 22 (128 neurons) at 300: running score 1.51 at 10 seconds with a clear gap (1.54 with F, 2.46 without). That is faster than run 3 at the same point (1.96), and it is already brushing the promotion line of 1.5. Waiting for run 21's 200 checkpoint.
+
+Run 22 promoted to 20-second wanders at iteration 302, against 804 for run 3 with 64 neurons. The larger network learned the 10-second stage in well under half the time. Waiting on run 21.
+
+Run 21 has turned around: running score 6.89 → 3.45, loss 7.4 → 4.0, and the frozen check is 2.48 with F against 7.69 without, which is already level with run 19's frozen checks at the same stage. The network re-adapted to the doubled lid in about 200 iterations. It stays. Now the question is whether it goes past run 19 in the remaining 600.
+
+Run 22, first checkpoint at 20 seconds: running 4.34 and the gap nearly closed (3.85 vs 4.04). That is the usual post-promotion dip; run 3 looked the same right after its promotion and recovered. The driver's gap rule does not apply to this run (it is manual), so I will judge it myself: if the gap has not reopened by iteration 700, it is stalling like seed 1 did.
+
+Run 21 at 300: running 3.35, frozen check 3.59 with F (worse than the 2.48 at 200), loss bouncing. It is holding around run 19's level rather than pulling ahead yet. Not a kill; the cosine decay has barely started shrinking the steps. Waiting for 400 and 500.
+
+Run 22 at 500: the gap at 20 seconds is still closed (4.76 with F, 4.91 without). Two checkpoints in a row like this is the pattern seed 1 showed in run 11. I'll hold to the plan: decision at 700. If it is still closed then, the honest reading is that 128 neurons learned the 10-second stage faster but transfer to 20 seconds no better, and I would rather spend that CPU on a second single from run 19.
+
+Run 22 at 600: gap still closed (4.51 vs 4.57), running score drifting up to 4.52. Three checkpoints without a memory at 20 seconds. One more checkpoint, then the decision.
+
+Run 21 at 400: running 2.82 on the training world, loss 3.32. Run 19's final iteration on that same world was running 2.73, loss 3.45. So the lid-2 network has caught up with its parent at the halfway mark, with 400 iterations of shrinking steps left. This is the moment it either pulls ahead or plateaus.
+
+Decision on run 22: four checkpoints at 20 seconds with no memory gap (4.02 with F, 4.06 without). Killing it and using that CPU for run 23 (the 45-second stage) in parallel now, so the driver's queue and this slot both keep moving.
+
+Run 22 is recorded (lesson, results, and its card for the deep-dive picker). Run 23 is training on 45-second wanders at about 7 seconds per iteration, so 600 iterations will take about 70 minutes. Run 21 at 500 has now edged past its parent: loss 3.01 against run 19's final 3.45 on the same training world, running score level at 2.73. Waiting for the next checkpoints.
+
+The old monitor expired; the replacement that also watches run 23 and the queue is already armed. Waiting.
+
+Stale line from the expired monitor. Nothing new.
+
+Run 21 at 600: running 2.88, frozen 3.23 with F. It has settled at roughly run 19's level rather than clearly below it. Two checkpoints left with the smallest steps; the exam at the end will decide. If it lands within noise of 1.62, the honest reading will be "doubling the lid did not by itself buy a better count," and the pinned-cell share in its test will say whether saturation moved elsewhere.
+
+Run 23 at 100 on 45-second wanders: running 3.71, frozen 3.84 with F against 12.2 without, so the memory is intact at the longer length. Both trainers healthy. Waiting.
+
+Run 21 at 700: running 3.06, frozen 2.72. It is not pulling below its parent. One checkpoint to go, then the driver tests it and I will write the verdict. Meanwhile I'll prepare the next single so the driver's slot is never idle after runs 24 and 25: the F-size penalty needs a small trainer flag, which I will add now (a new knob, off by default, so no existing run is affected).
+
+Run 21 has finished its 800 iterations; the driver is now running its exams (20 s and 30 s, final and best checkpoint), which takes a few minutes, and will then start run 24. The F-size penalty flag is in the trainer, off by default, ready for run 26. Waiting for run 21's numbers.
+
+Run 21's verdict is in and it is negative: 1.96 at 30 seconds on the final network, 1.83 at its best checkpoint, against run 19's 1.62. The doubled lid did not buy a better score. Before I write why, the diagnosis tool can say whether the count itself got more accurate even though the score did not.
+
+Committed and pushed. State at 21:07: run 23 (45-second wanders) at iteration 200 with a wide memory gap (3.39 with F, 11.1 without); run 24 (batch 64) just started; runs 25, 26 and 27 queued behind it. Nothing to do until the next checkpoints land.
+
+Already seen. Waiting.
+
+Run 24 (batch 64) at 100: running 2.83, frozen 2.49 with F. On track with its parent so far; 5 seconds per iteration with the bigger batch, so about 50 minutes for the run. Waiting.
+
+Run 23 at 300 of 600 on 45-second wanders: running 3.42, frozen 3.08 with F. Steady, and holding a memory across trips half again as long as it ever trained on before. Halfway. Waiting.
+
+Monitor re-armed for runs 23 through 27. Waiting.
+
+Run 23 at 400: running 3.48, frozen 3.03. Flat since 300. Two checkpoints left. Waiting.
+
+Run 24 (batch 64) at 300: running 2.81, frozen 2.79. Level with its parent so far, not below it. Three checkpoints left. Waiting.
+
+Run 23 at 500 of 600: running 3.20 at 45 seconds, the best yet for this run. One checkpoint to go, then I test it at 30 s and 45 s myself, since it is outside the driver's queue.
+
+Run 24 at 400: running 2.56, the lowest running score any run has posted on the two-speed training world (run 19 finished at 2.73). The steadier gradient may be doing something. Two checkpoints left.
+
+Run 23's exams are running in the background and run 28 is training in its slot. Waiting for the test results and run 24's last checkpoints.
+
+Run 24 at 500: running 2.47, frozen 2.33 with F, both the best numbers yet on the training world. The batch-64 line is genuinely ahead of its parent now. One checkpoint left.
+
+Run 23 is recorded. Run 24 is on its last 100 iterations and run 28 (F-size penalty) is at 100 with the memory intact. Nothing to request until the next events arrive.
+
+Seen. Waiting for run 24's finish.
+
+Run 24 (batch 64): 1.62 at 30 seconds, exactly run 19's number, with 20 s slightly worse (1.76 vs 1.63). Its running score on the training world was the best of any run (2.47 vs 2.73), but that did not carry to the exam. No effect.
+
+Three singles have now landed at or above 1.62, which says this recipe is at a plateau and the lever has to be the one the diagnosis named: the count is written only roughly in proportion to distance, because the write gate tracks speed at +0.69. The two-speed world only ever shows the network two speeds. A world where the speed changes to a new random level every few seconds would force the gate to track speed continuously. That is a data change of the same kind as run 13, so I'll add it as a speed profile and start it now as a third parallel run.
+
+Committed and pushed. Status at 21:45:
+
+| run | knob | state |
+|---|---|---|
+| 21 lid ±2 | done | 1.96 (best 1.83), worse; saturation was not the leak |
+| 22 128 neurons | killed at 700 | fast at 10 s, no transfer to 20 s |
+| 23 45-s stage | done | 2.05 at 30 s, 2.51 at 45 s, worse |
+| 24 batch 64 | done | 1.62, no change |
+| 25 penalty 5 | training | |
+| 28 F-size penalty | training | |
+| 29 many-speeds world | training | the diagnosis-driven bet |
+| 26 polish, 27 reseed | queued | |
+
+Every next step depends on a checkpoint landing, so I'm waiting on the monitor.
+
+Old monitor expired; the current one covers everything. Waiting.
+
+Run 28 (F-size penalty) at 200: running 3.33, frozen 2.45 with F. Memory intact; the penalty has not dimmed it. Waiting.
+
+Same line via the new monitor. Waiting.
+
+One of the two newer runs at its first checkpoint (running 3.06, gap wide). Waiting.
+
+Duplicate. Waiting.
+
+All three healthy at their first checkpoints: run 25 (penalty 5) running 3.06, run 28 (F penalty) at 300 running 2.75, run 29 (many-speeds world) running 2.86 with the gap wide (2.51 with F, 7.41 without). Note the running scores are on different training worlds now, so they are not comparable to each other; only the exam at the end is. Waiting.
+
+Seen (run 28 at 300). Waiting.
+
+Duplicate. Waiting.
+
+A 200 checkpoint (run 25 or 29): running 2.86, frozen 2.42. Waiting.
+
+Run 29 (many-speeds world) at 200: running 2.40 on its own world, frozen 2.58 with F against 7.86 without. Run 25 (penalty 5) at 200: running 2.86, frozen 2.42. Both fine. Waiting for the finishes; run 28 is the first due, in about 30 minutes.
+
+Run 28 (F penalty) at 400: running 2.67, frozen 2.76. Halfway, level with the parent. Waiting.
+
+Duplicate. Waiting.
+
+A 300 checkpoint (run 25 or 29), running 3.03. Waiting.
+
+Expired; the newer monitor still covers all runs. Waiting.
+
+Stale. Waiting.
+
+Run 29 (many-speeds world) at 300: running 2.45, and a single-batch score of 1.79 with loss 2.55, the lowest training loss any run has shown. Run 25 (penalty 5) at 300: running 3.03, slightly worse than its parent so far. It is 22:07; run 28 finishes in about 20 minutes, runs 25 and 29 about 30 minutes after that. Nothing to act on until those exams land.
+
+Run 28 (F penalty) at 500: running 2.83, frozen 2.57. Holding around its parent. Waiting.
+
+A 400 checkpoint (run 25 or 29), running 2.99. Waiting.
+
+Re-armed. Waiting.
+
+Run 28 at 600: running 2.55. Two checkpoints to go. Waiting.
+
+A 500 checkpoint (run 25 or 29), running 2.74. Waiting.
+
+The other 500 checkpoint, running 2.80. Both are near their parents' level on their own worlds; the exams will decide. Waiting.
+
+Run 28 at 700: running 2.58, frozen 2.28 with F, its best frozen check. One checkpoint left, then I test it. Waiting.
+
+Run 25 (erase penalty 20 → 5) is negative: 1.92 at 30 seconds, 1.84 at its best checkpoint. Checking what the gate did, then recording.
+
+Run 25 is recorded with the corrected reading. Run 26 (the polish) has started on the driver. Run 28 finishes in a few minutes and run 29 about 15 minutes after; nothing to request until their final checkpoints land.
+
+Run 29 at 600: running 2.72, frozen 2.29. Two checkpoints to go. Waiting.
+
+Run 28 (F-size penalty) has finished. Testing it at 20 and 30 seconds, final and best checkpoint, in the background.
+
+Tests launched; the monitor will report when they finish. Waiting.
+
+Run 26 (polish) at 100: running 2.60, frozen 2.28. Waiting on run 28's tests and run 29's finish.
+
+Run 29 at 700: running 2.36 on the many-speeds world, the lowest running score of the campaign on any world. Last checkpoint next. Waiting.
+
+Run 29 (many-speeds world) has finished. Testing it now, final and best checkpoint, at 20 and 30 seconds.
+
+The deep dive now has a question 12 on the diagnosis and the campaign-2 turns in the picker (Version 39, pushed). Four trainers are running: run 26 (polish) at 200, runs 27, 31 and 32 just started. Everything left depends on their checkpoints, so I'm waiting on the monitor.
+
+Run 26 (polish) at 300: running 2.70. With four trainers sharing the machine, iterations have slowed to about 4.5 seconds. Waiting.
+
+Duplicate. Waiting.
+
+Run 32 (cold, many-speeds world) at 100: running 3.22 at 10 seconds, no gap yet. That world is harder at 10 s than the steady one (the hand brain itself scores 1.0 there at 20 s), so its numbers will not line up with run 3's. Waiting.
+
+Duplicate from an older monitor. Waiting.
+
+A 100 checkpoint (run 27 or 31), running 3.53. Waiting.
+
+Run 32 at 200: running 2.83, first gap opening (2.60 with F, 2.99 without). Waiting.
+
+Old monitor expired; the current one covers all runs. Waiting.
+
+Stale. Waiting.
+
+Run 32 at 300: running 2.50, gap widening (2.37 with F, 3.45 without). A memory is forming on the many-speeds world from a cold start. Waiting.
+
+Another 100 checkpoint (run 27 or 31), running 2.52, frozen 2.24. Waiting.
+
+Duplicate. Waiting.
+
+Run 32 at 400: running 2.51, gap 2.33 versus 3.71. Waiting.
+
+Run 26 (polish) at 400: running 2.78. Halfway. Waiting.
+
+Run 32 at 500: running 3.08, up from 2.51, with the gap still there. A wobble. Waiting.
+
+Duplicate. Waiting.
+
+Attributed: run 26 (polish) at 400 running 2.78; run 27 (reseed) at 200 running 3.56, slower than run 19's own path so far; run 31 (stack) at 100 running 2.52; run 32 (cold, many speeds) at 600 running 2.06 at 10 s with a widening gap, close to promotion. It is 22:49. Nothing to act on until the next checkpoints.
+
+Seen. Waiting.
+
+Run 32 at 700: running 2.03. Its running score has sat just above the 1.5 promotion line for 200 iterations; on the many-speeds world 10-second trips are harder, so it may hit the 1000-iteration cap before earning promotion. Waiting.
+
+Duplicate. Waiting.
+
+Run 31 (stack) at 200: running 2.56, frozen 2.05 with F, the best frozen check of the campaign. Waiting.
+
+Run 26 (polish) at 500: running 2.66. Three checkpoints to go. Waiting.
+
+Duplicate. Waiting.
+
+Run 32 at 800: running 2.07, still just above the promotion line, gap 1.98 versus 3.20. It will most likely be promoted by the cap at 1000. Waiting.
+
+Run 27 (reseed) at 300: running 3.89, well above run 19's path. That is already telling: the same weights and recipe with different training dice is following a visibly different trajectory. Its exam number is the one that sets the noise floor. Waiting.
+
+Run 32 at 900: running 2.06. Cap at 1000 next. Waiting.
+
+Run 32 promoted to 20-second wanders by the cap at 1000, with a memory gap in place (2.20 with F, 3.38 without) but a running score of about 2.06 rather than the earned 1.5. Waiting.
+
+Seen. Waiting.
+
+Duplicate. Waiting.
+
+Run 31 (stack) at 300: running 2.50. Two checkpoints left. Waiting.
+
+Run 26 (polish) at 600: running 2.81. Waiting.
+
+Duplicate. Waiting.
+
+Run 32 first checkpoint at 20 seconds: running 4.80 on the many-speeds world, but a real gap (3.77 with F, 5.87 without), which is more than the 128-neuron run ever had at this stage. Waiting.
+
+Old monitor expired; the current one still covers everything. Waiting.
+
+Stale. Waiting.
+
+Run 27 (reseed) at 400: running 3.51. Halfway, still well above run 19's path. Waiting.
+
+Re-armed. Waiting.
+
+Run 31 (stack) at 400: running 2.50. One checkpoint to go. Waiting.
+
+Run 26 (polish) at 700: running 2.84. One checkpoint left. Waiting.
+
+Run 27 (reseed) at 500: running 3.58. Waiting.
+
+Run 32 at 1300 (20-second stage): running 5.28 and the gap has closed (5.37 vs 5.50). The same stall at 20 seconds that seed 1 and the 128-neuron run showed. It has until about 02:30 by the charter; if the gap has not reopened by iteration 1700 I will stop it early and test its 10-second checkpoint. Waiting.
+
+Run 31 (the batch-64 plus low-rate stack) has finished. Testing it now.
+
+Run 31 (batch 64 plus low-rate finish): 1.64 at 30 seconds. No change, like every other optimisation knob. Recording it and committing.
+
+Run 33 is training; its erase bias went from +1.86 to −0.14, and the frozen checks at 100 and 200 will show whether the at-food wipe survives. Runs 27, 30 and 32 continue. Waiting on the monitor.
+
+Run 27 (reseed) at 600: running 3.29, still above run 19's path at the same point. Waiting.
+
+Run 32 at 1500: running 4.60, a gap reappearing (4.26 vs 4.98). Not dead yet. Waiting.
+
+Duplicate. Waiting.
+
+Run 32 at 1600: gap nearly closed again (4.60 vs 4.87), running 4.83. One more checkpoint decides it. Waiting.
+
+Duplicate. Waiting.
+
+Run 33 (fade lowered) at 100: running 6.61, loss 7.65, a heavy hit, the same size as run 21's at 100 before it recovered. The prediction allows it to 300. Run 30 at 100: running 2.52. Waiting for run 33's 200 and 300.
+
+Duplicate. Waiting.
+
+Seen. Waiting.
+
+Run 27 (reseed) at 700: running 3.16. One checkpoint left. Waiting.
+
+Duplicate. Waiting.
+
+Run 32 at 1700: a gap of 0.65 (5.01 vs 5.66), running 4.75. Alive but slow, like seed 1 was. I'll let it keep going, since nothing is waiting for its slot until run 33 reports. Waiting.
+
+Duplicate. Waiting.
+
+Run 33 at 200: running 5.23, frozen 4.51 with F against 7.67 without. Recovering, but more slowly than run 21 did. Before the 300 decision I want to see what the gate itself is doing, so I'm testing the 200 checkpoint's erase values.
+
+Run 33 at 200 did exactly half of what it was meant to: the fade fell from 0.008 to 0.0012 per tick, so the count now lasts. But the wipe at food fell with it (0.38 to 0.06, peak 0.33), and the score at that checkpoint is 3.96. The frozen checks are improving fast (6.06 → 4.51), so the readout is re-matching. The prediction said kill at 300 if the wipe has not recovered; it will not reach 0.3 by then, but the trend is the thing I care about, so I'll give it to 400 and test that checkpoint before deciding. Waiting.
+
+Run 27 (the reseeded control) has finished. Testing it; this is the number that sets the noise floor for every comparison tonight.
+
+Run 32 reached a 10-second memory (1.51 with F, 2.61 without, 51 compass cells) but never a 20-second one. Five trainers are running now: run 30 (polish of 29), run 33 (fade lowered) approaching its 400 decision, and the three extra seeds. Everything left depends on those checkpoints; waiting on the monitor.
+
+Old monitor expired; the current one covers all live runs. Waiting.
+
+Stale. Waiting.
+
+Run 33 at 300 is going the wrong way: running 5.87, frozen 6.37, worse than at 200. The readout is not re-matching to the slower fade; the network is coming apart. Killing it per the prediction and recording the result.
+
+Run 37 is training with its erase floor at 0.0009 from the first tick. Five trainers live: run 30, the three seeds, and run 37. Nothing further to request until checkpoints land; waiting on the monitor.
+
+Run 37 at 100: running 2.14 at 10 seconds, no gap yet, normal for this point. Waiting.
+
+Run 30 at 300, already seen. Waiting.
+
+One of the seeds at 100: running 3.42. Waiting.
+
+Duplicate. Waiting.
+
+Another seed at 100: running 3.30. Waiting.
+
+Duplicate. Waiting.
+
+Third seed at 100: running 3.74. The three seeds at the same checkpoint read 3.42, 3.30 and 3.74, already spread by 0.4 on the training world. Waiting.
+
+Run 37 at 200: running 2.07, still no gap (2.05 vs 2.07). Run 3 had a small gap by 200; this one has none yet. Waiting.
+
+Duplicate from an older monitor. Waiting.
+
+Run 37 at 300: running 2.06, first gap opening (1.90 with F, 2.26 without). Waiting.
+
+Duplicate. Waiting.
+
+Old monitor expired; the current one covers all live runs. Waiting.
+
+Stale. Waiting.
+
+Run 30 (polish of 29) at 400: running 2.46. Two checkpoints left. Waiting.
+
+Run 37 at 400: running 2.01, and the gap has closed again (2.11 vs 2.04). Slower than run 3 at this point. Waiting; the 10-second stage cap is at 1000.
+
+Duplicate. Waiting.
+
+A seed at 200: running 3.26. Waiting.
+
+Duplicate. Waiting.
+
+Another seed at 200: running 3.32. Waiting.
+
+Duplicate. Waiting.
+
+Third seed at 200: running 3.72. Waiting.
+
+Run 37 at 500: running 2.08, gap still closed (2.09 vs 2.12). Halfway to the 10-second cap without a memory. If there is no gap at 700, I will stop it and call the low-floor cold start inconclusive, since the CPU is better spent finishing the seeds sooner. Waiting.
+
+Duplicate. Waiting.
+
+Run 37 at 600: running 1.96, gap 0.09. Marginal. One more checkpoint before the decision. Waiting.
+
+Run 30 at 500: running 2.44. One checkpoint left. Waiting.
+
+Run 37 at 700: running 1.73 and a real gap now (1.61 with F, 2.23 without). It found a memory later than run 3 did but it found one. It stays. Waiting.
+
+Duplicate. Waiting.
+
+A seed at 300: running 3.00. Waiting.
+
+Duplicate. Waiting.
+
+Another seed at 300: running 3.24. Waiting.
+
+Duplicate. Waiting.
+
+Third seed at 300: running 3.46. Waiting.
+
+Run 37 at 800: running 1.52, one hundredth above the promotion line, with a strong gap (1.40 with F, 2.36 without). It should promote within the next few dozen iterations, earned rather than by the cap. Waiting.
+
+Run 37 promoted to 20-second wanders at iteration 804, earned on the score, and by coincidence the exact iteration run 3 promoted at. Now the real test: whether a network that learned with a slow fade from the start transfers to 20 seconds, where the other cold starts stalled. Waiting.
+
+Run 37's first 20-second checkpoint: running 3.40 with a gap of 1.4 (2.91 with F, 4.30 without). Runs 22 and 32 had gaps near zero at this point. The slow-fade network carried its memory into the longer stage. Waiting.
+
+Duplicate. Waiting.
+
+Run 30 (polish of the many-speeds line): 1.78 at 30 seconds, no gain over its parent's 1.67, inside the noise. Recording it; the driver's queue is now empty and stays so, since the seeds and run 37 already fill the machine.
+
+Recorded and pushed. Live: the three seeds (around iteration 350 of 800) and run 37 on its 20-second stage. It is just past midnight; the seeds land around 01:00. Waiting on the monitor.
+
+Expected; the driver is idle by design. Waiting.
+
+Duplicate. Waiting.
+
+A seed at 400: running 3.02. Waiting.
+
+Duplicate. Waiting.
+
+Another seed at 400: running 2.85. Waiting.
+
+Duplicate. Waiting.
+
+Old monitor expired; the current one still covers all live runs. Waiting.
+
+Stale. Waiting.
+
+Third seed at 400: running 3.19. Halfway for all three. Waiting.
+
+Re-armed. Waiting.
+
+A seed at 500: running 3.21. Waiting.
+
+Run 37 at 1100 (20-second stage): running 3.55, gap narrowed to 0.6 (3.57 vs 4.17). Holding better than the other cold starts did at this point, but not yet pulling down. Waiting.
+
+Another seed at 500: running 2.69. Waiting.
+
+Third seed at 500: running 3.00. Waiting.
+
+Run 37 at 1200: running 3.09, gap 1.3 (3.09 vs 4.42), improving. This is the first cold start since run 3 to make progress at 20 seconds. Waiting.
+
+Two seeds at 600: running 2.87 and 2.71. Two checkpoints left. Waiting.
+
+Third seed at 600: running 2.75. Waiting.
+
+Run 37 at 1300: running 3.51, gap shrunk to 0.4 (3.35 vs 3.72). Wobbling. Waiting.
+
+A seed at 700: running 2.67. One checkpoint left. Waiting.
+
+Run 37 at 1400: the gap has closed (3.81 vs 3.81) and the running score climbed to 3.86. The pattern of the other cold starts after all, just delayed. I'll let it run to 1600 while the seeds finish, then decide. A seed at 700: running 2.75. Waiting.
+
+Third seed at 700: running 2.76. All three finish in about six minutes; then I test all three. Waiting.
+
+Run 37 at 1500: no gap (3.94 vs 3.79), running 3.79. Second closed checkpoint. One more and I stop it. Waiting.
+
+Two seeds have finished. Testing them (and the third as soon as it lands).
+
+The report is wired. Round two is training (runs 38 through 41, about 60 minutes); every remaining step depends on their checkpoints, so I'm waiting on the monitor.
+
+One of round two at 100: running 3.23, gap wide. Waiting.
+
+Two more at 100: running 3.49 and 3.14. Waiting.
+
+Old monitor expired; the round-two monitor is live. Waiting.
+
+Stale. Waiting.
+
+All four of round two are past 200 with memories intact: run 38 (shift −1) running 3.52, run 39 (shift −0.5) 2.87, run 40 and 41 (F-penalty seeds) 3.36 and 2.96. Neither fade shift has broken the readout the way −2 did. Waiting.
+
+Seen. Waiting.
+
+One at 300: running 2.94. Waiting.
+
+Run 38's checkpoint confirms the shape: the fade did fall to 0.003 and the wipe held at 0.24, but the score at that point is 3.07. The readout has not caught up with the slower fade. Runs 39, 40 and 41 are past 300 and healthy; they finish in about 35 minutes. Nothing to request until then.
+
+Seen (run 41 at 300). Waiting.
+
+Two at 400: running 2.68 and 2.77. Halfway. Waiting.
+
+Third at 400: running 2.69. Waiting.
+
+Two at 500: both running 2.53. Waiting.
+
+Re-armed. Waiting.
+
+One at 600: running 2.57. Waiting.
+
+All three at 600: running 2.57, 2.61, 2.55. Two checkpoints left, about ten minutes. Waiting.
+
+One at 700: running 2.57, frozen 2.30. Waiting.
+
+All three at 700, running 2.46 to 2.57. Last checkpoint next; then I test all three. Waiting.
+
+The deep dive now carries the fade test, the seed strip chart and run 41's diagnosis column. Committing that while the final round trains.
+
+The clock reads 01:14, so the final round has about 50 minutes to run and the write-up has the rest of the night. A waiter is set on the stress test. Nothing else can proceed until those land; waiting on the monitor.
+
+The stress test agrees with the seeds: run 41 beats run 19 at every condition it was measured on, though the gap shrinks with trip length (30 s: 1.49 vs 1.62; 45 s: 1.90 vs 2.15; 60 s: 2.68 vs 2.71; compass drift 0.05: 1.95 vs 2.01; drift 0.15: 3.14 vs 3.25). The Night Report's stress section will pick that row up at rebuild. Waiting on the final round.
+
+One of the final round at 100: running 3.25, gap wide. Waiting.
+
+One of the stacked runs at 100: running 4.13, frozen 4.68. The half-unit shift on run 41's readout is costing more early than it did on run 19's. Waiting for 200.
+
+Another at 100: running 3.18. Waiting.
+
+Fourth at 100: running 2.67, frozen 2.40. All four alive. Waiting.
+
+One at 200: running 3.33, frozen 2.32. Waiting.
+
+Runs 42 and 43 (the stack, seeds 0 and 1) are fine at 200 with frozen checks of 2.32 and 2.27, and run 45 (penalty seed 3) is at 2.59. Run 44 (stack, seed 2) is collapsing: running 6.00, frozen 5.24. I'll give it to 300; if it does not turn, it stays in the record as a failed draw of the stack, which is itself information about how fragile the shift is. Waiting.
+
+Old monitor expired; the final-round monitor is live. Waiting.
+
+One at 300: running 3.33. Waiting.
+
+Run 44 has not turned (running 5.63, frozen 5.76 at 300). Stopping it and recording it as a failed draw of the stack.
+
+Run 44 recorded. The other three are past 300 and healthy (running 3.33, 3.09, 2.85). About 30 minutes to their finish. Waiting.
+
+One at 400: running 3.30. Waiting.
+
+Another at 400: running 3.07. Waiting.
+
+Third at 400: running 2.87. All halfway. Waiting.
+
+One at 500: running 3.63, a swing upward. Waiting.
+
+Another at 500: running 2.94. Waiting.
+
+Third at 500: running 2.75. Waiting.
+
+Re-armed. The last three runs finish in about 15 minutes; then tests, then the final write-up. Waiting.
+
+One at 600: running 2.75. Waiting.
+
+Another at 600: running 2.89. Waiting.
+
+Third at 600: running 2.53. Two checkpoints left. Waiting.
+
+One at 700: running 2.70, frozen 2.32. Waiting.
+
+Another at 700: running 2.75. Waiting.
+
+Third at 700: running 2.54, frozen 2.21. Last checkpoint next, then tests. Waiting.
+
+One finished, waiting on the last two before testing them together.
+
+Two of three. Waiting on the last.
+
+All three are done. Testing them now.

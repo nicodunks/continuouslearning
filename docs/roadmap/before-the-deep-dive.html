@@ -830,7 +830,7 @@ tr.diff td{background:var(--chalk)}tr.diff td:first-child{border-left:3px solid 
 
 <!-- ============ MATH TOOLKIT ============ -->
 <h2 id="math"><span class="q">MATH TOOLKIT</span>The math behind this page, for a smart beginner</h2>
-<p>Almost everything on this page is built from six ideas. None of them needs more than multiplying, adding and reading a curve. Each one below has a small drawing you can play with, and a note on where it appears in our fly.</p>
+<p>Almost everything on this page is built from seven ideas. None of them needs more than multiplying, adding and reading a curve. Each one below has a small drawing you can play with, and a note on where it appears in our fly.</p>
 
 <h3>1 · Multiply and add: the weighted sum</h3>
 <p>This is the most important move in all of neural networks. Take some inputs, multiply each by its own <b>weight</b> (how much it matters), and add up the results. A big positive weight means "this input pushes the total up a lot", a negative weight means "it pushes the total down", and a weight near zero means "ignore it". Mathematicians call this a <b>dot product</b>. Every neuron, every output and every attention score on this page is one of these.</p>
@@ -875,10 +875,30 @@ tr.diff td{background:var(--chalk)}tr.diff td:first-child{border-left:3px solid 
  <div class="how"><b>How to read it.</b> Left: the raw scores. They can be negative, and they do not add up to anything in particular. This is what linear attention uses. Right: after the softmax. Every share is positive and together they make 100%. Push "dog" up by 1 and watch its share jump far more than 1 point.</div>
 </div>
 
-<h3>5 · Linear attention, in one paragraph</h3>
+<h3>5 · Query, key and value: what attention is asking, and why</h3>
+<p>Take the sentence <b>"The cat sat on the mat because it was tired."</b> When a language model reaches the word "it", the word on its own means almost nothing: it could be the cat or the mat. To understand "it", the model has to look back at the other words and work out which one matters. Most words have the same need. "Tired" needs to know who is tired, and "sat" needs to know who sat. <b>Attention is how each word gathers the context it needs from the other words.</b> It does this with three things per word. The easiest way to picture them is a library, where every word is both a reader and a book.</p>
+<ul>
+<li><b>Query, "what am I looking for?"</b> The question a word asks as a reader. For "it", roughly: "which earlier thing am I referring to? Probably something that can be tired."</li>
+<li><b>Key, "what am I about?"</b> The label on the spine of each word's book, so readers can find it. For "cat": "I'm an animal." For "mat": "I'm an object." For "sat": "I'm an action."</li>
+<li><b>Value, "what I hand over."</b> The contents of the book, meaning what a word passes on once it is picked. For "cat": "a small furry animal, the subject of this sentence."</li>
+</ul>
+<p>Attention then works in three moves. <b>Match</b> the reader's query against every word's key, using the multiply-and-add from part 1. Similar lists give a big number. <b>Share out</b> attention with the softmax from part 4, so the best matches get the biggest percentages. <b>Blend</b> the values using those percentages. After this, "it" carries the meaning of "the cat". Every word does this at the same time, each with its own question, because every word needs different context. The model's real job is guessing the next word, and the last word's query effectively asks "what in everything so far helps me guess what comes next?" Click any highlighted word below to see its question and where its attention goes.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: click a word to see its question (query), how it matches the other words' labels (keys), and what it takes from them (values)</div>
+ <div class="row" id="qkWords"></div>
+ <div class="row"><button class="btn" id="qkSoft" aria-pressed="true">with softmax (ordinary attention)</button><button class="btn" id="qkLin" aria-pressed="false">without softmax (linear attention)</button></div>
+ <div class="calc" id="qkAsk"></div>
+ <svg viewBox="0 0 900 330" id="qkSvg"></svg>
+ <div class="calc" id="qkRes"></div>
+ <div class="how"><b>How to read it.</b> The top box is the clicked word's question. Each bar is one earlier word. A word can only look back, never ahead, because the model reads left to right and has to guess the next word without peeking. That is why "sat" has only two words to choose from and "tired" has nine. The bar's length is how well that word's label (key) matches the question, and the number is the share of attention it gets. The bottom box is what the clicked word takes away: a blend of the other words' contents (values), weighted by those shares. The labels, questions and numbers here are made up to show the idea. In a real model they are lists of hundreds of numbers, produced by three tables the model learned in training (one each for queries, keys and values), and nobody writes them by hand. The English versions are our description of what those numbers end up doing.</div>
+</div>
+<p><b>Why keep the key and the value separate?</b> The key is how a word gets found, and the value is what it gives once found. A library's catalogue card is not the book. Keeping them apart lets a word advertise one thing ("I'm an animal") and hand over something richer ("the specific animal this story is about").</p>
+<p><b>How this connects to our fly.</b> The fly has no separate query, key and value. The sender neuron's activity plays the key and also the query, and the receiver neuron's activity plays the value. Its "questions" are simply what its neurons are doing on that tick.</p>
+
+<h3>6 · Linear attention, in one paragraph</h3>
 <p>Attention answers a question by adding up every word's value, weighted by how well that word's key matches the question. With the softmax removed, each term is just (question × key × value). The question can then be pulled out in front of the sum, and what is left, the sum of key × value, can be kept as a running total that is updated with every new word. That running total is a <b>fast-weight table</b>, the same kind of thing as our fly's F. The step-by-step version with numbers is in question 9 ("The math, one small step at a time").</p>
 
-<h3>6 · Slopes, and backpropagation: how training finds which way to turn each knob</h3>
+<h3>7 · Slopes, and backpropagation: how training finds which way to turn each knob</h3>
 <p>The <b>slope</b> of something tells you how much it changes when you nudge one of its inputs a little. If nudging a weight up by 0.01 makes the error go up by 0.03, the slope is 3 (0.03 ÷ 0.01). To reduce the error, move the weight the opposite way to its slope. That is <b>gradient descent</b>: the "gradient" is just the list of slopes, one for every weight.</p>
 <p>The hard part is finding 8,708 slopes at once. <b>Backpropagation</b> does it with one idea, the <b>chain rule</b>: when things are connected in a chain, their slopes <b>multiply</b>. If the output moves 2 for every 1 the middle moves, and the middle moves 3 for every 1 the weight moves, then the output moves 2 × 3 = 6 for every 1 the weight moves. Backprop starts at the error and walks backwards through the network, multiplying slopes as it goes, so every weight gets its slope in one backward pass. For our fly, the chain runs back through every tick of the trip, including every write into F. That is why training is slow, and why it uses so much memory.</p>
 <div class="sketch">
@@ -1506,7 +1526,28 @@ function drawMtBp(){const w1=+$('mtW1').value,w2=+$('mtW2').value;$('mtOw1').tex
  $('mtBpCalc').innerHTML=`slope of error with respect to output: 2 × (${o.toFixed(2)} − 3) = <b>${sgn(dE)}</b><br>slope for w2 = ${sgn(dE)} × middle (${m.toFixed(2)}) = <b>${sgn(g2)}</b><br>slope for w1 = ${sgn(dE)} × w2 (${w2.toFixed(2)}) × input (1) = <b>${sgn(g1)}</b> &nbsp;← the chain rule: slopes multiply along the chain<br>a training step moves w1 by −0.05 × ${sgn(g1)} and w2 by −0.05 × ${sgn(g2)}`;}
 function mtStep(){const w1=+$('mtW1').value,w2=+$('mtW2').value,o=w1*w2,dE=2*(o-3);$('mtW1').value=(w1-0.05*dE*w2).toFixed(3);$('mtW2').value=(w2-0.05*dE*w1).toFixed(3);drawMtBp();}
 ['mtW1','mtW2'].forEach(id=>$(id).addEventListener('input',drawMtBp));$('mtStep').addEventListener('click',mtStep);$('mtStep10').addEventListener('click',()=>{for(let i=0;i<10;i++)mtStep();});$('mtBpReset').addEventListener('click',()=>{$('mtW1').value=0.5;$('mtW2').value=1;drawMtBp();});
+// ---- Math toolkit: query, key, value
+const QK={w:['The','cat','sat','on','the','mat','because','it','was','tired'],
+ key:[[0,0,0],[1,0.1,0],[0,0,1],[0,0.2,0.1],[0,0,0],[0.1,1,0],[0,0,0.2],[0.3,0.3,0],[0,0,0.4],[0.6,0,0.3]],
+ lab:['(a small word)','an animal','an action','a place word','(a small word)','an object','a reason word','"something mentioned"','a state word','a feeling'],
+ val:['','a small furry animal, the one this story is about','sitting down','on top of something','','a flat thing on the floor','the reason comes next','whatever "it" refers to','being in some state','worn out, sleepy'],
+ q:{2:[1.4,0.3,0],5:[0,0,1.2],7:[1.5,0.6,0],9:[1.6,0.2,0]},
+ ask:{2:'"sat" asks: who did the sitting? (it looks for an animal or person)',5:'"mat" asks: what happened on me? (it looks for actions)',7:'"it" asks: which earlier thing am I referring to? Probably something that can be tired.',9:'"tired" asks: who is tired? (it looks for an animal or person)'},
+ cur:7,soft:true};
+function drawQK(){const i=QK.cur,q=QK.q[i];
+ $('qkWords').innerHTML=QK.w.map((w,j)=>QK.q[j]?`<button class="btn" data-qk="${j}" aria-pressed="${j===i}">${w}</button>`:`<span style="font-family:'Bricolage Grotesque';font-size:15px;color:var(--mute);padding:0 4px">${w}</span>`).join('');
+ document.querySelectorAll('[data-qk]').forEach(b=>b.addEventListener('click',()=>{QK.cur=+b.dataset.qk;drawQK();}));
+ $('qkSoft').setAttribute('aria-pressed',QK.soft);$('qkLin').setAttribute('aria-pressed',!QK.soft);
+ $('qkAsk').innerHTML=`<b>The question (query).</b> ${QK.ask[i]}`;
+ const others=QK.w.map((w,j)=>j).filter(j=>j<i);const sc=others.map(j=>QK.key[j].reduce((a,v,d)=>a+v*q[d],0));
+ let sh;if(QK.soft){const e=sc.map(v=>Math.exp(3*v)),t=e.reduce((a,v)=>a+v,0);sh=e.map(v=>v/t);}else{sh=sc;}
+ const mx=Math.max(...sh.map(Math.abs),0.01);let s='';
+ others.forEach((j,n)=>{const y=12+n*35,v=sh[n];s+=T(120,y+17,QK.w[j],{a:'end',f:'Bricolage Grotesque',s:15,w:700,c:'var(--ink)'})+T(130,y+17,'label: '+QK.lab[j],{c:'var(--mute)',s:12})+`<rect x="400" y="${y+2}" width="${Math.max(1,Math.abs(v)/mx*380)}" height="22" rx="3" fill="var(--coral)" opacity="${0.25+0.75*Math.abs(v)/mx}"/>`+T(406+Math.abs(v)/mx*380,y+18,QK.soft?Math.round(v*100)+'%':'score '+v.toFixed(2),{c:'var(--ink)'});});
+ $('qkSvg').innerHTML=s;
+ const top=others.map((j,n)=>[j,sh[n]]).sort((a,b)=>b[1]-a[1]).slice(0,2);
+ $('qkRes').innerHTML=QK.soft?`<b>What "${QK.w[i]}" takes away (the blend of values):</b> ${Math.round(top[0][1]*100)}% of "${QK.w[top[0][0]]}" (${QK.val[top[0][0]]}), ${Math.round(top[1][1]*100)}% of "${QK.w[top[1][0]]}", and small amounts of the rest. So "${QK.w[i]}" now carries mostly the meaning of "${QK.w[top[0][0]]}".`:`<b>Without the softmax</b>, the scores are used as they are. They do not add up to 100%, and most are exactly zero here, but the best match still counts most. This is linear attention. Because there is no dividing by a total over all words, the whole thing can be kept as a running whiteboard (question 9).`;}
+$('qkSoft').addEventListener('click',()=>{QK.soft=true;drawQK();});$('qkLin').addEventListener('click',()=>{QK.soft=false;drawQK();});
 drawLS();
-function all(){drawSig();bbDraw();drawSpeedWorld();drawCF();drawWire();drawGD();drawReset();drawStep();drawNT();drawTT();drawRO();drawFS();drawHD();drawBF();drawNB();drawSB();drawFD();drawKV();drawMX();drawMtDot();drawMtCirc();drawMtSq();drawMtSm();drawMtBp();}
+function all(){drawSig();bbDraw();drawSpeedWorld();drawCF();drawWire();drawGD();drawReset();drawStep();drawNT();drawTT();drawRO();drawFS();drawHD();drawBF();drawNB();drawSB();drawFD();drawKV();drawMX();drawMtDot();drawMtCirc();drawMtSq();drawMtSm();drawMtBp();drawQK();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

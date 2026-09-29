@@ -536,7 +536,7 @@ tr.diff td{background:var(--chalk)}tr.diff td:first-child{border-left:3px solid 
 <p><b>Backpropamine</b> is a 2019 paper by Miconi, Rawal, Clune and Stanley. The name is a pun on backpropagation and dopamine. The idea in one sentence: let a network have connections that change while it runs, in a Hebbian way, and let the network itself produce a signal (like dopamine in the brain) that says how much those changes should happen right now; then train everything by ordinary gradient descent. Press the buttons below to step through the family of rules, from a plain network up to ours, and see where our network sits in it.</p>
 <div class="panel">
  <div class="eyebrow">Notation used below</div>
- <p style="font-size:15px;margin:8px 0 0"><b>x_old ⊗ x_new</b> is the <span class="term" title="outer product">outer product</span>: a table with one cell per pair of neurons, each cell the product of the sender's activity last tick and the receiver's now. Step 6 of the calculator in question 1 fills exactly this table. <b>clip</b> and <b>clamp</b> both mean "if above +1 make it +1, if below −1 make it −1". <b>σ</b> is the sigmoid from question 3. <b>tanh</b> is its cousin that runs from −1 to +1 instead of 0 to 1. <b>η</b> (eta) is a fixed writing rate; <b>α</b> (alpha) is a per-connection scale, the same thing as our A.</p>
+ <p style="font-size:15px;margin:8px 0 0"><b>x_old ⊗ x_new</b> is the <span class="term" title="outer product">outer product</span>: a table with one cell per pair of neurons, each cell the product of the sender's activity last tick and the receiver's now. Step 4 of question 1 is where this table is used. <b>clip</b> and <b>clamp</b> both mean "if above +1 make it +1, if below −1 make it −1". <b>σ</b> is the sigmoid from question 3. <b>tanh</b> is its cousin that runs from −1 to +1 instead of 0 to 1. <b>η</b> (eta) is a fixed writing rate; <b>α</b> (alpha) is a per-connection scale, the same thing as our A.</p>
 </div>
 <div class="panel">
  <div class="row"><button class="btn rule on" data-r="0">plain recurrent network</button><button class="btn rule" data-r="1">differentiable plasticity (2018)</button><button class="btn rule" data-r="2">Backpropamine, simple (2019)</button><button class="btn rule" data-r="3">Backpropamine, retroactive</button><button class="btn rule" data-r="4">FlyNet (ours)</button></div>
@@ -556,6 +556,103 @@ tr.diff td{background:var(--chalk)}tr.diff td:first-child{border-left:3px solid 
 <tr><td>what the paper set out to show</td><td>neuromodulation helps on RL and language tasks</td><td>does a fly-like circuit emerge, and where does the memory live</td></tr>
 </tbody></table>
 <p>So FlyNet is "simple Backpropamine plus an erase gate," applied to a navigation task and then taken apart to see how it works. Nothing about our learning rule is new. What is ours is the question we ask (do the three fly motifs appear?), the world the fly lives in, and the analysis of the trained network. Peter's note says the same thing in the words the field uses. His note also places the delta rule and the newer sequence models (Gated DeltaNet, Titans) as the next steps along the same line of ideas.</p>
+
+<h3>How Backpropamine forgot without an erase gate</h3>
+<p>Backpropamine's update is Hebb ← clip(Hebb + M(t) · x_old · x_new). There is no decay term: nothing shrinks the old value on each tick. Forgetting happened in three other ways. First, the experimenter set Hebb to zero at the start of every episode, by hand. Second, M(t) can be negative, and a negative M writes the opposite sign, which removes what was written before, but only along whatever activity pattern is active at that moment. It cannot wipe everything at once the way our erase gate can. The paper's plots show the modulator often going negative on the tick right after a reward. Third, the clip at ±1 stops the trace from growing forever, but it forgets nothing.</p>
+<p>Their tasks did not need more than that. Each episode asked the network to learn one thing and keep it for the whole episode: which cue pays off, or where the reward is in the maze. Nothing had to be forgotten partway through. Our episodes hold <b>two trips that share one F</b>, so the fly has to clear its home count at food before the second trip starts. The sketch below follows one counting wire through an episode under each way of forgetting.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: one counting wire through two trips, under four ways of forgetting (made-up rates)</div>
+ <div class="row"><button class="btn" data-bf="bp" aria-pressed="true">Backpropamine: no decay</button><button class="btn" data-bf="bpr">Backpropamine + reset by hand between trips</button><button class="btn" data-bf="fade">2018 version: fixed fade</button><button class="btn" data-bf="fly">FlyNet: learned erase at food</button></div>
+ <svg viewBox="0 0 900 300" id="bfSvg"></svg>
+ <div class="calc" id="bfNote"></div>
+ <div class="how"><b>How to read it.</b> Time runs left to right through one episode. Trip 1 walks north for 20 seconds, the fly stands at food for 2 seconds (the green band), then trip 2 walks north for 5 seconds. The line is one wire that counts northward walking. The dashed marks show what the count <i>should</i> read at the end of each trip. A good scheme ends each trip on its mark. With no decay, trip 1 is counted correctly, but trip 2 starts from trip 1's leftovers and ends far too high. A hand reset fixes that, which is Backpropamine's setting. A fixed fade forgets during the walk too, so the count levels off and cannot tell 10 seconds from 20. A learned erase keeps the count while walking and wipes it at food.</div>
+</div>
+
+<h3>Could we have gone without an erase gate?</h3>
+<p>Yes, in Backpropamine's setting: one trip per episode, with F reset by hand before each trip. The network would probably home about as well, because nothing would need forgetting within an episode. But the reset at food, which is the fly-like behaviour questions 2, 3 and 6 are about, would then be something we did rather than something the network learned. The erase gate is what made "does a reset emerge?" a question we could test. It also cost us something. The gate started nearly shut, training could not move it (question 3), and it took five hand shifts before it learned to fire at food. The first natural experiment below tests what the gate costs when it is not needed.</p>
+
+<h3>How big their test really was</h3>
+<p>Backpropamine was tested on three tasks. Two were small reinforcement-learning problems: a cue-reward task with random 20-bit cues, and a 9 × 9 maze. The third was Penn Treebank, a standard benchmark for text prediction, run on two LSTMs with the number of parameters held equal. The scores are <b>perplexity</b>: roughly, how many words the model is choosing between at each step, so lower is better.</p>
+<div class="panel real">
+ <div class="eyebrow">From the paper (Table 1): Penn Treebank test perplexity, lower is better</div>
+ <svg viewBox="0 0 900 250" role="img" aria-label="Penn Treebank perplexity bars">
+  <text x="20" y="22" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">small LSTM, 4.8 M parameters (mean of 16 runs)</text>
+  <g font-family="JetBrains Mono" font-size="12" fill="var(--mute)">
+   <text x="20" y="54">plain LSTM</text><rect x="250" y="40" width="521" height="20" rx="3" fill="var(--rand)"/><text x="780" y="55" fill="var(--ink)">104.26</text>
+   <text x="20" y="84">+ plasticity (2018)</text><rect x="250" y="70" width="519" height="20" rx="3" fill="var(--blue)" opacity=".6"/><text x="780" y="85" fill="var(--ink)">103.80</text>
+   <text x="20" y="114">+ simple neuromodulation</text><rect x="250" y="100" width="513" height="20" rx="3" fill="var(--blue)" opacity=".8"/><text x="780" y="115" fill="var(--ink)">102.65</text>
+   <text x="20" y="144">+ retroactive neuromodulation</text><rect x="250" y="130" width="512" height="20" rx="3" fill="var(--blue)"/><text x="780" y="145" fill="var(--ink)">102.48</text>
+  </g>
+  <text x="20" y="182" font-family="Bricolage Grotesque" font-size="15" font-weight="700" fill="var(--ink)">large LSTM, 24.2 M parameters (median of 5 runs)</text>
+  <g font-family="JetBrains Mono" font-size="12" fill="var(--mute)">
+   <text x="20" y="212">plain LSTM</text><rect x="250" y="198" width="312" height="20" rx="3" fill="var(--rand)"/><text x="572" y="213" fill="var(--ink)">62.48</text>
+   <text x="20" y="242">+ simple neuromodulation</text><rect x="250" y="228" width="307" height="20" rx="3" fill="var(--blue)"/><text x="572" y="243" fill="var(--ink)">61.44</text>
+  </g>
+ </svg>
+ <div class="how"><b>How to read it.</b> Bar length is perplexity, drawn to scale from zero. The improvements are real and statistically significant: 1.8 points on the small model and 1.0 on the large one, with parameter counts matched. They are also small, which is the honest summary. The paper says it had to cut the large model's batch size to 7 "due to computational limitations". Training has to backpropagate through every plastic update, one tick after another, which costs a lot of memory and cannot run in parallel across time. Along with the modest gains, that is largely why this exact form did not spread.</div>
+</div>
+
+<h3>Where the idea went next</h3>
+<p>The idea survived under different names. In 2021, Schlag, Irie and Schmidhuber showed that <b>linear attention</b> (a cheaper form of the attention used in transformers) is mathematically the same as a fast-weight memory. It writes key–value pairs into a matrix with outer products, as we do, and they swapped the plain additive write for the <b>delta rule</b>. From there the line runs to the memory layers inside some of today's large language models. Those layers train in parallel across the sequence, which the step-by-step Backpropamine style could not.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: the family tree, from fast weights to production language models</div>
+ <svg viewBox="0 0 900 330" role="img" aria-label="timeline">
+  <line x1="40" y1="160" x2="870" y2="160" stroke="var(--line)" stroke-width="2"/>
+  <g font-family="JetBrains Mono" font-size="11" fill="var(--mute)">
+   <circle cx="60" cy="160" r="6" fill="var(--rand)"/><text x="60" y="140" text-anchor="middle">1992</text><text x="60" y="186" text-anchor="middle">fast weight</text><text x="60" y="200" text-anchor="middle">programmers</text><text x="60" y="214" text-anchor="middle">(Schmidhuber)</text>
+   <circle cx="165" cy="160" r="6" fill="var(--rand)"/><text x="165" y="140" text-anchor="middle">2016</text><text x="165" y="186" text-anchor="middle">fast weights</text><text x="165" y="200" text-anchor="middle">+ fixed fade</text><text x="165" y="214" text-anchor="middle">(Ba, Hinton)</text>
+   <circle cx="265" cy="160" r="7" fill="var(--blue)"/><text x="265" y="120" text-anchor="middle">2018 / 2019</text><text x="265" y="100" text-anchor="middle" fill="var(--blue)">differentiable plasticity,</text><text x="265" y="86" text-anchor="middle" fill="var(--blue)">then Backpropamine</text><text x="265" y="186" text-anchor="middle">Hebb + learned</text><text x="265" y="200" text-anchor="middle">write signal M(t)</text>
+   <circle cx="375" cy="160" r="6" fill="var(--rand)"/><text x="375" y="140" text-anchor="middle">2021</text><text x="375" y="186" text-anchor="middle">linear attention</text><text x="375" y="200" text-anchor="middle">= fast weights;</text><text x="375" y="214" text-anchor="middle">+ delta rule</text>
+   <circle cx="490" cy="160" r="6" fill="var(--rand)"/><text x="490" y="140" text-anchor="middle">2024–25</text><text x="490" y="186" text-anchor="middle">Gated DeltaNet:</text><text x="490" y="200" text-anchor="middle">delta + learned</text><text x="490" y="214" text-anchor="middle">decay gate</text>
+   <circle cx="600" cy="160" r="6" fill="var(--rand)"/><text x="600" y="140" text-anchor="middle">2025</text><text x="600" y="186" text-anchor="middle">Titans, Hope:</text><text x="600" y="200" text-anchor="middle">write by surprise,</text><text x="600" y="214" text-anchor="middle">many speeds</text>
+   <circle cx="710" cy="160" r="7" fill="var(--amber)"/><text x="710" y="140" text-anchor="middle">2025–26</text><text x="710" y="100" text-anchor="middle" fill="var(--amber)">in production:</text><text x="710" y="86" text-anchor="middle" fill="var(--amber)">Qwen3-Next, Qwen3.5,</text><text x="710" y="72" text-anchor="middle" fill="var(--amber)">Kimi Linear</text><text x="710" y="186" text-anchor="middle">~3 of every 4</text><text x="710" y="200" text-anchor="middle">layers</text>
+   <circle cx="820" cy="160" r="7" fill="var(--teal)"/><text x="820" y="140" text-anchor="middle">May 2026</text><text x="820" y="186" text-anchor="middle">Gated DeltaNet-2:</text><text x="820" y="200" text-anchor="middle">separate erase</text><text x="820" y="214" text-anchor="middle">and write gates</text>
+  </g>
+  <rect x="200" y="250" width="500" height="56" rx="8" fill="var(--panel)" stroke="var(--teal)"/>
+  <text x="450" y="274" text-anchor="middle" font-family="Bricolage Grotesque" font-size="14" font-weight="700" fill="var(--ink)">FlyNet (2026): Hebb + separate write and erase gates</text>
+  <text x="450" y="294" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="var(--mute)">built from Backpropamine; its erase/write split is the one GDN-2 found worth publishing</text>
+  <path d="M265,168 C265,230 330,240 360,250" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <path d="M820,220 C820,250 760,262 700,270" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-dasharray="4 4"/>
+ </svg>
+ <div class="how"><b>How to read it.</b> Time runs left to right. Blue is where our design came from. Amber marks the point where these fast-weight memories went into production language models: in Qwen3-Next and Qwen3.5, about three of every four layers use Gated DeltaNet, and Kimi Linear uses a version with a separate decay gate for each channel. Teal is the May 2026 paper that separates the erase gate from the write gate, the same split FlyNet has had from the start. In those models the memory layers are built for recall across a long text, not for navigation.</div>
+</div>
+<p>All of these systems make the same two choices we made: <b>what gets written</b> (the whole pair, as in Hebb, or only the surprise, as in delta) and <b>how the memory forgets</b> (never, a fixed fade, or a learned gate). Placing each one on those two choices shows where FlyNet sits, and which combinations nobody on this page has tried.</p>
+<div class="sketch">
+ <div class="eyebrow">Drawing: every system on this page, placed by its two choices</div>
+ <svg viewBox="0 0 900 360" role="img" aria-label="grid of systems by write rule and forgetting">
+  <g font-family="JetBrains Mono" font-size="11" fill="var(--mute)">
+   <text x="250" y="24" text-anchor="middle">never (reset by hand)</text><text x="420" y="24" text-anchor="middle">fixed fade</text><text x="590" y="24" text-anchor="middle">learned gate, one number</text><text x="770" y="24" text-anchor="middle">learned, per channel,</text><text x="770" y="38" text-anchor="middle">or erase ≠ write</text>
+   <text x="20" y="110">what is written:</text><text x="20" y="126" fill="var(--ink)">the whole pair</text><text x="20" y="142">(Hebb)</text>
+   <text x="20" y="260">what is written:</text><text x="20" y="276" fill="var(--ink)">only the surprise</text><text x="20" y="292">(delta)</text>
+   <text x="510" y="350" text-anchor="middle">how the memory forgets →</text>
+  </g>
+  <g fill="none" stroke="var(--line)"><rect x="165" y="50" width="170" height="140" rx="6"/><rect x="335" y="50" width="170" height="140" rx="6"/><rect x="505" y="50" width="170" height="140" rx="6"/><rect x="675" y="50" width="190" height="140" rx="6"/><rect x="165" y="190" width="170" height="140" rx="6"/><rect x="335" y="190" width="170" height="140" rx="6"/><rect x="505" y="190" width="170" height="140" rx="6"/><rect x="675" y="190" width="190" height="140" rx="6"/></g>
+  <g font-family="Literata" font-size="13" fill="var(--ink)">
+   <text x="250" y="96" text-anchor="middle">Backpropamine</text><text x="250" y="114" text-anchor="middle">(2019)</text><text x="250" y="146" text-anchor="middle">linear attention</text><text x="250" y="164" text-anchor="middle">(2020)</text>
+   <text x="420" y="96" text-anchor="middle">fast weights</text><text x="420" y="114" text-anchor="middle">(Ba, Hinton 2016)</text><text x="420" y="146" text-anchor="middle">differentiable</text><text x="420" y="164" text-anchor="middle">plasticity (2018)</text>
+   <text x="590" y="146" text-anchor="middle">Mamba-2</text><text x="590" y="164" text-anchor="middle">(2024)</text>
+   <text x="250" y="246" text-anchor="middle">DeltaNet</text><text x="250" y="264" text-anchor="middle">(2021, 2024)</text>
+   <text x="590" y="236" text-anchor="middle">Gated DeltaNet</text><text x="590" y="254" text-anchor="middle">(Qwen3-Next, 3.5)</text><text x="590" y="280" text-anchor="middle">Titans</text>
+   <text x="770" y="236" text-anchor="middle">Kimi Linear</text><text x="770" y="254" text-anchor="middle">(per channel)</text><text x="770" y="280" text-anchor="middle">Gated DeltaNet-2</text><text x="770" y="298" text-anchor="middle">(erase ≠ write)</text>
+  </g>
+  <rect x="525" y="66" width="130" height="50" rx="8" fill="var(--chalk)" stroke="var(--teal)" stroke-width="2"/><text x="590" y="87" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" font-weight="700" fill="var(--teal)">FlyNet run 19</text><text x="590" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">homes well</text>
+  <rect x="525" y="296" width="130" height="28" rx="8" fill="var(--soft)" stroke="var(--coral)" stroke-width="2"/><text x="590" y="315" text-anchor="middle" font-family="Bricolage Grotesque" font-size="12" font-weight="700" fill="var(--coral)">FlyNet 15, 18: failed</text>
+  <rect x="695" y="76" width="150" height="80" rx="8" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="5 4"/><text x="770" y="104" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" font-weight="700" fill="var(--amber)">untried: Hebb +</text><text x="770" y="122" text-anchor="middle" font-family="Bricolage Grotesque" font-size="13" font-weight="700" fill="var(--amber)">per-neuron erase</text><text x="770" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--mute)">question C below</text>
+ </svg>
+ <div class="how"><b>How to read it.</b> Rows are what gets written, and columns are how the memory forgets. FlyNet run 19 (teal) sits in the top row with one learned gate. Our delta runs (coral) sat in the cell where today's production models live, and failed, because those models are built for recall and our task is counting. Everything in the right-hand column is from 2025 or 2026. The dashed amber box is a combination nobody here has tried with Hebb. Titans is placed approximately: its memory is a small network trained by gradient steps, which behaves like a delta rule with momentum and a learned forget gate.</div>
+</div>
+<p><b>Why the field chose delta and we chose Hebb.</b> A language model's memory is asked "what came after this?", so a write that stops once the answer is stored is exactly right, and it keeps the memory from filling up. Our fly's memory is asked "how much of this happened?", so it must keep adding (question 4). Both sides ended up needing a learned forget gate. The large models learned that too, just at far greater scale.</p>
+<p><b>Within-episode memory is not the same as continual learning.</b> Everything above, FlyNet included, is memory that lives for one episode or one text and is then thrown away. <b>Continual learning</b> means keeping new knowledge across episodes, possibly for good, without wiping old skills, and it is still largely unsolved. Google's Nested Learning work (the Hope architecture, late 2025) is one current attempt: several memories stacked on top of each other, each updating at a different speed. That idea gives the fly a natural next step (question D).</p>
+
+<h3>Natural questions for us, one knob each</h3>
+<table>
+<tr><th>question</th><th>the one knob</th><th>prediction, written now</th><th>what the answer tells us</th></tr>
+<tr><td><b>A.</b> What does the erase gate cost when it is not needed?</td><td>one trip per episode, F reset by hand, erase gate removed (Backpropamine's setting)</td><td>homing about equal to run 19 on single trips, and training reaches it faster, because nothing has to learn a reset</td><td>whether the erase gate is a price we pay for the two-trip question, or free</td></tr>
+<tr><td><b>B.</b> Can un-writing replace erasing?</td><td>write gate squashed with tanh instead of sigmoid, so it can go negative like M(t); erase gate removed; two trips kept</td><td>fails, or only fades. At food the fly is standing still, so the walking pattern it would need to subtract is not active</td><td>whether a global erase is necessary for this task, or just convenient</td></tr>
+<tr><td><b>C.</b> Can the fly forget some wires and keep others?</td><td>64 erase gates, one per receiving neuron (the per-channel idea from Kimi Linear and GDN-2)</td><td>no gain on the plain homing task, because it has nothing worth keeping. Needs question D's world to show anything</td><td>whether per-channel erasing lets the home count reset while other memory survives</td></tr>
+<tr><td><b>D.</b> A first step toward continual learning</td><td>a second F that is never reset between episodes, written more slowly (smaller ws), in a world where the food stays in the same place for many episodes</td><td>the slow F learns where the food usually is, and first trips of later episodes get faster</td><td>whether memories at two speeds, one per trip and one lasting, can divide the work without interfering</td></tr>
+<tr><td><b>E.</b> Raw activities versus learned keys</td><td>write through learned projections of the activities (keys and values), as linear attention does, instead of the raw activities themselves</td><td>small gain, or none, at 64 neurons</td><td>whether the modern models' main extra ingredient matters for a counter</td></tr>
+</table>
 
 <!-- ============ Q10 ============ -->
 <h2 id="q10"><span class="q">QUESTION 10</span>Peter's paper, and what it teaches us to do next</h2>
@@ -1148,6 +1245,26 @@ function drawHD(){const S=1.0,R=0.8,Wg=0.5,WS=0.2,F=+$('hdF').value;$('hdOF').te
  row('5. add to F',`<span class="m">${f(F)} + ${f(ha)} = <b>${f(hn)}</b></span>`,`<span class="m">${f(F)} + ${f(da)} = <b>${f(dn)}</b></span>`);
  $('hdNote').innerHTML='<b>How to read it.</b> The two rules share every row except the two shaded ones. '+(Math.abs(sur)<0.001?'At F = 0.80 the guess is exactly right, so delta writes nothing, while Hebb still adds 0.08.':F<0.8?'Drag F toward 0.80. Hebb adds 0.08 whatever F holds. Delta adds less and less as its guess improves.':'Above 0.80 the guess is too high, so delta writes a negative amount and pulls F back down. Hebb still adds 0.08.');}
 $('hdF').addEventListener('input',drawHD);
-function all(){drawSig();bbDraw();drawSpeedWorld();drawCF();drawWire();drawGD();drawReset();drawStep();drawNT();drawTT();drawRO();drawFS();drawHD();}
+// ---- Q9 new: forgetting schemes
+const BF={s:'bp'};
+function drawBF(){document.querySelectorAll('[data-bf]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.bf===BF.s));
+ const a=0.004,N=270,v=[0];let F=0;for(let t=1;t<=N;t++){const food=t>200&&t<=220,walk=!food;
+  if(BF.s==='bpr'&&t===221)F=0;
+  if(BF.s==='fade')F=0.99*F+(walk?a:0);
+  else if(BF.s==='fly')F=(food?0.1:0.9999)*F+(walk?a:0);
+  else F=F+(walk?a:0);
+  F=Math.max(-1,Math.min(1,F));v.push(F);}
+ const W=900,H=300,p={l:50,r:20,t:20,b:44},X=t=>p.l+t/N*(W-p.l-p.r),Y=q=>p.t+(1-q)*(H-p.t-p.b);let s=ARR;
+ s+=`<rect x="${X(200)}" y="${p.t}" width="${X(220)-X(200)}" height="${H-p.t-p.b}" fill="var(--green)" opacity=".15"/>`+T((X(200)+X(220))/2,p.t+14,'food',{a:'middle',c:'var(--green)'});
+ [0,0.5,1].forEach(q=>{s+=`<line x1="${p.l}" x2="${W-p.r}" y1="${Y(q)}" y2="${Y(q)}" stroke="var(--line)" ${q===1?'stroke-dasharray="5 4"':''}/>`+T(p.l-6,Y(q)+4,q===1?'1 (lid)':q,{a:'end'});});
+ [0,5,10,15,20,25].forEach(sec=>{s+=T(X(sec*10),H-p.b+18,sec+' s',{a:'middle'});});s+=T(X(100),H-6,'trip 1: walk north 20 s',{a:'middle'})+T(X(245),H-6,'trip 2: north 5 s',{a:'middle'});
+ [[200,0.8],[270,0.2]].forEach(([t,q])=>{s+=`<line x1="${X(t)-14}" x2="${X(t)+2}" y1="${Y(q)}" y2="${Y(q)}" stroke="var(--ink)" stroke-width="3" stroke-dasharray="3 2"/>`+T(X(t)-18,Y(q)+4,'should be '+q,{a:'end',c:'var(--ink)'});});
+ s+=`<polyline fill="none" stroke="var(--teal)" stroke-width="3" points="${v.map((q,t)=>X(t)+','+Y(q)).join(' ')}"/>`;
+ $('bfSvg').innerHTML=s;
+ const e1=v[200],e2=v[270],ok=(x,y)=>Math.abs(x-y)<0.06?'right':'wrong';
+ const why={bp:'Nothing shrinks the old value, so trip 2 starts on top of trip 1 and ends far too high. Backpropamine never met this, because its experimenter reset the trace at the start of every episode.',bpr:'The same rule works once someone resets the trace by hand between trips. This is Backpropamine\'s setting. The reset is done by us, not learned.',fade:'Forgetting a fixed 1% every tick also forgets during the walk, so the count levels off near 0.4. Ten seconds and twenty seconds look the same. This is the "fade" our early runs fell into.',fly:'The gate stays almost shut while walking, so the count holds, and opens wide at food, so trip 2 starts from zero. The reset is learned, like the fly\'s.'};
+ $('bfNote').innerHTML=`End of trip 1: <span class="m">${e1.toFixed(2)}</span> (${ok(e1,0.8)}) · end of trip 2: <span class="m">${e2.toFixed(2)}</span> (${ok(e2,0.2)}). ${why[BF.s]}`;}
+document.querySelectorAll('[data-bf]').forEach(b=>b.addEventListener('click',()=>{BF.s=b.dataset.bf;drawBF();}));
+function all(){drawSig();bbDraw();drawSpeedWorld();drawCF();drawWire();drawGD();drawReset();drawStep();drawNT();drawTT();drawRO();drawFS();drawHD();drawBF();}
 all();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 </script>

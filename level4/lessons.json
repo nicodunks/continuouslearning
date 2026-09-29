@@ -53,5 +53,20 @@
   "lesson": "Round 3: matching the twin's starting setting to FW's (hold gate started almost shut, -5 or -3) and then matching FW's structure (32 fast + 32 slow neurons) did not let it learn: 0 of 18 rival runs homed better than not steering (best 4.86); FW from scratch with the same recipe scored 1.86, 5.23, 2.60. A one-population activity memory started slow cannot follow the heading, and training opens its gates (0.008 -> 0.23 by iteration 700).",
   "status": "measured",
   "evidence": "charter3.md; results.json twinH_*, twinH3_*, twinS_*, gruH_*"
+ },
+ {
+  "lesson": "The learned eraser fires at the start of each trip (first tick 0.84 with food, 0.75 without), not on arriving at food (0.005). It uses the world's free activity wipe at trip start as its cue. Earlier 'erase at food' descriptions are wrong in mechanism though right in effect in this world.",
+  "status": "measured",
+  "evidence": "narrative 12:40; run 41 and run 19, 200 flies, food_stand 4 vs 0, arrival ticks"
+ },
+ {
+  "lesson": "Round 4: FW learns even with its board empty at the start (write strength 0 -> ~0.03 within 50 iterations); the head-start contents are not the cause of FW's trainability, the one-knob distance to a working memory is. A twin handed a working counter learned on 1 of 3 starts; a trap-free grade (smooth closest approach + 0.2 x last-10 s) alone did not rescue the twin. The last-10-s grade has a measured valley (partial memories worse than spinning); closest approach does not.",
+  "status": "measured, 3 starts per group, 10 s stage only",
+  "evidence": "charter4.md, r4_results.json, trap_curve.json"
+ },
+ {
+  "lesson": "Round 5 (5 starts, stable steps): FW learns 3/5 with a full or an empty board (board switched on by iteration 30-40); plain twin 0/5; twin with a hand-built counter 2/5 and then as good as FW. Every failure still holds the way home. Rule of thumb: learnable from this grade iff a working memory is present or one knob away. Rejected: FW's edge is a built-in multiplication for reading (untrained FW and head-start twin encode the ideal turn equally).",
+  "status": "measured, 5 starts per group, 10 s stage",
+  "evidence": "charter5.md, r5_results.json, r5_twins.json"
  }
 ]

@@ -41,6 +41,9 @@ p.add_argument('--surgery', default='')                      # level 4: FW check
 p.add_argument('--gate_bias', type=float, default=None)     # round 3: starting bias of the twin's hold gate (-5 = FW's erase-gate start) / GRU update gate (sign flipped)
 p.add_argument('--gate_split', type=int, default=0)          # round 3 amendment 11:15: half the twin's neurons start fast (hold-gate bias +5,
                                                              # like FW's neurons), half start slow (bias -5, like FW's board)
+p.add_argument('--ws_init', type=float, default=None)      # round 4: FW write strength at the start (0 = no head start: the board starts empty)
+p.add_argument('--headstart', type=int, default=0)          # round 4: twin with 16 neurons wired as slow heading counters at the start
+p.add_argument('--grade_mix', default='')                   # round 4: 'tau,w' = smooth closest approach + w x last-10-s grade
 p.add_argument('--aux', type=float, default=0.0)            # level 4 diagnostic: weight of a charge on a linear readout's guess of the
                                                              # home vector at every wander tick (dense supervision, as in Cueva & Wei 2018)
 p.add_argument('--recenter_turn', type=int, default=0)       # level 4 amendment 08:45: after surgery, move the turn output's bias so
@@ -71,6 +74,15 @@ if args.arch == 'twin' and args.surgery and args.recenter_turn:
 if args.aux > 0: net.aux = torch.nn.Linear(net.x.shape[1] if hasattr(net, 'x') else (net.h if hasattr(net, 'h') else net.n), 2)
 if args.arch == 'twin' and args.gate_split:
     with torch.no_grad(): h = net.n // 2; net.V.bias[:h] = 5.0; net.V.bias[h:] = -5.0
+if args.ws_init is not None and args.arch == 'fw':
+    with torch.no_grad(): net.ws.fill_(args.ws_init)
+if args.headstart and args.arch == 'twin':
+    import math as _m
+    with torch.no_grad():
+        for i in range(16):                          # neuron i counts time spent facing direction phi_i
+            ph = 2 * _m.pi * i / 16
+            net.W_in.weight[i] = torch.tensor([_m.cos(ph), _m.sin(ph), 0.0, 0.0]); net.W_in.bias[i] = 0.0
+            net.W[i] = 0.0; net.U[i] = 0.0; net.V.weight[i] = 0.0; net.V.bias[i] = -5.3   # hold gate ~0.005: keeps 99.5% per tick
 print('arch', args.arch, 'trainable numbers', sum(q.numel() for q in net.parameters() if q.requires_grad), flush=True)
 opt = torch.optim.Adam([q for q in net.parameters() if q.requires_grad], lr=args.lr)
 state = dict(it=0, stage=0, stage_start=0, recent=[])
@@ -108,7 +120,8 @@ while state['it'] < args.iters:
     if args.lr_decay:
         import math as _m
         for g_ in opt.param_groups: g_['lr'] = args.lr * 0.5 * (1 + _m.cos(_m.pi * it / max(1, args.iters)))
-    r = run_episode(net, batch=args.batch, t_out=t_out, seed=10000 + it + 1000000 * int(args.seed), erase_penalty=args.erase_penalty, food_stand=args.food_stand, trips=args.trips, speed_profile=args.speed_profile)
+    _gm = tuple(float(v) for v in args.grade_mix.split(',')) if args.grade_mix else None
+    r = run_episode(net, batch=args.batch, t_out=t_out, seed=10000 + it + 1000000 * int(args.seed), erase_penalty=args.erase_penalty, food_stand=args.food_stand, trips=args.trips, speed_profile=args.speed_profile, grade_mix=_gm)
     if args.aux > 0: r['loss'] = r['loss'] + args.aux * r['aux_loss']
     loss = r['loss'] + (args.f_penalty * net.F.pow(2).mean() if args.f_penalty > 0 and args.arch == 'fw' else 0.0)
     opt.zero_grad(); loss.backward()

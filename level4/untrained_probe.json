@@ -1,0 +1,98 @@
+{
+ "FW untrained s0": {
+  "n_tuned": 52,
+  "n": 64,
+  "write_speed": -0.14914134334297588,
+  "r2": 0.925,
+  "err": 2.12,
+  "dist": 6.79
+ },
+ "TWIN untrained s0": {
+  "n_tuned": 52,
+  "n": 64,
+  "write_speed": null,
+  "r2": -0.059,
+  "err": 7.98,
+  "dist": 6.79
+ },
+ "GRU untrained s0": {
+  "n_tuned": 45,
+  "n": 52,
+  "write_speed": null,
+  "r2": 0.024,
+  "err": 7.66,
+  "dist": 6.79
+ },
+ "FW untrained s1": {
+  "n_tuned": 61,
+  "n": 64,
+  "write_speed": -0.22592743530066553,
+  "r2": 0.88,
+  "err": 2.69,
+  "dist": 6.79
+ },
+ "TWIN untrained s1": {
+  "n_tuned": 57,
+  "n": 64,
+  "write_speed": null,
+  "r2": -0.064,
+  "err": 8.0,
+  "dist": 6.79
+ },
+ "GRU untrained s1": {
+  "n_tuned": 45,
+  "n": 52,
+  "write_speed": null,
+  "r2": 0.026,
+  "err": 7.65,
+  "dist": 6.79
+ },
+ "FW untrained s2": {
+  "n_tuned": 57,
+  "n": 64,
+  "write_speed": -0.2831093362395346,
+  "r2": 0.932,
+  "err": 2.02,
+  "dist": 6.79
+ },
+ "TWIN untrained s2": {
+  "n_tuned": 51,
+  "n": 64,
+  "write_speed": null,
+  "r2": -0.061,
+  "err": 7.99,
+  "dist": 6.79
+ },
+ "GRU untrained s2": {
+  "n_tuned": 44,
+  "n": 52,
+  "write_speed": null,
+  "r2": 0.026,
+  "err": 7.65,
+  "dist": 6.79
+ },
+ "FW run41 trained": {
+  "n_tuned": 26,
+  "n": 64,
+  "write_speed": 0.804276760315421,
+  "r2": 0.978,
+  "err": 1.16,
+  "dist": 6.79
+ },
+ "TWIN taught (twin_aux0)": {
+  "n_tuned": 23,
+  "n": 64,
+  "write_speed": null,
+  "r2": 0.903,
+  "err": 2.42,
+  "dist": 6.79
+ },
+ "TWIN spinner (twin_c0_lr1e-3)": {
+  "n_tuned": 0,
+  "n": 64,
+  "write_speed": null,
+  "r2": 0.017,
+  "err": 7.69,
+  "dist": 6.79
+ }
+}

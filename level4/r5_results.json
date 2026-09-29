@@ -1,0 +1,184 @@
+{
+ "groups": {
+  "fw": [
+   {
+    "run": "r5_fw_s0",
+    "exam10": 1.21,
+    "hold": 0.93,
+    "steer": 0.45,
+    "turn_abs": 4.87
+   },
+   {
+    "run": "r5_fw_s1",
+    "exam10": 2.75,
+    "hold": 0.45,
+    "steer": -20.3,
+    "turn_abs": 6.19
+   },
+   {
+    "run": "r5_fw_s2",
+    "exam10": 1.99,
+    "hold": 0.87,
+    "steer": 0.26,
+    "turn_abs": 4.04
+   },
+   {
+    "run": "r5_fw_s3",
+    "exam10": 2.37,
+    "hold": 0.85,
+    "steer": 0.36,
+    "turn_abs": 4.43
+   },
+   {
+    "run": "r5_fw_s4",
+    "exam10": 2.52,
+    "hold": 0.88,
+    "steer": 0.07,
+    "turn_abs": 3.71
+   }
+  ],
+  "fwe": [
+   {
+    "run": "r5_fwe_s0",
+    "exam10": 1.39,
+    "hold": 0.95,
+    "steer": 0.36,
+    "turn_abs": 4.49
+   },
+   {
+    "run": "r5_fwe_s1",
+    "exam10": 2.21,
+    "hold": 0.89,
+    "steer": 0.18,
+    "turn_abs": 3.43
+   },
+   {
+    "run": "r5_fwe_s2",
+    "exam10": 2.77,
+    "hold": 0.88,
+    "steer": -0.01,
+    "turn_abs": 6.48
+   },
+   {
+    "run": "r5_fwe_s3",
+    "exam10": 2.74,
+    "hold": 0.73,
+    "steer": -4264.14,
+    "turn_abs": 6.15
+   },
+   {
+    "run": "r5_fwe_s4",
+    "exam10": 1.41,
+    "hold": 0.97,
+    "steer": 0.45,
+    "turn_abs": 3.71
+   }
+  ],
+  "tw": [
+   {
+    "run": "r5_tw_s0",
+    "exam10": 2.75,
+    "hold": 0.59,
+    "steer": -0.02,
+    "turn_abs": 5.85
+   },
+   {
+    "run": "r5_tw_s1",
+    "exam10": 2.74,
+    "hold": 0.37,
+    "steer": -0.03,
+    "turn_abs": 6.21
+   },
+   {
+    "run": "r5_tw_s2",
+    "exam10": 2.79,
+    "hold": 0.45,
+    "steer": -0.0,
+    "turn_abs": 6.25
+   },
+   {
+    "run": "r5_tw_s3",
+    "exam10": 2.81,
+    "hold": 0.27,
+    "steer": -1.09,
+    "turn_abs": 6.77
+   },
+   {
+    "run": "r5_tw_s4",
+    "exam10": 2.78,
+    "hold": 0.24,
+    "steer": -0.02,
+    "turn_abs": 6.66
+   }
+  ],
+  "twhs": [
+   {
+    "run": "r5_twhs_s0",
+    "exam10": 2.81,
+    "hold": 0.65,
+    "steer": -0.11,
+    "turn_abs": 6.73
+   },
+   {
+    "run": "r5_twhs_s1",
+    "exam10": 1.57,
+    "hold": 0.8,
+    "steer": 0.67,
+    "turn_abs": 3.56
+   },
+   {
+    "run": "r5_twhs_s2",
+    "exam10": 1.61,
+    "hold": 0.85,
+    "steer": 0.66,
+    "turn_abs": 3.45
+   },
+   {
+    "run": "r5_twhs_s3",
+    "exam10": 2.78,
+    "hold": 0.65,
+    "steer": -1.1,
+    "turn_abs": 6.62
+   },
+   {
+    "run": "r5_twhs_s4",
+    "exam10": 2.78,
+    "hold": 0.67,
+    "steer": -54.34,
+    "turn_abs": 6.62
+   }
+  ]
+ },
+ "refs": {
+  "FW untrained": {
+   "exam10": 2.56,
+   "hold": 0.99,
+   "steer": 0.53,
+   "turn_abs": 0.24
+  },
+  "TWIN untrained": {
+   "exam10": 2.54,
+   "hold": 0.32,
+   "steer": 0.1,
+   "turn_abs": 0.24
+  },
+  "TWIN-HS untrained": {
+   "exam10": 2.53,
+   "hold": 0.78,
+   "steer": 0.52,
+   "turn_abs": 0.23
+  },
+  "TWIN taught (twin_aux0)": {
+   "exam10": 2.05,
+   "hold": 0.97,
+   "steer": 0.59,
+   "turn_abs": 6.56
+  },
+  "FW run 41": {
+   "exam10": 1.41,
+   "hold": 0.99,
+   "steer": 0.59,
+   "turn_abs": 6.16
+  }
+ }
+}

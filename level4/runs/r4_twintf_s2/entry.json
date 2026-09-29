@@ -1,0 +1,28 @@
+{
+ "run": "r4_twintf_s2",
+ "arm": "TWIN-trapfree",
+ "args": [
+  "--arch",
+  "twin",
+  "--grade_mix",
+  "0.5,0.2",
+  "--seed",
+  "2",
+  "--stages",
+  "10",
+  "--iters",
+  "800",
+  "--lr",
+  "1e-3",
+  "--lr_decay",
+  "0",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--batch",
+  "32"
+ ],
+ "prediction": "round 4: twin on the trap-free grade",
+ "started": "2026-09-29 14:24:16"
+}

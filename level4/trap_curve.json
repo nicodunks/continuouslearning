@@ -1,0 +1,47 @@
+[
+ {
+  "name": "never steers",
+  "last10": 11.308182716369629,
+  "closest": 4.422168731689453
+ },
+ {
+  "name": "spins",
+  "last10": 6.457554817199707,
+  "closest": 5.994687080383301
+ },
+ {
+  "name": "memory off by up to 0 deg",
+  "last10": 0.45945706963539124,
+  "closest": 0.4594428241252899
+ },
+ {
+  "name": "memory off by up to 30 deg",
+  "last10": 0.463405966758728,
+  "closest": 0.46311402320861816
+ },
+ {
+  "name": "memory off by up to 60 deg",
+  "last10": 0.48117977380752563,
+  "closest": 0.47222191095352173
+ },
+ {
+  "name": "memory off by up to 90 deg",
+  "last10": 1.2463434934616089,
+  "closest": 1.0976835489273071
+ },
+ {
+  "name": "memory off by up to 120 deg",
+  "last10": 4.550206184387207,
+  "closest": 2.4573185443878174
+ },
+ {
+  "name": "memory off by up to 150 deg",
+  "last10": 8.985060691833496,
+  "closest": 3.2061500549316406
+ },
+ {
+  "name": "memory off by up to 180 deg",
+  "last10": 13.228081703186035,
+  "closest": 3.8397715091705322
+ }
+]

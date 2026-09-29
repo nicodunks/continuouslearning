@@ -17,7 +17,7 @@ W_MAX = 40.0          # tally ceiling (used by the hand brain; FlyNet clamps F t
 ERASE_PENALTY = 0.05  # weight of the "erase open without food" penalty in the loss
 
 
-def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5, speed_profile='drift', stop=None):
+def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5, speed_profile='drift', stop=None, grade_mix=None):
     # speed_profile: 'drift' = slow random drift around 1 (the default world);
     #                'legs'  = each wander has a slow half (0.4) and a fast half (1.6) in random order per agent,
     #                          so that time-facing-a-direction and distance-walked disagree on purpose.
@@ -38,7 +38,8 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
     food_ticks = int(round(food_stand / DT))
     brain.reset_fast(batch)
     dist_terms, pen_terms, score_terms, arr_terms = [], [], [], []
-    aux_terms = []   # level 4 diagnostic: if the brain carries an 'aux' readout, charge its home-vector guess every wander tick
+    aux_terms = []
+    ret_terms = []   # level 4 round 4: every return tick's distance, for the trap-free grade (grade_mix)   # level 4 diagnostic: if the brain carries an 'aux' readout, charge its home-vector guess every wander tick
     traces = {k: [] for k in ('t', 'speed', 'food', 'write', 'erase', 'dist', 'hd')} if record else None
 
     for trip in range(trips):
@@ -102,6 +103,7 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
             if returning:
                 min_d = torch.minimum(min_d, d.detach())
                 arrived = arrived | (d.detach() < 0.5)
+                if grade_mix is not None: ret_terms.append(torch.where(active, d, d.detach()))
                 if t >= t_out + t_ret - 10.0:
                     dist_terms.append(d)                              # smooth loss: distance over the last 10 s
             since_arrival = since_arrival + arrived.long()
@@ -114,6 +116,13 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
 
     loss = torch.stack(dist_terms).mean() + erase_penalty * torch.stack(pen_terms).mean()
     aux_loss = torch.stack(aux_terms).mean() if aux_terms else None
+    if grade_mix is not None:
+        # grade_mix = (tau, w): a smooth closest approach, -tau * log mean exp(-d / tau) over the return, per trip and agent,
+        # plus w x the last-10-second grade. With w below ~0.3 every level of memory beats spinning (level4/trap_curve.py).
+        tau, w = grade_mix; ntr = len(ret_terms) // trips
+        D = torch.stack(ret_terms).view(trips, ntr, -1)
+        softmin = -tau * (torch.logsumexp(-D / tau, dim=1) - torch.log(torch.tensor(float(ntr))))
+        loss = softmin.mean() + w * torch.stack(dist_terms).mean() + erase_penalty * torch.stack(pen_terms).mean()
     out = dict(loss=loss, score=float(torch.stack(score_terms).mean()), arrived=float(torch.stack(arr_terms).mean()),
                per_agent=torch.stack(score_terms).detach(), arr_agent=torch.stack(arr_terms).detach(),   # [trips, batch], level 4
                aux_loss=aux_loss)

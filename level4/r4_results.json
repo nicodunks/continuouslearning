@@ -1,0 +1,119 @@
+{
+ "fw": [
+  {
+   "run": "r4_fw_s0",
+   "running": 1.77,
+   "exam10": 2.43,
+   "arrived": 0.07,
+   "turn_return": 5.34
+  },
+  {
+   "run": "r4_fw_s1",
+   "running": 2.39,
+   "exam10": 2.91,
+   "arrived": 0.05,
+   "turn_return": 7.07
+  },
+  {
+   "run": "r4_fw_s2",
+   "running": 2.4,
+   "exam10": 2.92,
+   "arrived": 0.04,
+   "turn_return": 7.22
+  }
+ ],
+ "fwnohs": [
+  {
+   "run": "r4_fwnohs_s0",
+   "running": 1.09,
+   "exam10": 1.48,
+   "arrived": 0.32,
+   "turn_return": 5.75
+  },
+  {
+   "run": "r4_fwnohs_s1",
+   "running": 1.77,
+   "exam10": 2.13,
+   "arrived": 0.17,
+   "turn_return": 3.89
+  },
+  {
+   "run": "r4_fwnohs_s2",
+   "running": 2.04,
+   "exam10": 2.5,
+   "arrived": 0.1,
+   "turn_return": 4.92
+  }
+ ],
+ "twin": [
+  {
+   "run": "r4_twin_s0",
+   "running": 2.47,
+   "exam10": 2.96,
+   "arrived": 0.04,
+   "turn_return": 7.48
+  },
+  {
+   "run": "r4_twin_s1",
+   "running": 2.41,
+   "exam10": 2.96,
+   "arrived": 0.04,
+   "turn_return": 7.58
+  },
+  {
+   "run": "r4_twin_s2",
+   "running": 2.41,
+   "exam10": 2.95,
+   "arrived": 0.03,
+   "turn_return": 7.64
+  }
+ ],
+ "twinhs": [
+  {
+   "run": "r4_twinhs_s0",
+   "running": 2.46,
+   "exam10": 2.94,
+   "arrived": 0.04,
+   "turn_return": 7.61
+  },
+  {
+   "run": "r4_twinhs_s1",
+   "running": 1.85,
+   "exam10": 2.26,
+   "arrived": 0.15,
+   "turn_return": 5.81
+  },
+  {
+   "run": "r4_twinhs_s2",
+   "running": 2.41,
+   "exam10": 2.95,
+   "arrived": 0.03,
+   "turn_return": 7.68
+  }
+ ],
+ "twintf": [
+  {
+   "run": "r4_twintf_s0",
+   "running": 2.45,
+   "exam10": 2.92,
+   "arrived": 0.05,
+   "turn_return": 6.93
+  },
+  {
+   "run": "r4_twintf_s1",
+   "running": 2.39,
+   "exam10": 2.94,
+   "arrived": 0.04,
+   "turn_return": 7.06
+  },
+  {
+   "run": "r4_twintf_s2",
+   "running": 2.38,
+   "exam10": 2.92,
+   "arrived": 0.04,
+   "turn_return": 6.88
+  }
+ ],
+ "never_steers_exam10": 2.59,
+ "spinner_exam10": 2.96
+}

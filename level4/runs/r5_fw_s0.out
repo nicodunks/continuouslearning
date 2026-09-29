@@ -1,0 +1,14 @@
+arch fw trainable numbers 8708
+it     0 stage 0 t_out 10  loss 5.05 score 2.29 run 2.29  drift F 2.29 noF 2.35  0.91s/it
+it   100 stage 0 t_out 10  loss 2.78 score 2.25 run 2.21  drift F 2.18 noF 2.08  1.04s/it
+it   200 stage 0 t_out 10  loss 2.03 score 1.55 run 1.60  drift F 1.50 noF 2.22  1.14s/it
+it   300 stage 0 t_out 10  loss 1.48 score 1.02 run 1.25  drift F 1.25 noF 2.27  1.24s/it
+it   400 stage 0 t_out 10  loss 1.57 score 1.18 run 1.19  drift F 1.24 noF 2.33  1.01s/it
+it   500 stage 0 t_out 10  loss 1.52 score 1.17 run 1.26  drift F 1.23 noF 2.45  0.96s/it
+it   600 stage 0 t_out 10  loss 1.68 score 1.28 run 1.18  drift F 1.22 noF 2.46  0.98s/it
+it   700 stage 0 t_out 10  loss 1.49 score 1.10 run 1.08  drift F 1.18 noF 2.33  1.01s/it
+it   800 stage 0 t_out 10  loss 1.37 score 1.00 run 1.03  drift F 1.07 noF 2.41  0.98s/it
+it   900 stage 0 t_out 10  loss 1.54 score 1.08 run 1.01  drift F 0.90 noF 2.33  1.04s/it
+it  1000 stage 0 t_out 10  loss 1.18 score 0.85 run 1.00  drift F 0.98 noF 2.30  1.06s/it
+it  1100 stage 0 t_out 10  loss 1.28 score 0.89 run 0.97  drift F 0.84 noF 2.24  1.09s/it
+finished

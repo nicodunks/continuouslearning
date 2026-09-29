@@ -60,6 +60,66 @@
   "std30": 2.597759485244751
  },
  {
+  "run": "gruH_c0",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.9168381690979
+ },
+ {
+  "run": "gruH_c1",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.969577789306641
+ },
+ {
+  "run": "gruH_c2",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.922563552856445
+ },
+ {
   "run": "gru_aux0",
   "reached_it": 3991,
   "finished": true,
@@ -218,6 +278,306 @@
    "cap"
   ],
   "std30": 5.877328872680664
+ },
+ {
+  "run": "twinH3_c0",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.96651554107666
+ },
+ {
+  "run": "twinH3_c1",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.978506565093994
+ },
+ {
+  "run": "twinH3_c2",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.914433479309082
+ },
+ {
+  "run": "twinH_c0_lr1e-3",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.915026664733887
+ },
+ {
+  "run": "twinH_c0_lr3e-4",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.8771467208862305
+ },
+ {
+  "run": "twinH_c1_lr1e-3",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.978537559509277
+ },
+ {
+  "run": "twinH_c1_lr3e-4",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.9082865715026855
+ },
+ {
+  "run": "twinH_c2_lr1e-3",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.933833599090576
+ },
+ {
+  "run": "twinH_c2_lr3e-4",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.897615909576416
+ },
+ {
+  "run": "twinS_c0_lr1e-3",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.915003776550293
+ },
+ {
+  "run": "twinS_c0_lr3e-4",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.889255523681641
+ },
+ {
+  "run": "twinS_c1_lr1e-3",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 4.860785484313965
+ },
+ {
+  "run": "twinS_c1_lr3e-4",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.834633827209473
+ },
+ {
+  "run": "twinS_c2_lr1e-3",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.933436393737793
+ },
+ {
+  "run": "twinS_c2_lr3e-4",
+  "reached_it": 3991,
+  "finished": true,
+  "promotions": [
+   [
+    1500,
+    20.0
+   ],
+   [
+    3001,
+    30.0
+   ]
+  ],
+  "how": [
+   "cap",
+   "cap"
+  ],
+  "std30": 5.887810230255127
  },
  {
   "run": "twin_aux0",

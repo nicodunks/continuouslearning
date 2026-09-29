@@ -66,5 +66,19 @@ T['aux'] = f"""
 </ol>
 """
 T['rule'] = """<p class="note">Read this verdict together with the section "Learning from scratch": the rule compares scores, and the scores here are decided by which network could be trained at all.</p>"""
+r3 = {k: [n for n in R if R[n]['arm'].startswith(k)] for k in ('TWIN-split', 'TWIN-hold', 'GRU-hold')}
+if all(r3.values()):
+    sc = lambda ns: ', '.join(f"{s(n,'std30'):.2f}" for n in ns)
+    fwc = [n for n in R if R[n]['arm'] == 'FW-cold']
+    T['rematch'] = f"""
+<p>The last round removed every unfairness in how the twin starts, without changing the grading, the exam, or our network. It ran in two steps, both decided before seeing a result from them.</p>
+<ol class="steps">
+  <li><b>The twin gets our network's head start.</b> Our network's erase gate has always started almost shut (a setting of −5), so its board holds whatever is written from the first tick. The twin's hold gate had started half open, so it threw away half its value every tick and had to learn to hold before anything else. In this round it starts almost shut too (−5, and a second setting of −3), and so does a GRU. Within 700 iterations training had pulled the twin's gate open again (from 0.008 to 0.23) and the networks were turning hard.</li>
+  <li><b>The split twin.</b> Looking at why: our network has two kinds of parts, fast neurons that follow the heading every tick and a separate slow board that holds the count. The twin has one population of neurons that must do both. Started slow, it cannot follow the heading, so training opens its gates and loses the store with them. So the closest twin of our network is one with 32 neurons that start fast, like our network's neurons, and 32 that start slow, like its board. Same size, same everything else.</li>
+</ol>
+<p><b>What happened.</b> Standard exam after 4,000 iterations from scratch: split twins {sc(sorted(r3['TWIN-split']))}; twins with the hold start {sc(sorted(r3['TWIN-hold']))}; GRUs with the hold start {sc(sorted(r3['GRU-hold']))}. Our network from scratch, same recipe: {sc(sorted(fwc))}. A fly that never steers: {f(rnd)}. One split twin (seed 1, rate 1e-3) did learn the 10-second stage (running score 1.69 against 2.31 for chance), the only twin all day to learn anything without a teacher, but it lost its grip as the trips grew and ended close to the spinners.</p>
+<p><b>What this means.</b> With the starting settings matched and the structure matched as closely as a memory in activity allows, the twin still could not learn this task from this grading in 4,000 iterations, while our network learned it on two of three seeds. Because the teacher runs showed a twin of this size can hold a home vector, the fair reading is: <b>on this task, a fast-weight memory is far easier for training to discover than an activity memory of the same size.</b> It is a statement about learning, not about how well the finished memory works; the one comparison of working memories we have (the teacher runs) shows the activity memory losing less when the fly stands still.</p>
+"""
+    T['summary'] += f"""<p><b>6.</b> In a final round the twin was given our network's head start (a hold gate that starts almost shut) and then our network's structure (half its neurons fast, half slow). It still did not learn to home: split twins scored {sc(sorted(r3['TWIN-split']))} from scratch, against {sc(sorted(fwc))} for our network with the same recipe. So the learning advantage survives the fairest setup we could build. See "The fairest rematch".</p>"""
 json.dump(T, open(os.path.join(HERE, 'page_text.json'), 'w'), indent=1)
 print('ok', list(T))

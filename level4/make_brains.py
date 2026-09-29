@@ -4,7 +4,8 @@ checkpoint (the 11:50 cutoff), plus the four FW networks, the hand brain and the
 import glob, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ARM = {'twin_w': 'TWIN-warm', 'twinB_w': 'TWIN-warm-B', 'twinA_w': 'TWIN-warm-aux', 'fwA_': 'FW-warm-aux', 'fw_c': 'FW-cold',
-       'twin_c': 'TWIN-cold', 'gru_c': 'GRU-cold', 'twin_aux': 'TWIN-aux', 'gru_aux': 'GRU-aux'}
+       'twin_c': 'TWIN-cold', 'gru_c': 'GRU-cold', 'twin_aux': 'TWIN-aux', 'gru_aux': 'GRU-aux',
+       'twinH_c': 'TWIN-hold', 'twinH3_c': 'TWIN-hold3', 'twinS_c': 'TWIN-split', 'gruH_c': 'GRU-hold'}
 out = [dict(name='hand', arm='hand', ckpt='hand'), dict(name='random', arm='random', ckpt='random')] + \
       [dict(name=f'fw{r}', arm='FW', ckpt=f'level3/runs/run{r}/final.pt') for r in (28, 40, 41, 45)]
 for d in sorted(glob.glob(os.path.join(HERE, 'runs', '*'))):

@@ -7,7 +7,7 @@ R = json.load(open(os.path.join(HERE, 'results.json')))
 rows = []
 for d in sorted(glob.glob(os.path.join(HERE, 'runs', '*'))):
     n = os.path.basename(d)
-    if not os.path.isdir(d) or not re.match(r'(fw_c|twin_c|gru_c|twin_aux|gru_aux)', n): continue
+    if not os.path.isdir(d) or not re.match(r'(fw_c|twin_c|gru_c|twin_aux|gru_aux|twinH|twinS|gruH)', n): continue
     out = open(d + '.out').read()
     promos = [(int(a), float(b)) for a, b in re.findall(r'iteration (\d+): promoted to stage \d \((\d+\.\d) s\)', out)]
     L = [json.loads(l) for l in open(os.path.join(d, 'log.jsonl'))]
@@ -22,6 +22,7 @@ fw = [r for r in rows if r['run'].startswith('fw_c')]
 learned20 = sum(1 for r in fw if r['how'][:1] == ['learned']); learned30 = sum(1 for r in fw if r['how'][1:2] == ['learned'])
 sc = ', '.join(f"{r['std30']:.2f}" for r in fw if r['std30'] is not None)
 riv = [r for r in rows if re.match(r'(twin_c|gru_c)', r['run'])]
+r3 = [r for r in rows if re.match(r'(twinH|twinS|gruH)', r['run'])]
 riv_l = sum(1 for r in riv if 'learned' in r['how'])
 best20 = []
 for r in fw:

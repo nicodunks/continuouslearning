@@ -38,6 +38,9 @@ p.add_argument('--f_penalty', type=float, default=0.0)      # campaign 2: charge
 p.add_argument('--erase_bias_shift', type=float, default=0.0) # added to the erase gate's bias after loading: moves the gate out of the flat part of the sigmoid
 p.add_argument('--arch', default='fw')                       # level 4: fw | twin | gru
 p.add_argument('--surgery', default='')                      # level 4: FW checkpoint to turn into a TWIN
+p.add_argument('--gate_bias', type=float, default=None)     # round 3: starting bias of the twin's hold gate (-5 = FW's erase-gate start) / GRU update gate (sign flipped)
+p.add_argument('--gate_split', type=int, default=0)          # round 3 amendment 11:15: half the twin's neurons start fast (hold-gate bias +5,
+                                                             # like FW's neurons), half start slow (bias -5, like FW's board)
 p.add_argument('--aux', type=float, default=0.0)            # level 4 diagnostic: weight of a charge on a linear readout's guess of the
                                                              # home vector at every wander tick (dense supervision, as in Cueva & Wei 2018)
 p.add_argument('--recenter_turn', type=int, default=0)       # level 4 amendment 08:45: after surgery, move the turn output's bias so
@@ -51,8 +54,11 @@ stages = [float(s) for s in args.stages.split(',')]
 
 torch.manual_seed(int(args.seed))
 if args.arch == 'fw': net = FlyNet(n=args.neurons, use_fast=bool(args.use_fast), f_max=args.f_max, rule=args.rule)
-elif args.arch == 'twin': net = TwinNet.from_fw(torch.load(args.surgery)['net']) if args.surgery else TwinNet(n=args.neurons)
-else: net = GRURef()
+elif args.arch == 'twin': net = TwinNet.from_fw(torch.load(args.surgery)['net']) if args.surgery else TwinNet(n=args.neurons, gate_bias=args.gate_bias or 0.0)
+else:
+    net = GRURef()
+    if args.gate_bias is not None:   # PyTorch GRU: h' = (1 - z) n + z h, gates ordered (r, z, n); hold by default = z near 1
+        with torch.no_grad(): h = net.h; net.cell.bias_ih[h:2*h].fill_(-args.gate_bias); net.cell.bias_hh[h:2*h].zero_()
 if args.arch == 'twin' and args.surgery and args.recenter_turn:
     _pre = []; _st = net.step
     def _h(inp, active=None):
@@ -63,6 +69,8 @@ if args.arch == 'twin' and args.surgery and args.recenter_turn:
     with torch.no_grad(): _m = float(torch.stack(_pre).mean()); net.W_out.bias[0] -= _m
     print('turn output re-centred by', -_m, flush=True)
 if args.aux > 0: net.aux = torch.nn.Linear(net.x.shape[1] if hasattr(net, 'x') else (net.h if hasattr(net, 'h') else net.n), 2)
+if args.arch == 'twin' and args.gate_split:
+    with torch.no_grad(): h = net.n // 2; net.V.bias[:h] = 5.0; net.V.bias[h:] = -5.0
 print('arch', args.arch, 'trainable numbers', sum(q.numel() for q in net.parameters() if q.requires_grad), flush=True)
 opt = torch.optim.Adam([q for q in net.parameters() if q.requires_grad], lr=args.lr)
 state = dict(it=0, stage=0, stage_start=0, recent=[])

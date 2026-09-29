@@ -1,0 +1,30 @@
+{
+ "run": "twinS_c1_lr3e-4",
+ "arm": "TWIN-split",
+ "args": [
+  "--arch",
+  "twin",
+  "--gate_split",
+  "1",
+  "--lr",
+  "3e-4",
+  "--seed",
+  "1",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1500",
+  "--iters",
+  "4000",
+  "--lr_decay",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--batch",
+  "32"
+ ],
+ "prediction": "Round 3 amendment 11:15: the split twin (32 fast neurons like FW's, 32 slow like FW's board). Predicted: passes the 10 s stage by learning on at least 2 of 3 seeds at one rate (50%).",
+ "started": "2026-09-29 11:12:52"
+}

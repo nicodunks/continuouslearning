@@ -1,0 +1,30 @@
+{
+ "run": "gruH_c1",
+ "arm": "GRU-hold",
+ "args": [
+  "--arch",
+  "gru",
+  "--gate_bias",
+  "-5",
+  "--lr",
+  "1e-3",
+  "--seed",
+  "1",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1500",
+  "--iters",
+  "4000",
+  "--lr_decay",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--batch",
+  "32"
+ ],
+ "prediction": "Round 3 reference: GRU with update gate started at keep (+5). Predicted: learns on at least 1 of 3 seeds (50%).",
+ "started": "2026-09-29 11:09:38"
+}

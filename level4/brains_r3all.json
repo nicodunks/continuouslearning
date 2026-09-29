@@ -1,0 +1,296 @@
+[
+ {
+  "name": "fwA_41",
+  "arm": "FW-warm-aux",
+  "ckpt": "level4/runs/fwA_41/final.pt",
+  "finished": true
+ },
+ {
+  "name": "fwA_45",
+  "arm": "FW-warm-aux",
+  "ckpt": "level4/runs/fwA_45/final.pt",
+  "finished": true
+ },
+ {
+  "name": "fw_c0",
+  "arm": "FW-cold",
+  "ckpt": "level4/runs/fw_c0/final.pt",
+  "finished": true
+ },
+ {
+  "name": "fw_c1",
+  "arm": "FW-cold",
+  "ckpt": "level4/runs/fw_c1/final.pt",
+  "finished": true
+ },
+ {
+  "name": "fw_c2",
+  "arm": "FW-cold",
+  "ckpt": "level4/runs/fw_c2/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gruH_c0",
+  "arm": "GRU-hold",
+  "ckpt": "level4/runs/gruH_c0/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gruH_c1",
+  "arm": "GRU-hold",
+  "ckpt": "level4/runs/gruH_c1/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gruH_c2",
+  "arm": "GRU-hold",
+  "ckpt": "level4/runs/gruH_c2/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_aux0",
+  "arm": "GRU-aux",
+  "ckpt": "level4/runs/gru_aux0/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_aux1",
+  "arm": "GRU-aux",
+  "ckpt": "level4/runs/gru_aux1/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c0_lr1e-3",
+  "arm": "GRU-cold@1e-3",
+  "ckpt": "level4/runs/gru_c0_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c0_lr3e-4",
+  "arm": "GRU-cold@3e-4",
+  "ckpt": "level4/runs/gru_c0_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c1_lr1e-3",
+  "arm": "GRU-cold@1e-3",
+  "ckpt": "level4/runs/gru_c1_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c1_lr3e-4",
+  "arm": "GRU-cold@3e-4",
+  "ckpt": "level4/runs/gru_c1_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c2_lr1e-3",
+  "arm": "GRU-cold@1e-3",
+  "ckpt": "level4/runs/gru_c2_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c2_lr3e-4",
+  "arm": "GRU-cold@3e-4",
+  "ckpt": "level4/runs/gru_c2_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinA_w41",
+  "arm": "TWIN-warm-aux",
+  "ckpt": "level4/runs/twinA_w41/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinA_w45",
+  "arm": "TWIN-warm-aux",
+  "ckpt": "level4/runs/twinA_w45/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w28",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w28/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w40",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w40/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w41",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w41/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w45",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w45/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH3_c0",
+  "arm": "TWIN-hold3",
+  "ckpt": "level4/runs/twinH3_c0/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH3_c1",
+  "arm": "TWIN-hold3",
+  "ckpt": "level4/runs/twinH3_c1/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH3_c2",
+  "arm": "TWIN-hold3",
+  "ckpt": "level4/runs/twinH3_c2/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH_c0_lr1e-3",
+  "arm": "TWIN-hold@1e-3",
+  "ckpt": "level4/runs/twinH_c0_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH_c0_lr3e-4",
+  "arm": "TWIN-hold@3e-4",
+  "ckpt": "level4/runs/twinH_c0_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH_c1_lr1e-3",
+  "arm": "TWIN-hold@1e-3",
+  "ckpt": "level4/runs/twinH_c1_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH_c1_lr3e-4",
+  "arm": "TWIN-hold@3e-4",
+  "ckpt": "level4/runs/twinH_c1_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH_c2_lr1e-3",
+  "arm": "TWIN-hold@1e-3",
+  "ckpt": "level4/runs/twinH_c2_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinH_c2_lr3e-4",
+  "arm": "TWIN-hold@3e-4",
+  "ckpt": "level4/runs/twinH_c2_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinS_c0_lr1e-3",
+  "arm": "TWIN-split@1e-3",
+  "ckpt": "level4/runs/twinS_c0_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinS_c0_lr3e-4",
+  "arm": "TWIN-split@3e-4",
+  "ckpt": "level4/runs/twinS_c0_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinS_c1_lr1e-3",
+  "arm": "TWIN-split@1e-3",
+  "ckpt": "level4/runs/twinS_c1_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinS_c1_lr3e-4",
+  "arm": "TWIN-split@3e-4",
+  "ckpt": "level4/runs/twinS_c1_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinS_c2_lr1e-3",
+  "arm": "TWIN-split@1e-3",
+  "ckpt": "level4/runs/twinS_c2_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinS_c2_lr3e-4",
+  "arm": "TWIN-split@3e-4",
+  "ckpt": "level4/runs/twinS_c2_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_aux0",
+  "arm": "TWIN-aux",
+  "ckpt": "level4/runs/twin_aux0/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_aux1",
+  "arm": "TWIN-aux",
+  "ckpt": "level4/runs/twin_aux1/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c0_lr1e-3",
+  "arm": "TWIN-cold@1e-3",
+  "ckpt": "level4/runs/twin_c0_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c0_lr3e-4",
+  "arm": "TWIN-cold@3e-4",
+  "ckpt": "level4/runs/twin_c0_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c1_lr1e-3",
+  "arm": "TWIN-cold@1e-3",
+  "ckpt": "level4/runs/twin_c1_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c1_lr3e-4",
+  "arm": "TWIN-cold@3e-4",
+  "ckpt": "level4/runs/twin_c1_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c2_lr1e-3",
+  "arm": "TWIN-cold@1e-3",
+  "ckpt": "level4/runs/twin_c2_lr1e-3/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c2_lr3e-4",
+  "arm": "TWIN-cold@3e-4",
+  "ckpt": "level4/runs/twin_c2_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_w28",
+  "arm": "TWIN-warm",
+  "ckpt": "level4/runs/twin_w28/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_w40",
+  "arm": "TWIN-warm",
+  "ckpt": "level4/runs/twin_w40/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_w41",
+  "arm": "TWIN-warm",
+  "ckpt": "level4/runs/twin_w41/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_w45",
+  "arm": "TWIN-warm",
+  "ckpt": "level4/runs/twin_w45/final.pt",
+  "finished": true
+ }
+]

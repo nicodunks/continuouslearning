@@ -69,7 +69,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--line);padding:1px 
   <div class="verdict" id="summary"></div>
   <div class="kpis" id="kpis"></div>
   <nav class="toc">
-    <a href="#twins">The two twins</a><a href="#read">How to read the charts</a><a href="#exam">Standard exam</a><a href="#longer">Longer trips</a><a href="#drift">Drifting compass</a><a href="#stop">Long stop</a><a href="#reset">Five trips</a><a href="#scratch">From scratch</a><a href="#teacher">With a teacher</a><a href="#rule">The verdict, by rule</a><a href="#honest">What we know and do not</a>
+    <a href="#twins">The two twins</a><a href="#read">How to read the charts</a><a href="#exam">Standard exam</a><a href="#longer">Longer trips</a><a href="#drift">Drifting compass</a><a href="#stop">Long stop</a><a href="#reset">Five trips</a><a href="#scratch">From scratch</a><a href="#rematch">Fairest rematch</a><a href="#teacher">With a teacher</a><a href="#rule">The verdict, by rule</a><a href="#honest">What we know and do not</a>
   </nav>
 </header>
 
@@ -191,6 +191,16 @@ code{font-family:var(--mono);font-size:.88em;background:var(--line);padding:1px 
     <p class="cap">Running score (average of the last 50 training trips) against training iteration. Grey steps: a fly that never steers, at each wander length (drawn where a run that hits every stage cap would be; runs that learn move on sooner). Red dashes: a fly that spins at full lock (above the top of the chart at 30 s, where it is 6.1). A line at or above the grey step is learning nothing; a line below it is learning to home.</p></div>
 </section>
 
+<section id="rematch">
+  <h2>The fairest rematch</h2>
+  <div id="t_rematch"></div>
+  <div class="fig"><span class="tag real">Real data</span><div id="stripRematch"></div>
+    <p class="cap">Standard exam, networks trained from scratch with the same grading, curriculum, budget (4,000 iterations) and seeds. Only the memory and its starting setting differ. Each dot is one network; the bar is its exam noise.</p></div>
+  <div class="fig" style="margin-top:14px"><span class="tag real">Real data</span><div id="stripRematchStop"></div>
+    <p class="cap">The same networks with a 30-second stop halfway through the walk.</p></div>
+  <div id="rematchVerdict" class="verdict"></div>
+</section>
+
 <section id="teacher">
   <h2>With a teacher</h2>
   <div id="t_aux"></div>
@@ -238,7 +248,7 @@ const vals=(a,c)=>nets(a).map(([n,r])=>r.conds[c]).filter(Boolean);
 const mean=xs=>xs.reduce((s,x)=>s+x,0)/xs.length;
 const f2=x=>x==null?'–':x.toFixed(2);
 function text(id){const t=(D.text||{})[id];if(t&&$('t_'+id))$('t_'+id).innerHTML=t;}
-['std30','std30_1k','len','drift','stop','trips','scratch','aux','honest'].forEach(text);
+['std30','std30_1k','len','drift','stop','trips','scratch','aux','honest','rematch'].forEach(text);
 if(D.text&&D.text.summary)$('summary').innerHTML=D.text.summary;else $('summary').innerHTML='<p class="note">Results are still coming in.</p>';
 
 /* ---------- svg helpers ---------- */
@@ -288,7 +298,7 @@ function renderReal(){
   lines($('lenChart'),['std30','len45','len60','len90'],['30 s','45 s','60 s','90 s'],'how long the fly wandered before turning home',MAIN,$('legendLen'));
   lines($('driftChart'),['std30','drift05','drift15'],['none','0.05','0.15'],'compass drift',MAIN,$('legendDrift'));
   lines($('stopChart'),['std30','stop10','stop30'],['no stop','10 s stop','30 s stop'],'standing still halfway through the walk',MAIN,$('legendStop'));
-  tripsChart();probeChart();curves();ruleTable();kpis();
+  tripsChart();probeChart();curves();ruleTable();kpis();rematch();
 }
 function tripsChart(){
   const W=620,H=300,L=54,Rt=600,T=18,B=250;const arms=MAIN.filter(a=>nets(a.k).some(([n,r])=>r.conds.trips5));
@@ -319,7 +329,7 @@ function probeChart(){
   $('probeChart').innerHTML=svg(W,H,g)+`<div class="legend"><span><i style="background:${css('--ink')};height:10px;width:3px"></i>just before the stop</span><span><i style="background:${css('--ink-3')};opacity:.6"></i>end of stop, readout refitted</span><span><i style="background:${css('--ink-3')};opacity:.2;border:1px solid ${css('--ink-3')}"></i>end of stop, same readout</span></div>`;
   $('probeCap').innerHTML=((D.text||{}).probe||'');
 }
-const CGROUPS={'Our network (FW)':/^fw_c/,'TWIN':/^twin_c/,'GRU reference':/^gru_c/,'With a teacher':/_aux/};
+const CGROUPS={'Our network (FW)':/^fw_c/,'TWIN':/^twin_c/,'GRU reference':/^gru_c/,'Twin, hold start':/^twinH_/,'Split twin':/^twinS_/,'With a teacher':/_aux/};
 let cg='Our network (FW)';
 function curves(){
   const C=D.curves||{};$('curveBtns').innerHTML=Object.keys(CGROUPS).map(k=>`<button class="${k===cg?'on':''}" data-g="${k}">${k}</button>`).join('');
@@ -358,6 +368,20 @@ function ruleTable(){
   const wins=rest.filter(x=>x==='FW').length,loses=[g1,...rest].filter(x=>x==='TWIN').length;
   let V;if((g1==='FW'||wins>=2)&&loses===0)V='Supported';else if(g1!=='FW'&&rest.every(x=>x!=='FW'))V='Not supported';else V='Mixed';
   $('ruleVerdict').innerHTML=`<h3 style="margin-top:0">Warm pair: <span style="color:${css(V==='Supported'?'--amber':V==='Not supported'?'--teal':'--ink')}">${V}</span></h3><p>Claim tested: "fast weights beat activity memory on this task", for our network against its twin with the same history. Supported needs FW better on the standard exam, or on at least two of conditions 2 to 4, and worse on none. Not supported needs the twin to tie or beat FW on the standard exam and on conditions 2 to 4.</p>`+((D.text||{}).rule||'');
+}
+const R3=[{k:'FW-cold',label:'FW · from scratch (this morning)',c:'--amber'},
+ {k:'TWIN-split@1e-3',label:'split twin · rate 1e-3',c:'--teal'},{k:'TWIN-split@3e-4',label:'split twin · rate 3e-4',c:'--teal',faint:true},
+ {k:'TWIN-hold@1e-3',label:'twin, hold start · 1e-3',c:'--violet'},{k:'TWIN-hold@3e-4',label:'twin, hold start · 3e-4',c:'--violet',faint:true},
+ {k:'TWIN-hold3',label:'twin, hold start −3 · 1e-3',c:'--violet',faint:true},{k:'GRU-hold',label:'GRU, hold start · 1e-3',c:'--blue'},
+ {k:'TWIN-cold@1e-3',label:'twin, original start · 1e-3',c:'--ink-3',faint:true}];
+function rematch(){
+  if(!vals('FW-cold','std30').length){$('stripRematch').innerHTML='<p class="note">Waiting.</p>';return}
+  strip($('stripRematch'),'std30',R3);strip($('stripRematchStop'),'stop30',R3);
+  const tw=R3.filter(a=>a.k.startsWith('TWIN-')&&!a.k.startsWith('TWIN-cold')&&vals(a.k,'std30').length).sort((x,y)=>mean(vals(x.k,'std30').map(v=>v.score))-mean(vals(y.k,'std30').map(v=>v.score)))[0];
+  if(!tw){$('rematchVerdict').innerHTML='';return}
+  const rows=['std30','len60','len90','drift15','stop30'].map(c=>{const f=vals('FW-cold',c).map(v=>v.score),r=vals(tw.k,c).map(v=>v.score);if(!f.length||!r.length)return'';const o=cmp(f,r);
+    return `<tr><td class="mono">${c}</td><td class="n">${f2(mean(f))}</td><td class="n">${f2(mean(r))}</td><td class="n">${(o.gap>0?'+':'')+o.gap.toFixed(2)}</td><td>${o.v==='tie'?'<span class="pill p-tie">tie</span>':`<span class="pill ${o.v.endsWith('FW')?'p-fw':'p-rv'}">${o.v.replace(':',' · ').replace('TWIN','twin')}</span>`}</td></tr>`}).join('');
+  $('rematchVerdict').innerHTML=`<h3 style="margin-top:0">Cold pair, by the rule: FW from scratch against ${tw.label}</h3><div class="tbl"><table><thead><tr><th>Level</th><th>FW-cold mean</th><th>Twin mean</th><th>Gap (twin − FW)</th><th>Label</th></tr></thead><tbody>${rows}</tbody></table></div><p class="note">The twin side is its best setting by standard-exam mean (chosen once), which favours the twin. Three seeds each; the rule is the charter's: a gap of 0.2 or more with no overlap is "better".</p>`;
 }
 function kpis(){
   const m=a=>{const v=vals(a,'std30');return v.length?mean(v.map(x=>x.score)):null};

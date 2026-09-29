@@ -1,0 +1,35 @@
+{
+ "cold": {
+  "10": {
+   "never": [
+    5.42,
+    2.25
+   ],
+   "spin": [
+    2.67,
+    2.39
+   ]
+  },
+  "20": {
+   "never": [
+    8.78,
+    3.65
+   ],
+   "spin": [
+    4.96,
+    4.56
+   ]
+  },
+  "30": {
+   "never": [
+    11.53,
+    4.57
+   ],
+   "spin": [
+    6.55,
+    6.09
+   ]
+  }
+ },
+ "note": "1,000 flies, seed 11, cold recipe world (steady speed, 2 s at food). Each pair is [training loss, exam-style score]. level4 narrative 08:50."
+}

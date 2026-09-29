@@ -1,0 +1,11 @@
+arch fw trainable numbers 8838
+initialised from level3/runs/run41/final.pt
+it     0 stage 0 t_out 30  loss 6.85 score 2.40 run 2.40  drift F 2.62 noF 9.01  4.87s/it
+it   100 stage 0 t_out 30  loss 7.76 score 2.55 run 2.65  drift F 2.10 noF 8.16  4.36s/it
+it   200 stage 0 t_out 30  loss 8.86 score 2.88 run 2.98  drift F 2.87 noF 7.69  4.25s/it
+it   300 stage 0 t_out 30  loss 8.61 score 3.17 run 3.70  drift F 3.77 noF 8.55  4.57s/it
+it   400 stage 0 t_out 30  loss 7.47 score 2.80 run 3.07  drift F 3.16 noF 8.44  4.46s/it
+it   500 stage 0 t_out 30  loss 8.70 score 3.73 run 2.98  drift F 2.89 noF 8.27  3.90s/it
+it   600 stage 0 t_out 30  loss 6.30 score 2.33 run 2.78  drift F 3.05 noF 9.32  3.48s/it
+it   700 stage 0 t_out 30  loss 7.87 score 2.85 run 2.62  drift F 2.41 noF 8.23  2.80s/it
+finished

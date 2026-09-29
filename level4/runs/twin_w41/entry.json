@@ -1,0 +1,30 @@
+{
+ "run": "twin_w41",
+ "arm": "TWIN-warm",
+ "args": [
+  "--arch",
+  "twin",
+  "--iters",
+  "2400",
+  "--stages",
+  "30",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--erase_penalty",
+  "20",
+  "--food_stand",
+  "4.0",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--seed",
+  "2",
+  "--surgery",
+  "level3/runs/run41/final.pt"
+ ],
+ "prediction": "Warm pair (main verdict). TWIN made from this FW seed by surgery, trained with the night-two recipe for 2,400 iterations at 30 s. Predicted: it learns to use its hold gate and ends within 0.2 of its FW parent's 30 s score (a tie); holds better than FW in the long stop. (parent run 41, 1.49)",
+ "started": "2026-09-29 08:27:34"
+}

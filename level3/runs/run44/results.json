@@ -1,0 +1,30 @@
+{
+ "run": "run44",
+ "knob": "stack: F-size penalty and erase bias shift \u22120.5, warm from run 41, seed 2",
+ "parent": "run41 (final)",
+ "minutes": 20.0,
+ "stopped_early": "killed by the supervisor at 300: collapsed",
+ "tests": [
+  {
+   "ckpt": "ckpt_00300.pt",
+   "t_out": 30,
+   "bars": {
+    "A": {
+     "score": 4.116683483123779,
+     "arrived": 0.09749999642372131
+    },
+    "B": {
+     "score": 5.789060115814209,
+     "arrived": 0.029999999329447746
+    },
+    "C": {
+     "score": 4.3781962394714355,
+     "arrived": 0.09000000357627869
+    }
+   },
+   "n_tuned": 32,
+   "file": "test_final_30.json"
+  }
+ ],
+ "finished": 1789633834.662744
+}

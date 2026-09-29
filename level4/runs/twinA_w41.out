@@ -1,0 +1,27 @@
+turn output re-centred by 10.868595123291016
+arch twin trainable numbers 9157
+it     0 stage 0 t_out 30  loss 16.35 score 6.01 run 6.01  drift F 6.97 noF 6.97  1.20s/it
+it   100 stage 0 t_out 30  loss 14.37 score 7.33 run 7.56  drift F 6.78 noF 6.78  1.20s/it
+it   200 stage 0 t_out 30  loss 13.42 score 8.09 run 7.82  drift F 7.04 noF 7.04  1.19s/it
+it   300 stage 0 t_out 30  loss 13.00 score 8.32 run 8.57  drift F 8.45 noF 8.45  1.27s/it
+it   400 stage 0 t_out 30  loss 12.32 score 7.73 run 8.38  drift F 8.08 noF 8.08  1.27s/it
+it   500 stage 0 t_out 30  loss 14.07 score 9.20 run 8.27  drift F 8.02 noF 8.02  1.23s/it
+it   600 stage 0 t_out 30  loss 11.90 score 8.02 run 8.56  drift F 9.10 noF 9.10  1.41s/it
+it   700 stage 0 t_out 30  loss 13.54 score 8.84 run 8.56  drift F 8.21 noF 8.21  1.26s/it
+it   800 stage 0 t_out 30  loss 14.57 score 9.65 run 8.66  drift F 9.05 noF 9.05  1.23s/it
+it   900 stage 0 t_out 30  loss 11.87 score 7.96 run 8.61  drift F 8.33 noF 8.33  1.24s/it
+it  1000 stage 0 t_out 30  loss 13.55 score 9.16 run 8.61  drift F 8.55 noF 8.55  1.03s/it
+it  1100 stage 0 t_out 30  loss 13.60 score 9.47 run 8.71  drift F 8.79 noF 8.79  1.29s/it
+it  1200 stage 0 t_out 30  loss 12.33 score 8.22 run 8.76  drift F 8.82 noF 8.82  1.24s/it
+it  1300 stage 0 t_out 30  loss 12.53 score 8.75 run 8.70  drift F 8.60 noF 8.60  1.18s/it
+it  1400 stage 0 t_out 30  loss 11.86 score 8.33 run 8.62  drift F 8.53 noF 8.53  1.29s/it
+it  1500 stage 0 t_out 30  loss 11.68 score 8.19 run 8.70  drift F 8.60 noF 8.60  1.26s/it
+it  1600 stage 0 t_out 30  loss 12.29 score 8.74 run 8.65  drift F 8.85 noF 8.85  1.18s/it
+it  1700 stage 0 t_out 30  loss 13.41 score 9.56 run 8.69  drift F 9.08 noF 9.08  1.18s/it
+it  1800 stage 0 t_out 30  loss 12.38 score 8.82 run 8.60  drift F 8.36 noF 8.36  1.10s/it
+it  1900 stage 0 t_out 30  loss 12.54 score 8.92 run 8.62  drift F 9.20 noF 9.20  1.22s/it
+it  2000 stage 0 t_out 30  loss 11.65 score 8.28 run 8.70  drift F 8.67 noF 8.67  1.16s/it
+it  2100 stage 0 t_out 30  loss 11.05 score 7.72 run 8.81  drift F 8.82 noF 8.82  1.02s/it
+it  2200 stage 0 t_out 30  loss 12.47 score 8.97 run 8.63  drift F 8.53 noF 8.53  1.06s/it
+it  2300 stage 0 t_out 30  loss 12.52 score 8.64 run 8.77  drift F 8.82 noF 8.82  0.85s/it
+finished

@@ -1,0 +1,432 @@
+<title>The Twin Test</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#EEF1F4;--panel:#F8F9FA;--ink:#1B2330;--ink-2:#4A5563;--ink-3:#8A94A2;--line:#D3D9E0;--amber:#D07A1E;--amber-soft:#F6E3C8;--teal:#1F8A8A;--teal-soft:#CDE8E6;--red:#C24A3A;--red-soft:#F5DAD5;--blue:#3C6FB6;--blue-soft:#D7E3F4;--violet:#7A5AB8;--violet-soft:#E6DEF4;--green:#3F8F4E;
+ --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--serif:'Source Serif 4',Georgia,serif;--disp:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3A1C18;--blue:#7AA4E0;--blue-soft:#1A2A40;--violet:#A98BE0;--violet-soft:#2A2140;--green:#6CC07B}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#141A21;--panel:#1B222B;--ink:#E6EAEE;--ink-2:#AEB7C2;--ink-3:#77818E;--line:#2C3541;--amber:#EFA24A;--amber-soft:#3A2A16;--teal:#3FB3B0;--teal-soft:#14302F;--red:#E0655A;--red-soft:#3A1C18;--blue:#7AA4E0;--blue-soft:#1A2A40;--violet:#A98BE0;--violet-soft:#2A2140;--green:#6CC07B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:16.5px;line-height:1.62;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--disp);text-wrap:balance;line-height:1.12;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:26px;margin-bottom:10px}
+h3{font-size:18px;margin:18px 0 6px}
+h4{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+p{max-width:68ch;margin:0 0 12px}
+.lede{font-size:19px;color:var(--ink-2)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+header{padding-block:48px 24px;border-bottom:1px solid var(--line)}
+section{padding-block:34px;border-bottom:1px solid var(--line)}
+.note{font-size:14px;color:var(--ink-2)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:18px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.kpi b{font-family:var(--mono);font-size:22px;font-weight:500;display:block}
+.kpi span{font-size:12.5px;color:var(--ink-2)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.toc a{font-family:var(--disp);font-weight:700;font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--panel)}
+nav.toc a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+button{font-family:var(--disp);font-weight:700;font-size:13px;padding:6px 11px;border-radius:4px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+button.on{background:var(--amber);border-color:var(--amber);color:#1B2330}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
+.fig{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 12px 8px}
+.fig .cap{font-size:13.5px;color:var(--ink-2);margin:6px 2px 4px;max-width:none}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:6px}
+.tag.real{background:var(--teal-soft);color:var(--teal)}
+.tag.sketch{background:var(--amber-soft);color:var(--amber)}
+.read{border-left:3px solid var(--blue);padding:4px 0 4px 14px;margin:10px 0;font-size:15px;color:var(--ink-2);max-width:70ch;border-radius:0}
+.read b{font-family:var(--disp);color:var(--ink)}
+.verdict{border:1px solid var(--line);border-radius:6px;padding:16px 18px;background:var(--panel);margin-top:18px}
+.verdict p{max-width:none}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--mono);font-size:11px;fill:var(--ink-2)}
+svg .lab{font-family:var(--disp);font-weight:700;font-size:12px;fill:var(--ink)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin:6px 2px}
+.legend i{display:inline-block;width:14px;height:4px;vertical-align:middle;margin-right:6px;border-radius:0}
+table{border-collapse:collapse;font-size:14px;width:100%;margin:8px 0}
+td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+td.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.p-fw{background:var(--amber-soft);color:var(--amber)}.p-rv{background:var(--teal-soft);color:var(--teal)}.p-tie{background:var(--line);color:var(--ink-2)}
+ol.steps{max-width:68ch;padding-left:22px}ol.steps li{margin-bottom:6px}
+input[type=range]{width:100%;accent-color:var(--amber)}
+details{margin-top:10px}summary{font-family:var(--disp);font-weight:700;cursor:pointer}
+footer{padding-block:30px;font-size:14px;color:var(--ink-2)}
+code{font-family:var(--mono);font-size:.88em;background:var(--line);padding:1px 5px;border-radius:3px}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Level 4 · 29 September 2026 · five hours, one charter</div>
+  <h1>The Twin Test</h1>
+  <p class="lede">Our network remembers the way home by rewriting its own connections. Its twin is the same network with that part removed and a gate that lets its neurons hold their activity instead. Same size, same inputs, same training. Which one homes better, and when?</p>
+  <div class="verdict" id="summary"></div>
+  <div class="kpis" id="kpis"></div>
+  <nav class="toc">
+    <a href="#twins">The two twins</a><a href="#read">How to read the charts</a><a href="#exam">Standard exam</a><a href="#longer">Longer trips</a><a href="#drift">Drifting compass</a><a href="#stop">Long stop</a><a href="#reset">Five trips</a><a href="#scratch">From scratch</a><a href="#teacher">With a teacher</a><a href="#rule">The verdict, by rule</a><a href="#honest">What we know and do not</a>
+  </nav>
+</header>
+
+<section id="twins">
+  <h2>The two twins</h2>
+  <p>Both networks are the same machine. Each has 64 neurons. Each tick (a tenth of a second) they receive four numbers: the heading as two numbers (east–west and north–south parts), the walking speed, and whether food is underfoot. Each tick they produce a turn command. Between the neurons sits a table of connection strengths called <code>W</code>, set by training and then frozen. Everything so far is identical.</p>
+  <p>The difference is how a number is kept over time. The fly needs to keep a running total of where it has walked, so it can turn around and walk back.</p>
+  <ol class="steps">
+    <li><b>Our network (FW, for fast weights)</b> keeps the total in a second table of connection strengths, the board <code>F</code>, that it rewrites every tick. A write gate decides how much to add; an erase gate decides how much to wipe. A table called <code>A</code> (4,096 numbers) decides how much each board cell matters. This is the fly's proposed trick.</li>
+    <li><b>The twin (TWIN)</b> has no board. Instead each neuron has a hold gate <code>u</code> between 0 and 1. Each tick the neuron's new value is <code>(1 − u) × old value + u × new proposal</code>. With <code>u</code> at 0 it keeps its old value exactly. With <code>u</code> at 1 it behaves like our network's plain neurons. The gate's weights are 4,416 numbers, close to <code>A</code>'s 4,096.</li>
+  </ol>
+  <div class="two">
+    <div class="fig"><span class="tag sketch">Drawing</span><div id="twinDiagram"></div><p class="cap">Everything grey is shared. The only difference is the coloured box.</p></div>
+    <div class="fig"><span class="tag sketch">Sketch, not data</span>
+      <div id="holdSketch"></div>
+      <label for="uSlider" class="note">Hold gate <code>u</code> while standing still: <b class="mono" id="uVal"></b></label>
+      <input id="uSlider" type="range" min="0" max="0.02" step="0.0005" value="0.001">
+      <p class="cap" id="holdCap"></p>
+    </div>
+  </div>
+  <div class="read"><b>Why this is the fair version of the question.</b> The roadmap's argument was that a memory held in activity has to repeat its number to itself with a loop gain of exactly 1 (multiply by exactly one each tick), which is hard to get right, while a tally in the connections just sits there. The twin is handed a gate that can hold at exactly 1. So the question becomes: does it learn to use it?</div>
+  <p class="note">Sizes: FW 8,708 trained numbers; TWIN 9,027 (4% more). A textbook GRU (a standard gated memory network) with 52 memory units, 9,101 numbers, runs beside them as a reference, never used to decide the verdict.</p>
+</section>
+
+<section id="read">
+  <h2>How to read the charts</h2>
+  <p>Every score on this page is the same ruler as the first two nights. The fly walks out for a while with its steering ignored, then has twice that long to walk home using its own turn commands. The score is the closest it ever gets to home, in the same units as the walk (a unit is about what the fly covers in one second), averaged over 200 test trips. <b>Lower is better.</b> The hand-built fly brain scores about 0.75. A fly that never steers scores about 4.4.</p>
+  <p>Each dot is one trained network. Networks in the same row were trained the same way and differ only in the random numbers they started with (the seed). The thin bar through a dot is that network's own exam noise: if we gave it 200 different trips, its score would land inside the bar 95 times in 100. The thick tick is the row's average.</p>
+  <div class="two">
+    <div class="fig"><span class="tag sketch">Sketch, not data</span><div id="readSketch"></div></div>
+    <div>
+      <p><b>The rule for calling a winner</b> was written before anything ran:</p>
+      <ol class="steps">
+        <li>Take the average of each row.</li>
+        <li>If the averages differ by less than 0.2, it is a <b>tie</b>. With three or four networks per row, a gap that small could come from training luck alone (night two measured the plain recipe's seed-to-seed spread at 0.16).</li>
+        <li>If they differ by 0.2 or more and no dot of one row overlaps the other row's range, that row is <b>better</b>.</li>
+        <li>If they differ by 0.2 or more but the ranges overlap, it <b>leans</b> better.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="exam">
+  <h2>The standard exam</h2>
+  <div id="t_std30"></div>
+  <div class="fig"><span class="tag real">Real data</span><div id="stripStd"></div>
+    <div class="legend" id="legendStd"></div>
+    <p class="cap">Standard exam: 30-second wander, seed 4242, 200 trips per network. Measured by <code>level4/exam.py</code>. Each dot is one network; the bar is its 95% range from resampling its 200 trips 1,000 times.</p></div>
+  <div id="t_std30_1k"></div>
+</section>
+
+<section id="longer">
+  <h2>Longer trips</h2>
+  <div id="t_len"></div>
+  <div class="two">
+    <div class="fig"><span class="tag real">Real data</span><div id="lenChart"></div><div class="legend" id="legendLen"></div>
+      <p class="cap">Average over each group's networks; the faint lines are the individual networks. The return always gets twice the wander time. Same 200 trips at every length.</p></div>
+    <div class="fig"><span class="tag sketch">Sketch, not data</span>
+      <div class="row" id="lenBtns"><button data-k="win">Fast weights win</button><button data-k="tie" class="on">Tie</button><button data-k="lose">Twin wins</button></div>
+      <div id="lenSketch"></div><p class="cap" id="lenCap"></p></div>
+  </div>
+</section>
+
+<section id="drift">
+  <h2>A drifting compass</h2>
+  <p>The heading the network is told slowly wanders away from the true heading, like a compass needle being nudged. At 0.05 the error after 30 seconds is typically about 16 degrees; at 0.15 it is about 47 degrees. Neither network was trained with drift.</p>
+  <div id="t_drift"></div>
+  <div class="fig"><span class="tag real">Real data</span><div id="driftChart"></div><div class="legend" id="legendDrift"></div>
+    <p class="cap">30-second wander with the compass drifting at 0, 0.05 and 0.15 (spread per square-root second). Averages with individual networks faint.</p></div>
+</section>
+
+<section id="stop">
+  <h2>The long stop</h2>
+  <p>This is the roadmap's central argument, turned into a test. The fly walks for 15 seconds, stands still for 10 or 30 seconds, then walks another 15 seconds and turns for home. It walks exactly as far as on the standard exam; only the standing is added. A tally in the connections has nothing to do while standing. A memory in activity has to hold its number for the whole stop.</p>
+  <div id="t_stop"></div>
+  <div class="two">
+    <div class="fig"><span class="tag real">Real data</span><div id="stopChart"></div><div class="legend" id="legendStop"></div>
+      <p class="cap">Score with no stop, a 10-second stop and a 30-second stop. Same walking in each; the return time is based on the walking time.</p></div>
+    <div class="fig"><span class="tag real">Real data · inside the networks</span><div id="probeChart"></div>
+      <p class="cap" id="probeCap"></p></div>
+  </div>
+</section>
+
+<section id="reset">
+  <h2>Five trips in a row</h2>
+  <p>The plan's "two food sites" test becomes this in our world: five trips back to back, and the score of each trip. A clean wipe at food means trip five scores like trip one. <b>This test is not a contest.</b> The world wipes every network's activity at the start of each trip for free. The twin gets its reset from the world; our network has to earn its reset with its erase gate, because the board is not wiped. So this chart shows what the reset costs our network.</p>
+  <div id="t_trips"></div>
+  <div class="two">
+    <div class="fig"><span class="tag real">Real data</span><div id="tripsChart"></div><div class="legend" id="legendTrips"></div>
+      <p class="cap">Score of each trip in an episode of five, averaged over each group's networks. The dashed lines are the hand-built brain and a fly that never steers on the same trips: later trips are harder for everyone, so each line should be read against them, not against a flat line.</p></div>
+    <div class="fig"><span class="tag sketch">Sketch, not data</span><div id="tripsSketch"></div>
+      <p class="cap">A clean reset stays flat. A partial reset climbs, because each trip starts with leftovers from the one before.</p></div>
+  </div>
+</section>
+
+<section id="scratch">
+  <h2>Learning from scratch</h2>
+  <p>The warm twins inherited our network's history: its compass cells, its connection table, everything but the board. The cold pair asks a different question. Start both designs from random numbers, give them the same lessons in the same order, and see which one learns. The lessons are the curriculum from the first night: 10-second wanders until the running score drops under 1.5 (or 1,500 iterations pass), then 20 seconds, then 30.</p>
+  <div id="t_scratch"></div>
+  <h3>The trap in the loss</h3>
+  <p>Training does not see the score. It sees the loss: the average distance from home over the last 10 seconds of the return. For a network that cannot yet remember anything, those two disagree. Here is how, step by step.</p>
+  <ol class="steps">
+    <li>A fly with no memory has no idea where home is when it turns around.</li>
+    <li>If it keeps walking, it wanders further away. By the last 10 seconds of the return it is far from home.</li>
+    <li>If it spins on the spot at full lock, it stays roughly where it turned. It never gets closer, but it never gets further either.</li>
+    <li>So spinning gives a much lower loss than walking, even though it homes worse. Training follows the loss, so a network without a memory is pulled towards spinning, and once it spins, small changes do not help, so it stays there.</li>
+    <li>A network that already holds a usable tally escapes: reading the tally and walking home beats spinning. Our network's board starts collecting a tally on the very first tick without any training. An activity network has to discover how to hold a number first, and the pull towards spinning works against it the whole time.</li>
+  </ol>
+  <div class="two">
+    <div class="fig"><span class="tag real">Real data</span><div id="trapChart"></div>
+      <p class="cap">Two brains with no memory, 1,000 flies each, the cold training world. Left bar of each pair: the training loss (what training tries to lower). Right bar: the exam-style score (what we care about). Spinning halves the loss and worsens the score.</p></div>
+    <div class="fig"><span class="tag sketch">Sketch, not data</span><div id="trapSketch"></div>
+      <p class="cap">Seen from above. The fly turns for home at the dot. Walking on (grey) drifts away; spinning (red) stays near the dot. The loss only measures the shaded last stretch, so it prefers the spinner.</p></div>
+  </div>
+  <h3>How each design learned</h3>
+  <div class="fig"><span class="tag real">Real data</span>
+    <div class="row" id="curveBtns"></div>
+    <div id="curveChart"></div><div class="legend" id="legendCurve"></div>
+    <p class="cap">Running score (average of the last 50 training trips) against training iteration. Grey steps: a fly that never steers, at each wander length (drawn where a run that hits every stage cap would be; runs that learn move on sooner). Red dashes: a fly that spins at full lock (above the top of the chart at 30 s, where it is 6.1). A line at or above the grey step is learning nothing; a line below it is learning to home.</p></div>
+</section>
+
+<section id="teacher">
+  <h2>With a teacher</h2>
+  <div id="t_aux"></div>
+</section>
+
+<section id="rule">
+  <h2>The verdict, by rule</h2>
+  <p>This table is computed on the page from the numbers above, using the rule exactly as the charter fixed it before the exam ran. Nothing in it was typed by hand.</p>
+  <div class="tbl" id="ruleTable"></div>
+  <div id="ruleVerdict" class="verdict"></div>
+</section>
+
+<section id="honest">
+  <h2>What we know and do not</h2>
+  <div id="t_honest"></div>
+</section>
+
+<footer>
+  The charter, with every amendment and its time: <code>level4/charter.md</code>. The timestamped account: <code>level4/narrative.md</code>. Code: <code>level4/nets.py</code> (the twin and the GRU), <code>level4/train4.py</code>, <code>level4/exam.py</code>, <code>level4/probe.py</code>. Numbers: <code>level4/results.json</code>, <code>level4/probe.json</code>.
+</footer>
+</div>
+
+<script>
+const D=/*DATA*/null;
+const $=id=>document.getElementById(id);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const ARMS=[
+ {k:'FW',label:'FW · our network (fast weights)',c:'--amber'},
+ {k:'TWIN-warm-B',label:'TWIN · warm, turn re-centred',c:'--teal'},
+ {k:'TWIN-warm',label:'TWIN · warm, as pre-registered',c:'--teal',faint:true},
+ {k:'FW-cold',label:'FW · from scratch',c:'--amber',faint:true},
+ {k:'TWIN-cold@3e-4',label:'TWIN · from scratch, rate 3e-4',c:'--teal',faint:true},
+ {k:'TWIN-cold@1e-3',label:'TWIN · from scratch, rate 1e-3',c:'--teal',faint:true},
+ {k:'GRU-cold@3e-4',label:'GRU reference · from scratch, 3e-4',c:'--blue',faint:true},
+ {k:'GRU-cold@1e-3',label:'GRU reference · from scratch, 1e-3',c:'--blue',faint:true},
+ {k:'FW-warm-aux',label:'FW · warm, with a teacher',c:'--amber',faint:true},
+ {k:'TWIN-warm-aux',label:'TWIN · warm, with a teacher',c:'--violet',faint:true},
+ {k:'TWIN-aux',label:'TWIN · from scratch, with a teacher',c:'--violet'},
+ {k:'GRU-aux',label:'GRU · from scratch, with a teacher',c:'--blue'},
+];
+const R=D.results||{};
+const nets=a=>Object.entries(R).filter(([n,r])=>r.arm===a);
+const ref=(n,c)=>R[n]&&R[n].conds[c]?R[n].conds[c].score:null;
+const vals=(a,c)=>nets(a).map(([n,r])=>r.conds[c]).filter(Boolean);
+const mean=xs=>xs.reduce((s,x)=>s+x,0)/xs.length;
+const f2=x=>x==null?'–':x.toFixed(2);
+function text(id){const t=(D.text||{})[id];if(t&&$('t_'+id))$('t_'+id).innerHTML=t;}
+['std30','std30_1k','len','drift','stop','trips','scratch','aux','honest'].forEach(text);
+if(D.text&&D.text.summary)$('summary').innerHTML=D.text.summary;else $('summary').innerHTML='<p class="note">Results are still coming in.</p>';
+
+/* ---------- svg helpers ---------- */
+function svg(w,h,inner){return `<svg viewBox="0 0 ${w} ${h}" role="img">${inner}</svg>`}
+function lin(d0,d1,r0,r1){return v=>r0+(v-d0)/(d1-d0)*(r1-r0)}
+
+/* ---------- strip chart for one condition ---------- */
+function strip(el,cond,arms){
+  const rows=arms.filter(a=>vals(a.k,cond).length);
+  const W=640,top=34,rh=50,H=top+rows.length*rh+40,L=14,Rt=626;
+  const all=rows.flatMap(a=>vals(a.k,cond).flatMap(v=>[v.ci[0],v.ci[1]]));
+  const hand=ref('hand',cond),rnd=ref('random',cond);
+  const hi=Math.max(...all,rnd||0)+0.3,lo=Math.min(0.5,...all);
+  const X=lin(lo,hi,L,Rt);let g='';
+  for(let t=Math.ceil(lo);t<=hi;t+=1)g+=`<line x1="${X(t)}" x2="${X(t)}" y1="${top-8}" y2="${H-34}" stroke="${css('--line')}"/><text x="${X(t)}" y="${H-20}" text-anchor="middle">${t}</text>`;
+  [[hand,'hand-built','--green','start'],[rnd,'no steering','--red','end']].forEach(([v,l,c,an])=>{if(v==null)return;g+=`<line x1="${X(v)}" x2="${X(v)}" y1="${top-12}" y2="${H-34}" stroke="${css(c)}" stroke-dasharray="4 3" stroke-width="1.5"/><text x="${X(v)+(an==='start'?4:-4)}" y="${top-16}" text-anchor="${an}" style="fill:${css(c)}">${l} ${v.toFixed(2)}</text>`});
+  rows.forEach((a,i)=>{const y=top+i*rh+26,vs=vals(a.k,cond),m=mean(vs.map(v=>v.score)),col=css(a.c);
+    g+=`<text x="${L}" y="${y-14}" class="lab" style="${a.faint?'fill:'+css('--ink-2'):''}">${a.label} · mean ${m.toFixed(2)}</text>`;
+    vs.forEach(v=>{g+=`<line x1="${X(v.ci[0])}" x2="${X(v.ci[1])}" y1="${y}" y2="${y}" stroke="${col}" stroke-opacity=".45" stroke-width="3"/><circle cx="${X(v.score)}" cy="${y}" r="6" fill="${col}" fill-opacity="${a.faint?.55:.9}" stroke="${css('--panel')}" stroke-width="1"/>`});
+    g+=`<line x1="${X(m)}" x2="${X(m)}" y1="${y-10}" y2="${y+10}" stroke="${col}" stroke-width="3"/>`;});
+  g+=`<text x="${(L+Rt)/2}" y="${H-4}" text-anchor="middle">closest approach to home, averaged over trips · lower is better</text>`;
+  el.innerHTML=svg(W,H,g);
+}
+/* ---------- line chart over levels ---------- */
+function lines(el,conds,xs,xlab,arms,legendEl,ylab){
+  const W=620,H=330,L=54,Rt=600,T=18,B=280;
+  const series=arms.map(a=>({a,per:nets(a.k).map(([n,r])=>conds.map(c=>r.conds[c]?r.conds[c].score:null))})).filter(s=>s.per.length&&s.per[0].every(v=>v!=null));
+  const all=series.flatMap(s=>s.per.flat());const refs=['hand','random'].map(n=>conds.map(c=>ref(n,c)));
+  const hi=Math.max(...all,...refs[1].filter(v=>v!=null))*1.05,lo=0;
+  const X=lin(0,xs.length-1,L+20,Rt-20),Y=lin(lo,hi,B,T);let g='';
+  for(let t=0;t<=hi;t+=1){g+=`<line x1="${L}" x2="${Rt}" y1="${Y(t)}" y2="${Y(t)}" stroke="${css('--line')}"/><text x="${L-8}" y="${Y(t)+4}" text-anchor="end">${t}</text>`}
+  xs.forEach((x,i)=>g+=`<text x="${X(i)}" y="${B+18}" text-anchor="middle">${x}</text>`);
+  g+=`<text x="${(L+Rt)/2}" y="${H-6}" text-anchor="middle">${xlab}</text><text transform="translate(14 ${(T+B)/2}) rotate(-90)" text-anchor="middle">${ylab||'score · lower is better'}</text>`;
+  const path=ys=>ys.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join('');
+  [['hand','--green','hand-built'],['random','--red','no steering']].forEach(([n,c,l],k)=>{const ys=refs[k];if(ys.some(v=>v==null))return;g+=`<path d="${path(ys)}" fill="none" stroke="${css(c)}" stroke-dasharray="5 4" stroke-width="1.5"/><text x="${X(xs.length-1)+4}" y="${Y(ys[ys.length-1])-6}" text-anchor="end" style="fill:${css(c)}">${l}</text>`});
+  series.forEach(s=>{const col=css(s.a.c);s.per.forEach(ys=>g+=`<path d="${path(ys)}" fill="none" stroke="${col}" stroke-opacity=".25" stroke-width="1.2"/>`);
+    const m=conds.map((c,i)=>mean(s.per.map(p=>p[i])));g+=`<path d="${path(m)}" fill="none" stroke="${col}" stroke-width="${s.a.faint?2:3}" ${s.a.faint?'stroke-dasharray="6 4"':''}/>`;
+    m.forEach((v,i)=>g+=`<circle cx="${X(i)}" cy="${Y(v)}" r="3.5" fill="${col}"/>`);
+    g+=`<text x="${X(xs.length-1)+6}" y="${Y(m[m.length-1])+4}" style="fill:${col}">${m[m.length-1].toFixed(2)}</text>`});
+  el.innerHTML=svg(W+40,H,g);
+  if(legendEl)legendEl.innerHTML=series.map(s=>`<span><i style="background:${css(s.a.c)}"></i>${s.a.label}</span>`).join('');
+}
+const MAIN=ARMS.filter(a=>['FW','TWIN-warm-B','TWIN-aux','GRU-aux','TWIN-warm-aux'].includes(a.k));
+function renderReal(){
+  strip($('stripStd'),'std30',ARMS);
+  $('legendStd').innerHTML='<span><i style="background:'+css('--green')+'"></i>hand-built fly brain</span><span><i style="background:'+css('--red')+'"></i>a fly that never steers</span>';
+  lines($('lenChart'),['std30','len45','len60','len90'],['30 s','45 s','60 s','90 s'],'how long the fly wandered before turning home',MAIN,$('legendLen'));
+  lines($('driftChart'),['std30','drift05','drift15'],['none','0.05','0.15'],'compass drift',MAIN,$('legendDrift'));
+  lines($('stopChart'),['std30','stop10','stop30'],['no stop','10 s stop','30 s stop'],'standing still halfway through the walk',MAIN,$('legendStop'));
+  tripsChart();probeChart();curves();ruleTable();kpis();
+}
+function tripsChart(){
+  const W=620,H=300,L=54,Rt=600,T=18,B=250;const arms=MAIN.filter(a=>nets(a.k).some(([n,r])=>r.conds.trips5));
+  const per=arms.map(a=>({a,m:[0,1,2,3,4].map(i=>mean(nets(a.k).filter(([n,r])=>r.conds.trips5).map(([n,r])=>r.conds.trips5.per_trip[i])))}));
+  if(!per.length){$('tripsChart').innerHTML='<p class="note">Not measured yet.</p>';return}
+  const refs=[['hand','--green','hand-built'],['random','--red','no steering']].filter(([n])=>R[n]&&R[n].conds.trips5).map(([n,c,l])=>({c,l,m:R[n].conds.trips5.per_trip}));
+  const hi=Math.max(...per.flatMap(p=>p.m),...refs.flatMap(r=>r.m))*1.08;const X=lin(0,4,L+20,Rt-30),Y=lin(0,hi,B,T);let g='';
+  refs.forEach(r=>{g+=`<path d="${r.m.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join('')}" fill="none" stroke="${css(r.c)}" stroke-dasharray="5 4" stroke-width="1.5"/><text x="${X(4)+6}" y="${Y(r.m[4])+4}" style="fill:${css(r.c)}">${r.l}</text>`});
+  for(let t=0;t<=hi;t+=1)g+=`<line x1="${L}" x2="${Rt}" y1="${Y(t)}" y2="${Y(t)}" stroke="${css('--line')}"/><text x="${L-8}" y="${Y(t)+4}" text-anchor="end">${t}</text>`;
+  [0,1,2,3,4].forEach(i=>g+=`<text x="${X(i)}" y="${B+18}" text-anchor="middle">trip ${i+1}</text>`);
+  per.forEach(p=>{const col=css(p.a.c);g+=`<path d="${p.m.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join('')}" fill="none" stroke="${col}" stroke-width="3" ${p.a.faint?'stroke-dasharray="6 4"':''}/>`;p.m.forEach((v,i)=>g+=`<circle cx="${X(i)}" cy="${Y(v)}" r="3.5" fill="${col}"/>`);g+=`<text x="${X(4)+6}" y="${Y(p.m[4])+4}" style="fill:${col}">${p.m[4].toFixed(2)}</text>`});
+  g+=`<text transform="translate(14 ${(T+B)/2}) rotate(-90)" text-anchor="middle">score · lower is better</text>`;
+  $('tripsChart').innerHTML=svg(W+40,H,g);$('legendTrips').innerHTML=per.map(p=>`<span><i style="background:${css(p.a.c)}"></i>${p.a.label}</span>`).join('');
+}
+function probeChart(){
+  const P=D.probe||{};const names=Object.keys(P).filter(n=>P[n].decode&&P[n].arm!=='TWIN-warm-B');
+  if(!names.length){$('probeChart').innerHTML='<p class="note">Not measured yet.</p>';return}
+  const W=640,rh=34,T=28,H=T+names.length*rh+46,L=150,Rt=620,X=lin(0,4,L,Rt);let g='';
+  [0,1,2,3,4].forEach(t=>g+=`<line x1="${X(t)}" x2="${X(t)}" y1="${T-6}" y2="${H-40}" stroke="${css('--line')}"/><text x="${X(t)}" y="${H-26}" text-anchor="middle">${t}</text>`);
+  const walked=P[names[0]].decode.walked;g+=`<line x1="${X(walked)}" x2="${X(walked)}" y1="${T-10}" y2="${H-40}" stroke="${css('--red')}" stroke-dasharray="4 3"/><text x="${X(walked)-4}" y="${T-14}" text-anchor="end" style="fill:${css('--red')}">distance walked ${walked.toFixed(1)}</text>`;
+  const col={'FW':'--amber','TWIN-aux':'--violet','GRU-aux':'--blue'};
+  names.forEach((n,i)=>{const d=P[n].decode,y=T+i*rh+12,c=css(col[P[n].arm]||'--ink-2');
+    g+=`<text x="${L-8}" y="${y+4}" text-anchor="end" class="lab">${n}</text>`;
+    g+=`<rect x="${X(0)}" y="${y-9}" width="${X(d.after)-X(0)}" height="18" fill="${c}" fill-opacity=".18" stroke="${c}"/>`;
+    g+=`<rect x="${X(0)}" y="${y-5}" width="${X(d.after_refit)-X(0)}" height="10" fill="${c}" fill-opacity=".55"/>`;
+    g+=`<line x1="${X(d.before)}" x2="${X(d.before)}" y1="${y-11}" y2="${y+11}" stroke="${css('--ink')}" stroke-width="2.5"/>`;});
+  g+=`<text x="${(L+Rt)/2}" y="${H-8}" text-anchor="middle">error of a straight-line readout of the home vector, in walking units</text>`;
+  $('probeChart').innerHTML=svg(W,H,g)+`<div class="legend"><span><i style="background:${css('--ink')};height:10px;width:3px"></i>just before the stop</span><span><i style="background:${css('--ink-3')};opacity:.6"></i>end of stop, readout refitted</span><span><i style="background:${css('--ink-3')};opacity:.2;border:1px solid ${css('--ink-3')}"></i>end of stop, same readout</span></div>`;
+  $('probeCap').innerHTML=((D.text||{}).probe||'');
+}
+const CGROUPS={'Our network (FW)':/^fw_c/,'TWIN':/^twin_c/,'GRU reference':/^gru_c/,'With a teacher':/_aux/};
+let cg='Our network (FW)';
+function curves(){
+  const C=D.curves||{};$('curveBtns').innerHTML=Object.keys(CGROUPS).map(k=>`<button class="${k===cg?'on':''}" data-g="${k}">${k}</button>`).join('');
+  $('curveBtns').querySelectorAll('button').forEach(b=>b.onclick=()=>{cg=b.dataset.g;curves()});
+  const runs=Object.entries(C).filter(([n])=>CGROUPS[cg].test(n));
+  const W=660,H=330,L=54,Rt=640,T=14,B=280;const X=lin(0,4000,L,Rt),Y=lin(0,4,B,T);let g='';
+  const rnd={10:2.31,20:3.65,30:4.57},spn={10:2.39,20:4.56,30:6.09};
+  for(let t=0;t<=4;t+=1)g+=`<line x1="${L}" x2="${Rt}" y1="${Y(t)}" y2="${Y(t)}" stroke="${css('--line')}"/><text x="${L-8}" y="${Y(t)+4}" text-anchor="end">${t}</text>`;
+  [0,1000,2000,3000,4000].forEach(t=>g+=`<text x="${X(t)}" y="${B+18}" text-anchor="middle">${t}</text>`);
+  const pal=['--amber','--teal','--blue','--violet','--red','--green'];
+  runs.forEach(([n,r],i)=>{const col=css(pal[i%pal.length]);let prev=null,d='';
+    r.pts.forEach(([it,run,to],j)=>{d+=(j?'L':'M')+X(it)+','+Y(Math.min(run,4));});
+    // random-walk step for this run's stage lengths
+    g+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="2"/>`;});
+  [[0,1500,10],[1500,3000,20],[3000,4000,30]].forEach(([a,b,to])=>{g+=`<rect x="${X(a)}" y="${Y(rnd[to])-3}" width="${X(b)-X(a)}" height="6" fill="${css('--ink-3')}" fill-opacity=".35"/><line x1="${X(a)}" x2="${X(b)}" y1="${Y(Math.min(spn[to],4))}" y2="${Y(Math.min(spn[to],4))}" stroke="${css('--red')}" stroke-dasharray="3 3"/><text x="${X(a)+4}" y="${Y(rnd[to])-6}">${to} s: never steers ${rnd[to]}</text>`});
+  g+=`<text x="${(L+Rt)/2}" y="${H-10}" text-anchor="middle">training iteration</text><text transform="translate(14 ${(T+B)/2}) rotate(-90)" text-anchor="middle">running score</text>`;
+  $('curveChart').innerHTML=svg(W,H,g);
+  $('legendCurve').innerHTML=runs.map(([n,r],i)=>{const last=r.pts[r.pts.length-1];return `<span><i style="background:${css(pal[i%pal.length])}"></i>${n} · reached ${last[2]} s · ${r.done?'finished':'running'}</span>`}).join('');
+}
+/* ---------- the verdict rule, as written in the charter ---------- */
+function cmp(fwScores,rvScores){
+  const a=mean(fwScores),b=mean(rvScores),gap=b-a;const disj=Math.max(...fwScores)<Math.min(...rvScores)||Math.max(...rvScores)<Math.min(...fwScores);
+  if(Math.abs(gap)<0.2)return{v:'tie',gap};const who=gap>0?'FW':'TWIN';return{v:(disj?'better':'leans')+':'+who,gap};
+}
+function ruleTable(){
+  const rvArm=['TWIN-warm','TWIN-warm-B'].filter(a=>vals(a,'std30').length).sort((x,y)=>mean(vals(x,'std30').map(v=>v.score))-mean(vals(y,'std30').map(v=>v.score)))[0];
+  if(!rvArm||!vals('FW','std30').length){$('ruleTable').innerHTML='<p class="note">Waiting for the exam.</p>';return}
+  const groups=[['1 · standard exam',['std30']],['2 · longer trips',['len45','len60','len90']],['3 · drifting compass',['drift05','drift15']],['4 · long stop',['stop10','stop30']]];
+  const pill=v=>v==='tie'?'<span class="pill p-tie">tie</span>':`<span class="pill ${v.endsWith('FW')?'p-fw':'p-rv'}">${v.replace(':',' · ').replace('TWIN','twin').replace('FW','FW')}</span>`;
+  let rows='',gv={};
+  groups.forEach(([gname,cs])=>{let w=0,l=0;const cells=cs.map(c=>{const f=vals('FW',c).map(v=>v.score),r=vals(rvArm,c).map(v=>v.score);if(!f.length||!r.length)return null;const o=cmp(f,r);if(o.v.endsWith('FW'))w++;else if(o.v.endsWith('TWIN'))l++;return{c,o,f:mean(f),r:mean(r)}}).filter(Boolean);
+    const need=cs.length===2?2:Math.ceil(cs.length/2+0.01);const g=cells.length<cs.length?'incomplete':w>=need?'FW':l>=need?'TWIN':'tie';gv[gname]=g;
+    cells.forEach((x,i)=>rows+=`<tr>${i===0?`<td rowspan="${cells.length}"><b>${gname}</b><br>${g==='tie'?'<span class="pill p-tie">tie</span>':g==='incomplete'?'<span class="pill p-tie">incomplete</span>':`<span class="pill ${g==='FW'?'p-fw':'p-rv'}">${g==='FW'?'FW better':'twin better'}</span>`}</td>`:''}<td class="mono">${x.c}</td><td class="n">${f2(x.f)}</td><td class="n">${f2(x.r)}</td><td class="n">${(x.o.gap>0?'+':'')+x.o.gap.toFixed(2)}</td><td>${pill(x.o.v)}</td></tr>`)});
+  $('ruleTable').innerHTML=`<table><thead><tr><th>Condition</th><th>Level</th><th>FW mean</th><th>${rvArm} mean</th><th>Gap (twin − FW)</th><th>Label</th></tr></thead><tbody>${rows}</tbody></table><p class="note">Rival side: <b>${rvArm}</b>, the warm twin group with the lower standard-exam mean (chosen once, used everywhere). A positive gap means FW scored lower, which is better.</p>`;
+  const g1=gv['1 · standard exam'],rest=['2 · longer trips','3 · drifting compass','4 · long stop'].map(k=>gv[k]);
+  const wins=rest.filter(x=>x==='FW').length,loses=[g1,...rest].filter(x=>x==='TWIN').length;
+  let V;if((g1==='FW'||wins>=2)&&loses===0)V='Supported';else if(g1!=='FW'&&rest.every(x=>x!=='FW'))V='Not supported';else V='Mixed';
+  $('ruleVerdict').innerHTML=`<h3 style="margin-top:0">Warm pair: <span style="color:${css(V==='Supported'?'--amber':V==='Not supported'?'--teal':'--ink')}">${V}</span></h3><p>Claim tested: "fast weights beat activity memory on this task", for our network against its twin with the same history. Supported needs FW better on the standard exam, or on at least two of conditions 2 to 4, and worse on none. Not supported needs the twin to tie or beat FW on the standard exam and on conditions 2 to 4.</p>`+((D.text||{}).rule||'');
+}
+function kpis(){
+  const m=a=>{const v=vals(a,'std30');return v.length?mean(v.map(x=>x.score)):null};
+  const k=[[f2(m('FW')),'FW, standard exam (4 networks)'],[f2((()=>{const xs=['TWIN-warm-B','TWIN-warm'].map(m).filter(x=>x!=null);return xs.length?Math.min(...xs):null})()),'best warm twin group'],[f2((()=>{const xs=['GRU-aux'].map(m).filter(x=>x!=null);return xs.length?xs[0]:null})()),'GRU with a teacher (not in the verdict)'],[f2(ref('hand','std30')),'hand-built fly brain'],[f2(ref('random','std30')),'a fly that never steers']];
+  $('kpis').innerHTML=k.map(([b,s])=>`<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join('');
+}
+
+/* ---------- sketches ---------- */
+function twinDiagram(){
+  const g=`<rect x="200" y="10" width="220" height="40" rx="4" fill="${css('--line')}"/><text x="310" y="35" text-anchor="middle" class="lab">inputs · 64 neurons · table W</text>
+  <rect x="200" y="170" width="220" height="40" rx="4" fill="${css('--line')}"/><text x="310" y="195" text-anchor="middle" class="lab">turn command · world · loss</text>
+  <path d="M260 50 L130 88 M360 50 L490 88 M130 132 L260 170 M490 132 L360 170" stroke="${css('--ink-3')}" fill="none"/>
+  <rect x="20" y="88" width="220" height="44" rx="4" fill="${css('--amber-soft')}" stroke="${css('--amber')}"/><text x="130" y="108" text-anchor="middle" class="lab">FW: board F + table A</text><text x="130" y="124" text-anchor="middle">4,096 extra numbers</text>
+  <rect x="380" y="88" width="220" height="44" rx="4" fill="${css('--teal-soft')}" stroke="${css('--teal')}"/><text x="490" y="108" text-anchor="middle" class="lab">TWIN: hold gate u</text><text x="490" y="124" text-anchor="middle">4,416 extra numbers</text>`;
+  $('twinDiagram').innerHTML=svg(620,220,g);
+}
+function holdSketch(){
+  const u=+$('uSlider').value;$('uVal').textContent=u.toFixed(4);
+  const W=560,H=220,L=44,Rt=540,T=14,B=180,X=lin(0,30,L,Rt),Y=lin(0,10,B,T);let g='';
+  [0,10,20,30].forEach(t=>g+=`<text x="${X(t)}" y="${B+16}" text-anchor="middle">${t} s</text>`);[0,5,10].forEach(v=>g+=`<line x1="${L}" x2="${Rt}" y1="${Y(v)}" y2="${Y(v)}" stroke="${css('--line')}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`);
+  let a='',b='';for(let k=0;k<=300;k+=5){a+=(k?'L':'M')+X(k/10)+','+Y(10*Math.pow(0.993,k));b+=(k?'L':'M')+X(k/10)+','+Y(10*Math.pow(1-u,k))}
+  g+=`<path d="${a}" fill="none" stroke="${css('--amber')}" stroke-width="2.5"/><path d="${b}" fill="none" stroke="${css('--teal')}" stroke-width="2.5"/>`;
+  g+=`<text x="${(L+Rt)/2}" y="${H-4}" text-anchor="middle">seconds standing still, starting from a stored count of 10</text>`;
+  $('holdSketch').innerHTML=svg(W,H,g);
+  const f=10*Math.pow(0.993,300),t=10*Math.pow(1-u,300);
+  $('holdCap').innerHTML=`Orange: our network's board fades by 0.7% each tick (the rate its training settled on), so after 30 s it keeps <b class="mono">${f.toFixed(1)}</b> of 10. Teal: the twin keeps <code>1 − u</code> of its value each tick, so it keeps <b class="mono">${t.toFixed(1)}</b>. ${u===0?'At u = 0 the twin holds perfectly.':'Drag u to 0 to see a perfect hold.'} Whether training teaches the twin to close its gate when the fly stops is exactly what the long-stop test measures.`;
+}
+function readSketch(){
+  const W=560,H=200,L=150,Rt=540,X=lin(0.5,4.5,L,Rt);let g='';
+  const rows=[['a clear winner',[1.4,1.5,1.55,1.6],[2.2,2.35,2.4,2.5]],['a tie',[1.45,1.55,1.6,1.7],[1.5,1.6,1.65,1.75]],['leans, ranges overlap',[1.3,1.5,1.7,2.1],[1.8,1.95,2.2,2.5]]];
+  rows.forEach(([l,a,b],i)=>{const y=30+i*56;g+=`<text x="${L-10}" y="${y+10}" text-anchor="end" class="lab">${l}</text>`;
+    [[a,'--amber',-6],[b,'--teal',6]].forEach(([vs,c,dy])=>{vs.forEach(v=>g+=`<circle cx="${X(v)}" cy="${y+dy+6}" r="4.5" fill="${css(c)}"/>`);const m=mean(vs);g+=`<line x1="${X(m)}" x2="${X(m)}" y1="${y+dy}" y2="${y+dy+12}" stroke="${css(c)}" stroke-width="3"/>`})});
+  [1,2,3,4].forEach(t=>g+=`<text x="${X(t)}" y="${H-6}" text-anchor="middle">${t}</text>`);
+  $('readSketch').innerHTML=svg(W,H,g)+`<div class="legend"><span><i style="background:${css('--amber')}"></i>FW networks</span><span><i style="background:${css('--teal')}"></i>twin networks</span></div>`;
+}
+const LS={win:[[1.56,1.8,2.0,2.3],[1.6,2.3,3.0,3.8],'Fast weights stay low while the twin climbs: the memory in the connections lasts, the one in activity leaks.'],
+tie:[[1.56,2.0,2.4,3.0],[1.5,1.95,2.45,3.05],'Both climb together. On this task, a memory in activity is enough.'],
+lose:[[1.56,2.2,2.9,3.7],[1.4,1.7,2.0,2.4],'The twin holds up better. Our network\'s board fades with a time constant of about 14 s, so it undercounts long trips.']};
+function lenSketch(k){const [a,b,c]=LS[k];const W=560,H=240,L=44,Rt=520,T=14,B=200,X=lin(0,3,L+20,Rt-20),Y=lin(0,4.2,B,T);let g='';
+  ['30 s','45 s','60 s','90 s'].forEach((x,i)=>g+=`<text x="${X(i)}" y="${B+16}" text-anchor="middle">${x}</text>`);[0,1,2,3,4].forEach(v=>g+=`<line x1="${L}" x2="${Rt}" y1="${Y(v)}" y2="${Y(v)}" stroke="${css('--line')}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`);
+  const p=ys=>ys.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join('');g+=`<path d="${p([0.75,0.75,0.75,0.75])}" stroke="${css('--green')}" stroke-dasharray="5 4" fill="none"/><path d="${p(a)}" stroke="${css('--amber')}" stroke-width="3" fill="none"/><path d="${p(b)}" stroke="${css('--teal')}" stroke-width="3" fill="none"/>`;
+  g+=`<text x="${(L+Rt)/2}" y="${H-6}" text-anchor="middle">wander length</text>`;$('lenSketch').innerHTML=svg(W,H,g);$('lenCap').textContent=c;
+  $('lenBtns').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.k===k));}
+function tripsSketch(){const W=560,H=220,L=44,Rt=520,T=14,B=180,X=lin(0,4,L+20,Rt-30),Y=lin(0,4,B,T);let g='';
+  [0,1,2,3,4].forEach(i=>g+=`<text x="${X(i)}" y="${B+16}" text-anchor="middle">trip ${i+1}</text>`);
+  const p=ys=>ys.map((v,i)=>(i?'L':'M')+X(i)+','+Y(v)).join('');
+  g+=`<path d="${p([1.6,1.62,1.6,1.63,1.61])}" stroke="${css('--teal')}" stroke-width="3" fill="none"/><text x="${X(4)+6}" y="${Y(1.61)+4}" style="fill:${css('--teal')}">clean</text><path d="${p([1.6,2.0,2.4,2.7,3.0])}" stroke="${css('--red')}" stroke-width="3" fill="none"/><text x="${X(4)+6}" y="${Y(3.0)+4}" style="fill:${css('--red')}">partial</text>`;
+  $('tripsSketch').innerHTML=svg(W,H,g);}
+
+function trapChart(){const T=D.trap&&D.trap.cold;if(!T){$('trapChart').innerHTML='';return}
+  const W=560,H=260,L=40,Rt=540,Tp=14,B=210,Y=lin(0,12,B,Tp);let g='';const lens=['10','20','30'],bw=26;
+  [0,4,8,12].forEach(v=>g+=`<line x1="${L}" x2="${Rt}" y1="${Y(v)}" y2="${Y(v)}" stroke="${css('--line')}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`);
+  lens.forEach((l,i)=>{const x0=L+30+i*170;[['never','--ink-3','never steers'],['spin','--red','spins']].forEach(([k,c,lab],j)=>{const [loss,score]=T[l][k];const x=x0+j*72;
+    g+=`<rect x="${x}" y="${Y(loss)}" width="${bw}" height="${B-Y(loss)}" fill="${css(c)}"/><rect x="${x+bw+2}" y="${Y(score)}" width="${bw}" height="${B-Y(score)}" fill="${css(c)}" fill-opacity=".35" stroke="${css(c)}"/>`;
+    g+=`<text x="${x+bw/2}" y="${Y(loss)-4}" text-anchor="middle">${loss.toFixed(1)}</text><text x="${x+bw*1.5+2}" y="${Y(score)-4}" text-anchor="middle">${score.toFixed(1)}</text><text x="${x+bw}" y="${B+14}" text-anchor="middle">${lab}</text>`});
+    g+=`<text x="${x0+62}" y="${B+30}" text-anchor="middle" class="lab">${l} s wander</text>`});
+  g+=`<rect x="${L+10}" y="${Tp}" width="10" height="10" fill="${css('--ink-3')}"/><text x="${L+24}" y="${Tp+9}">training loss (solid)</text><rect x="${L+170}" y="${Tp}" width="10" height="10" fill="${css('--ink-3')}" fill-opacity=".35" stroke="${css('--ink-3')}"/><text x="${L+184}" y="${Tp+9}">score (pale)</text>`;
+  $('trapChart').innerHTML=svg(W,H,g);}
+function trapSketch(){const W=560,H=260;let g='';const cx=180,cy=130;
+  g+=`<circle cx="60" cy="200" r="7" fill="${css('--green')}"/><text x="72" y="204">home</text>`;
+  g+=`<path d="M60 200 C 90 150, 120 170, 150 140 S ${cx-10} 120, ${cx} ${cy}" fill="none" stroke="${css('--ink-3')}" stroke-width="2" stroke-dasharray="4 3"/><text x="96" y="140">outbound walk</text>`;
+  g+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${css('--ink')}"/><text x="${cx+10}" y="${cy+18}">turns for home here</text>`;
+  g+=`<path d="M${cx} ${cy} C 260 110, 330 80, 400 70 S 480 50, 520 40" fill="none" stroke="${css('--ink-3')}" stroke-width="2.5"/><path d="M430 60 L520 40" stroke="${css('--ink-3')}" stroke-width="9" stroke-opacity=".25"/><text x="410" y="96">walks on: far away at the end</text>`;
+  let sp='';for(let k=0;k<=60;k++){const a=k*0.9,r=10+ (k%7);sp+=(k?'L':'M')+(cx+r*Math.cos(a)+k*0.15)+','+(cy+r*Math.sin(a)-k*0.1)}
+  g+=`<path d="${sp}" fill="none" stroke="${css('--red')}" stroke-width="1.8"/><text x="${cx-40}" y="${cy-30}" style="fill:${css('--red')}">spins: stays near</text>`;
+  $('trapSketch').innerHTML=svg(W,H,g);}
+function all(){trapChart();trapSketch();twinDiagram();holdSketch();readSketch();lenSketch(document.querySelector('#lenBtns .on').dataset.k);tripsSketch();renderReal();}
+$('uSlider').oninput=holdSketch;$('lenBtns').querySelectorAll('button').forEach(b=>b.onclick=()=>lenSketch(b.dataset.k));
+all();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all)}catch(e){}
+new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+</script>

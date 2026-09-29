@@ -1,0 +1,18 @@
+<h3>My predictions, written before the run, against what happened</h3>
+<p>Each prediction was written in the charter before "go", with how sure I was. Keeping score is how you learn whether your own intuition about a system is any good.</p>
+<div class="tbl"><table>
+<thead><tr><th>Prediction</th><th>How sure</th><th>What happened</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>The warm twin learns to use its hold gate and ties FW on the standard exam (within 0.2).</td><td class="n">55%</td><td>Every warm twin, with or without the turn fix, spun on the spot and scored about 5.9.</td><td><span class="pill p-rv">wrong</span></td></tr>
+<tr><td>In the long stop, the twin holds better than FW.</td><td class="n">55%</td><td>Could not be tested on the warm twins (they never learned). The teacher-trained twins did pay much less for the stop than FW (0.05 to 0.23 against 0.61), though inside they lose more information.</td><td><span class="pill p-tie">untestable as stated</span></td></tr>
+<tr><td>On longer wanders the twin ties or beats FW.</td><td class="n">55%</td><td>Warm twins spun. Among teacher-trained networks, the best twin degraded less than FW; the others about as much.</td><td><span class="pill p-rv">wrong as stated</span></td></tr>
+<tr><td>FW's score is flat within 0.15 across five trips.</td><td class="n">70%</td><td>FW rises 0.18 from trip 1 to later trips, but so does every brain, including the random walk, because later trips are harder. Against that baseline, FW's reset is clean.</td><td><span class="pill p-tie">wrong by the letter, right in substance</span></td></tr>
+<tr><td>The twin learns from scratch on more seeds than FW does.</td><td class="n">65%</td><td>No twin passed any stage by learning (0 of 6). FW passed the 10-second stage by learning on all 3 seeds.</td><td><span class="pill p-rv">wrong</span></td></tr>
+<tr><td>FW from scratch stalls at 20 seconds on at least 2 of 3 seeds.</td><td class="n">75%</td><td>All 3 reached 30 seconds only by the stage cap, though all three learned something at 20 seconds; one then fell into the spin at 30 seconds (final scores 1.86, 5.23, 2.60).</td><td><span class="pill p-fw">right</span></td></tr>
+<tr><td>The textbook GRU lands within 0.3 of the twin, so the twin is not a weak rival.</td><td class="n">60%</td><td>Both spun, 5.8 to 6.0. True, but for a reason that says nothing about the twin's strength.</td><td><span class="pill p-tie">right, uninformatively</span></td></tr>
+<tr><td>With a teacher, the twin and GRU learn the 10-second stage within 1,000 iterations.</td><td class="n">70%</td><td>Both twins did (762 and 810). One GRU did at 1,298, one only by the cap, though it then learned to home.</td><td><span class="pill p-fw">mostly right</span></td></tr>
+<tr><td>The warm twin with a teacher homes within 0.3 of FW.</td><td class="n">55%</td><td>Both spun (5.9 and 5.4). Starting from FW's weights was a worse place for an activity memory than starting from random.</td><td><span class="pill p-rv">wrong</span></td></tr>
+<tr><td>The teacher leaves FW within 0.1 of where it was.</td><td class="n">60%</td><td>Run 45: +0.04. Run 41: +0.27 (worse).</td><td><span class="pill p-tie">half right</span></td></tr>
+<tr><td>Overall verdict: not supported, or mixed.</td><td class="n">about 65%</td><td>Supported, by the rule. For a reason I had not foreseen: the rival never learned to use its memory.</td><td><span class="pill p-rv">wrong</span></td></tr>
+</tbody></table></div>
+<p>The pattern in my misses: I expected the contest to be about which memory holds a number better. It turned out to be about which memory a network can discover by gradient descent from this loss. I had the right worry (night one's rival never learned) and still underrated it.</p>

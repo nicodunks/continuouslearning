@@ -1,0 +1,28 @@
+{
+ "run": "fw_c2",
+ "arm": "FW-cold",
+ "args": [
+  "--arch",
+  "fw",
+  "--lr",
+  "1e-3",
+  "--seed",
+  "2",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1500",
+  "--iters",
+  "4000",
+  "--lr_decay",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--batch",
+  "32"
+ ],
+ "prediction": "Cold pair. FW from a random start, the same recipe and budget as TWIN-cold. Predicted: stalls at 20 s (reaches 30 s only by the stage cap, or scores above 2.5 there) on at least 2 of 3 seeds, as in campaign 2. Rate 1e-3.",
+ "started": "2026-09-29 08:35:26"
+}

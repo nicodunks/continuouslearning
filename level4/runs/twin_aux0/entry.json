@@ -1,0 +1,30 @@
+{
+ "run": "twin_aux0",
+ "arm": "TWIN-aux",
+ "args": [
+  "--arch",
+  "twin",
+  "--seed",
+  "0",
+  "--stages",
+  "10,20,30",
+  "--stage_cap",
+  "1500",
+  "--iters",
+  "4000",
+  "--lr_decay",
+  "1",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--batch",
+  "32",
+  "--lr",
+  "1e-3",
+  "--aux",
+  "0.1"
+ ],
+ "prediction": "Diagnostic, not in the verdict. Cold start with dense supervision: a linear readout must state the home vector every wander tick (x 0.1 in the loss). Question: can this activity network hold a home vector at all? Predicted: yes; it learns to home at 10 s within 1,000 iterations, showing the failure elsewhere is the learning signal, not capacity. 70%.",
+ "started": "2026-09-29 08:42:02"
+}

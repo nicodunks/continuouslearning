@@ -1,0 +1,44 @@
+arch gru trainable numbers 9101
+it     0 stage 0 t_out 10  loss 5.00 score 2.17 run 2.17  drift F 2.28 noF 2.28  0.30s/it
+it   100 stage 0 t_out 10  loss 2.99 score 2.54 run 2.31  drift F 2.36 noF 2.36  0.32s/it
+it   200 stage 0 t_out 10  loss 2.74 score 2.33 run 2.35  drift F 2.37 noF 2.37  0.28s/it
+it   300 stage 0 t_out 10  loss 3.07 score 2.69 run 2.35  drift F 2.38 noF 2.38  0.28s/it
+it   400 stage 0 t_out 10  loss 2.59 score 2.24 run 2.32  drift F 2.34 noF 2.34  0.37s/it
+it   500 stage 0 t_out 10  loss 2.69 score 2.32 run 2.34  drift F 2.44 noF 2.44  0.38s/it
+it   600 stage 0 t_out 10  loss 2.68 score 2.36 run 2.33  drift F 2.47 noF 2.47  0.43s/it
+it   700 stage 0 t_out 10  loss 2.93 score 2.56 run 2.36  drift F 2.37 noF 2.37  1.52s/it
+it   800 stage 0 t_out 10  loss 2.61 score 2.30 run 2.34  drift F 2.44 noF 2.44  0.40s/it
+it   900 stage 0 t_out 10  loss 2.55 score 2.19 run 2.38  drift F 2.37 noF 2.37  0.39s/it
+it  1000 stage 0 t_out 10  loss 2.66 score 2.38 run 2.40  drift F 2.33 noF 2.33  0.40s/it
+it  1100 stage 0 t_out 10  loss 2.85 score 2.52 run 2.40  drift F 2.31 noF 2.31  0.38s/it
+it  1200 stage 0 t_out 10  loss 2.71 score 2.40 run 2.41  drift F 2.43 noF 2.43  0.40s/it
+it  1300 stage 0 t_out 10  loss 2.33 score 2.00 run 2.42  drift F 2.28 noF 2.28  0.40s/it
+it  1400 stage 0 t_out 10  loss 2.77 score 2.43 run 2.41  drift F 2.34 noF 2.34  0.36s/it
+iteration 1500: promoted to stage 1 (20.0 s)
+it  1500 stage 1 t_out 10  loss 2.82 score 2.48 run 2.41  drift F 2.39 noF 2.39  0.34s/it
+it  1600 stage 1 t_out 20  loss 4.73 score 4.34 run 4.54  drift F 4.40 noF 4.40  0.69s/it
+it  1700 stage 1 t_out 20  loss 5.43 score 5.00 run 4.57  drift F 4.25 noF 4.25  0.74s/it
+it  1800 stage 1 t_out 20  loss 5.12 score 4.61 run 4.60  drift F 4.96 noF 4.96  0.78s/it
+it  1900 stage 1 t_out 20  loss 5.04 score 4.58 run 4.57  drift F 4.34 noF 4.34  0.74s/it
+it  2000 stage 1 t_out 20  loss 5.16 score 4.70 run 4.55  drift F 4.40 noF 4.40  0.67s/it
+it  2100 stage 1 t_out 20  loss 5.48 score 5.05 run 4.61  drift F 4.47 noF 4.47  0.87s/it
+it  2200 stage 1 t_out 20  loss 5.26 score 4.82 run 4.52  drift F 4.74 noF 4.74  0.74s/it
+it  2300 stage 1 t_out 20  loss 4.95 score 4.51 run 4.59  drift F 4.50 noF 4.50  0.71s/it
+it  2400 stage 1 t_out 20  loss 5.18 score 4.73 run 4.61  drift F 4.27 noF 4.27  0.67s/it
+it  2500 stage 1 t_out 20  loss 5.04 score 4.64 run 4.46  drift F 4.44 noF 4.44  0.65s/it
+it  2600 stage 1 t_out 20  loss 5.08 score 4.63 run 4.50  drift F 4.60 noF 4.60  0.66s/it
+it  2700 stage 1 t_out 20  loss 4.98 score 4.49 run 4.52  drift F 4.58 noF 4.58  0.68s/it
+it  2800 stage 1 t_out 20  loss 5.08 score 4.55 run 4.54  drift F 4.68 noF 4.68  0.68s/it
+it  2900 stage 1 t_out 20  loss 5.04 score 4.57 run 4.62  drift F 4.88 noF 4.88  0.62s/it
+it  3000 stage 1 t_out 20  loss 4.70 score 4.29 run 4.53  drift F 4.72 noF 4.72  0.58s/it
+iteration 3001: promoted to stage 2 (30.0 s)
+it  3100 stage 2 t_out 30  loss 6.37 score 5.78 run 5.90  drift F 6.49 noF 6.49  0.94s/it
+it  3200 stage 2 t_out 30  loss 6.99 score 6.48 run 6.06  drift F 5.24 noF 5.24  0.76s/it
+it  3300 stage 2 t_out 30  loss 6.02 score 5.55 run 6.06  drift F 6.56 noF 6.56  0.76s/it
+it  3400 stage 2 t_out 30  loss 6.76 score 6.20 run 6.04  drift F 6.08 noF 6.08  0.71s/it
+it  3500 stage 2 t_out 30  loss 7.49 score 6.98 run 6.09  drift F 5.68 noF 5.68  0.71s/it
+it  3600 stage 2 t_out 30  loss 5.85 score 5.36 run 5.97  drift F 6.32 noF 6.32  0.73s/it
+it  3700 stage 2 t_out 30  loss 7.52 score 6.95 run 6.04  drift F 5.98 noF 5.98  0.71s/it
+it  3800 stage 2 t_out 30  loss 6.17 score 5.71 run 5.95  drift F 6.23 noF 6.23  0.75s/it
+it  3900 stage 2 t_out 30  loss 6.34 score 5.87 run 6.04  drift F 5.47 noF 5.47  0.64s/it
+finished

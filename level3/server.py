@@ -16,7 +16,7 @@ Routes:
 import json, os, sys, subprocess, glob, time
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
-HERE = os.path.dirname(os.path.abspath(__file__)); RUNS = os.path.join(HERE, 'runs')
+HERE = os.path.dirname(os.path.abspath(__file__)); RUNS = os.environ.get('RUNS_DIR', os.path.join(HERE, 'runs'))   # level 4 serves level4/runs with RUNS_DIR
 FILES = ['world.py', 'flynet.py', 'train.py', 'test.py', 'handbrain.py', 'server.py', 'index.html']
 PROCS = {}
 

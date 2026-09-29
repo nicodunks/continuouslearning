@@ -1,0 +1,20 @@
+<h3>What was measured, and what was chosen</h3>
+<p>Measured: every score on this page (frozen networks, fixed trips, <code>level4/exam.py</code>); the spinning trap (loss and score of two memoryless brains on 1,000 trips); what happens inside the networks during the stop (<code>level4/probe.py</code>). Chosen by me, and able to tilt the outcome: the size of the rival (matched to our network's number of trained values), the single-gate design of the twin, the curriculum and budgets, the surgery that built the warm twins, the teacher's weight (0.1), and the clock cutoff. Each choice is in the charter with its reason.</p>
+
+<h3>Every change to the plan after "go", in order</h3>
+<ol class="steps">
+  <li><b>08:35 · both learning rates for the rivals.</b> The sweep could not rank the rates for the twin or the GRU (every rate stayed at the random walk's score), so they ran at two rates and were judged at the better one. Our network ran at one. This favours the rivals.</li>
+  <li><b>08:45 · a fix for my own surgery.</b> The first warm twins started at full-lock turning, where they could barely learn. That was a flaw in how I built them, not a property of activity memory. A second set (TWIN-warm-B) got the turn re-centred first, the same kind of one-number fix our network received four times in its history. The first set still ran to the end and is reported. This favours the rivals.</li>
+  <li><b>08:43 and 09:01 · diagnostic runs with a teacher</b> on both sides. They change the loss, so they never enter the verdict.</li>
+  <li><b>08:48 · a gap in the verdict rule closed</b> before any exam had run: how to combine the levels of one condition (majority of levels).</li>
+  <li><b>09:06 · a clock cutoff at 11:50.</b> Runs unfinished then are examined at their last checkpoint. Only our network's cold runs were at risk. This favours the rivals.</li>
+</ol>
+<p>Every change favoured the rivals or was neutral. That was deliberate: the person who built both sides had predicted the rivals would do well, and the easiest bias to fall into is a quiet one against the other side.</p>
+
+<h3>What this cannot show</h3>
+<ul>
+  <li><b>One task and one loss.</b> The main result, as it turned out, is about the loss: a homing loss that only looks at the end of the return sets a trap for any network without a working memory. A different loss, or a different task, could change the picture.</li>
+  <li><b>One rival design, one budget.</b> The twin and the GRU got up to 4,000 iterations. More iterations, a gentler curriculum, or a different starting point might let them out of the trap without a teacher. "Did not escape in this budget" is what was measured.</li>
+  <li><b>The warm twins inherited a network built around a board.</b> Removing the board left a network whose other parts had been shaped for years of its training (about 9,800 iterations) to work with one. That is fair in one sense (same history) and a handicap in another.</li>
+  <li><b>Few seeds.</b> Three or four networks per group. The groups here differ by far more than seed-to-seed luck (about 0.16), but finer comparisons are not possible.</li>
+</ul>

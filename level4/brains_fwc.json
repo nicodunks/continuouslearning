@@ -1,0 +1,1 @@
+[{"name": "fw_c0", "arm": "FW-cold", "ckpt": "level4/runs/fw_c0/final.pt", "finished": true}, {"name": "fw_c1", "arm": "FW-cold", "ckpt": "level4/runs/fw_c1/final.pt", "finished": true}, {"name": "fw_c2", "arm": "FW-cold", "ckpt": "level4/runs/fw_c2/final.pt", "finished": true}]

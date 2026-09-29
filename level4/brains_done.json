@@ -1,0 +1,62 @@
+[
+ {
+  "name": "gru_c0_lr3e-4",
+  "arm": "GRU-cold@3e-4",
+  "ckpt": "level4/runs/gru_c0_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c1_lr3e-4",
+  "arm": "GRU-cold@3e-4",
+  "ckpt": "level4/runs/gru_c1_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "gru_c2_lr3e-4",
+  "arm": "GRU-cold@3e-4",
+  "ckpt": "level4/runs/gru_c2_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w28",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w28/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w40",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w40/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w41",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w41/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twinB_w45",
+  "arm": "TWIN-warm-B",
+  "ckpt": "level4/runs/twinB_w45/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c0_lr3e-4",
+  "arm": "TWIN-cold@3e-4",
+  "ckpt": "level4/runs/twin_c0_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c1_lr3e-4",
+  "arm": "TWIN-cold@3e-4",
+  "ckpt": "level4/runs/twin_c1_lr3e-4/final.pt",
+  "finished": true
+ },
+ {
+  "name": "twin_c2_lr3e-4",
+  "arm": "TWIN-cold@3e-4",
+  "ckpt": "level4/runs/twin_c2_lr3e-4/final.pt",
+  "finished": true
+ }
+]

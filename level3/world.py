@@ -17,7 +17,7 @@ W_MAX = 40.0          # tally ceiling (used by the hand brain; FlyNet clamps F t
 ERASE_PENALTY = 0.05  # weight of the "erase open without food" penalty in the loss
 
 
-def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5, speed_profile='drift'):
+def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, record=False, erase_penalty=ERASE_PENALTY, food_stand=0.5, speed_profile='drift', stop=None):
     # speed_profile: 'drift' = slow random drift around 1 (the default world);
     #                'legs'  = each wander has a slow half (0.4) and a fast half (1.6) in random order per agent,
     #                          so that time-facing-a-direction and distance-walked disagree on purpose.
@@ -31,11 +31,14 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
     def randn(*s): return torch.randn(*s, generator=g)
     def rand(*s): return torch.rand(*s, generator=g)
 
-    t_ret = 2.0 * t_out
+    # stop (level 4): (start_s, dur_s) -> the agent stands still for dur_s seconds starting start_s into the
+    # wander; t_out includes the stop, and the return time is based on the walking time only (2 x (t_out - dur)).
+    t_ret = 2.0 * (t_out - (stop[1] if stop else 0.0))
     n_ticks = int(round((t_out + t_ret) / DT))
     food_ticks = int(round(food_stand / DT))
     brain.reset_fast(batch)
     dist_terms, pen_terms, score_terms, arr_terms = [], [], [], []
+    aux_terms = []   # level 4 diagnostic: if the brain carries an 'aux' readout, charge its home-vector guess every wander tick
     traces = {k: [] for k in ('t', 'speed', 'food', 'write', 'erase', 'dist', 'hd')} if record else None
 
     for trip in range(trips):
@@ -77,12 +80,17 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
             else:
                 speed = (speed + 0.3 * randn(batch) * math.sqrt(DT) + 0.2 * (1 - speed) * DT).clamp(0.3, 1.7)
             speed = torch.where(in_pause | at_food | done, torch.zeros(batch), speed)
+            if stop and stop[0] <= t < stop[0] + stop[1]: speed = torch.zeros(batch)
 
             # ---- what the brain sees ----
             comp = comp + drift * randn(batch) * math.sqrt(DT)
             hd_seen = hd + comp
             inp = torch.stack([torch.cos(hd_seen), torch.sin(hd_seen), speed, food], 1)
             turn, write, erase = brain.step(inp, active=active)
+            if getattr(brain, 'aux', None) is not None and not returning:
+                m = (active & ~arrived).float()
+                err = ((brain.aux(brain.x) + pos) ** 2).sum(1)                 # home vector = −position
+                aux_terms.append((err * m).sum() / m.sum().clamp(min=1))
 
             # ---- the world moves (only active, not-yet-arrived agents) ----
             moving = active & ~arrived
@@ -105,6 +113,9 @@ def run_episode(brain, batch=32, t_out=20.0, trips=2, seed=None, drift=0.0, reco
         score_terms.append(min_d); arr_terms.append(arrived.float())
 
     loss = torch.stack(dist_terms).mean() + erase_penalty * torch.stack(pen_terms).mean()
-    out = dict(loss=loss, score=float(torch.stack(score_terms).mean()), arrived=float(torch.stack(arr_terms).mean()))
+    aux_loss = torch.stack(aux_terms).mean() if aux_terms else None
+    out = dict(loss=loss, score=float(torch.stack(score_terms).mean()), arrived=float(torch.stack(arr_terms).mean()),
+               per_agent=torch.stack(score_terms).detach(), arr_agent=torch.stack(arr_terms).detach(),   # [trips, batch], level 4
+               aux_loss=aux_loss)
     if record: out['traces'] = traces
     return out

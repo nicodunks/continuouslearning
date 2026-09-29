@@ -1,0 +1,2 @@
+[{"name":"twinB_w28","arm":"TWIN-warm-B","ckpt":"level4/runs/twinB_w28/final.pt"},{"name":"twinB_w40","arm":"TWIN-warm-B","ckpt":"level4/runs/twinB_w40/final.pt"},
+ {"name":"twinB_w41","arm":"TWIN-warm-B","ckpt":"level4/runs/twinB_w41/final.pt"},{"name":"twinB_w45","arm":"TWIN-warm-B","ckpt":"level4/runs/twinB_w45/final.pt"}]

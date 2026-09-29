@@ -1,0 +1,32 @@
+{
+ "run": "twinB_w45",
+ "arm": "TWIN-warm-B",
+ "args": [
+  "--arch",
+  "twin",
+  "--iters",
+  "2400",
+  "--stages",
+  "30",
+  "--lr",
+  "3e-4",
+  "--lr_decay",
+  "1",
+  "--erase_penalty",
+  "20",
+  "--food_stand",
+  "4.0",
+  "--speed_profile",
+  "legs",
+  "--batch",
+  "32",
+  "--recenter_turn",
+  "1",
+  "--seed",
+  "3",
+  "--surgery",
+  "level3/runs/run45/final.pt"
+ ],
+ "prediction": "Amendment 08:45, warm pair B. As TWIN-warm, plus one hand fix at the start: the turn output's bias is re-centred so the operated twin steers straight on average instead of at full lock (the pre-registered warm twins sat in that dead zone for 800 iterations). FW's own lineage had four hand-made bias fixes. Predicted: learns to home and ends within 0.2 of its FW parent. (parent run 45)",
+ "started": "2026-09-29 08:37:22"
+}

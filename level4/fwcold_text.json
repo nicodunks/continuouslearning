@@ -1,0 +1,4 @@
+{
+ "fwA": "left it no better: run 41 went from 1.49 to 1.76 and run 45 from 1.55 to 1.59",
+ "sentence": "Our network from scratch did better, though not cleanly. All three seeds passed the 10-second stage by learning (at iterations 447, 247, 911). None met the promotion bar of 1.5 at 20 seconds, although their best running scores there were 1.61, 2.52, 2.15 against 3.65 for a fly that never steers and 4.56 for a spinner, so all three learned something there. On the standard exam, at the end of their budget, they score 1.86, 5.23, 2.60. Of the 12 rival runs without a teacher, 0 passed any stage by learning."
+}

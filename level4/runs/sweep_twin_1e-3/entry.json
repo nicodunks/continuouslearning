@@ -1,0 +1,26 @@
+{
+ "run": "sweep_twin_1e-3",
+ "arm": "sweep",
+ "args": [
+  "--arch",
+  "twin",
+  "--lr",
+  "1e-3",
+  "--stages",
+  "10",
+  "--iters",
+  "600",
+  "--lr_decay",
+  "0",
+  "--food_stand",
+  "2.0",
+  "--erase_penalty",
+  "0.05",
+  "--batch",
+  "32",
+  "--seed",
+  "0"
+ ],
+ "prediction": "Learning-rate sweep on the 10 s stage (run 3's cold recipe), 600 iterations at a constant rate. The best running score (last 50) at 600 picks the rate for this arm's cold seeds.",
+ "started": "2026-09-29 08:27:34"
+}

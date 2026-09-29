@@ -1,0 +1,8 @@
+arch gru trainable numbers 9101
+it     0 stage 0 t_out 10  loss 5.37 score 2.33 run 2.33  drift F 2.32 noF 2.32  0.17s/it
+it   100 stage 0 t_out 10  loss 2.77 score 2.34 run 2.26  drift F 2.35 noF 2.35  0.21s/it
+it   200 stage 0 t_out 10  loss 3.11 score 2.71 run 2.36  drift F 2.34 noF 2.34  0.20s/it
+it   300 stage 0 t_out 10  loss 2.53 score 2.21 run 2.36  drift F 2.45 noF 2.45  0.21s/it
+it   400 stage 0 t_out 10  loss 2.68 score 2.35 run 2.41  drift F 2.35 noF 2.35  0.22s/it
+it   500 stage 0 t_out 10  loss 2.58 score 2.23 run 2.40  drift F 2.42 noF 2.42  0.21s/it
+finished

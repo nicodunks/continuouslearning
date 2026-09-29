@@ -1,0 +1,1 @@
+[{"name": "fw28", "arm": "FW", "ckpt": "level3/runs/run28/final.pt"}, {"name": "fw40", "arm": "FW", "ckpt": "level3/runs/run40/final.pt"}, {"name": "fw41", "arm": "FW", "ckpt": "level3/runs/run41/final.pt"}, {"name": "fw45", "arm": "FW", "ckpt": "level3/runs/run45/final.pt"}]

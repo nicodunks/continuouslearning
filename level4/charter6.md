@@ -130,3 +130,16 @@ Wave 3 results (21:45): kvq_hebblc3 0 of 8 new (2 of 16 in all); kvq_hebblc0 1 o
 difference" RIGHT: the start value does not matter; the extra key/query bias lifts the plain hybrid from 0/4 to ~1 in 7.
 Transformer x6 5/8 (mean 2.25), x12 4/8 (2.49). Twin k16 5/13 in all. Pooled 124 runs: <0.4 0/20, 0.4-0.6 2/15,
 0.6-0.7 8/20, 0.7-0.8 13/28, >=0.8 11/41.
+
+## Transformer through the full schedule (30 Sept, before running)
+Nico asked for an apples-to-apples 30 s comparison. The transformer only ever trained on 10 s trips; FW-cold went through
+10 -> 20 -> 30 s (stage cap 1,500, 4,000 iterations, lr 1e-3, cosine) and scored 1.86, 2.60, 5.23 on the 30 s exam.
+Same recipe for the transformer, seeds 0-2. Prediction: it passes 10 s on all 3 (as before) and reaches 30 s; its 30 s exam
+is no better than FW-cold's best (1.86), because a list with position markers must re-learn each new trip length.
+Changed before any result (1-hour budget): full-length schedule would not finish. Instead BOTH our board (fw) and the
+transformer from scratch, same shortened recipe: stages 10,20,30, stage cap 700, 2,100 iterations, lr 1e-3 cosine, seeds 0-2.
+Graded on the 30 s exam at ~45 min; unfinished runs graded at their latest checkpoint with the stage reached stated.
+Result (07:05, 30 Sept; runs stopped at the 1-hour limit, all six at the 30 s stage; graded at latest checkpoint, 30 s exam):
+transformer 2.96 / 4.04 / 4.39 (ckpt 1300 / 1100 / 1400); our board 4.88 / 5.89 / 5.90 (ckpt 1900; never passed 10 s within
+the 700-iteration cap). Never steers 4.38, hand-built 0.75. Neither learned 30 s homing well on this short schedule; the
+transformer did somewhat better. Prediction ("no better than FW-cold's best 1.86") right; FW-cold with cap 1,500 reached 1.86, 2.60.

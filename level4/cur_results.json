@@ -1,0 +1,44 @@
+{
+ "cur_fw_s0": {
+  "file": "ckpt_01900.pt",
+  "last_it": 1920,
+  "last_trip_s": 30.0,
+  "exam30": 5.89,
+  "exam10": 2.92
+ },
+ "cur_fw_s1": {
+  "file": "ckpt_01900.pt",
+  "last_it": 1920,
+  "last_trip_s": 30.0,
+  "exam30": 4.88,
+  "exam10": 2.61
+ },
+ "cur_fw_s2": {
+  "file": "ckpt_01900.pt",
+  "last_it": 1920,
+  "last_trip_s": 30.0,
+  "exam30": 5.9,
+  "exam10": 2.92
+ },
+ "cur_transformer_s0": {
+  "file": "ckpt_01100.pt",
+  "last_it": 1130,
+  "last_trip_s": 30.0,
+  "exam30": 4.04,
+  "exam10": 2.25
+ },
+ "cur_transformer_s1": {
+  "file": "ckpt_01400.pt",
+  "last_it": 1420,
+  "last_trip_s": 30.0,
+  "exam30": 4.39,
+  "exam10": 2.86
+ },
+ "cur_transformer_s2": {
+  "file": "ckpt_01300.pt",
+  "last_it": 1350,
+  "last_trip_s": 30.0,
+  "exam30": 2.96,
+  "exam10": 1.79
+ }
+}

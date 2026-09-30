@@ -1,0 +1,23 @@
+arch fw trainable numbers 8708
+it     0 stage 0 t_out 10  loss 4.63 score 2.23 run 2.23  drift F 2.13 noF 2.11  0.63s/it
+it   100 stage 0 t_out 10  loss 2.70 score 2.21 run 2.24  drift F 2.32 noF 2.29  0.57s/it
+it   200 stage 0 t_out 10  loss 2.65 score 2.23 run 2.40  drift F 2.31 noF 2.27  0.58s/it
+it   300 stage 0 t_out 10  loss 2.90 score 2.45 run 2.30  drift F 2.37 noF 2.36  0.61s/it
+it   400 stage 0 t_out 10  loss 2.99 score 2.52 run 2.32  drift F 2.27 noF 2.25  0.64s/it
+it   500 stage 0 t_out 10  loss 2.49 score 2.05 run 2.08  drift F 2.12 noF 2.37  0.64s/it
+it   600 stage 0 t_out 10  loss 2.91 score 1.89 run 2.08  drift F 2.33 noF 2.26  0.61s/it
+iteration 700: promoted to stage 1 (20.0 s)
+it   700 stage 1 t_out 10  loss 4.33 score 2.30 run 1.99  drift F 2.00 noF 2.03  0.65s/it
+it   800 stage 1 t_out 20  loss 7.81 score 3.60 run 3.71  drift F 4.22 noF 4.26  1.23s/it
+it   900 stage 1 t_out 20  loss 7.87 score 3.88 run 3.74  drift F 3.70 noF 3.87  1.25s/it
+it  1000 stage 1 t_out 20  loss 6.36 score 3.49 run 3.67  drift F 3.87 noF 3.95  1.28s/it
+it  1100 stage 1 t_out 20  loss 5.58 score 3.19 run 3.61  drift F 3.55 noF 3.88  1.29s/it
+it  1200 stage 1 t_out 20  loss 4.81 score 3.36 run 4.01  drift F 3.96 noF 4.20  1.29s/it
+it  1300 stage 1 t_out 20  loss 8.21 score 3.70 run 3.63  drift F 3.44 noF 3.80  1.31s/it
+it  1400 stage 1 t_out 20  loss 7.55 score 3.67 run 3.69  drift F 3.88 noF 4.12  1.30s/it
+iteration 1401: promoted to stage 2 (30.0 s)
+it  1500 stage 2 t_out 30  loss 9.09 score 5.14 run 5.09  drift F 4.90 noF 5.28  1.97s/it
+it  1600 stage 2 t_out 30  loss 9.26 score 4.78 run 5.18  drift F 5.06 noF 5.40  1.99s/it
+it  1700 stage 2 t_out 30  loss 9.43 score 5.30 run 5.15  drift F 5.14 noF 5.50  1.95s/it
+it  1800 stage 2 t_out 30  loss 9.27 score 5.12 run 5.11  drift F 4.90 noF 4.96  1.95s/it
+it  1900 stage 2 t_out 30  loss 9.51 score 5.27 run 5.13  drift F 5.69 noF 6.04  1.96s/it

@@ -123,3 +123,10 @@ Landscape at birth (slope.py): spin direction identical for all designs (loss ~5
 (twin16 2.13, twin4 2.49, FW 2.79, transformer 3.01, hybrid 2.74, Mamba 3.34); does not predict learning.
 Race (race.py): turn share 0.04 at birth -> ~0.5 by it 100 for learners and failures alike; learners 0.50 at it 600,
 failures 0.67. Nothing at birth separates them.
+21:03 wave 3 (firming the counts, same recipe, written before running): kvq_hebblc3 s8-s15, kvq_hebblc0 s4-s11,
+transformer x6 s4-s7, x12 s4-s7, twin k16 s9-s12. Question: with ~16 tries each, is the running-sum start better than the
+same knob started at zero? Prediction: no clear difference (both 15-30%), i.e. the knob, not its starting value, matters.
+Wave 3 results (21:45): kvq_hebblc3 0 of 8 new (2 of 16 in all); kvq_hebblc0 1 of 8 new (2 of 12); prediction "no clear
+difference" RIGHT: the start value does not matter; the extra key/query bias lifts the plain hybrid from 0/4 to ~1 in 7.
+Transformer x6 5/8 (mean 2.25), x12 4/8 (2.49). Twin k16 5/13 in all. Pooled 124 runs: <0.4 0/20, 0.4-0.6 2/15,
+0.6-0.7 8/20, 0.7-0.8 13/28, >=0.8 11/41.

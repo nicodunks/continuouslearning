@@ -155,5 +155,27 @@
    0.4,
    0.38
   ]
+ },
+ "activity_direction_10s_round5_groups": {
+  "fw_plain": [
+   0.79,
+   0.73,
+   0.76
+  ],
+  "fw_empty_board": [
+   0.18,
+   0.22,
+   0.21
+  ],
+  "twin_plain": [
+   0.36,
+   0.4,
+   0.38
+  ],
+  "twin_counter": [
+   0.83,
+   0.83,
+   0.83
+  ]
  }
 }

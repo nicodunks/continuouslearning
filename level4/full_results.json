@@ -1,0 +1,121 @@
+{
+ "full_kvq_delta_s0": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.93,
+  "exam10": 2.94
+ },
+ "full_kvq_delta_s1": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.96,
+  "exam10": 2.96
+ },
+ "full_kvq_delta_s2": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.93,
+  "exam10": 2.93
+ },
+ "full_kvq_gdelta_s0": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.95,
+  "exam10": 2.93
+ },
+ "full_kvq_gdelta_s1": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.93,
+  "exam10": 2.93
+ },
+ "full_kvq_gdelta_s2": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.91,
+  "exam10": 2.92
+ },
+ "full_kvq_titans_s0": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": NaN,
+  "exam10": NaN
+ },
+ "full_kvq_titans_s1": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.91,
+  "exam10": 2.92
+ },
+ "full_kvq_titans_s2": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.23,
+  "exam10": 2.55
+ },
+ "full_mamba_s0": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.97,
+  "exam10": 2.96
+ },
+ "full_mamba_s1": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.93,
+  "exam10": 2.93
+ },
+ "full_mamba_s2": {
+  "file": "final.pt",
+  "last_it": 3990,
+  "last_trip_s": 30.0,
+  "exam30": 5.91,
+  "exam10": 2.92
+ },
+ "full_transformer_s0": {
+  "file": "ckpt_03100.pt",
+  "last_it": 3150,
+  "last_trip_s": 30.0,
+  "exam30": 4.47,
+  "exam10": 2.69
+ },
+ "full_transformer_s1": {
+  "file": "ckpt_03400.pt",
+  "last_it": 3490,
+  "last_trip_s": 30.0,
+  "exam30": 4.25,
+  "exam10": 2.93
+ },
+ "full_transformer_s2": {
+  "file": "ckpt_03400.pt",
+  "last_it": 3400,
+  "last_trip_s": 30.0,
+  "exam30": 3.21,
+  "exam10": 2.08
+ },
+ "full_transformer_s3": {
+  "file": "ckpt_03100.pt",
+  "last_it": 3150,
+  "last_trip_s": 30.0,
+  "exam30": 4.91,
+  "exam10": 2.94
+ },
+ "full_transformer_s4": {
+  "file": "ckpt_03100.pt",
+  "last_it": 3180,
+  "last_trip_s": 30.0,
+  "exam30": 4.3,
+  "exam10": 2.96
+ }
+}

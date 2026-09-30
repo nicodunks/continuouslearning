@@ -143,3 +143,25 @@ Result (07:05, 30 Sept; runs stopped at the 1-hour limit, all six at the 30 s st
 transformer 2.96 / 4.04 / 4.39 (ckpt 1300 / 1100 / 1400); our board 4.88 / 5.89 / 5.90 (ckpt 1900; never passed 10 s within
 the 700-iteration cap). Never steers 4.38, hand-built 0.75. Neither learned 30 s homing well on this short schedule; the
 transformer did somewhat better. Prediction ("no better than FW-cold's best 1.86") right; FW-cold with cap 1,500 reached 1.86, 2.60.
+
+## Transformer, full schedule (30 Sept, started ~07:10, before any result)
+Exactly FW-cold's recipe (runs fw_c0-2: stages 10,20,30, stage cap 1,500, 4,000 iterations, lr 1e-3 cosine, food_stand 2,
+erase_penalty 0.05, batch 32), transformer, seeds 0-2. Compared with FW-cold's standard 30 s exam: 1.86, 2.60, 5.23.
+Prediction: it passes 10 s on all 3; at 30 s it does no better than FW-cold's best (1.86).
+
+## Full recipe for the remaining designs (30 Sept, agreed with Nico, written before running)
+Exactly the recipe of FW-cold (fw_c0-2) / twin-cold / E4: stages 10,20,30, stage cap 1,500, 4,000 iterations, lr 1e-3 cosine,
+food_stand 2, erase_penalty 0.05, batch 32, from scratch. Transformer seeds 0-4; kvq_delta, kvq_gdelta, kvq_titans, mamba
+seeds 0-2. Graded on the standard 30 s exam (200 trips, seed 4242) and the 10 s exam, final.pt.
+Existing full-recipe results: FW 1.86 / 2.60 / 5.23; twin and GRU 0 of 12; keys and values + lid 0 of 4.
+Predictions: transformer passes 10 s on all 5 and does no better than FW's best (1.86) at 30 s; the four others learn 0 of 12.
+Result (30 Sept, 13:45; full_results.json). The four delta/state-space designs finished all 4,000 iterations; every one reached
+30 s only through the stage caps. 30 s exam: DeltaNet 5.93 / 5.96 / 5.93; Gated DeltaNet 5.95 / 5.93 / 5.91; Mamba 5.97 / 5.93 /
+5.91; Titans-style nan (numbers overflowed) / 5.91 / 5.23 (10 s exam 2.55, not learned). All spin: 0 of 12 learned (prediction held).
+Transformer: passed 10 s by learning in all 5 (iterations 250-650), hit the 20 s stage cap in all 5. It slowed to ~3 iterations
+per minute at 30 s (attention cost grows with trip length), so with Nico's agreement the five runs were stopped at 13:40 and
+graded at their latest checkpoint (3,100-3,400 of 4,000; scores had been drifting worse over the last 3 hours): 30 s exam 4.47,
+4.25, 3.21, 4.91, 4.30 (never steers 4.38); 10 s exam 2.69, 2.93, 2.08, 2.94, 2.96, so 4 of 5 lost the 10 s homing they had
+learned. Prediction ("no better than FW's best 1.86") held, by a wide margin: best transformer 3.21 against FW 1.86 and 2.60.
+Same recipe, same iterations: our board 2 of 3 working navigators at 30 s; every rival 0 of 25 (twin/GRU 12, keys + lid 4,
+delta/state-space 12 - 1 overflow, transformer 5 stopped at ~80%).

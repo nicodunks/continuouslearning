@@ -1,0 +1,34 @@
+17:17:21 start mkdir -p level4/runs/r6e1_fw_blend_s0 && echo '{"run": "r6e1_fw_blend_s0", "arm": "E1-fw_blend"}' > level4/run
+17:17:23 start mkdir -p level4/runs/r6e1_fw_delta_s0 && echo '{"run": "r6e1_fw_delta_s0", "arm": "E1-fw_delta"}' > level4/run
+17:18:15 start mkdir -p level4/runs/r6e1_kvq_hebb_s0 && echo '{"run": "r6e1_kvq_hebb_s0", "arm": "E1-kvq_hebb"}' > level4/run
+17:18:57 start mkdir -p level4/runs/r6e1_kvq_gdelta_s0 && echo '{"run": "r6e1_kvq_gdelta_s0", "arm": "E1-kvq_gdelta"}' > leve
+17:19:20 start mkdir -p level4/runs/r6e1_kvq_delta_s0 && echo '{"run": "r6e1_kvq_delta_s0", "arm": "E1-kvq_delta"}' > level4/
+17:19:22 start mkdir -p level4/runs/r6e1_kvq_titans_s0 && echo '{"run": "r6e1_kvq_titans_s0", "arm": "E1-kvq_titans"}' > leve
+17:19:24 start mkdir -p level4/runs/r6e1_mamba_s0 && echo '{"run": "r6e1_mamba_s0", "arm": "E1-mamba"}' > level4/runs/r6e1_ma
+17:19:26 start mkdir -p level4/runs/r6e1_transformer_s0 && echo '{"run": "r6e1_transformer_s0", "arm": "E1-transformer"}' > l
+17:19:28 start mkdir -p level4/runs/r6e1_fw_blend_s1 && echo '{"run": "r6e1_fw_blend_s1", "arm": "E1-fw_blend"}' > level4/run
+17:19:30 start mkdir -p level4/runs/r6e1_fw_delta_s1 && echo '{"run": "r6e1_fw_delta_s1", "arm": "E1-fw_delta"}' > level4/run
+17:27:55 start mkdir -p level4/runs/r6e1_kvq_hebb_s1 && echo '{"run": "r6e1_kvq_hebb_s1", "arm": "E1-kvq_hebb"}' > level4/run
+17:29:48 start mkdir -p level4/runs/r6e1_kvq_gdelta_s1 && echo '{"run": "r6e1_kvq_gdelta_s1", "arm": "E1-kvq_gdelta"}' > leve
+17:30:20 start mkdir -p level4/runs/r6e1_kvq_delta_s1 && echo '{"run": "r6e1_kvq_delta_s1", "arm": "E1-kvq_delta"}' > level4/
+17:30:52 start mkdir -p level4/runs/r6e1_kvq_titans_s1 && echo '{"run": "r6e1_kvq_titans_s1", "arm": "E1-kvq_titans"}' > leve
+17:31:44 start mkdir -p level4/runs/r6e1_mamba_s1 && echo '{"run": "r6e1_mamba_s1", "arm": "E1-mamba"}' > level4/runs/r6e1_ma
+17:31:46 start mkdir -p level4/runs/r6e1_transformer_s1 && echo '{"run": "r6e1_transformer_s1", "arm": "E1-transformer"}' > l
+17:32:09 start mkdir -p level4/bench && python3 level4/bench.py --arch fw_blend --seed 2 > level4/bench/fw_blend_s2.out 2>&1
+17:32:21 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_hebb --seed 2 > level4/bench/kvq_hebb_s2.out 2>&1
+17:33:03 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_gdelta --seed 2 > level4/bench/kvq_gdelta_s2.out 2
+17:33:05 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_delta --seed 2 > level4/bench/kvq_delta_s2.out 2>&
+17:33:07 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_titans --seed 2 > level4/bench/kvq_titans_s2.out 2
+17:33:39 start mkdir -p level4/bench && python3 level4/bench.py --arch mamba --seed 2 > level4/bench/mamba_s2.out 2>&1
+17:33:42 start mkdir -p level4/bench && python3 level4/bench.py --arch transformer --seed 2 > level4/bench/transformer_s2.out
+17:34:04 start mkdir -p level4/bench && python3 level4/bench.py --arch twin --seed 2 > level4/bench/twin_s2.out 2>&1
+17:36:57 start mkdir -p level4/bench && python3 level4/bench.py --arch gru --seed 2 > level4/bench/gru_s2.out 2>&1
+17:37:29 start mkdir -p level4/runs/r6e1_fw_blend_s2 && echo '{"run": "r6e1_fw_blend_s2", "arm": "E1-fw_blend"}' > level4/run
+17:38:21 start mkdir -p level4/runs/r6e1_fw_delta_s2 && echo '{"run": "r6e1_fw_delta_s2", "arm": "E1-fw_delta"}' > level4/run
+17:38:44 start mkdir -p level4/runs/r6e1_kvq_hebb_s2 && echo '{"run": "r6e1_kvq_hebb_s2", "arm": "E1-kvq_hebb"}' > level4/run
+17:38:46 start mkdir -p level4/runs/r6e1_kvq_gdelta_s2 && echo '{"run": "r6e1_kvq_gdelta_s2", "arm": "E1-kvq_gdelta"}' > leve
+17:39:18 start mkdir -p level4/runs/r6e1_kvq_delta_s2 && echo '{"run": "r6e1_kvq_delta_s2", "arm": "E1-kvq_delta"}' > level4/
+17:39:40 start mkdir -p level4/runs/r6e1_kvq_titans_s2 && echo '{"run": "r6e1_kvq_titans_s2", "arm": "E1-kvq_titans"}' > leve
+17:40:12 start mkdir -p level4/runs/r6e1_mamba_s2 && echo '{"run": "r6e1_mamba_s2", "arm": "E1-mamba"}' > level4/runs/r6e1_ma
+17:41:15 start mkdir -p level4/runs/r6e1_transformer_s2 && echo '{"run": "r6e1_transformer_s2", "arm": "E1-transformer"}' > l
+17:54:57 all done

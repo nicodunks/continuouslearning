@@ -1,0 +1,21 @@
+arch kvq_hebbl trainable numbers 8708
+it     0 stage 0 t_out 10  loss 5.42 score 2.41 run 2.41  drift F 2.25 noF 2.21  0.68s/it
+it   100 stage 0 t_out 10  loss 2.75 score 2.29 run 2.23  drift F 2.28 noF 2.08  0.75s/it
+it   200 stage 0 t_out 10  loss 3.00 score 2.58 run 2.22  drift F 2.32 noF 2.29  0.81s/it
+it   300 stage 0 t_out 10  loss 2.59 score 2.18 run 2.32  drift F 2.36 noF 2.36  0.81s/it
+it   400 stage 0 t_out 10  loss 2.64 score 2.29 run 2.37  drift F 2.32 noF 2.32  0.83s/it
+it   500 stage 0 t_out 10  loss 2.50 score 2.16 run 2.38  drift F 2.43 noF 2.43  0.76s/it
+it   600 stage 0 t_out 10  loss 2.78 score 2.44 run 2.39  drift F 2.48 noF 2.48  0.78s/it
+it   700 stage 0 t_out 10  loss 2.76 score 2.47 run 2.37  drift F 2.37 noF 2.34  0.75s/it
+it   800 stage 0 t_out 10  loss 2.56 score 2.24 run 2.42  drift F 2.46 noF 2.44  0.77s/it
+it   900 stage 0 t_out 10  loss 2.64 score 2.35 run 2.39  drift F 2.36 noF 2.39  0.83s/it
+it  1000 stage 0 t_out 10  loss 2.62 score 2.28 run 2.37  drift F 2.36 noF 2.34  0.85s/it
+it  1100 stage 0 t_out 10  loss 2.65 score 2.34 run 2.43  drift F 2.30 noF 2.31  0.80s/it
+it  1200 stage 0 t_out 10  loss 2.71 score 2.41 run 2.39  drift F 2.42 noF 2.44  0.78s/it
+it  1300 stage 0 t_out 10  loss 2.94 score 2.61 run 2.40  drift F 2.31 noF 2.29  0.90s/it
+it  1400 stage 0 t_out 10  loss 2.92 score 2.64 run 2.39  drift F 2.34 noF 2.33  0.90s/it
+iteration 1500: promoted to stage 1 (20.0 s)
+it  1500 stage 1 t_out 10  loss 2.77 score 2.44 run 2.40  drift F 2.36 noF 2.37  0.83s/it
+it  1600 stage 1 t_out 20  loss 5.31 score 4.89 run 4.61  drift F 4.45 noF 4.45  1.44s/it
+it  1700 stage 1 t_out 20  loss 4.92 score 4.50 run 4.57  drift F 4.26 noF 4.25  1.32s/it
+it  1800 stage 1 t_out 20  loss 4.36 score 3.96 run 4.61  drift F 4.97 noF 4.96  1.23s/it

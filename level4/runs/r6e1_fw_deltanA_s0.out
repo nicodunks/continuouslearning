@@ -1,0 +1,14 @@
+arch fw_deltanA trainable numbers 8708
+it     0 stage 0 t_out 10  loss 4.73 score 2.44 run 2.44  drift F 2.07 noF 2.31  1.97s/it
+it   100 stage 0 t_out 10  loss 2.91 score 2.25 run 2.12  drift F 2.24 noF 2.08  1.71s/it
+it   200 stage 0 t_out 10  loss 3.12 score 2.67 run 2.29  drift F 2.33 noF 1.99  1.83s/it
+it   300 stage 0 t_out 10  loss 2.56 score 2.17 run 2.29  drift F 2.35 noF 2.07  1.98s/it
+it   400 stage 0 t_out 10  loss 2.67 score 2.27 run 2.36  drift F 2.32 noF 2.06  1.60s/it
+it   500 stage 0 t_out 10  loss 2.60 score 2.20 run 2.37  drift F 2.41 noF 2.18  1.36s/it
+it   600 stage 0 t_out 10  loss 2.75 score 2.36 run 2.35  drift F 2.48 noF 2.12  1.34s/it
+it   700 stage 0 t_out 10  loss 2.92 score 2.50 run 2.34  drift F 2.32 noF 2.05  1.41s/it
+it   800 stage 0 t_out 10  loss 2.62 score 2.26 run 2.40  drift F 2.46 noF 2.23  1.38s/it
+it   900 stage 0 t_out 10  loss 2.66 score 2.31 run 2.36  drift F 2.33 noF 2.13  1.56s/it
+it  1000 stage 0 t_out 10  loss 2.57 score 2.24 run 2.33  drift F 2.30 noF 2.10  1.40s/it
+it  1100 stage 0 t_out 10  loss 2.63 score 2.29 run 2.39  drift F 2.22 noF 2.00  1.32s/it
+finished

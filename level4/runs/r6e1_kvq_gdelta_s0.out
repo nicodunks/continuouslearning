@@ -1,0 +1,14 @@
+arch kvq_gdelta trainable numbers 8707
+it     0 stage 0 t_out 10  loss 5.38 score 2.40 run 2.40  drift F 2.23 noF 2.22  0.58s/it
+it   100 stage 0 t_out 10  loss 2.81 score 2.35 run 2.28  drift F 2.34 noF 2.27  0.63s/it
+it   200 stage 0 t_out 10  loss 3.12 score 2.73 run 2.36  drift F 2.34 noF 2.36  0.64s/it
+it   300 stage 0 t_out 10  loss 2.61 score 2.19 run 2.34  drift F 2.38 noF 2.35  0.62s/it
+it   400 stage 0 t_out 10  loss 2.72 score 2.33 run 2.36  drift F 2.31 noF 2.32  0.63s/it
+it   500 stage 0 t_out 10  loss 2.50 score 2.16 run 2.38  drift F 2.42 noF 2.44  0.62s/it
+it   600 stage 0 t_out 10  loss 2.71 score 2.36 run 2.37  drift F 2.46 noF 2.48  0.73s/it
+it   700 stage 0 t_out 10  loss 2.87 score 2.46 run 2.35  drift F 2.35 noF 2.34  0.74s/it
+it   800 stage 0 t_out 10  loss 2.58 score 2.25 run 2.40  drift F 2.42 noF 2.45  0.63s/it
+it   900 stage 0 t_out 10  loss 2.73 score 2.33 run 2.36  drift F 2.32 noF 2.32  0.62s/it
+it  1000 stage 0 t_out 10  loss 2.56 score 2.21 run 2.33  drift F 2.32 noF 2.28  0.60s/it
+it  1100 stage 0 t_out 10  loss 2.65 score 2.31 run 2.39  drift F 2.24 noF 2.24  0.63s/it
+finished

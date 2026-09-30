@@ -1,0 +1,38 @@
+/Users/nico/Documents/GitHub/fly-circuit-exploration/level4/bench.py:61: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  if it % 50 == 0: curve.append([it, round(float(loss), 4)]); print(it, round(float(loss), 3), f'{time.time() - t0:.0f}s', flush=True)
+0 54.225 0s
+50 33.278 10s
+100 40.272 21s
+150 32.312 30s
+200 30.153 41s
+250 26.233 52s
+300 29.793 63s
+350 26.009 73s
+400 25.129 83s
+450 20.474 93s
+500 20.338 103s
+550 26.622 113s
+600 20.714 124s
+650 23.268 134s
+700 15.358 144s
+750 17.99 155s
+800 21.352 165s
+850 17.63 175s
+900 12.868 185s
+950 18.782 196s
+1000 15.917 206s
+1050 18.461 216s
+1100 14.62 226s
+1150 15.709 236s
+1200 11.867 247s
+1250 14.448 257s
+1300 13.062 267s
+1350 18.882 277s
+1400 14.334 288s
+1450 11.11 298s
+walk30 5.09
+walk60 9.429
+walk90 13.271
+stop30 5.752
+drift15 6.159

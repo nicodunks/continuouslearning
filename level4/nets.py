@@ -85,6 +85,11 @@ class GRURef(nn.Module):
 
 def build(arch, ckpt_args=None):
     a = ckpt_args or {}
+    if arch.startswith(('fw_', 'kvq_')) or arch in ('mamba', 'transformer'):          # round 6 designs
+        import frontier as fr
+        if arch.startswith('fw_'): return fr.FWRule(rule=arch[3:], erase_rows=bool(a.get('erase_rows', 0)), direct_read=bool(a.get('direct_read', 0)))
+        if arch.startswith('kvq_'): return fr.KVQNet(rule=arch[4:])
+        return fr.MambaNet() if arch == 'mamba' else fr.TinyTransformer()
     if arch == 'fw': return FlyNet(n=int(a.get('neurons', 64)), use_fast=True, f_max=float(a.get('f_max', 1.0)), rule=a.get('rule', 'hebb'))
     if arch == 'twin': return TwinNet(n=int(a.get('neurons', 64)))
     if arch == 'gru': return GRURef()

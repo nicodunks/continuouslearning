@@ -1,0 +1,14 @@
+arch kvq_hebb trainable numbers 8707
+it     0 stage 0 t_out 10  loss 4.50 score 2.12 run 2.12  drift F 2.27 noF 2.17  0.51s/it
+it   100 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.52s/it
+it   200 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.52s/it
+it   300 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.57s/it
+it   400 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.51s/it
+it   500 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.48s/it
+it   600 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.47s/it
+it   700 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.44s/it
+it   800 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.43s/it
+it   900 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.38s/it
+it  1000 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.39s/it
+it  1100 stage 0 t_out 10  loss nan score nan run nan  drift F nan noF nan  0.33s/it
+finished

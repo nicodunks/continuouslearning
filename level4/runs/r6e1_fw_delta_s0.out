@@ -1,0 +1,14 @@
+arch fw_delta trainable numbers 8708
+it     0 stage 0 t_out 10  loss 5.41 score 2.33 run 2.33  drift F 2.36 noF 2.36  1.57s/it
+it   100 stage 0 t_out 10  loss 3.00 score 2.22 run 2.13  drift F 2.12 noF 2.13  1.31s/it
+it   200 stage 0 t_out 10  loss 3.05 score 2.40 run 2.14  drift F 2.20 noF 2.17  1.35s/it
+it   300 stage 0 t_out 10  loss 2.70 score 1.98 run 2.11  drift F 2.18 noF 2.18  1.35s/it
+it   400 stage 0 t_out 10  loss 2.78 score 2.09 run 2.14  drift F 2.07 noF 2.03  1.50s/it
+it   500 stage 0 t_out 10  loss 2.43 score 1.83 run 2.13  drift F 2.12 noF 2.21  1.35s/it
+it   600 stage 0 t_out 10  loss 2.82 score 2.11 run 2.12  drift F 2.21 noF 2.17  1.25s/it
+it   700 stage 0 t_out 10  loss 2.98 score 2.23 run 2.10  drift F 2.13 noF 2.12  1.19s/it
+it   800 stage 0 t_out 10  loss 2.86 score 2.05 run 2.15  drift F 2.23 noF 2.24  1.20s/it
+it   900 stage 0 t_out 10  loss 2.77 score 2.04 run 2.11  drift F 2.01 noF 2.05  1.18s/it
+it  1000 stage 0 t_out 10  loss 2.84 score 2.10 run 2.06  drift F 2.09 noF 2.06  1.21s/it
+it  1100 stage 0 t_out 10  loss 2.79 score 2.09 run 2.14  drift F 2.00 noF 2.05  1.21s/it
+finished

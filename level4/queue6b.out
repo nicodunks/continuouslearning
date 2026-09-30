@@ -1,0 +1,3 @@
+16:03:27 start mkdir -p level4/runs/r6e3_rows_45 && echo '{"run": "r6e3_rows_45", "arm": "E3-rows"}' > level4/runs/r6e3_rows_
+16:03:29 start mkdir -p level4/runs/r6e3_read_45 && echo '{"run": "r6e3_read_45", "arm": "E3-read"}' > level4/runs/r6e3_read_
+16:03:31 start mkdir -p level4/runs/r6e3_ctrl_45 && echo '{"run": "r6e3_ctrl_45", "arm": "E3-ctrl"}' > level4/runs/r6e3_ctrl_

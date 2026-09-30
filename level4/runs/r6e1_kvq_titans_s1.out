@@ -1,0 +1,14 @@
+arch kvq_titans trainable numbers 8708
+it     0 stage 0 t_out 10  loss 4.96 score 2.32 run 2.32  drift F 2.20 noF 2.20  0.63s/it
+it   100 stage 0 t_out 10  loss 2.60 score 2.11 run 2.20  drift F 2.29 noF 2.26  0.63s/it
+it   200 stage 0 t_out 10  loss 2.74 score 2.24 run 2.39  drift F 2.26 noF 2.26  0.61s/it
+it   300 stage 0 t_out 10  loss 2.97 score 2.47 run 2.26  drift F 2.41 noF 2.42  0.62s/it
+it   400 stage 0 t_out 10  loss 2.95 score 2.53 run 2.36  drift F 2.33 noF 2.29  0.60s/it
+it   500 stage 0 t_out 10  loss 2.64 score 2.27 run 2.36  drift F 2.41 noF 2.37  0.59s/it
+it   600 stage 0 t_out 10  loss 2.43 score 2.09 run 2.36  drift F 2.45 noF 2.42  0.58s/it
+it   700 stage 0 t_out 10  loss 2.88 score 2.52 run 2.38  drift F 2.35 noF 2.30  0.61s/it
+it   800 stage 0 t_out 10  loss 2.57 score 2.23 run 2.37  drift F 2.40 noF 2.39  0.61s/it
+it   900 stage 0 t_out 10  loss 2.53 score 2.24 run 2.39  drift F 2.30 noF 2.27  0.62s/it
+it  1000 stage 0 t_out 10  loss 3.03 score 2.67 run 2.34  drift F 2.31 noF 2.23  0.62s/it
+it  1100 stage 0 t_out 10  loss 2.79 score 2.45 run 2.36  drift F 2.26 noF 2.22  0.59s/it
+finished

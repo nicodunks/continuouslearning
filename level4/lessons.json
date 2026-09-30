@@ -68,5 +68,30 @@
   "lesson": "Round 5 (5 starts, stable steps): FW learns 3/5 with a full or an empty board (board switched on by iteration 30-40); plain twin 0/5; twin with a hand-built counter 2/5 and then as good as FW. Every failure still holds the way home. Rule of thumb: learnable from this grade iff a working memory is present or one knob away. Rejected: FW's edge is a built-in multiplication for reading (untrained FW and head-start twin encode the ideal turn equally).",
   "status": "measured, 5 starts per group, 10 s stage",
   "evidence": "charter5.md, r5_results.json, r5_twins.json"
+ },
+ {
+  "lesson": "Round 6 memory test (no steering, dense readout): learned keys and values with FW's lid and small write strength remembered best on every test (0.73 at 30 s vs FW 1.83; 6.6 vs 9.1 at 90 s) with 320 state numbers against FW's 4,160. The same design without the lid overflowed and learned nothing.",
+  "status": "measured, 3 starts each, exploratory design",
+  "evidence": "r6_results.json e2; bench/*.json"
+ },
+ {
+  "lesson": "Every delta-rule memory (DeltaNet, Gated DeltaNet, Titans-style, delta on FW's board) path-integrates worse than the adding rules: the delta rule writes the surprise, and counting needs accumulation. A blend knob between Hebb and delta stays at Hebb.",
+  "status": "measured",
+  "evidence": "r6_results.json e2, e3 beta"
+ },
+ {
+  "lesson": "A one-layer transformer with fixed sine positions trained on 30 s walks fails beyond 30 s (1.2 -> 6.9 at 40 s, 14.4 at 90 s; one start worse than knowing nothing).",
+  "status": "measured, 3 starts",
+  "evidence": "bench/transformer_s*.json"
+ },
+ {
+  "lesson": "Learnable from the homing score at 10 s: transformer 3/3, FW 3/5, FW+blend 1/3; every key-value table, delta form and Mamba 0/3. Separator (found after the results): how well untrained ACTIVITY encodes the home direction at 10 s - learners 0.76-0.83, all failures <= 0.63. Consistent with round 5's 'memory present or one knob away'. The pre-registered forecast from the store's R^2 failed; that probe is unreliable for 256-cell tables (ridge-dependent).",
+  "status": "measured; separator exploratory",
+  "evidence": "r6_results.json e1; r6_untrained.json activity_direction_10s; charter6 17:28"
+ },
+ {
+  "lesson": "No new knob (direct read, per-neuron forget, blend) beat 800 more iterations of plain practice on trained FW; the practice itself gave the project's best network (run 45 retrained: 1.35 standard, 1.444 on 1,000 fresh trips).",
+  "status": "measured, 4 networks per arm",
+  "evidence": "r6_results.json e3"
  }
 ]

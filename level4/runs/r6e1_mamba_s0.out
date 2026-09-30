@@ -1,0 +1,14 @@
+arch mamba trainable numbers 8227
+it     0 stage 0 t_out 10  loss 5.37 score 2.37 run 2.37  drift F 2.12 noF 2.12  0.68s/it
+it   100 stage 0 t_out 10  loss 2.83 score 2.31 run 2.19  drift F 2.26 noF 2.26  0.71s/it
+it   200 stage 0 t_out 10  loss 3.13 score 2.70 run 2.31  drift F 2.27 noF 2.27  0.70s/it
+it   300 stage 0 t_out 10  loss 2.62 score 2.20 run 2.29  drift F 2.40 noF 2.40  0.69s/it
+it   400 stage 0 t_out 10  loss 2.69 score 2.26 run 2.35  drift F 2.33 noF 2.33  0.70s/it
+it   500 stage 0 t_out 10  loss 2.51 score 2.15 run 2.36  drift F 2.39 noF 2.39  0.83s/it
+it   600 stage 0 t_out 10  loss 2.79 score 2.41 run 2.36  drift F 2.46 noF 2.46  0.72s/it
+it   700 stage 0 t_out 10  loss 2.87 score 2.48 run 2.33  drift F 2.33 noF 2.33  0.68s/it
+it   800 stage 0 t_out 10  loss 2.63 score 2.26 run 2.37  drift F 2.38 noF 2.38  0.68s/it
+it   900 stage 0 t_out 10  loss 2.73 score 2.34 run 2.35  drift F 2.32 noF 2.32  0.66s/it
+it  1000 stage 0 t_out 10  loss 2.58 score 2.22 run 2.32  drift F 2.29 noF 2.29  0.64s/it
+it  1100 stage 0 t_out 10  loss 2.65 score 2.29 run 2.37  drift F 2.25 noF 2.25  0.65s/it
+finished

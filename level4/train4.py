@@ -44,6 +44,8 @@ p.add_argument('--gate_split', type=int, default=0)          # round 3 amendment
 p.add_argument('--ws_init', type=float, default=None)      # round 4: FW write strength at the start (0 = no head start: the board starts empty)
 p.add_argument('--headstart', type=int, default=0)          # round 4: twin with 16 neurons wired as slow heading counters at the start
 p.add_argument('--grade_mix', default='')                   # round 4: 'tau,w' = smooth closest approach + w x last-10-s grade
+p.add_argument('--erase_rows', type=int, default=0)         # round 6: per-neuron forget (FW designs)
+p.add_argument('--direct_read', type=int, default=0)        # round 6: board read straight to the turn (FW designs)
 p.add_argument('--aux', type=float, default=0.0)            # level 4 diagnostic: weight of a charge on a linear readout's guess of the
                                                              # home vector at every wander tick (dense supervision, as in Cueva & Wei 2018)
 p.add_argument('--recenter_turn', type=int, default=0)       # level 4 amendment 08:45: after surgery, move the turn output's bias so
@@ -58,6 +60,9 @@ stages = [float(s) for s in args.stages.split(',')]
 torch.manual_seed(int(args.seed))
 if args.arch == 'fw': net = FlyNet(n=args.neurons, use_fast=bool(args.use_fast), f_max=args.f_max, rule=args.rule)
 elif args.arch == 'twin': net = TwinNet.from_fw(torch.load(args.surgery)['net']) if args.surgery else TwinNet(n=args.neurons, gate_bias=args.gate_bias or 0.0)
+elif args.arch.startswith(('fw_', 'kvq_')) or args.arch in ('mamba', 'transformer'):
+    from nets import build as _build
+    net = _build(args.arch, vars(args))
 else:
     net = GRURef()
     if args.gate_bias is not None:   # PyTorch GRU: h' = (1 - z) n + z h, gates ordered (r, z, n); hold by default = z near 1
@@ -71,7 +76,7 @@ if args.arch == 'twin' and args.surgery and args.recenter_turn:
     net.step = _st
     with torch.no_grad(): _m = float(torch.stack(_pre).mean()); net.W_out.bias[0] -= _m
     print('turn output re-centred by', -_m, flush=True)
-if args.aux > 0: net.aux = torch.nn.Linear(net.x.shape[1] if hasattr(net, 'x') else (net.h if hasattr(net, 'h') else net.n), 2)
+if args.aux > 0: net.aux = torch.nn.Linear(net.d if args.arch == 'transformer' else (net.h if hasattr(net, 'h') and isinstance(net.h, int) else net.n), 2)
 if args.arch == 'twin' and args.gate_split:
     with torch.no_grad(): h = net.n // 2; net.V.bias[:h] = 5.0; net.V.bias[h:] = -5.0
 if args.ws_init is not None and args.arch == 'fw':

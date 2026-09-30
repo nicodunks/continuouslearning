@@ -1,0 +1,14 @@
+arch kvq_delta trainable numbers 8707
+it     0 stage 0 t_out 10  loss 5.38 score 2.40 run 2.40  drift F 2.22 noF 2.22  0.53s/it
+it   100 stage 0 t_out 10  loss 2.77 score 2.35 run 2.26  drift F 2.36 noF 2.33  0.60s/it
+it   200 stage 0 t_out 10  loss 3.12 score 2.73 run 2.36  drift F 2.34 noF 2.36  0.60s/it
+it   300 stage 0 t_out 10  loss 2.53 score 2.19 run 2.35  drift F 2.45 noF 2.43  0.59s/it
+it   400 stage 0 t_out 10  loss 2.68 score 2.35 run 2.41  drift F 2.35 noF 2.37  0.59s/it
+it   500 stage 0 t_out 10  loss 2.58 score 2.24 run 2.40  drift F 2.42 noF 2.43  0.60s/it
+it   600 stage 0 t_out 10  loss 2.78 score 2.43 run 2.39  drift F 2.49 noF 2.50  0.72s/it
+it   700 stage 0 t_out 10  loss 2.93 score 2.56 run 2.38  drift F 2.40 noF 2.39  0.64s/it
+it   800 stage 0 t_out 10  loss 2.55 score 2.24 run 2.42  drift F 2.46 noF 2.49  0.60s/it
+it   900 stage 0 t_out 10  loss 2.65 score 2.35 run 2.39  drift F 2.37 noF 2.38  0.59s/it
+it  1000 stage 0 t_out 10  loss 2.64 score 2.28 run 2.36  drift F 2.34 noF 2.34  0.58s/it
+it  1100 stage 0 t_out 10  loss 2.57 score 2.27 run 2.41  drift F 2.31 noF 2.26  0.59s/it
+finished

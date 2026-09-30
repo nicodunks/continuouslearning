@@ -1,0 +1,11 @@
+arch fw_blend trainable numbers 8773
+initialised from level3/runs/run28/final.pt
+it     0 stage 0 t_out 30  loss 3.40 score 2.49 run 2.49  drift F 5.00 noF 9.00  2.79s/it
+it   100 stage 0 t_out 30  loss 3.91 score 3.04 run 2.91  drift F 2.62 noF 8.17  3.48s/it
+it   200 stage 0 t_out 30  loss 3.98 score 3.09 run 3.02  drift F 2.44 noF 7.68  4.72s/it
+it   300 stage 0 t_out 30  loss 7.36 score 4.62 run 3.76  drift F 4.17 noF 8.58  5.01s/it
+it   400 stage 0 t_out 30  loss 8.53 score 5.64 run 5.51  drift F 5.55 noF 8.42  4.46s/it
+it   500 stage 0 t_out 30  loss 7.72 score 4.89 run 5.32  drift F 5.11 noF 8.13  4.42s/it
+it   600 stage 0 t_out 30  loss 7.91 score 4.85 run 5.18  drift F 5.31 noF 9.15  5.82s/it
+it   700 stage 0 t_out 30  loss 7.08 score 4.55 run 5.15  drift F 4.85 noF 8.17  4.60s/it
+finished

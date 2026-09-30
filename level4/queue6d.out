@@ -1,0 +1,7 @@
+16:34:25 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_hebbl --seed 0 > level4/bench/kvq_hebbl_s0.out 2>&
+16:34:37 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_hebbl --seed 1 > level4/bench/kvq_hebbl_s1.out 2>&
+16:43:12 start mkdir -p level4/bench && python3 level4/bench.py --arch kvq_hebbl --seed 2 > level4/bench/kvq_hebbl_s2.out 2>&
+16:43:24 start mkdir -p level4/runs/r6e1_kvq_hebbl_s0 && echo '{"run": "r6e1_kvq_hebbl_s0", "arm": "E1-kvq_hebbl"}' > level4/
+16:45:27 start mkdir -p level4/runs/r6e1_kvq_hebbl_s1 && echo '{"run": "r6e1_kvq_hebbl_s1", "arm": "E1-kvq_hebbl"}' > level4/
+16:46:49 start mkdir -p level4/runs/r6e1_kvq_hebbl_s2 && echo '{"run": "r6e1_kvq_hebbl_s2", "arm": "E1-kvq_hebbl"}' > level4/
+16:47:22 start mkdir -p level4/runs/r6e1_kvq_hebbl_s3 && echo '{"run": "r6e1_kvq_hebbl_s3", "arm": "E1-kvq_hebbl"}' > level4/

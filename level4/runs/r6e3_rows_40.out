@@ -1,0 +1,11 @@
+arch fw_hebb trainable numbers 8772
+initialised from level3/runs/run40/final.pt
+it     0 stage 0 t_out 30  loss 3.36 score 2.42 run 2.42  drift F 2.75 noF 9.00  2.39s/it
+it   100 stage 0 t_out 30  loss 4.87 score 2.99 run 3.01  drift F 3.42 noF 8.15  2.92s/it
+it   200 stage 0 t_out 30  loss 7.35 score 4.65 run 4.84  drift F 4.25 noF 7.25  3.95s/it
+it   300 stage 0 t_out 30  loss 5.72 score 3.70 run 4.60  drift F 3.97 noF 8.54  4.17s/it
+it   400 stage 0 t_out 30  loss 6.42 score 4.32 run 3.90  drift F 3.63 noF 8.48  3.99s/it
+it   500 stage 0 t_out 30  loss 7.96 score 4.30 run 4.01  drift F 4.01 noF 8.21  3.79s/it
+it   600 stage 0 t_out 30  loss 6.43 score 4.20 run 4.57  drift F 4.51 noF 9.24  3.91s/it
+it   700 stage 0 t_out 30  loss 6.33 score 4.17 run 4.15  drift F 3.94 noF 8.20  5.14s/it
+finished

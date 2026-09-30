@@ -1,0 +1,4 @@
+16:45:26 start python3 level4/bench.py --arch fw_deltan --seed 0 > level4/bench/fw_deltan_s0.out 2>&1
+16:46:48 start python3 level4/bench.py --arch fw_deltan --seed 1 > level4/bench/fw_deltan_s1.out 2>&1
+16:47:31 start python3 level4/bench.py --arch fw_deltan --seed 2 > level4/bench/fw_deltan_s2.out 2>&1
+16:47:33 start python3 level4/bench.py --arch fw_deltanA --seed 0 > level4/bench/fw_deltanA_s0.out 2>&1

@@ -1,0 +1,13 @@
+15:54:21 start mkdir -p level4/runs/r6e3_blend_28 && echo '{"run": "r6e3_blend_28", "arm": "E3-blend"}' > level4/ru
+15:54:21 start mkdir -p level4/runs/r6e3_rows_28 && echo '{"run": "r6e3_rows_28", "arm": "E3-rows"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_read_28 && echo '{"run": "r6e3_read_28", "arm": "E3-read"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_ctrl_28 && echo '{"run": "r6e3_ctrl_28", "arm": "E3-ctrl"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_blend_40 && echo '{"run": "r6e3_blend_40", "arm": "E3-blend"}' > level4/ru
+15:54:21 start mkdir -p level4/runs/r6e3_rows_40 && echo '{"run": "r6e3_rows_40", "arm": "E3-rows"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_read_40 && echo '{"run": "r6e3_read_40", "arm": "E3-read"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_ctrl_40 && echo '{"run": "r6e3_ctrl_40", "arm": "E3-ctrl"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_blend_41 && echo '{"run": "r6e3_blend_41", "arm": "E3-blend"}' > level4/ru
+15:54:21 start mkdir -p level4/runs/r6e3_rows_41 && echo '{"run": "r6e3_rows_41", "arm": "E3-rows"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_read_41 && echo '{"run": "r6e3_read_41", "arm": "E3-read"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_ctrl_41 && echo '{"run": "r6e3_ctrl_41", "arm": "E3-ctrl"}' > level4/runs/
+15:54:21 start mkdir -p level4/runs/r6e3_blend_45 && echo '{"run": "r6e3_blend_45", "arm": "E3-blend"}' > level4/ru

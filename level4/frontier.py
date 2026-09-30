@@ -86,9 +86,15 @@ class FWRule(FlyNet):
 class KVQNet(nn.Module):
     def __init__(self, rule='hebb', n=64, d=16):
         super().__init__()
-        self.n, self.d, self.rule = n, d, rule; self.zero_F = False
+        kb, kbias = 0.0, rule.startswith('hebblc')
+        if kbias:   # after round 6 (Path 4): the lid hybrid born as a running sum. Keys and queries get a
+            kb = float(rule[6:] or 3); rule = 'hebbl'   # shared constant part of size kb, so at birth every write lands in
+        self.n, self.d, self.rule = n, d, rule; self.zero_F = False   # the same place and a read returns the sum of all values
         self.W_in = nn.Linear(4, n); self.W = nn.Parameter(0.1 * torch.randn(n, n)); self.W_out = nn.Linear(n, 3)
-        self.Wk = nn.Linear(n, d, bias=False); self.Wv = nn.Linear(n, d, bias=False); self.Wq = nn.Linear(n, d, bias=False)
+        self.Wk = nn.Linear(n, d, bias=kbias); self.Wv = nn.Linear(n, d, bias=False); self.Wq = nn.Linear(n, d, bias=kbias)
+        if kbias:   # 'hebblc0' = the same 32 extra numbers started at zero: the control for 'more parameters'
+            with torch.no_grad():
+                for L in (self.Wk, self.Wq): L.bias.zero_(); L.bias[0] = kb
         self.Wr = nn.Linear(d, n, bias=False)
         if rule == 'titans': self.eta_raw = nn.Parameter(torch.tensor(2.0))      # momentum eta = sigmoid(2) = 0.88
         if rule == 'hebbl': self.ws = nn.Parameter(torch.tensor(0.1))            # round 6 exploration: FW's own safeguards

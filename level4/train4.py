@@ -42,7 +42,8 @@ p.add_argument('--gate_bias', type=float, default=None)     # round 3: starting 
 p.add_argument('--gate_split', type=int, default=0)          # round 3 amendment 11:15: half the twin's neurons start fast (hold-gate bias +5,
                                                              # like FW's neurons), half start slow (bias -5, like FW's board)
 p.add_argument('--ws_init', type=float, default=None)      # round 4: FW write strength at the start (0 = no head start: the board starts empty)
-p.add_argument('--headstart', type=int, default=0)          # round 4: twin with 16 neurons wired as slow heading counters at the start
+p.add_argument('--headstart', type=int, default=0)          # round 4: twin with 16 neurons wired as slow heading counters at the start (after round 6: a number > 1 wires that many)
+p.add_argument('--att_sharp', type=float, default=1.0)     # after round 6 (the dial): transformer query and key weights multiplied by this at birth
 p.add_argument('--grade_mix', default='')                   # round 4: 'tau,w' = smooth closest approach + w x last-10-s grade
 p.add_argument('--erase_rows', type=int, default=0)         # round 6: per-neuron forget (FW designs)
 p.add_argument('--direct_read', type=int, default=0)        # round 6: board read straight to the turn (FW designs)
@@ -84,10 +85,13 @@ if args.ws_init is not None and args.arch == 'fw':
 if args.headstart and args.arch == 'twin':
     import math as _m
     with torch.no_grad():
-        for i in range(16):                          # neuron i counts time spent facing direction phi_i
-            ph = 2 * _m.pi * i / 16
+        kc = args.headstart if args.headstart > 1 else 16
+        for i in range(kc):                          # neuron i counts time spent facing direction phi_i
+            ph = 2 * _m.pi * i / kc
             net.W_in.weight[i] = torch.tensor([_m.cos(ph), _m.sin(ph), 0.0, 0.0]); net.W_in.bias[i] = 0.0
             net.W[i] = 0.0; net.U[i] = 0.0; net.V.weight[i] = 0.0; net.V.bias[i] = -5.3   # hold gate ~0.005: keeps 99.5% per tick
+if args.att_sharp != 1.0 and args.arch == 'transformer':
+    with torch.no_grad(): net.Wq.weight.mul_(args.att_sharp); net.Wk.weight.mul_(args.att_sharp)
 print('arch', args.arch, 'trainable numbers', sum(q.numel() for q in net.parameters() if q.requires_grad), flush=True)
 opt = torch.optim.Adam([q for q in net.parameters() if q.requires_grad], lr=args.lr)
 state = dict(it=0, stage=0, stage_start=0, recent=[])

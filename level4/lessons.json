@@ -98,5 +98,10 @@
   "lesson": "A memory must be within reach early in training to be learned from the final score: across 54 runs of rounds 5-6, runs whose activity pointed home (R^2 >= 0.7 at iteration 0, 100 or 200) learned 12 of 24; the rest 0 of 30. Within reach is necessary, not sufficient (the lid hybrid gets there and still spins). 'One knob away' shows up as reaching it by iteration 100 (FW with an empty board).",
   "status": "measured; measure and threshold chosen after the results",
   "evidence": "reach.json, reach.py"
+ },
+ {
+  "lesson": "After round 6: a memory close to working raises the chance of learning from the final score (0/20 below early R^2 0.4, ~40% above 0.7, 96 runs) and lowering it on purpose lowers learning (transformer attention sharpening: 5/5 -> 2/4, score 1.65 -> 2.53); but it does not decide the outcome. Every run first learns to turn hard; learners are those that ease off later. The loss landscape at birth (steer vs spin slopes) does not predict who learns. Twin with 4 or 8 counters (birth 0.83) learned 0/8 vs 16 counters 3/9.",
+  "status": "measured; 4-9 tries per setting; predictions partly failed",
+  "evidence": "charter6.md results 21:00; dial_results.json, slope.json, race.json, reach.json"
  }
 ]

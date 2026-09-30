@@ -1,0 +1,296 @@
+{
+ "dial_twk2_s0": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.638,
+  "it100": 0.569,
+  "it200": 0.539
+ },
+ "dial_twk2_s1": {
+  "exam10": 2.89,
+  "learned": false,
+  "it0": 0.621,
+  "it100": 0.611,
+  "it200": 0.61
+ },
+ "dial_twk2_s2": {
+  "exam10": 2.91,
+  "learned": false,
+  "it0": 0.637,
+  "it100": 0.722,
+  "it200": 0.661
+ },
+ "dial_twk2_s3": {
+  "exam10": 2.91,
+  "learned": false,
+  "it0": 0.602,
+  "it100": 0.559,
+  "it200": 0.549
+ },
+ "dial_twk4_s0": {
+  "exam10": 2.93,
+  "learned": false,
+  "it0": 0.828,
+  "it100": 0.829,
+  "it200": 0.768
+ },
+ "dial_twk4_s1": {
+  "exam10": 2.89,
+  "learned": false,
+  "it0": 0.824,
+  "it100": 0.818,
+  "it200": 0.813
+ },
+ "dial_twk4_s2": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.827,
+  "it100": 0.836,
+  "it200": 0.758
+ },
+ "dial_twk4_s3": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.825,
+  "it100": 0.837,
+  "it200": 0.721
+ },
+ "r6p4_hebblc3_s0": {
+  "exam10": 2.37,
+  "learned": true,
+  "it0": 0.791,
+  "it100": 0.804,
+  "it200": 0.688
+ },
+ "r6p4_hebblc3_s1": {
+  "exam10": 2.89,
+  "learned": false,
+  "it0": 0.807,
+  "it100": 0.792,
+  "it200": 0.766
+ },
+ "r6p4_hebblc3_s2": {
+  "exam10": 2.9,
+  "learned": false,
+  "it0": 0.802,
+  "it100": 0.777,
+  "it200": 0.366
+ },
+ "r6p4_hebblc3_s3": {
+  "exam10": 2.61,
+  "learned": false,
+  "it0": 0.81,
+  "it100": 0.743,
+  "it200": 0.602
+ },
+ "r6p4_hebblc3_s4": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.801,
+  "it100": 0.809,
+  "it200": 0.744
+ },
+ "r6p4_hebblc3_s5": {
+  "exam10": 2.93,
+  "learned": false,
+  "it0": 0.788,
+  "it100": 0.586,
+  "it200": 0.461
+ },
+ "r6p4_hebblc3_s6": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.805,
+  "it100": 0.771,
+  "it200": 0.713
+ },
+ "r6p4_hebblc3_s7": {
+  "exam10": 1.76,
+  "learned": true,
+  "it0": 0.797,
+  "it100": 0.769,
+  "it200": 0.778
+ },
+ "dial_twk8_s0": {
+  "exam10": 2.91,
+  "learned": false,
+  "it0": 0.834,
+  "it100": 0.832,
+  "it200": 0.786
+ },
+ "dial_twk8_s1": {
+  "exam10": 2.89,
+  "learned": false,
+  "it0": 0.828,
+  "it100": 0.841,
+  "it200": 0.845
+ },
+ "dial_twk8_s2": {
+  "exam10": 2.91,
+  "learned": false,
+  "it0": 0.83,
+  "it100": 0.838,
+  "it200": 0.833
+ },
+ "dial_twk8_s3": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.822,
+  "it100": 0.842,
+  "it200": 0.763
+ },
+ "dial_twk16_s5": {
+  "exam10": 2.93,
+  "learned": false,
+  "it0": 0.834,
+  "it100": 0.847,
+  "it200": 0.817
+ },
+ "dial_twk16_s6": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.836,
+  "it100": 0.844,
+  "it200": 0.812
+ },
+ "dial_twk16_s7": {
+  "exam10": 1.39,
+  "learned": true,
+  "it0": 0.831,
+  "it100": 0.865,
+  "it200": 0.847
+ },
+ "dial_twk16_s8": {
+  "exam10": 2.93,
+  "learned": false,
+  "it0": 0.83,
+  "it100": 0.821,
+  "it200": 0.823
+ },
+ "dial_tfx12_s0": {
+  "exam10": 2.38,
+  "learned": true,
+  "it0": 0.612,
+  "it100": 0.603,
+  "it200": 0.623
+ },
+ "dial_tfx12_s1": {
+  "exam10": 2.75,
+  "learned": false,
+  "it0": 0.644,
+  "it100": 0.627,
+  "it200": 0.642
+ },
+ "dial_tfx12_s2": {
+  "exam10": 2.71,
+  "learned": false,
+  "it0": 0.543,
+  "it100": 0.539,
+  "it200": 0.544
+ },
+ "dial_tfx12_s3": {
+  "exam10": 2.29,
+  "learned": true,
+  "it0": 0.47,
+  "it100": 0.463,
+  "it200": 0.487
+ },
+ "dial_tfx1_s3": {
+  "exam10": 1.36,
+  "learned": true,
+  "it0": 0.822,
+  "it100": 0.833,
+  "it200": 0.759
+ },
+ "dial_tfx1_s4": {
+  "exam10": 1.78,
+  "learned": true,
+  "it0": 0.822,
+  "it100": 0.812,
+  "it200": 0.737
+ },
+ "dial_tfx3_s0": {
+  "exam10": 1.69,
+  "learned": true,
+  "it0": 0.744,
+  "it100": 0.7,
+  "it200": 0.683
+ },
+ "dial_tfx3_s1": {
+  "exam10": 2.37,
+  "learned": true,
+  "it0": 0.787,
+  "it100": 0.694,
+  "it200": 0.696
+ },
+ "dial_tfx3_s2": {
+  "exam10": 1.58,
+  "learned": true,
+  "it0": 0.701,
+  "it100": 0.719,
+  "it200": 0.682
+ },
+ "dial_tfx3_s3": {
+  "exam10": 2.0,
+  "learned": true,
+  "it0": 0.627,
+  "it100": 0.646,
+  "it200": 0.653
+ },
+ "dial_tfx6_s0": {
+  "exam10": 2.04,
+  "learned": true,
+  "it0": 0.636,
+  "it100": 0.64,
+  "it200": 0.615
+ },
+ "dial_tfx6_s1": {
+  "exam10": 2.31,
+  "learned": true,
+  "it0": 0.684,
+  "it100": 0.64,
+  "it200": 0.626
+ },
+ "dial_tfx6_s2": {
+  "exam10": 2.4,
+  "learned": false,
+  "it0": 0.575,
+  "it100": 0.579,
+  "it200": 0.611
+ },
+ "dial_tfx6_s3": {
+  "exam10": 2.47,
+  "learned": false,
+  "it0": 0.508,
+  "it100": 0.526,
+  "it200": 0.478
+ },
+ "r6p4_hebblc0_s0": {
+  "exam10": 2.66,
+  "learned": false,
+  "it0": 0.592,
+  "it100": 0.785,
+  "it200": 0.747
+ },
+ "r6p4_hebblc0_s1": {
+  "exam10": 1.56,
+  "learned": true,
+  "it0": 0.545,
+  "it100": 0.762,
+  "it200": 0.678
+ },
+ "r6p4_hebblc0_s2": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.757,
+  "it100": 0.743,
+  "it200": 0.674
+ },
+ "r6p4_hebblc0_s3": {
+  "exam10": 2.92,
+  "learned": false,
+  "it0": 0.775,
+  "it100": 0.791,
+  "it200": 0.74
+ }
+}

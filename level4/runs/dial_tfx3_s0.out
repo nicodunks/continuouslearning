@@ -1,0 +1,14 @@
+arch transformer trainable numbers 8737
+it     0 stage 0 t_out 10  loss 5.38 score 2.35 run 2.35  drift F 2.21 noF 2.21  0.79s/it
+it   100 stage 0 t_out 10  loss 2.73 score 2.34 run 2.22  drift F 2.36 noF 2.36  0.84s/it
+it   200 stage 0 t_out 10  loss 2.34 score 1.69 run 1.94  drift F 1.54 noF 1.54  1.65s/it
+it   300 stage 0 t_out 10  loss 2.04 score 1.61 run 1.62  drift F 1.79 noF 1.79  1.92s/it
+it   400 stage 0 t_out 10  loss 1.76 score 1.21 run 1.32  drift F 1.18 noF 1.18  2.12s/it
+it   500 stage 0 t_out 10  loss 1.72 score 1.27 run 1.32  drift F 1.43 noF 1.43  2.71s/it
+it   600 stage 0 t_out 10  loss 2.12 score 1.67 run 1.61  drift F 1.54 noF 1.54  2.45s/it
+it   700 stage 0 t_out 10  loss 1.99 score 1.24 run 1.26  drift F 1.27 noF 1.27  2.21s/it
+it   800 stage 0 t_out 10  loss 1.73 score 1.21 run 1.26  drift F 1.46 noF 1.46  1.43s/it
+it   900 stage 0 t_out 10  loss 1.73 score 1.23 run 1.31  drift F 1.19 noF 1.19  1.35s/it
+it  1000 stage 0 t_out 10  loss 1.83 score 1.19 run 1.23  drift F 1.22 noF 1.22  1.16s/it
+it  1100 stage 0 t_out 10  loss 1.73 score 1.28 run 1.29  drift F 1.10 noF 1.10  1.12s/it
+finished

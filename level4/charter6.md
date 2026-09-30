@@ -83,3 +83,43 @@ Forecast (store R^2 > 0.7 learns at >= 1 of 4): right for fw_blend and transform
 E2 predictions: delta beats add on stop and 90 s - wrong; transformer best at 30 s, degrades beyond - second best, degrades (half);
 FW degrades with length - right. E3: no arm beat control (prediction "at most one" right; beta ~0 right). E4: 0/4 plain,
 1/2 with teacher (prediction "learns 30 s on >= 2 of 4" wrong).
+
+## After round 6: the dial (Path 1), written 20:14, before any training
+Question: does the birth signal CAUSE learnability? Set it on purpose inside one design and count who learns (10 s stage,
+1,200 iterations, round-5/6 recipe, 4 starts each; learned = exam10 < 2.39). Birth signals measured first (dial_probe.json):
+transformer with query/key weights x3 at birth: 0.70-0.79; x12: 0.54-0.65 (normal x1: 0.82-0.84, learned 3/3).
+twin with 2 hand-wired counters: 0.58-0.61; with 4: 0.83 (0 counters: 0.36-0.40, learned 0/5; 16: 0.83, learned 2/5).
+Predictions from the 0.7 rule: transformer x3 learns on >= 2 of 4; transformer x12 learns on <= 1 of 4 (unless training
+undoes the sharpening early, which the within-reach measure at iterations 100-200 would show); twin k=2 learns 0 of 4;
+twin k=4 learns about as often as k=16 (1-3 of 4). Confirmation = the two within-design contrasts go the predicted way.
+
+## Path 4, the running-sum birth for the lid hybrid (written 20:17, before training)
+kvq_hebblc3: kvq_hebbl whose key and query layers get a bias, set at birth to 3 on one shared coordinate (32 extra numbers,
+8,740 in all). Every key then starts nearly the same, so a read returns roughly the sum of all values written: a running
+total from birth, the trick that makes the untrained transformer point home. Birth signal 0.80-0.81 (plain hybrid 0.51-0.59;
+c=1 0.75-0.81, c=10 0.79-0.80). Predictions: it learns 10 s homing on >= 3 of 8 starts (plain hybrid 0 of 4); on the memory
+test it stays within 0.3 of the plain hybrid's 0.73 at 30 s (keys are still free to learn). Both true = the best memory made
+findable by changing only its start.
+Wave 2 (20:23): transformer x6 (birth 0.58-0.69), 4 starts; transformer x1 (normal) 2 more starts (s3, s4); control
+kvq_hebblc0 = the same 32 extra numbers started at zero (birth signal as the plain hybrid), 4 starts. Prediction: control
+learns 0-1 of 4, so any rescue by hebblc3 is due to the running-sum start, not the extra numbers. Path 2 (race.py) early
+result: turning share and a turn-vs-ideal alignment at iterations 0-200 do not separate learners from failures among the
+24 within-reach runs (spin 0.04 vs 0.03 at birth, 0.50 vs 0.44 at 100); they separate only late (0.50 vs 0.67 at 600).
+20:28 dial, twin results: k=2 (birth 0.60-0.64) 0 of 4 learned (predicted 0: right); k=4 (birth 0.82-0.83, as high as
+k=16) 0 of 4 (predicted 1-3: WRONG). Same birth signal, different outcome: the direction readout does not capture what the
+16-counter twin has. Added (exploratory): k=8 x 4 starts and k=16 x 4 more starts (s5-s8) to see whether counter number
+matters and to firm up k=16's 2 of 5.
+
+## After round 6: results (21:00)
+Dial, transformer (att_sharp): x1 5/5 (s0-s4; 1.36-1.79, mean 1.65), x3 4/4 (mean 1.91), x6 2/4 (2.31), x12 2/4 (2.53);
+birth signal 0.83 / 0.71 / 0.60 / 0.57. Predictions: x3 >= 2 of 4 RIGHT; x12 <= 1 of 4 WRONG (2 of 4, weak scores).
+Dial, twin counters: k=2 0/4, k=4 0/4, k=8 0/4 (birth 0.62 / 0.83 / 0.83), k=16 1/4 new (3/9 with round 5). k=4 prediction WRONG.
+Pooled (96 graded runs, best early pointing-home R^2 at it 0/100/200): <0.4 0/20, 0.4-0.6 1/11, 0.6-0.7 4/11, 0.7-0.8 12/25,
+>=0.8 9/29. The 0.7 line is not sharp; the chance rises then levels near 40%.
+Path 4: kvq_hebblc3 2/8 learned (2.37, 1.76); memory test 0.94 / 6.64 / stop 2.45 (kept the lead: prediction RIGHT);
+learnability prediction (>= 3 of 8) WRONG. Control kvq_hebblc0 1/4 (1.56): training built the shared key part itself
+(0.55 -> 0.76 by it 100). Not separable from the start with 12 tries.
+Landscape at birth (slope.py): spin direction identical for all designs (loss ~5.3 -> 2.72); steer direction depth varies
+(twin16 2.13, twin4 2.49, FW 2.79, transformer 3.01, hybrid 2.74, Mamba 3.34); does not predict learning.
+Race (race.py): turn share 0.04 at birth -> ~0.5 by it 100 for learners and failures alike; learners 0.50 at it 600,
+failures 0.67. Nothing at birth separates them.

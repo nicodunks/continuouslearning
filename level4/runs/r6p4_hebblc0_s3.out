@@ -1,0 +1,14 @@
+arch kvq_hebblc0 trainable numbers 8740
+it     0 stage 0 t_out 10  loss 4.40 score 1.84 run 1.84  drift F 2.22 noF 2.38  1.32s/it
+it   100 stage 0 t_out 10  loss 2.83 score 2.42 run 2.22  drift F 2.36 noF 2.20  1.14s/it
+it   200 stage 0 t_out 10  loss 2.45 score 2.00 run 2.30  drift F 2.34 noF 2.27  1.17s/it
+it   300 stage 0 t_out 10  loss 2.71 score 2.35 run 2.35  drift F 2.45 noF 2.36  1.31s/it
+it   400 stage 0 t_out 10  loss 2.77 score 2.39 run 2.36  drift F 2.35 noF 2.33  1.57s/it
+it   500 stage 0 t_out 10  loss 2.59 score 2.26 run 2.40  drift F 2.43 noF 2.43  1.25s/it
+it   600 stage 0 t_out 10  loss 2.85 score 2.55 run 2.39  drift F 2.49 noF 2.47  1.23s/it
+it   700 stage 0 t_out 10  loss 2.87 score 2.52 run 2.40  drift F 2.40 noF 2.33  1.34s/it
+it   800 stage 0 t_out 10  loss 2.58 score 2.26 run 2.45  drift F 2.46 noF 2.42  1.18s/it
+it   900 stage 0 t_out 10  loss 2.55 score 2.24 run 2.37  drift F 2.37 noF 2.32  0.98s/it
+it  1000 stage 0 t_out 10  loss 2.65 score 2.35 run 2.42  drift F 2.33 noF 2.26  0.81s/it
+it  1100 stage 0 t_out 10  loss 2.94 score 2.55 run 2.41  drift F 2.29 noF 2.24  0.72s/it
+finished

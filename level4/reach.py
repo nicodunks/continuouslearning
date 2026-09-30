@@ -29,17 +29,18 @@ def points_home(net):
     P = torch.cat([X[half:], torch.ones(len(X) - half, 1)], 1) @ W
     return round(float(1 - ((P - D[half:]) ** 2).sum() / ((D[half:] - D[half:].mean(0)) ** 2).sum()), 3)
 
-r5 = json.load(open(os.path.join(HERE, 'r5_results.json')))['groups']
-r6 = json.load(open(os.path.join(HERE, 'r6_results.json')))['e1']
-exam = {r['run']: r['exam10'] for g in r5.values() for r in g}
-exam.update({r['run']: r['exam10'] for g in r6.values() for r in g if r['run'].startswith('r6e1_')})
-out = []
-for d in sorted(glob.glob(os.path.join(HERE, 'runs', 'r5_*')) + glob.glob(os.path.join(HERE, 'runs', 'r6e1_*'))):
-    n = os.path.basename(d)
-    if not os.path.isdir(d) or n not in exam: continue
-    row = dict(run=n, exam10=exam[n], learned=bool(exam[n] == exam[n] and exam[n] < 2.39))
-    for it in (0, 100, 200):
-        f = f'{d}/ckpt_{it:05d}.pt'
-        row[f'it{it}'] = points_home(load(f).eval()) if os.path.exists(f) else None
-    out.append(row); print(row, flush=True)
-json.dump(out, open(os.path.join(HERE, 'reach.json'), 'w'), indent=1)
+if __name__ == "__main__":
+  r5 = json.load(open(os.path.join(HERE, 'r5_results.json')))['groups']
+  r6 = json.load(open(os.path.join(HERE, 'r6_results.json')))['e1']
+  exam = {r['run']: r['exam10'] for g in r5.values() for r in g}
+  exam.update({r['run']: r['exam10'] for g in r6.values() for r in g if r['run'].startswith('r6e1_')})
+  out = []
+  for d in sorted(glob.glob(os.path.join(HERE, 'runs', 'r5_*')) + glob.glob(os.path.join(HERE, 'runs', 'r6e1_*'))):
+      n = os.path.basename(d)
+      if not os.path.isdir(d) or n not in exam: continue
+      row = dict(run=n, exam10=exam[n], learned=bool(exam[n] == exam[n] and exam[n] < 2.39))
+      for it in (0, 100, 200):
+          f = f'{d}/ckpt_{it:05d}.pt'
+          row[f'it{it}'] = points_home(load(f).eval()) if os.path.exists(f) else None
+      out.append(row); print(row, flush=True)
+  json.dump(out, open(os.path.join(HERE, 'reach.json'), 'w'), indent=1)

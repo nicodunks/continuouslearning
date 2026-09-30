@@ -1,0 +1,14 @@
+arch twin trainable numbers 9027
+it     0 stage 0 t_out 10  loss 4.38 score 2.10 run 2.10  drift F 2.25 noF 2.25  0.21s/it
+it   100 stage 0 t_out 10  loss 3.07 score 2.54 run 2.27  drift F 2.39 noF 2.39  0.21s/it
+it   200 stage 0 t_out 10  loss 2.71 score 2.29 run 2.35  drift F 2.36 noF 2.36  0.20s/it
+it   300 stage 0 t_out 10  loss 3.07 score 2.69 run 2.35  drift F 2.38 noF 2.38  0.20s/it
+it   400 stage 0 t_out 10  loss 2.58 score 2.23 run 2.32  drift F 2.34 noF 2.34  0.22s/it
+it   500 stage 0 t_out 10  loss 2.68 score 2.30 run 2.34  drift F 2.44 noF 2.44  0.25s/it
+it   600 stage 0 t_out 10  loss 2.69 score 2.36 run 2.33  drift F 2.46 noF 2.46  0.35s/it
+it   700 stage 0 t_out 10  loss 2.96 score 2.57 run 2.36  drift F 2.34 noF 2.34  0.39s/it
+it   800 stage 0 t_out 10  loss 2.58 score 2.25 run 2.34  drift F 2.45 noF 2.45  0.49s/it
+it   900 stage 0 t_out 10  loss 2.53 score 2.16 run 2.38  drift F 2.35 noF 2.35  0.68s/it
+it  1000 stage 0 t_out 10  loss 2.78 score 2.43 run 2.38  drift F 2.32 noF 2.32  0.56s/it
+it  1100 stage 0 t_out 10  loss 2.85 score 2.52 run 2.38  drift F 2.24 noF 2.24  0.52s/it
+finished
